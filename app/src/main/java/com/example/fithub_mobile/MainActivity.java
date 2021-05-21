@@ -3,6 +3,8 @@ package com.example.fithub_mobile;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.View;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
@@ -24,9 +26,7 @@ public class MainActivity extends AppCompatActivity {
         sp = getSharedPreferences("login",MODE_PRIVATE);
 
         if(!sp.getBoolean("logged",false)){
-            Intent intent = new Intent(this, Login.class);
-            startActivity(intent);
-            finish();
+            goToLogin();
         }
 
         BottomNavigationView navView = findViewById(R.id.nav_view);
@@ -38,6 +38,17 @@ public class MainActivity extends AppCompatActivity {
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
         NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
         NavigationUI.setupWithNavController(navView, navController);
+    }
+
+    public void goToLogin(){
+        Intent i = new Intent(this,Login.class);
+        startActivity(i);
+        finish();
+    }
+
+    public void logOut(View view){
+        sp.edit().putBoolean("logged",false).apply();
+        goToLogin();
     }
 
 }
