@@ -1,6 +1,10 @@
 <resources>
-    <string name="app_name">fithub-mobile</string>
+    <string name="app_name">Fithub</string>
     <string name="title_home">Fithub</string>
     <string name="title_dashboard">Dashboard</string>
     <string name="title_notifications">Notifications</string>
+    <string name="emailInputHint">Escribe un mail valido</string>
+    <string name="passwordInputHint">Escriba su contraseña</string>
+    <string name="logInBtnText">LogIn</string>
+    <string name="userlogged">false</string>
 </resources>
