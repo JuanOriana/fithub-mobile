@@ -14,7 +14,6 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.example.fithub_mobile.R;
-import com.example.fithub_mobile.ui.notifications.NotificationsViewModel;
 
 public class ProfileFragment extends Fragment {
 

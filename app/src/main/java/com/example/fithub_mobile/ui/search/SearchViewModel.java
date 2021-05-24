@@ -1,16 +1,17 @@
-package com.example.fithub_mobile.ui.dashboard;
+package com.example.fithub_mobile.ui.search;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-public class DashboardViewModel extends ViewModel {
+public class SearchViewModel extends ViewModel {
 
     private MutableLiveData<String> mText;
 
-    public DashboardViewModel() {
+    public SearchViewModel() {
         mText = new MutableLiveData<>();
-        mText.setValue("This is dashboard fragment");
+        mText.setValue("This is search fragment");
+        mText.setValue("This is search fragment");
     }
 
     public LiveData<String> getText() {
