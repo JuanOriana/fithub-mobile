@@ -14,6 +14,8 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.example.fithub_mobile.R;
+import com.example.fithub_mobile.ui.RoutineCard;
+import com.example.fithub_mobile.ui.favorites.FavoritesViewModel;
 
 public class ProfileFragment extends Fragment {
 
@@ -24,13 +26,13 @@ public class ProfileFragment extends Fragment {
         profileViewModel =
                 new ViewModelProvider(this).get(ProfileViewModel.class);
         View root = inflater.inflate(R.layout.fragment_profile, container, false);
-        final TextView textView = root.findViewById(R.id.text_profile);
-        profileViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
-            @Override
-            public void onChanged(@Nullable String s) {
-                textView.setText(s);
-            }
-        });
+
+        if (savedInstanceState == null) {
+            getChildFragmentManager().beginTransaction()
+                    .setReorderingAllowed(true)
+                    .add(R.id.fragment_container_view, RoutineCard.class, null)
+                    .commit();
+        }
         return root;
     }
 }
