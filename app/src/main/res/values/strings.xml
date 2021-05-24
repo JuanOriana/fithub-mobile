@@ -8,6 +8,9 @@
     <string name="passwordInputHint">Escriba su contraseña</string>
     <string name="logInBtnText">LogIn</string>
     <string name="userlogged">false</string>
+    <string name="RoutineTag">Routines</string>
+    <string name="favouriteTag">Favourites</string>
+    <string name="edit_profile">Edit profile</string>
 
 
 </resources>
