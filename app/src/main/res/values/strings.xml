@@ -11,6 +11,8 @@
     <string name="RoutineTag">Routines</string>
     <string name="favouriteTag">Favourites</string>
     <string name="edit_profile">Edit profile</string>
+    <string name="title_search">Search</string>
+    <string name="title_favorites">Favorites</string>
 
 
 </resources>
