@@ -6,6 +6,7 @@
     android:layout_height="match_parent"
     tools:context=".ui.profile.ProfileFragment" >
 
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/userContainer"
         android:layout_width="334dp"
@@ -76,27 +77,29 @@
         android:layout_marginTop="16dp"
         android:text="@string/edit_profile"
         app:layout_constraintStart_toStartOf="@+id/userContainer"
-        app:layout_constraintTop_toBottomOf="@+id/userContainer" />
+        app:layout_constraintTop_toBottomOf="@+id/userContainer"
+        />
 
-    <ScrollView
+    <androidx.core.widget.NestedScrollView
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="30dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button">
+        app:layout_constraintTop_toBottomOf="@+id/button"
+        app:layout_constraintVertical_bias="0.857">
 
         <LinearLayout
             android:id="@+id/cardContainer"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:gravity="center"
+            android:layout_marginBottom="60dp"
             android:divider="@drawable/divider"
-            android:showDividers="middle"/>
-    </ScrollView>
+            android:gravity="center"
+            android:orientation="vertical"
+            android:showDividers="middle" />
+    </androidx.core.widget.NestedScrollView>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

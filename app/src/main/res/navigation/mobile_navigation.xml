@@ -19,7 +19,7 @@
     <fragment
         android:id="@+id/navigation_favorites"
         android:name="com.example.fithub_mobile.ui.favorites.FavoritesFragment"
-        android:label="@string/title_notifications"
+        android:label="@string/title_favorites"
         tools:layout="@layout/fragment_favorites" />
     <fragment
         android:id="@+id/navigation_profile"
