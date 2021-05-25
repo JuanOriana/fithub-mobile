@@ -109,12 +109,12 @@
             android:orientation="horizontal">
 
             <com.google.android.material.button.MaterialButton
+                android:id="@+id/routine_btn"
                 style="?attr/borderlessButtonStyle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="8dp"
-                android:text="Accion 1"
-                />
+                android:text="Accion 1" />
 
             <com.google.android.material.button.MaterialButton
                 style="?attr/borderlessButtonStyle"
