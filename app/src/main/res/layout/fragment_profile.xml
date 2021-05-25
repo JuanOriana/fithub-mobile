@@ -78,15 +78,5 @@
         app:layout_constraintStart_toStartOf="@+id/userContainer"
         app:layout_constraintTop_toBottomOf="@+id/userContainer" />
 
-    <!-- res/layout/example_activity.xml -->
-    <androidx.fragment.app.FragmentContainerView
-        android:id="@+id/fragment_container_view"
-        android:layout_width="394dp"
-        android:layout_height="671dp"
-        android:layout_marginTop="24dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

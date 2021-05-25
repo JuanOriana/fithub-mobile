@@ -3,19 +3,14 @@ package com.example.fithub_mobile.ui.profile;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 
 import com.example.fithub_mobile.R;
-import com.example.fithub_mobile.ui.RoutineCard;
-import com.example.fithub_mobile.ui.notifications.NotificationsViewModel;
 
 public class ProfileFragment extends Fragment {
 
@@ -27,12 +22,6 @@ public class ProfileFragment extends Fragment {
                 new ViewModelProvider(this).get(ProfileViewModel.class);
         View root = inflater.inflate(R.layout.fragment_profile, container, false);
 
-        if (savedInstanceState == null) {
-            getChildFragmentManager().beginTransaction()
-                    .setReorderingAllowed(true)
-                    .add(R.id.fragment_container_view, RoutineCard.class, null)
-                    .commit();
-        }
         return root;
     }
 }
