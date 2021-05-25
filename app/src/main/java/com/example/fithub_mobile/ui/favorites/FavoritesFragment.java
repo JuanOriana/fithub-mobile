@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -13,23 +14,25 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.example.fithub_mobile.R;
+import com.example.fithub_mobile.RoutineCard;
 
 public class FavoritesFragment extends Fragment {
 
     private FavoritesViewModel favoritesViewModel;
+    private LinearLayout cardContainer;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         favoritesViewModel =
                 new ViewModelProvider(this).get(FavoritesViewModel.class);
         View root = inflater.inflate(R.layout.fragment_favorites, container, false);
-        final TextView textView = root.findViewById(R.id.text_favorites);
-        favoritesViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
-            @Override
-            public void onChanged(@Nullable String s) {
-                textView.setText(s);
-            }
-        });
+
+        cardContainer = root.findViewById(R.id.cardContainer);
+
+        cardContainer.addView(new RoutineCard(getActivity(),"Uno"));
+        cardContainer.addView(new RoutineCard(getActivity(),"Dos"));
+        cardContainer.addView(new RoutineCard(getActivity(),"Tres"));
+
         return root;
     }
 }

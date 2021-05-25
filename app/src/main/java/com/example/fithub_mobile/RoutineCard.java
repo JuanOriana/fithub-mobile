@@ -1,6 +1,7 @@
 package com.example.fithub_mobile;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.View;
 import android.widget.TextView;
 
