@@ -11,7 +11,8 @@
     app:strokeColor="@color/fithub_green"
     app:strokeWidth="1dp"
     tools:layout_editor_absoluteX="8dp"
-    tools:layout_editor_absoluteY="8dp">
+    tools:layout_editor_absoluteY="8dp"
+    android:layout_gravity = "center">
 
 
     <LinearLayout
