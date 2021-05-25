@@ -32,9 +32,10 @@ public class ProfileFragment extends Fragment {
         View root = inflater.inflate(R.layout.fragment_profile, container, false);
 
         cardContainer = root.findViewById(R.id.cardContainer);
-        cardContainer.addView(new RoutineCard(getActivity()));
-        cardContainer.addView(new RoutineCard(getActivity()));
-        cardContainer.addView(new RoutineCard(getActivity()));
+
+        cardContainer.addView(new RoutineCard(getActivity(),"Uno"));
+        cardContainer.addView(new RoutineCard(getActivity(),"Dos"));
+        cardContainer.addView(new RoutineCard(getActivity(),"Tres"));
 
         return root;
     }

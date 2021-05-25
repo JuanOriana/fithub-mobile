@@ -5,19 +5,19 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/card"
     android:layout_width="363dp"
-    android:layout_height="188dp"
+    android:layout_height="220dp"
+    android:layout_gravity="center"
     android:layout_margin="0dp"
     app:cardElevation="0dp"
     app:strokeColor="@color/fithub_green"
     app:strokeWidth="1dp"
     tools:layout_editor_absoluteX="8dp"
-    tools:layout_editor_absoluteY="8dp"
-    android:layout_gravity = "center">
+    tools:layout_editor_absoluteY="8dp">
 
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="222dp"
         android:orientation="vertical">
 
         <!-- Media -->
@@ -25,23 +25,61 @@
         <!-- Buttons -->
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="157dp"
             android:orientation="vertical"
             android:padding="16dp">
 
             <!-- Title, secondary and supporting text -->
-            <TextView
-                android:id="@+id/title_card"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Titulo"
-                android:textAppearance="?attr/textAppearanceHeadline6"
-                android:textColor="@color/fithub_green" />
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="37dp">
+
+                <TextView
+                    android:id="@+id/title_card"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Titulo"
+                    android:textAppearance="?attr/textAppearanceHeadline6"
+                    android:textColor="@color/fithub_green"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.025"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <ImageButton
+                    android:id="@+id/imageButton3"
+                    android:layout_width="36dp"
+                    android:layout_height="36dp"
+                    android:layout_marginEnd="5dp"
+                    android:background="#FBFBFB"
+                    android:tint="@color/fithub_green"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:srcCompat="@android:drawable/ic_menu_share" />
+
+                <ToggleButton
+                    android:id="@+id/toggleButton2"
+                    android:layout_width="32dp"
+                    android:layout_height="32dp"
+                    android:layout_marginEnd="8dp"
+                    android:background="@drawable/toggle_fav"
+                    android:backgroundTint="@color/fithub_green"
+                    android:text=""
+                    android:textOff=""
+                    android:textOn=""
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@+id/imageButton3"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.4" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
             <View
                 android:layout_width="320dp"
                 android:layout_height="2dp"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="5dp"
                 android:background="@color/fithub_green_darker" />
 
             <TextView
