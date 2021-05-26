@@ -43,6 +43,9 @@
         app:layout_anchor="@id/app_bar"
         app:layout_anchorGravity="bottom|end"
         app:srcCompat="@android:drawable/ic_media_play"
-        android:contentDescription="@string/start_routine"/>
+        android:contentDescription="@string/start_routine"
+        android:backgroundTint="#85CFAE"
+        app:borderWidth="0dp"
+        app:tint="@color/black"/>
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
