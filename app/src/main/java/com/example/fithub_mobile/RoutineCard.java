@@ -16,6 +16,8 @@ import com.google.android.material.snackbar.Snackbar;
 public class RoutineCard extends MaterialCardView {
 
     public static final String TITLE_MESSAGE = "com.example.fithub_mobile.NAME";
+    public static final String RATING_MESSAGE = "com.example.fithub_mobile.RATING";
+    public static final String DESC_MESSAGE = "com.example.fithub_mobile.DESC";
 
 
     public RoutineCard(Context context, String title, String desc, Integer rating) {
@@ -33,6 +35,8 @@ public class RoutineCard extends MaterialCardView {
         routineBtn.setOnClickListener(view -> {
             Intent i = new Intent(getContext(),RoutineActivity.class);
             i.putExtra(TITLE_MESSAGE, title);
+            i.putExtra(RATING_MESSAGE, rating);
+            i.putExtra(DESC_MESSAGE, desc);
             getContext().startActivity(i);
         });
     }
