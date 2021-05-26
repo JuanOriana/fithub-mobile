@@ -10,6 +10,8 @@ import com.google.android.material.snackbar.Snackbar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
+import android.view.View;
+import android.widget.Button;
 import android.widget.LinearLayout;
 
 public class RoutineActivity extends AppCompatActivity {
@@ -33,5 +35,13 @@ public class RoutineActivity extends AppCompatActivity {
         cycleContainer.addView(new CycleDisplay(this,"Tres",3));
 
         FloatingActionButton fab = findViewById(R.id.fab);
+        fab.setOnClickListener(view -> startExecution());
+        Button startBtn = findViewById(R.id.start_routine);
+        startBtn.setOnClickListener(view -> startExecution());
+    }
+
+    public void startExecution(){
+        Intent i = new Intent(this,ExecutionActivity.class);
+        startActivity(i);
     }
 }
