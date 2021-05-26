@@ -29,9 +29,9 @@ public class FavoritesFragment extends Fragment {
 
         cardContainer = root.findViewById(R.id.cardContainer);
 
-        cardContainer.addView(new RoutineCard(getActivity(),"Uno"));
-        cardContainer.addView(new RoutineCard(getActivity(),"Dos"));
-        cardContainer.addView(new RoutineCard(getActivity(),"Tres"));
+        cardContainer.addView(new RoutineCard(getActivity(),"Uno","Una descripcion random"));
+        cardContainer.addView(new RoutineCard(getActivity(),"Dos","Una descripcion random"));
+        cardContainer.addView(new RoutineCard(getActivity(),"Tres","Una descripcion random"));
 
         return root;
     }
