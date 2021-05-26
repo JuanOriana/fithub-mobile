@@ -2,6 +2,8 @@ package com.example.fithub_mobile.ui.favorites;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
@@ -15,6 +17,8 @@ import androidx.lifecycle.ViewModelProvider;
 
 import com.example.fithub_mobile.R;
 import com.example.fithub_mobile.RoutineCard;
+
+import org.jetbrains.annotations.NotNull;
 
 public class FavoritesFragment extends Fragment {
 
@@ -33,6 +37,16 @@ public class FavoritesFragment extends Fragment {
         cardContainer.addView(new RoutineCard(getActivity(),"Dos","Una descripcion random",2));
         cardContainer.addView(new RoutineCard(getActivity(),"Tres","Una descripcion random",5));
 
+        setHasOptionsMenu(true);
+
         return root;
+    }
+
+    @Override
+    public void onCreateOptionsMenu(
+            @NotNull Menu menu, MenuInflater inflater) {
+        inflater.inflate(R.menu.options_menu, menu);
+        super.onCreateOptionsMenu(menu, inflater);
+
     }
 }
