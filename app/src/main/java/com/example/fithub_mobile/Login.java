@@ -19,7 +19,7 @@ public class Login extends AppCompatActivity {
 
         sp = getSharedPreferences("login",MODE_PRIVATE);
 
-        if(sp.getBoolean("logged",false)){
+        if (sp.getBoolean("logged",false)){
             goToMainActivity();
         }
     }
@@ -30,7 +30,7 @@ public class Login extends AppCompatActivity {
     }
 
     public void goToMainActivity(){
-        Intent i = new Intent(this,MainActivity.class);
+        Intent i = new Intent(this, MainActivity.class);
         startActivity(i);
         finish();
     }

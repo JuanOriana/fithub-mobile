@@ -16,6 +16,8 @@
         android:hint="@string/emailInputHint"
         android:inputType="textEmailAddress"
         android:padding="5dp"
+        android:paddingStart="15dp"
+        android:paddingEnd="15dp"
         android:textColor="@color/fithub_green"
         android:textColorHint="@color/fithub_green_darker"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -34,6 +36,8 @@
         android:hint="@string/passwordInputHint"
         android:inputType="textPassword"
         android:padding="5dp"
+        android:paddingStart="15dp"
+        android:paddingEnd="15dp"
         android:textColor="@color/fithub_green"
         android:textColorHint="@color/fithub_green_darker"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -50,10 +54,24 @@
         android:onClick="logIn"
         android:text="@string/logInBtnText"
         android:textSize="20sp"
+        app:cornerRadius="50dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/loginPasswordInput"
         app:layout_constraintVertical_bias="0.239" />
+
+    <TextView
+        android:id="@+id/login_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/title_home"
+        android:textColor="@color/fithub_green"
+        android:textSize="50sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/loginEmailInput"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>
