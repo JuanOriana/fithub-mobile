@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">fithub-mobile</string>
+    <string name="title_home">Fithub</string>
+    <string name="title_profile">Perfil</string>
+    <string name="emailInputHint">Correo Electrónico</string>
+    <string name="passwordInputHint">Contraseña</string>
+    <string name="logInBtnText">Ingresar</string>
+    <string name="RoutineTag">Rutinas</string>
+    <string name="favouriteTag">Favoritos</string>
+    <string name="edit_profile">Editar perfil</string>
+    <string name="title_search">Buscar</string>
+    <string name="title_favorites">Favoritos</string>
+    <string name="title_activity_routine">Routina</string>
+    <string name="action_settings">Ajustes</string>
+    <string name="sets">sets</string>
+    <string name="exercise_cycle">Ciclo de ejercitacion</string>
+    <string name="start_routine">Comenzar rutina</string>
+    <string name="fithub">Fithub</string>
+    <string name="app_label">Buscar</string>
+    <string name="search_hint">Busca rutinas</string>
+    <string name="search_title">Buscador</string>
+</resources>
