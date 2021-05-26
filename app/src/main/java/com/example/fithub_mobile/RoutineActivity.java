@@ -33,7 +33,5 @@ public class RoutineActivity extends AppCompatActivity {
         cycleContainer.addView(new CycleDisplay(this,"Tres",3));
 
         FloatingActionButton fab = findViewById(R.id.fab);
-        fab.setOnClickListener(view -> Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                .setAction("Action", null).show());
     }
 }
