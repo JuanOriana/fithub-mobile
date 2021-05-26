@@ -5,19 +5,18 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/card"
     android:layout_width="363dp"
-    android:layout_height="220dp"
+    android:layout_height="wrap_content"
     android:layout_gravity="center"
     android:layout_margin="0dp"
-    app:cardElevation="0dp"
+    app:cardCornerRadius="16dp"
+    app:cardElevation="3dp"
     app:strokeColor="@color/fithub_green"
-    app:strokeWidth="1dp"
-    tools:layout_editor_absoluteX="8dp"
-    tools:layout_editor_absoluteY="8dp">
+    app:strokeWidth="2dp">
 
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="222dp"
+        android:layout_height="match_parent"
         android:orientation="vertical">
 
         <!-- Media -->
@@ -30,9 +29,10 @@
             android:padding="16dp">
 
             <!-- Title, secondary and supporting text -->
+
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="37dp">
+                android:layout_height="wrap_content">
 
                 <TextView
                     android:id="@+id/title_card"
@@ -45,7 +45,8 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.025"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0" />
 
                 <ImageButton
                     android:id="@+id/imageButton3"
@@ -54,9 +55,9 @@
                     android:layout_marginEnd="5dp"
                     android:background="#FBFBFB"
                     android:tint="@color/fithub_green"
-                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintBottom_toBottomOf="@+id/toggleButton2"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/toggleButton2"
                     app:srcCompat="@android:drawable/ic_menu_share" />
 
                 <ToggleButton
@@ -69,10 +70,24 @@
                     android:text=""
                     android:textOff=""
                     android:textOn=""
-                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintBottom_toBottomOf="@+id/title_card"
                     app:layout_constraintEnd_toStartOf="@+id/imageButton3"
-                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/title_card"
                     app:layout_constraintVertical_bias="0.4" />
+
+                <RatingBar
+                    android:id="@+id/rating_bar"
+                    style="@style/Base.Widget.AppCompat.RatingBar.Small"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="5dp"
+                    android:isIndicator="true"
+                    android:numStars="5"
+                    android:progressTint="@color/fithub_green"
+                    android:rating="5"
+                    app:layout_constraintStart_toStartOf="@+id/title_card"
+                    app:layout_constraintTop_toBottomOf="@+id/title_card" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -80,7 +95,7 @@
                 android:layout_width="320dp"
                 android:layout_height="2dp"
                 android:layout_marginTop="5dp"
-                android:background="@color/fithub_green_darker" />
+                android:background="#9F57B58C" />
 
             <TextView
                 android:id="@+id/desc_card"
@@ -94,9 +109,10 @@
         </LinearLayout>
 
         <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="8dp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:layout_margin="10dp"
             android:orientation="horizontal">
 
             <com.google.android.material.button.MaterialButton
@@ -104,14 +120,9 @@
                 style="?attr/borderlessButtonStyle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="8dp"
-                android:text="Accion 1" />
+                android:gravity="center_vertical|end"
+                android:text="@string/start_routine" />
 
-            <com.google.android.material.button.MaterialButton
-                style="?attr/borderlessButtonStyle"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Accion 2" />
         </LinearLayout>
 
     </LinearLayout>

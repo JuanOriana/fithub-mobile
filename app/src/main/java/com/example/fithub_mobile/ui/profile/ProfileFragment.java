@@ -33,9 +33,9 @@ public class ProfileFragment extends Fragment {
 
         cardContainer = root.findViewById(R.id.cardContainer);
 
-        cardContainer.addView(new RoutineCard(getActivity(),"Uno","Una descripcion random"));
-        cardContainer.addView(new RoutineCard(getActivity(),"Dos","Una descripcion random"));
-        cardContainer.addView(new RoutineCard(getActivity(),"Tres","Una descripcion random"));
+        cardContainer.addView(new RoutineCard(getActivity(),"Uno","Una descripcion random",5));
+        cardContainer.addView(new RoutineCard(getActivity(),"Dos","Una descripcion random",1));
+        cardContainer.addView(new RoutineCard(getActivity(),"Tres","Una descripcion random",3));
 
         return root;
     }
