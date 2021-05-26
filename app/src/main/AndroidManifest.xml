@@ -9,10 +9,11 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Fithubmobile">
+        <activity android:name=".ExecutionActivity"></activity>
         <activity
             android:name=".RoutineActivity"
             android:label="@string/title_activity_routine"
-            android:theme="@style/Theme.Fithubmobile.NoActionBar"/>
+            android:theme="@style/Theme.Fithubmobile.NoActionBar" />
         <activity
             android:name=".Login"
             android:label="Login" />
