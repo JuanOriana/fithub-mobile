@@ -38,14 +38,14 @@
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fab"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="105dp"
         android:layout_margin="@dimen/fab_margin"
+        android:backgroundTint="#85CFAE"
+        android:contentDescription="@string/start_routine"
+        app:borderWidth="0dp"
         app:layout_anchor="@id/app_bar"
         app:layout_anchorGravity="bottom|end"
         app:srcCompat="@android:drawable/ic_media_play"
-        android:contentDescription="@string/start_routine"
-        android:backgroundTint="#85CFAE"
-        app:borderWidth="0dp"
-        app:tint="@color/black"/>
+        app:tint="@color/black" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
