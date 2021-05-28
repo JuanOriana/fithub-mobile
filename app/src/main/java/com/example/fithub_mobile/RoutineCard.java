@@ -15,9 +15,10 @@ import com.google.android.material.snackbar.Snackbar;
 @SuppressLint("ViewConstructor")
 public class RoutineCard extends MaterialCardView {
 
-    public static final String TITLE_MESSAGE = "com.example.fithub_mobile.NAME";
+    public static String TITLE_MESSAGE = "com.example.fithub_mobile.NAME";
     public static final String RATING_MESSAGE = "com.example.fithub_mobile.RATING";
     public static final String DESC_MESSAGE = "com.example.fithub_mobile.DESC";
+    public String title;
 
 
     public RoutineCard(Context context, String title, String desc, Integer rating) {
@@ -26,6 +27,7 @@ public class RoutineCard extends MaterialCardView {
 
         TextView titleView = findViewById(R.id.title_card);
         titleView.setText(title);
+        this.title = title;
         TextView descView = findViewById(R.id.desc_card);
         descView.setText(desc);
         RatingBar ratingBar = findViewById(R.id.rating_bar);
@@ -39,6 +41,10 @@ public class RoutineCard extends MaterialCardView {
             i.putExtra(DESC_MESSAGE, desc);
             getContext().startActivity(i);
         });
+    }
+
+    public String getTitle(){
+        return title;
     }
 
 }
