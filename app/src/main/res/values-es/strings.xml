@@ -20,4 +20,6 @@
     <string name="app_label">Buscar</string>
     <string name="search_hint">Busca rutinas</string>
     <string name="search_title">Buscador</string>
+    <string name="recent_routines">Rutinas Recientes</string>
+    <string name="explore_routines">Explorar Rutinas</string>
 </resources>
