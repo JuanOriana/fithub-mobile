@@ -7,6 +7,7 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.SearchView;
 import android.widget.TextView;
 
@@ -15,12 +16,14 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.example.fithub_mobile.R;
+import com.example.fithub_mobile.RoutineCard;
 
 import org.jetbrains.annotations.NotNull;
 
 public class HomeFragment extends Fragment {
 
     private HomeViewModel homeViewModel;
+    private LinearLayout cardContainer;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -29,6 +32,13 @@ public class HomeFragment extends Fragment {
                 new ViewModelProvider(this).get(HomeViewModel.class);
         View root = inflater.inflate(R.layout.fragment_home, container, false);
         setHasOptionsMenu(true);
+
+        cardContainer = root.findViewById(R.id.cardContainer);
+
+        cardContainer.addView(new RoutineCard(getActivity(),"Uno","Una descripcion random",5));
+        cardContainer.addView(new RoutineCard(getActivity(),"Dos","Una descripcion random",1));
+        cardContainer.addView(new RoutineCard(getActivity(),"Tres","Una descripcion random",3));
+
         return root;
     }
 
