@@ -67,6 +67,7 @@ public class SearchFragment extends Fragment {
             @Override
             public boolean onQueryTextChange(String newText) {
                 if(newText.length() >= 3){
+                    //Only working w/one card (pro tem)
                     cardContainer.removeAllViews();
                     RoutineCard chosen = getRoutineByTitle(newText);
                     if(chosen != null)
