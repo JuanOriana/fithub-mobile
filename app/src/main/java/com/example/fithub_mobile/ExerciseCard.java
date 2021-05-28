@@ -16,7 +16,7 @@ public class ExerciseCard extends MaterialCardView {
         TextView titleView = findViewById(R.id.title_exercise);
         titleView.setText(title);
         TextView descView = findViewById(R.id.desc_exercise);
-        titleView.setText(description);
+        descView.setText(description);
         TextView repeatsView = findViewById(R.id.repeats_exercise);
         repeatsView.setText(repeats);
         TextView secondsView = findViewById(R.id.seconds_exercise);
