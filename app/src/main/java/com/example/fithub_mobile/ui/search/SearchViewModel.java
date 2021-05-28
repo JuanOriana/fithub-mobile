@@ -1,18 +1,15 @@
-package com.example.fithub_mobile.ui.favorites;
+package com.example.fithub_mobile.ui.search;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-import com.example.fithub_mobile.RoutineCard;
-
-public class FavoritesViewModel extends ViewModel {
-
+public class SearchViewModel extends ViewModel {
     private MutableLiveData<String> mText;
 
-    public FavoritesViewModel() {
+    public SearchViewModel() {
         mText = new MutableLiveData<>();
-        mText.setValue("This is favorites fragment");
+        mText.setValue("This is search fragment");
     }
 
     public LiveData<String> getText() {
