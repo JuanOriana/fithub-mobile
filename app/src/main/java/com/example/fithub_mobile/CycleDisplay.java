@@ -5,10 +5,12 @@ import android.widget.TextView;
 
 import androidx.constraintlayout.widget.ConstraintLayout;
 
+import com.example.fithub_mobile.R;
+
 public class CycleDisplay extends ConstraintLayout {
     public CycleDisplay(Context context) {
         super(context);
-        inflate(getContext(),R.layout.cycle_display,this);
+        inflate(getContext(), R.layout.cycle_display,this);
     }
 
     public CycleDisplay(Context context,String name, Integer sets) {

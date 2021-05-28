@@ -60,17 +60,22 @@ public class SearchFragment extends Fragment {
             @Override
             public boolean onQueryTextSubmit(String query) {
                 Log.d("SEARCHING", query);
-                cardContainer.removeAllViews();
-                RoutineCard chosen = getRoutineByTitle(query);
-                if(chosen != null)
-                    cardContainer.addView(chosen);
                 hideSoftKeyboard(requireActivity());
                 return true;
             }
 
             @Override
             public boolean onQueryTextChange(String newText) {
-                return false;
+                if(newText.length() >= 3){
+                    //Only working w/one card (pro tem)
+                    cardContainer.removeAllViews();
+                    RoutineCard chosen = getRoutineByTitle(newText);
+                    if(chosen != null)
+                        cardContainer.addView(chosen);
+                }
+                else
+                    restoreViews();
+                return true;
             }
         });
 
@@ -83,10 +88,16 @@ public class SearchFragment extends Fragment {
 
     private RoutineCard getRoutineByTitle(String title){
         for (RoutineCard r : routines){
-            if(r.getTitle().equals(title))
+            if(r.getTitle().startsWith(title))
                 return r;
         }
         return null;
+    }
+
+    private void restoreViews(){
+        cardContainer.removeAllViews();
+        for(RoutineCard r : routines)
+            cardContainer.addView(r);
     }
 
     public static void hideSoftKeyboard(Activity activity) {
