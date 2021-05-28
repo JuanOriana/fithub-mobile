@@ -11,7 +11,7 @@ public class ExerciseCard extends MaterialCardView {
 
     public ExerciseCard(Context context, String title, String description, int repeats, int seconds) {
         super(context);
-        inflate(getContext(),R.layout.routine_card,this);
+        inflate(getContext(),R.layout.exercise_card,this);
 
         TextView titleView = findViewById(R.id.title_exercise);
         titleView.setText(title);
