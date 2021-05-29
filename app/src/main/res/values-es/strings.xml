@@ -22,4 +22,5 @@
     <string name="search_title">Buscador</string>
     <string name="recent_routines">Rutinas Recientes</string>
     <string name="explore_routines">Explorar Rutinas</string>
+    <string name="share_msg">¡Hola! Quiero compartir mi rutina contigo: </string>
 </resources>
