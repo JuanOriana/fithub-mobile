@@ -3,6 +3,7 @@ package com.example.fithub_mobile;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
 import android.view.View;
 import android.widget.RatingBar;
 import android.widget.TextView;
@@ -35,11 +36,15 @@ public class RoutineCard extends MaterialCardView {
 
         MaterialButton routineBtn = findViewById(R.id.routine_btn);
         routineBtn.setOnClickListener(view -> {
-            Intent i = new Intent(getContext(),RoutineActivity.class);
-            i.putExtra(TITLE_MESSAGE, title);
-            i.putExtra(RATING_MESSAGE, rating);
-            i.putExtra(DESC_MESSAGE, desc);
+            Intent i=new Intent(Intent.ACTION_VIEW);
+            i.setData(Uri.parse("http://fithub.com/routine"));
+            i.setPackage("com.example.fithub_mobile");
             getContext().startActivity(i);
+//            Intent i = new Intent(getContext(),RoutineActivity.class);
+//            i.putExtra(TITLE_MESSAGE, title);
+//            i.putExtra(RATING_MESSAGE, rating);
+//            i.putExtra(DESC_MESSAGE, desc);
+//            getContext().startActivity(i);
         });
     }
 

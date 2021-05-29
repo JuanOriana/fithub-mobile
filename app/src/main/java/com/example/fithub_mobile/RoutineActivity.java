@@ -29,13 +29,15 @@ public class RoutineActivity extends AppCompatActivity {
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         CollapsingToolbarLayout toolBarLayout = findViewById(R.id.toolbar_layout);
-        toolBarLayout.setTitle(title);
+        if (title!=null)
+            toolBarLayout.setTitle(title);
 
         RatingBar ratingBar = findViewById(R.id.rating_bar_routine_view);
         ratingBar.setRating(rating);
 
         TextView descView = findViewById(R.id.desc_routine);
-        descView.setText(desc);
+        if (desc != null)
+            descView.setText(desc);
 
         LinearLayout cycleContainer = findViewById(R.id.cycle_container);
         cycleContainer.addView(new CycleDisplay(this,"Uno",4));

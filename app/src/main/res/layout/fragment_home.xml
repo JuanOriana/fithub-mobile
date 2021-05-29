@@ -55,7 +55,7 @@
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/recent_routines"
-                android:paddingVertical="3"/>
+                android:paddingVertical="3dp"/>
 
             <LinearLayout
                 android:id="@+id/cardContainer"

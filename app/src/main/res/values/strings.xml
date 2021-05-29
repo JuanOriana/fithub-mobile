@@ -22,4 +22,5 @@
     <string name="search_title">Searcher</string>
     <string name="recent_routines">Recent Routines</string>
     <string name="explore_routines">Explore Routines</string>
+    <string name="fithub_url" translatable="false">fithub.com</string>
 </resources>
