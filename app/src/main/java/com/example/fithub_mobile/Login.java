@@ -34,12 +34,20 @@ public class Login extends AppCompatActivity {
     public void logIn(View view){
         EditText emailView = findViewById(R.id.loginEmailInput);
         String email = emailView.getText().toString();
+        EditText passView = findViewById(R.id.loginPasswordInput);
+        String pass = passView.getText().toString();
         boolean error = false;
-        error = error || !Patterns.EMAIL_ADDRESS.matcher(email).matches();
+        if (!Patterns.EMAIL_ADDRESS.matcher(email).matches() || email.trim().length() == 0){
+            error = true;
+            emailView.setError("The email is not valid");
+        }
+
+        if (pass.trim().length() == 0){
+            error = true;
+            passView.setError("The email is not valid");
+        }
         if (error){
-            emailView.setError("This field can not be blank");
             Toast toast=Toast.makeText(getApplicationContext(),"Error in parameters",Toast.LENGTH_SHORT);
-            toast.setMargin(50,50);
             toast.show();
             return;
         }
