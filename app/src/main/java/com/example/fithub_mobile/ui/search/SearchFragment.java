@@ -27,6 +27,7 @@ import com.example.fithub_mobile.ui.favorites.FavoritesViewModel;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class SearchFragment extends Fragment {
 
@@ -45,6 +46,8 @@ public class SearchFragment extends Fragment {
             cardContainer = root.findViewById(R.id.cardContainer);
             addRoutine(new RoutineCard(getActivity(), "Uno", "Una descripcion random", 4));
             addRoutine(new RoutineCard(getActivity(), "Dos", "Una descripcion random", 2));
+            addRoutine(new RoutineCard(getActivity(), "Dosis", "Una descripcion random", 2));
+            addRoutine(new RoutineCard(getActivity(), "Dostesco", "Una descripcion random", 2));
             addRoutine(new RoutineCard(getActivity(), "Tres", "Una descripcion random", 5));
 
             setHasOptionsMenu(true);
@@ -88,12 +91,14 @@ public class SearchFragment extends Fragment {
 
             @Override
             public boolean onQueryTextChange(String newText) {
+                List<RoutineCard> chosenRoutines;
                 if(newText.length() >= 3){
-                    //Only working w/one card (pro tem)
                     cardContainer.removeAllViews();
-                    RoutineCard chosen = getRoutineByTitle(newText);
-                    if(chosen != null)
-                        cardContainer.addView(chosen);
+                    chosenRoutines = getRoutinesByTitle(newText);
+                    if(!chosenRoutines.isEmpty())
+                        for(RoutineCard r : chosenRoutines) {
+                            cardContainer.addView(r);
+                        }
                     if(cardContainer.getChildCount() == 0){
                         routineNotFound.setText(R.string.NotFoundMessage);
                         cardContainer.addView(routineNotFound);
@@ -113,12 +118,13 @@ public class SearchFragment extends Fragment {
         routines.add(routine);
     }
 
-    private RoutineCard getRoutineByTitle(String title){
+    private List<RoutineCard> getRoutinesByTitle(String title){
+    ArrayList<RoutineCard> chosenRoutines = new ArrayList<>();
         for (RoutineCard r : routines){
             if(r.getTitle().startsWith(title))
-                return r;
-        }
-        return null;
+                chosenRoutines.add(r);
+            }
+        return chosenRoutines;
     }
 
     private void restoreViews(){
