@@ -3,6 +3,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.example.fithub_mobile">
 
+    <uses-permission android:name="android.permission.CAMERA"/>
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -10,13 +12,16 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Fithubmobile">
-        <activity android:name=".ExecutionQueueActivity"></activity>
+        <activity android:name=".QrScanner"></activity>
+        <activity android:name=".QrGenActivity" />
+        <activity android:name=".ExecutionQueueActivity" />
         <activity android:name=".ExecutionActivity" />
         <activity
             android:name=".RoutineActivity"
             android:label="@string/title_activity_routine"
             android:theme="@style/Theme.Fithubmobile.NoActionBar">
             <tools:validation testUrl="http://fithub.com/routine" />
+
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
 
@@ -24,9 +29,9 @@
                 <category android:name="android.intent.category.BROWSABLE" />
 
                 <data
-                    android:scheme="http"
                     android:host="fithub.com"
-                    android:pathPattern="/routine" />
+                    android:pathPattern="/routine"
+                    android:scheme="http" />
             </intent-filter>
         </activity>
         <activity
@@ -50,6 +55,7 @@
             <intent-filter>
                 <action android:name="android.intent.action.SEARCH" />
             </intent-filter>
+
             <meta-data
                 android:name="android.app.searchable"
                 android:resource="@xml/searchable" />

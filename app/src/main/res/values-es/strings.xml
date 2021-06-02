@@ -24,4 +24,6 @@
     <string name="explore_routines">Explorar Rutinas</string>
     <string name="share_msg">¡Hola! Quiero compartir mi rutina contigo: </string>
     <string name="NotFoundMessage">Oops… parece que no enontramos lo que buscabas.</string>
+    <string name="qr_code_msg">Este ese el codigo QR para tu rutina, ¡Muestraselo a un amigo para que pueda entrenar contigo!</string>
+    <string name="scan_your_code">Escanea tu codigo...</string>
 </resources>

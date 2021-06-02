@@ -10,6 +10,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.RatingBar;
 import android.widget.TextView;
@@ -48,6 +49,12 @@ public class RoutineActivity extends AppCompatActivity {
         fab.setOnClickListener(view -> startExecution());
         Button startBtn = findViewById(R.id.start_routine);
         startBtn.setOnClickListener(view -> startExecution());
+
+        ImageButton qrBtn = findViewById(R.id.qr_btn);
+        qrBtn.setOnClickListener(view -> {
+            Intent i = new Intent(this,QrScanner.class);
+            startActivity(i);
+        });
     }
 
     public void startExecution(){

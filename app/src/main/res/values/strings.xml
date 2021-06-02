@@ -25,4 +25,6 @@
     <string name="fithub_url" translatable="false">fithub.com</string>
     <string name="share_msg">Hey! I want to share my routine with you: </string>
     <string name="NotFoundMessage">Oops… looks like we couldn\'t find what you were searching for.</string>
+    <string name="qr_code_msg">This is the QR code for your routine, show it to a friend so he can scan it and train with you!</string>
+    <string name="scan_your_code">Scan your code...</string>
 </resources>
