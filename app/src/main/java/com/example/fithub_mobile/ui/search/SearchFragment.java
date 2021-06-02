@@ -1,6 +1,8 @@
 package com.example.fithub_mobile.ui.search;
 
 import android.app.Activity;
+import android.graphics.text.LineBreaker;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -11,8 +13,10 @@ import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.LinearLayout;
 import android.widget.SearchView;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
@@ -27,9 +31,11 @@ import java.util.ArrayList;
 public class SearchFragment extends Fragment {
 
         private SearchViewModel searchViewModel;
+        private TextView routineNotFound;
         private LinearLayout cardContainer;
         private final ArrayList<RoutineCard> routines = new ArrayList<>();
 
+        @RequiresApi(api = Build.VERSION_CODES.Q)
         public View onCreateView(@NonNull LayoutInflater inflater,
                                  ViewGroup container, Bundle savedInstanceState) {
             searchViewModel =
@@ -42,6 +48,10 @@ public class SearchFragment extends Fragment {
             addRoutine(new RoutineCard(getActivity(), "Tres", "Una descripcion random", 5));
 
             setHasOptionsMenu(true);
+
+            routineNotFound = new TextView(this.getContext());
+            routineNotFound.setTextSize(20);
+            routineNotFound.setGravity(1);
 
             return root;
         }
@@ -84,7 +94,12 @@ public class SearchFragment extends Fragment {
                     RoutineCard chosen = getRoutineByTitle(newText);
                     if(chosen != null)
                         cardContainer.addView(chosen);
+                    if(cardContainer.getChildCount() == 0){
+                        routineNotFound.setText(R.string.NotFoundMessage);
+                        cardContainer.addView(routineNotFound);
+                    }
                 }
+
                 else
                     restoreViews();
                 return true;
