@@ -30,4 +30,9 @@
     <string name="execution_view">Execution View</string>
     <string name="next_up">Next up</string>
     <string name="current_exercise">Current exercise</string>
+    <string name="first_name">First Name</string>
+    <string name="last_name">Last Name</string>
+    <string name="cancel_btn">Cancel</string>
+    <string name="save_btn">Save</string>
+    <string name="logout">Log Out</string>
 </resources>

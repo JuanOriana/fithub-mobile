@@ -17,6 +17,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.fithub_mobile.Login;
 import com.example.fithub_mobile.R;
@@ -61,14 +62,27 @@ public class ProfileFragment extends Fragment {
         return root;
     }
 
-    public void goToLogin(){
+    public void goToLogin() {
         Intent i = new Intent(getContext(), Login.class);
         startActivity(i);
         getActivity().finish();
     }
 
-    public void logOut(View view){
+    public void logOut(View view) {
         sp.edit().putBoolean("logged",false).apply();
         goToLogin();
     }
+
+    public void editProfile(View view) {
+        Toast.makeText(getContext(), "A editar perfil", Toast.LENGTH_LONG).show();
+        goToEdit();
+    }
+
+    private void goToEdit() {
+//        FragmentTransaction fragmentTransaction = getParentFragmentManager().beginTransaction();
+//        fragmentTransaction.replace(R.id.navigation_profile, EditProfileFragment.class, null);
+//        fragmentTransaction.addToBackStack(null);
+//        fragmentTransaction.commit();
+    }
+
 }

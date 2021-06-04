@@ -120,7 +120,7 @@
         android:layout_height="wrap_content"
         android:layout_marginEnd="15dp"
         android:backgroundTint="#CC4545"
-        android:text="Log Out"
+        android:text="@string/logout"
         android:onClick="logOut"
         app:layout_constraintBottom_toBottomOf="@+id/button"
         app:layout_constraintEnd_toEndOf="@+id/userContainer"

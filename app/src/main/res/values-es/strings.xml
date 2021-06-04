@@ -11,10 +11,10 @@
     <string name="edit_profile">Editar perfil</string>
     <string name="title_search">Buscar</string>
     <string name="title_favorites">Favoritos</string>
-    <string name="title_activity_routine">Routina</string>
+    <string name="title_activity_routine">Rutina</string>
     <string name="action_settings">Ajustes</string>
     <string name="sets">sets</string>
-    <string name="exercise_cycle">Ciclo de ejercitacion</string>
+    <string name="exercise_cycle">Ciclo de ejercitación</string>
     <string name="start_routine">Comenzar rutina</string>
     <string name="fithub">Fithub</string>
     <string name="app_label">Buscar</string>
@@ -23,7 +23,12 @@
     <string name="recent_routines">Rutinas Recientes</string>
     <string name="explore_routines">Explorar Rutinas</string>
     <string name="share_msg">¡Hola! Quiero compartir mi rutina contigo: </string>
-    <string name="NotFoundMessage">Oops… parece que no enontramos lo que buscabas.</string>
-    <string name="qr_code_msg">Este ese el codigo QR para tu rutina, ¡Muestraselo a un amigo para que pueda entrenar contigo!</string>
-    <string name="scan_your_code">Escanea tu codigo...</string>
+    <string name="NotFoundMessage">Oops… parece que no encontramos lo que buscabas.</string>
+    <string name="qr_code_msg">Este ese el código QR para tu rutina, ¡Muéstraselo a un amigo para que pueda entrenar contigo!</string>
+    <string name="scan_your_code">Escanea tu código…</string>
+    <string name="first_name">Nombre</string>
+    <string name="last_name">Apellido</string>
+    <string name="cancel_btn">Cancelar</string>
+    <string name="save_btn">Guardar</string>
+    <string name="logout">Log Out</string>
 </resources>
