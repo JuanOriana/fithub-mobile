@@ -27,4 +27,9 @@
     <string name="NotFoundMessage">Oops… looks like we couldn\'t find what you were searching for.</string>
     <string name="qr_code_msg">This is the QR code for your routine, show it to a friend so he can scan it and train with you!</string>
     <string name="scan_your_code">Scan your code...</string>
+    <string name="first_name">First Name</string>
+    <string name="last_name">Last Name</string>
+    <string name="cancel_btn">Cancel</string>
+    <string name="save_btn">Save</string>
+    <string name="logout">Log Out</string>
 </resources>
