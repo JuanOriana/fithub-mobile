@@ -58,16 +58,11 @@ public class SearchFragment extends Fragment {
             extractedRoutines.add(new RoutineCardData(4,"Terminator","Prueba",5));
             extractedRoutines.add(new RoutineCardData(1,"Diaccordo","Prueba",4));
 
-
-
             cardContainer = root.findViewById(R.id.cardContainer);
             cardContainer.setLayoutManager(new LinearLayoutManager(getContext()));
             adapter = new RoutineCardAdapter(extractedRoutines);
             cardContainer.setLayoutManager(new LinearLayoutManager(getContext()));
             cardContainer.setAdapter(adapter);
-
-
-
 
             routineNotFound = new TextView(this.getContext());
             routineNotFound.setTextSize(20);
@@ -115,10 +110,6 @@ public class SearchFragment extends Fragment {
         });
 
 
-    }
-    public void addRoutine(RoutineCard routine){
-        cardContainer.addView(routine);
-        routines.add(routine);
     }
 
     public static void hideSoftKeyboard(Activity activity) {
