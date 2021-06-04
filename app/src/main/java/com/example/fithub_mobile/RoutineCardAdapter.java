@@ -5,6 +5,8 @@ import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Filter;
+import android.widget.Filterable;
 import android.widget.ImageButton;
 import android.widget.RatingBar;
 import android.widget.TextView;
@@ -17,10 +19,14 @@ import com.google.android.material.button.MaterialButton;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
 
-public class RoutineCardAdapter extends RecyclerView.Adapter<RoutineCardAdapter.ViewHolder> {
+public class RoutineCardAdapter extends RecyclerView.Adapter<RoutineCardAdapter.ViewHolder> implements Filterable {
 
     private ArrayList<RoutineCardData> routines;
+    private ArrayList<RoutineCardData> allRoutines;
+
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
         private final TextView titleView;
@@ -43,8 +49,8 @@ public class RoutineCardAdapter extends RecyclerView.Adapter<RoutineCardAdapter.
                 Intent shareIntent = new Intent(Intent.ACTION_SEND);
                 shareIntent.setType("text/plain");
                 shareIntent.putExtra(Intent.EXTRA_SUBJECT, R.string.fithub);
-                String shareMessage= "\n"+ view.getContext().getString(R.string.share_msg)+"\n\n";
-                shareMessage = shareMessage + "http://fithub.com/routine" +"\n\n";
+                String shareMessage = "\n" + view.getContext().getString(R.string.share_msg) + "\n\n";
+                shareMessage = shareMessage + "http://fithub.com/routine" + "\n\n";
                 shareIntent.putExtra(Intent.EXTRA_TEXT, shareMessage);
                 view.getContext().startActivity(Intent.createChooser(shareIntent, "Choose one"));
             });
@@ -83,8 +89,40 @@ public class RoutineCardAdapter extends RecyclerView.Adapter<RoutineCardAdapter.
         }
     }
 
+    @Override
+    public Filter getFilter() {
+        return filter;
+    }
+
+    Filter filter  = new Filter() {
+        @Override
+        protected FilterResults performFiltering(CharSequence constraint) {
+            ArrayList<RoutineCardData> filteredList = new ArrayList<>();
+            if(constraint.toString().isEmpty())
+                filteredList.addAll(allRoutines);
+            else {
+                for(RoutineCardData routine : allRoutines){
+                    if(routine.getTitle().toLowerCase().contains(constraint))
+                        filteredList.add(routine);
+                }
+            }
+            FilterResults filterResults = new FilterResults();
+            filterResults.values = filteredList;
+            return filterResults;
+        }
+
+        @Override
+        protected void publishResults(CharSequence constraint, FilterResults results) {
+            routines.clear();
+            routines.addAll((Collection<? extends RoutineCardData>) results.values);
+            notifyDataSetChanged();
+        }
+    };
+
     public RoutineCardAdapter(ArrayList<RoutineCardData> routines){
+
         this.routines = routines;
+        this.allRoutines = new ArrayList<>(routines);
     }
 
     @NonNull
