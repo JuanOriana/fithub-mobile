@@ -22,6 +22,7 @@ import androidx.lifecycle.ViewModelProvider;
 
 import com.example.fithub_mobile.R;
 import com.example.fithub_mobile.RoutineCard;
+import com.example.fithub_mobile.RoutineCardData;
 import com.example.fithub_mobile.ui.favorites.FavoritesViewModel;
 
 import org.jetbrains.annotations.NotNull;
@@ -35,6 +36,7 @@ public class SearchFragment extends Fragment {
         private TextView routineNotFound;
         private LinearLayout cardContainer;
         private final ArrayList<RoutineCard> routines = new ArrayList<>();
+        private ArrayList<RoutineCardData> extractedRoutines = new ArrayList<>();
 
         @RequiresApi(api = Build.VERSION_CODES.Q)
         public View onCreateView(@NonNull LayoutInflater inflater,
@@ -44,11 +46,14 @@ public class SearchFragment extends Fragment {
             View root = inflater.inflate(R.layout.fragment_favorites, container, false);
 
             cardContainer = root.findViewById(R.id.cardContainer);
-            addRoutine(new RoutineCard(getActivity(), "Uno", "Una descripcion random", 4));
-            addRoutine(new RoutineCard(getActivity(), "Dos", "Una descripcion random", 2));
-            addRoutine(new RoutineCard(getActivity(), "Dosis", "Una descripcion random", 2));
-            addRoutine(new RoutineCard(getActivity(), "Dostesco", "Una descripcion random", 2));
-            addRoutine(new RoutineCard(getActivity(), "Tres", "Una descripcion random", 5));
+
+            extractedRoutines.add(new RoutineCardData(1,"Titulo","Prueba",4));
+            extractedRoutines.add(new RoutineCardData(2,"Titulo","Prueba",5));
+            extractedRoutines.add(new RoutineCardData(3,"Titulo","Prueba",1));
+
+            cardContainer.addView(new RoutineCard(getActivity(),extractedRoutines.get(0)));
+            cardContainer.addView(new RoutineCard(getActivity(),extractedRoutines.get(1)));
+            cardContainer.addView(new RoutineCard(getActivity(),extractedRoutines.get(2)));
 
             setHasOptionsMenu(true);
 
