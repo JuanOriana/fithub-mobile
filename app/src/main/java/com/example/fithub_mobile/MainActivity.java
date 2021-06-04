@@ -7,12 +7,15 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.View;
+import android.widget.Toast;
 
+import com.example.fithub_mobile.ui.profile.EditProfileFragment;
 import com.example.fithub_mobile.ui.profile.ProfileFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.SearchView;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
@@ -54,5 +57,7 @@ public class MainActivity extends AppCompatActivity {
         sp.edit().putBoolean("logged",false).apply();
         goToLogin();
     }
+
+
 
 }

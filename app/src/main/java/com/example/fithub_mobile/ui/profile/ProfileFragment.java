@@ -6,7 +6,9 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -48,6 +50,11 @@ public class ProfileFragment extends Fragment {
         TextView username = root.findViewById(R.id.userName);
         username.setText(sp.getString("username", "User"));
 
+        Button editButton = root.findViewById(R.id.edit_btn);
+        editButton.setOnClickListener(v->{
+            Navigation.findNavController(v).navigate(R.id.action_navigation_profile_to_navigation_editprofile);
+        });
+
         cardContainer = root.findViewById(R.id.cardContainer);
 
         routines.add(new RoutineCardData(1,"Titulo","Prueba",4));
@@ -71,18 +78,6 @@ public class ProfileFragment extends Fragment {
     public void logOut(View view) {
         sp.edit().putBoolean("logged",false).apply();
         goToLogin();
-    }
-
-    public void editProfile(View view) {
-        Toast.makeText(getContext(), "A editar perfil", Toast.LENGTH_LONG).show();
-        goToEdit();
-    }
-
-    private void goToEdit() {
-//        FragmentTransaction fragmentTransaction = getParentFragmentManager().beginTransaction();
-//        fragmentTransaction.replace(R.id.navigation_profile, EditProfileFragment.class, null);
-//        fragmentTransaction.addToBackStack(null);
-//        fragmentTransaction.commit();
     }
 
 }

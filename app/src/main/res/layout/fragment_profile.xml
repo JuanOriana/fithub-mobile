@@ -91,7 +91,7 @@
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/edit_btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="15dp"
@@ -102,12 +102,13 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="436dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="30dp"
         android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button">
+        app:layout_constraintTop_toBottomOf="@+id/edit_btn">
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/cardContainer"
@@ -129,12 +130,11 @@
         android:layout_height="wrap_content"
         android:layout_marginEnd="15dp"
         android:backgroundTint="#CC4545"
-        android:text="@string/logout"
         android:onClick="logOut"
-        app:layout_constraintBottom_toBottomOf="@+id/button"
+        android:text="@string/logout"
+        app:layout_constraintBottom_toBottomOf="@+id/edit_btn"
         app:layout_constraintEnd_toEndOf="@+id/userContainer"
-        app:layout_constraintTop_toTopOf="@+id/button"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintTop_toTopOf="@+id/edit_btn" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
