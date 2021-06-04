@@ -6,9 +6,9 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -22,13 +22,17 @@ import android.widget.Toast;
 import com.example.fithub_mobile.Login;
 import com.example.fithub_mobile.R;
 import com.example.fithub_mobile.RoutineCard;
+import com.example.fithub_mobile.RoutineCardAdapter;
+import com.example.fithub_mobile.RoutineCardData;
 
+import java.util.ArrayList;
 import java.util.Objects;
 
 public class ProfileFragment extends Fragment {
 
     private ProfileViewModel profileViewModel;
-    private LinearLayout cardContainer;
+    private RecyclerView cardContainer;
+    private ArrayList<RoutineCardData> routines = new ArrayList<>();
     SharedPreferences sp;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
@@ -44,14 +48,16 @@ public class ProfileFragment extends Fragment {
         TextView username = root.findViewById(R.id.userName);
         username.setText(sp.getString("username", "User"));
 
-        Button editProfile = (Button) root.findViewById(R.id.button);
-        editProfile.setOnClickListener(this::editProfile);
-
         cardContainer = root.findViewById(R.id.cardContainer);
 
-        cardContainer.addView(new RoutineCard(getActivity(),"Uno","Una descripcion random",5));
-        cardContainer.addView(new RoutineCard(getActivity(),"Dos","Una descripcion random",1));
-        cardContainer.addView(new RoutineCard(getActivity(),"Tres","Una descripcion random",3));
+        routines.add(new RoutineCardData(1,"Titulo","Prueba",4));
+        routines.add(new RoutineCardData(2,"Titulo","Prueba",5));
+        routines.add(new RoutineCardData(3,"Titulo","Prueba",1));
+
+        cardContainer = root.findViewById(R.id.cardContainer);
+        RoutineCardAdapter adapter = new RoutineCardAdapter(routines);
+        cardContainer.setLayoutManager(new LinearLayoutManager(getContext()));
+        cardContainer.setAdapter(adapter);
 
         return root;
     }

@@ -25,17 +25,17 @@ public class RoutineCard extends MaterialCardView {
     public String title;
 
 
-    public RoutineCard(Context context, String title, String desc, Integer rating) {
+    public RoutineCard(Context context, RoutineCardData routine) {
         super(context);
         inflate(getContext(),R.layout.routine_card,this);
 
         TextView titleView = findViewById(R.id.title_card);
-        titleView.setText(title);
-        this.title = title;
+        titleView.setText(routine.getTitle());
+        title = routine.getTitle();
         TextView descView = findViewById(R.id.desc_card);
-        descView.setText(desc);
+        descView.setText(routine.getDesc());
         RatingBar ratingBar = findViewById(R.id.rating_bar);
-        ratingBar.setRating(rating);
+        ratingBar.setRating(routine.getRating());
 
         ImageButton shareBtn = findViewById(R.id.share_btn);
         shareBtn.setOnClickListener(view -> {
@@ -61,8 +61,7 @@ public class RoutineCard extends MaterialCardView {
 
     }
 
-    public String getTitle(){
+    public String getTitle() {
         return title;
     }
-
 }

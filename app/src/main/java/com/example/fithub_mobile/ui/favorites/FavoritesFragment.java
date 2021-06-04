@@ -19,16 +19,23 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.fithub_mobile.R;
 import com.example.fithub_mobile.RoutineCard;
+import com.example.fithub_mobile.RoutineCardAdapter;
+import com.example.fithub_mobile.RoutineCardData;
 
 import org.jetbrains.annotations.NotNull;
 
+import java.util.ArrayList;
+
 public class FavoritesFragment extends Fragment {
 
+    private ArrayList<RoutineCardData> routines = new ArrayList<>();
     private FavoritesViewModel favoritesViewModel;
-    private LinearLayout cardContainer;
+    private RecyclerView cardContainer;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -38,9 +45,15 @@ public class FavoritesFragment extends Fragment {
 
         cardContainer = root.findViewById(R.id.cardContainer);
 
-        cardContainer.addView(new RoutineCard(getActivity(),"Uno","Una descripcion random",4));
-        cardContainer.addView(new RoutineCard(getActivity(),"Dos","Una descripcion random",2));
-        cardContainer.addView(new RoutineCard(getActivity(),"Tres","Una descripcion random",5));
+        routines.add(new RoutineCardData(1,"Titulo","Prueba",4));
+        routines.add(new RoutineCardData(2,"Titulo","Prueba",5));
+        routines.add(new RoutineCardData(3,"Titulo","Prueba",1));
+
+        cardContainer = root.findViewById(R.id.cardContainer);
+        RoutineCardAdapter adapter = new RoutineCardAdapter(routines);
+        cardContainer.setLayoutManager(new LinearLayoutManager(getContext()));
+        cardContainer.setAdapter(adapter);
+
         return root;
     }
 }
