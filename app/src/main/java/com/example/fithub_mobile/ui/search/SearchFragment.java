@@ -19,9 +19,12 @@ import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.fithub_mobile.R;
 import com.example.fithub_mobile.RoutineCard;
+import com.example.fithub_mobile.RoutineCardAdapter;
 import com.example.fithub_mobile.RoutineCardData;
 import com.example.fithub_mobile.ui.favorites.FavoritesViewModel;
 
@@ -34,28 +37,32 @@ public class SearchFragment extends Fragment {
 
         private SearchViewModel searchViewModel;
         private TextView routineNotFound;
-        private LinearLayout cardContainer;
+        private RecyclerView cardContainer;
         private final ArrayList<RoutineCard> routines = new ArrayList<>();
         private ArrayList<RoutineCardData> extractedRoutines = new ArrayList<>();
+    RoutineCardAdapter adapter;
 
         @RequiresApi(api = Build.VERSION_CODES.Q)
         public View onCreateView(@NonNull LayoutInflater inflater,
                                  ViewGroup container, Bundle savedInstanceState) {
             searchViewModel =
                     new ViewModelProvider(this).get(SearchViewModel.class);
-            View root = inflater.inflate(R.layout.fragment_favorites, container, false);
+            View root = inflater.inflate(R.layout.fragment_search, container, false);
+            setHasOptionsMenu(true);
+
+
+
+            extractedRoutines.add(new RoutineCardData(1,"Diácono","Prueba",4));
+            extractedRoutines.add(new RoutineCardData(2,"Caballero","Prueba",5));
+            extractedRoutines.add(new RoutineCardData(3,"Titán","Prueba",1));
+            extractedRoutines.add(new RoutineCardData(4,"Terminator","Prueba",5));
+            extractedRoutines.add(new RoutineCardData(1,"Diaccordo","Prueba",4));
 
             cardContainer = root.findViewById(R.id.cardContainer);
-
-            extractedRoutines.add(new RoutineCardData(1,"Titulo","Prueba",4));
-            extractedRoutines.add(new RoutineCardData(2,"Titulo","Prueba",5));
-            extractedRoutines.add(new RoutineCardData(3,"Titulo","Prueba",1));
-
-            cardContainer.addView(new RoutineCard(getActivity(),extractedRoutines.get(0)));
-            cardContainer.addView(new RoutineCard(getActivity(),extractedRoutines.get(1)));
-            cardContainer.addView(new RoutineCard(getActivity(),extractedRoutines.get(2)));
-
-            setHasOptionsMenu(true);
+            cardContainer.setLayoutManager(new LinearLayoutManager(getContext()));
+            adapter = new RoutineCardAdapter(extractedRoutines);
+            cardContainer.setLayoutManager(new LinearLayoutManager(getContext()));
+            cardContainer.setAdapter(adapter);
 
             routineNotFound = new TextView(this.getContext());
             routineNotFound.setTextSize(20);
@@ -73,16 +80,17 @@ public class SearchFragment extends Fragment {
 
         SearchView searchView = (SearchView) menu.findItem(R.id.search).getActionView();
         searchView.setIconifiedByDefault(false);
+        searchView.setIconified(false);
 
         searchView.addOnAttachStateChangeListener(new View.OnAttachStateChangeListener() {
             @Override
             public void onViewAttachedToWindow(View v) {
-
+                searchView.setQuery("",false);
             }
 
             @Override
             public void onViewDetachedFromWindow(View v) {
-                restoreViews();
+                adapter.getFilter().filter("");
             }
         });
 
@@ -96,46 +104,12 @@ public class SearchFragment extends Fragment {
 
             @Override
             public boolean onQueryTextChange(String newText) {
-                List<RoutineCard> chosenRoutines;
-                if(newText.length() >= 3){
-                    cardContainer.removeAllViews();
-                    chosenRoutines = getRoutinesByTitle(newText);
-                    if(!chosenRoutines.isEmpty())
-                        for(RoutineCard r : chosenRoutines) {
-                            cardContainer.addView(r);
-                        }
-                    if(cardContainer.getChildCount() == 0){
-                        routineNotFound.setText(R.string.NotFoundMessage);
-                        cardContainer.addView(routineNotFound);
-                    }
-                }
-
-                else
-                    restoreViews();
+                adapter.getFilter().filter(newText);
                 return true;
             }
         });
 
 
-    }
-    public void addRoutine(RoutineCard routine){
-        cardContainer.addView(routine);
-        routines.add(routine);
-    }
-
-    private List<RoutineCard> getRoutinesByTitle(String title){
-    ArrayList<RoutineCard> chosenRoutines = new ArrayList<>();
-        for (RoutineCard r : routines){
-            if(r.getTitle().startsWith(title))
-                chosenRoutines.add(r);
-            }
-        return chosenRoutines;
-    }
-
-    private void restoreViews(){
-        cardContainer.removeAllViews();
-        for(RoutineCard r : routines)
-            cardContainer.addView(r);
     }
 
     public static void hideSoftKeyboard(Activity activity) {

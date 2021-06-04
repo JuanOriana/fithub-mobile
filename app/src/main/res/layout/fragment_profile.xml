@@ -100,19 +100,28 @@
         app:layout_constraintStart_toStartOf="@+id/userContainer"
         app:layout_constraintTop_toBottomOf="@+id/userContainer" />
 
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/cardContainer"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_marginTop="30dp"
-        android:layout_marginBottom="60dp"
-        android:divider="@drawable/divider"
-        android:gravity="center"
+        android:layout_height="436dp"
         android:orientation="vertical"
-        android:showDividers="middle"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/button">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/cardContainer"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="30dp"
+            android:layout_marginBottom="60dp"
+            android:divider="@drawable/divider"
+            android:orientation="vertical"
+            android:showDividers="middle"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/button" />
+    </LinearLayout>
 
     <Button
         android:id="@+id/logout_btn"
@@ -120,7 +129,7 @@
         android:layout_height="wrap_content"
         android:layout_marginEnd="15dp"
         android:backgroundTint="#CC4545"
-        android:text="Log Out"
+        android:text="@string/logout"
         android:onClick="logOut"
         app:layout_constraintBottom_toBottomOf="@+id/button"
         app:layout_constraintEnd_toEndOf="@+id/userContainer"
