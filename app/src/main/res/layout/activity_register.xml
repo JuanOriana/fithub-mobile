@@ -12,12 +12,12 @@
         android:id="@+id/login_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:layout_marginBottom="32dp"
         android:text="@string/title_home"
         android:textColor="@color/fithub_green"
         android:textSize="70sp"
-        android:textStyle="bold"
-        android:layout_marginTop="48dp"
-        android:layout_marginBottom="48dp" />
+        android:textStyle="bold" />
 
     <EditText
         android:id="@+id/firstname_input"
@@ -90,7 +90,7 @@
         android:onClick="signUp"
         android:text="@string/register"
         android:textSize="20sp"
-        android:layout_marginTop="48dp" />
+        android:layout_marginTop="32dp" />
 
     <LinearLayout
         android:id="@+id/linearLayout"
@@ -111,6 +111,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="5dp"
             android:clickable="true"
+            android:onClick="goToLogin"
             android:text="@string/sign_in" />
 
     </LinearLayout>

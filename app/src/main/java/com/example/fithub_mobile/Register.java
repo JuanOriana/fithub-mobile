@@ -21,7 +21,7 @@ public class Register extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_login);
+        setContentView(R.layout.activity_register);
 
         sp = getSharedPreferences("login",MODE_PRIVATE);
 
@@ -43,12 +43,12 @@ public class Register extends AppCompatActivity {
 
         if (fn.trim().length() == 0){
             error = true;
-            passView.setError("The first name is not valid");
+            fnView.setError("The first name is not valid");
         }
 
         if (ln.trim().length() == 0){
             error = true;
-            passView.setError("The last name is not valid");
+            lnView.setError("The last name is not valid");
         }
 
         if (!Patterns.EMAIL_ADDRESS.matcher(email).matches() || email.trim().length() == 0){
@@ -63,7 +63,7 @@ public class Register extends AppCompatActivity {
 
         if (passConf.trim().length() == 0 || !passConf.equals(pass)){
             error = true;
-            passView.setError("The password doesn't match");
+            passConfView.setError("The password doesn't match");
         }
 
         if (error){
@@ -82,6 +82,12 @@ public class Register extends AppCompatActivity {
 
     public void goToMainActivity(){
         Intent i = new Intent(this, MainActivity.class);
+        startActivity(i);
+        finish();
+    }
+
+    public void goToLogin(View view) {
+        Intent i = new Intent(this, Login.class);
         startActivity(i);
         finish();
     }
