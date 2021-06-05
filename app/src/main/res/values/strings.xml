@@ -4,7 +4,9 @@
     <string name="title_profile">Profile</string>
     <string name="emailInputHint">Email</string>
     <string name="passwordInputHint">Password</string>
-    <string name="logInBtnText">LogIn</string>
+    <string name="confirm_password">Confirm Password</string>
+    <string name="logInBtnText">Login</string>
+    <string name="register">Register</string>
     <string name="userlogged" translatable="false">false</string>
     <string name="RoutineTag">Routines</string>
     <string name="favouriteTag">Favorites</string>
@@ -32,4 +34,9 @@
     <string name="cancel_btn">Cancel</string>
     <string name="save_btn">Save</string>
     <string name="logout">Log Out</string>
+    <string name="no_account">Don\'t have an account?</string>
+    <string name="sign_up">Sign Up</string>
+    <string name="account">Already have an account?</string>
+    <string name="sign_in">Sign In</string>
+    <string name="username">Username</string>
 </resources>
