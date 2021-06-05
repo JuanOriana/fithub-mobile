@@ -38,7 +38,6 @@ public class HomeFragment extends Fragment {
         homeViewModel =
                 new ViewModelProvider(this).get(HomeViewModel.class);
         View root = inflater.inflate(R.layout.fragment_home, container, false);
-        setHasOptionsMenu(true);
 
         routines.add(new RoutineCardData(1,"Titulo","Prueba",4));
         routines.add(new RoutineCardData(2,"Titulo","Prueba",5));
@@ -51,27 +50,6 @@ public class HomeFragment extends Fragment {
         return root;
     }
 
-    @Override
-    public void onCreateOptionsMenu(
-            @NotNull Menu menu, MenuInflater inflater) {
-        inflater.inflate(R.menu.options_menu, menu);
-        super.onCreateOptionsMenu(menu, inflater);
-        SearchView searchView = (SearchView) menu.findItem(R.id.search).getActionView();
-        searchView.setIconifiedByDefault(false);
-        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-            @Override
-            public boolean onQueryTextSubmit(String query) {
-                Log.d("SEARCHING", query);
-                return true;
-            }
-
-            @Override
-            public boolean onQueryTextChange(String newText) {
-                return false;
-            }
-        });
-
-    }
 
 
 }

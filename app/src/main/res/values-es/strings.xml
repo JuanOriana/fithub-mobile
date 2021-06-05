@@ -27,7 +27,7 @@
     <string name="share_msg">¡Hola! Quiero compartir mi rutina contigo: </string>
     <string name="NotFoundMessage">Oops… parece que no encontramos lo que buscabas.</string>
     <string name="qr_code_msg">Este ese el código QR para tu rutina, ¡Muéstraselo a un amigo para que pueda entrenar contigo!</string>
-    <string name="scan_your_code">Escanea tu código…</string>
+    <string name="scan_your_code">Escaneá tu código…</string>
     <string name="first_name">Nombre</string>
     <string name="last_name">Apellido</string>
     <string name="cancel_btn">Cancelar</string>
@@ -38,4 +38,6 @@
     <string name="account">Ya tenés cuenta?</string>
     <string name="sign_in">Incia sesión</string>
     <string name="username">Nombre de usuario</string>
+    <string name="current_exercise">Ejercicio actual</string>
+    <string name="next_up">Siguiente</string>
 </resources>
