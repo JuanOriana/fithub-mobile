@@ -52,7 +52,7 @@ public class RoutineActivity extends AppCompatActivity {
 
         ImageButton qrBtn = findViewById(R.id.qr_btn);
         qrBtn.setOnClickListener(view -> {
-            Intent i = new Intent(this,QrScanner.class);
+            Intent i = new Intent(this,QrGenActivity.class);
             startActivity(i);
         });
     }

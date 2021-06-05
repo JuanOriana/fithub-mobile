@@ -1,6 +1,7 @@
 package com.example.fithub_mobile.ui.search;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.graphics.text.LineBreaker;
 import android.os.Build;
 import android.os.Bundle;
@@ -8,6 +9,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
@@ -22,6 +24,7 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.fithub_mobile.QrScanner;
 import com.example.fithub_mobile.R;
 import com.example.fithub_mobile.RoutineCard;
 import com.example.fithub_mobile.RoutineCardAdapter;
@@ -72,6 +75,7 @@ public class SearchFragment extends Fragment {
         }
 
 
+
     @Override
     public void onCreateOptionsMenu(
             @NotNull Menu menu, MenuInflater inflater) {
@@ -110,6 +114,19 @@ public class SearchFragment extends Fragment {
         });
 
 
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle item selection
+        switch (item.getItemId()) {
+            case R.id.camera_menu_item:
+                Intent i = new Intent(getContext(), QrScanner.class);
+                startActivity(i);
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
     }
 
     public static void hideSoftKeyboard(Activity activity) {
