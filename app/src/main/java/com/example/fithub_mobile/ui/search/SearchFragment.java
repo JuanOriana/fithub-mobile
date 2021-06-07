@@ -2,7 +2,6 @@ package com.example.fithub_mobile.ui.search;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.graphics.text.LineBreaker;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
@@ -13,7 +12,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
-import android.widget.LinearLayout;
 import android.widget.SearchView;
 import android.widget.TextView;
 
@@ -29,12 +27,10 @@ import com.example.fithub_mobile.R;
 import com.example.fithub_mobile.RoutineCard;
 import com.example.fithub_mobile.RoutineCardAdapter;
 import com.example.fithub_mobile.RoutineCardData;
-import com.example.fithub_mobile.ui.favorites.FavoritesViewModel;
 
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class SearchFragment extends Fragment {
 

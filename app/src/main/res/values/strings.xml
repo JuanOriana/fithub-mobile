@@ -44,4 +44,13 @@
     <string name="account">Already have an account?</string>
     <string name="sign_in">Sign In</string>
     <string name="username">Username</string>
+
+
+    <string name="monday">Monday</string>
+    <string name="tuesday">Tuesday</string>
+    <string name="wednesday">Wednesday</string>
+    <string name="thursday">Thursday</string>
+    <string name="friday">Friday</string>
+    <string name="saturday">Saturday</string>
+    <string name="sunday">Sunday</string>
 </resources>

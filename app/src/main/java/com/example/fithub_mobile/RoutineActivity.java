@@ -6,6 +6,7 @@ import android.os.Bundle;
 import com.google.android.material.appbar.CollapsingToolbarLayout;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
@@ -54,6 +55,12 @@ public class RoutineActivity extends AppCompatActivity {
         qrBtn.setOnClickListener(view -> {
             Intent i = new Intent(this,QrGenActivity.class);
             startActivity(i);
+        });
+
+        ImageButton calendarBtn = findViewById(R.id.calendar_btn);
+        calendarBtn.setOnClickListener(view -> {
+            new NotificationDialogFragment().show(getSupportFragmentManager(), NotificationDialogFragment.TAG);
+
         });
     }
 

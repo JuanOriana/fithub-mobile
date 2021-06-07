@@ -12,8 +12,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Fithubmobile">
-        <activity android:name=".QrScanner"></activity>
         <activity android:name=".QrGenActivity" />
+        <activity android:name=".QrScanner" />
         <activity android:name=".ExecutionQueueActivity" />
         <activity android:name=".ExecutionActivity" />
         <activity
