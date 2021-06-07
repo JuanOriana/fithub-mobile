@@ -42,14 +42,12 @@ public class RoutineActivity extends AppCompatActivity {
             descView.setText(desc);
 
         LinearLayout cycleContainer = findViewById(R.id.cycle_container);
-        cycleContainer.addView(new CycleDisplay(this,"Uno",4));
-        cycleContainer.addView(new CycleDisplay(this,"Dos",4));
-        cycleContainer.addView(new CycleDisplay(this,"Tres",3));
+        cycleContainer.addView(new CycleDisplay(this,new CycleData(1,"Uno",4)));
+        cycleContainer.addView(new CycleDisplay(this,new CycleData(1,"Uno",4)));
+        cycleContainer.addView(new CycleDisplay(this,new CycleData(1,"Uno",4)));
 
         FloatingActionButton fab = findViewById(R.id.fab);
         fab.setOnClickListener(view -> startExecution());
-        Button startBtn = findViewById(R.id.start_routine);
-        startBtn.setOnClickListener(view -> startExecution());
 
         ImageButton qrBtn = findViewById(R.id.qr_btn);
         qrBtn.setOnClickListener(view -> {
