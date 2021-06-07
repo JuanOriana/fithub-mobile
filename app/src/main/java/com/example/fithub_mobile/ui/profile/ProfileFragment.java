@@ -79,6 +79,7 @@ public class ProfileFragment extends Fragment {
         getActivity().finish();
     }
 
+
     public void logOut(View view) {
         sp.edit().putBoolean("logged",false).apply();
         goToLogin();

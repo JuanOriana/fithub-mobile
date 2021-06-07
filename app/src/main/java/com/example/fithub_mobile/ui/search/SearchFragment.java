@@ -1,14 +1,14 @@
 package com.example.fithub_mobile.ui.search;
 
 import android.app.Activity;
-import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
+import android.content.Intent;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
@@ -27,10 +27,12 @@ import com.example.fithub_mobile.R;
 import com.example.fithub_mobile.RoutineCard;
 import com.example.fithub_mobile.RoutineCardAdapter;
 import com.example.fithub_mobile.RoutineCardData;
+import com.example.fithub_mobile.ui.favorites.FavoritesViewModel;
 
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class SearchFragment extends Fragment {
 
@@ -69,7 +71,6 @@ public class SearchFragment extends Fragment {
 
             return root;
         }
-
 
 
     @Override
@@ -120,9 +121,13 @@ public class SearchFragment extends Fragment {
                 Intent i = new Intent(getContext(), QrScanner.class);
                 startActivity(i);
                 return true;
+            case R.id.filter_menu_item:
+                FilterDialogFragment f = new FilterDialogFragment();
+                f.show(getParentFragmentManager(),"FilterFragment");
+                break;
             default:
-                return super.onOptionsItemSelected(item);
         }
+        return super.onOptionsItemSelected(item);
     }
 
     public static void hideSoftKeyboard(Activity activity) {

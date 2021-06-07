@@ -40,12 +40,8 @@
     <string name="username">Nombre de usuario</string>
     <string name="current_exercise">Ejercicio actual</string>
     <string name="next_up">Siguiente</string>
-    <string name="monday">Lunes</string>
-    <string name="tuesday">Martes</string>
-    <string name="wednesday">Miercoles</string>
-    <string name="thursday">Jueves</string>
-    <string name="friday">Viernes</string>
-    <string name="saturday">Sabado</string>
-    <string name="sunday">Domingo</string>
-
+    <string name="sort_spinner_title">Ordenar por:</string>
+    <string name="spinner_name_item">Nombre</string>
+    <string name="filter_dialog_title">Filtros de Búsqueda</string>
+    <string name="spinner_difficulty_item">Dificultad</string>
 </resources>
