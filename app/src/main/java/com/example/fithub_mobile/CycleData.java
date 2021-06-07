@@ -5,12 +5,20 @@ import java.util.Objects;
 public class CycleData {
     private  Integer id;
     private String title;
-    private String desc;
+    private Integer reps;
 
-    public CycleData(Integer id, String title, String desc) {
+    public CycleData(Integer id, String title, Integer reps) {
         this.id = id;
         this.title = title;
-        this.desc = desc;
+        this.reps = reps;
+    }
+
+    public Integer getReps() {
+        return reps;
+    }
+
+    public void setReps(Integer reps) {
+        this.reps = reps;
     }
 
     public Integer getId() {
@@ -29,13 +37,6 @@ public class CycleData {
         this.title = title;
     }
 
-    public String getDesc() {
-        return desc;
-    }
-
-    public void setDesc(String desc) {
-        this.desc = desc;
-    }
 
     @Override
     public boolean equals(Object o) {
