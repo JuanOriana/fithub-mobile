@@ -5,7 +5,9 @@
     <string name="title_profile">Perfil</string>
     <string name="emailInputHint">Correo Electrónico</string>
     <string name="passwordInputHint">Contraseña</string>
+    <string name="confirm_password">Confirmar Contraseña</string>
     <string name="logInBtnText">Ingresar</string>
+    <string name="register">Registrar</string>
     <string name="RoutineTag">Rutinas</string>
     <string name="favouriteTag">Favoritos</string>
     <string name="edit_profile">Editar perfil</string>
@@ -31,6 +33,11 @@
     <string name="cancel_btn">Cancelar</string>
     <string name="save_btn">Guardar</string>
     <string name="logout">Log Out</string>
+    <string name="no_account">No tenés cuenta?</string>
+    <string name="sign_up">Registrate</string>
+    <string name="account">Ya tenés cuenta?</string>
+    <string name="sign_in">Incia sesión</string>
+    <string name="username">Nombre de usuario</string>
     <string name="current_exercise">Ejercicio actual</string>
     <string name="next_up">Siguiente</string>
     <string name="sort_spinner_title">Ordenar por:</string>

@@ -4,7 +4,9 @@
     <string name="title_profile">Profile</string>
     <string name="emailInputHint">Email</string>
     <string name="passwordInputHint">Password</string>
-    <string name="logInBtnText">LogIn</string>
+    <string name="confirm_password">Confirm Password</string>
+    <string name="logInBtnText">Login</string>
+    <string name="register">Register</string>
     <string name="userlogged" translatable="false">false</string>
     <string name="RoutineTag">Routines</string>
     <string name="favouriteTag">Favorites</string>
@@ -37,6 +39,11 @@
     <string name="logout">Log Out</string>
     <string name="filter_title" translatable="false">Filter</string>
     <string name="camera_title" translatable="false">Camera</string>
+    <string name="no_account">Don\'t have an account?</string>
+    <string name="sign_up">Sign Up</string>
+    <string name="account">Already have an account?</string>
+    <string name="sign_in">Sign In</string>
+    <string name="username">Username</string>
     <string name="sort_spinner_title">Sort by:</string>
     <string name="spinner_name_item">Name</string>
     <string name="filter_dialog_title">Search Filters</string>

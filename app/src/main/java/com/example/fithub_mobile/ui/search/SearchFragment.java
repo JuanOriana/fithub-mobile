@@ -1,19 +1,17 @@
 package com.example.fithub_mobile.ui.search;
 
 import android.app.Activity;
-import android.app.AlertDialog;
-import android.graphics.text.LineBreaker;
 import android.os.Build;
 import android.os.Bundle;
+import android.content.Intent;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
-import android.widget.LinearLayout;
 import android.widget.SearchView;
 import android.widget.TextView;
 
@@ -24,6 +22,7 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.fithub_mobile.QrScanner;
 import com.example.fithub_mobile.R;
 import com.example.fithub_mobile.RoutineCard;
 import com.example.fithub_mobile.RoutineCardAdapter;
@@ -80,7 +79,6 @@ public class SearchFragment extends Fragment {
         inflater.inflate(R.menu.options_menu, menu);
         super.onCreateOptionsMenu(menu, inflater);
 
-
         SearchView searchView = (SearchView) menu.findItem(R.id.search).getActionView();
         searchView.setIconifiedByDefault(false);
         searchView.setIconified(false);
@@ -112,14 +110,23 @@ public class SearchFragment extends Fragment {
             }
         });
 
+
     }
 
     @Override
-    public boolean onOptionsItemSelected(@NonNull @NotNull MenuItem item) {
-            if(item.getItemId() == R.id.filter_menu_item){
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle item selection
+        switch (item.getItemId()) {
+            case R.id.camera_menu_item:
+                Intent i = new Intent(getContext(), QrScanner.class);
+                startActivity(i);
+                return true;
+            case R.id.filter_menu_item:
                 FilterDialogFragment f = new FilterDialogFragment();
-                f.show(getParentFragmentManager(),"facha");
-            }
+                f.show(getParentFragmentManager(),"FilterFragment");
+                break;
+            default:
+        }
         return super.onOptionsItemSelected(item);
     }
 

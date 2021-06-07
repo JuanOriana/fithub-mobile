@@ -13,30 +13,44 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 
-public class Login extends AppCompatActivity {
+public class Register extends AppCompatActivity {
 
     SharedPreferences sp;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_login);
+        setContentView(R.layout.activity_register);
 
         sp = getSharedPreferences("login",MODE_PRIVATE);
 
-        if (sp.getBoolean("logged",false)){
-            goToMainActivity();
-        }
     }
 
-    public void logIn(View view){
-        EditText emailView = findViewById(R.id.loginEmailInput);
+    public void signUp(View view) {
+        EditText fnView = findViewById(R.id.firstname_input);
+        String fn = fnView.getText().toString();
+        EditText lnView = findViewById(R.id.lastname_input);
+        String ln = lnView.getText().toString();
+        EditText emailView = findViewById(R.id.registerEmailInput);
         String email = emailView.getText().toString();
-        EditText passView = findViewById(R.id.loginPasswordInput);
+        EditText passView = findViewById(R.id.edit_password);
         String pass = passView.getText().toString();
+        EditText passConfView = findViewById(R.id.edit_confirm_password);
+        String passConf = passConfView.getText().toString();
+
         boolean error = false;
+
+        if (fn.trim().length() == 0){
+            error = true;
+            fnView.setError("The first name is not valid");
+        }
+
+        if (ln.trim().length() == 0){
+            error = true;
+            lnView.setError("The last name is not valid");
+        }
+
         if (!Patterns.EMAIL_ADDRESS.matcher(email).matches() || email.trim().length() == 0){
             error = true;
             emailView.setError("The email is not valid");
@@ -46,15 +60,22 @@ public class Login extends AppCompatActivity {
             error = true;
             passView.setError("The password is not valid");
         }
+
+        if (passConf.trim().length() == 0 || !passConf.equals(pass)){
+            error = true;
+            passConfView.setError("The password doesn't match");
+        }
+
         if (error){
             Toast toast=Toast.makeText(getApplicationContext(),"Error in parameters",Toast.LENGTH_SHORT);
             toast.show();
             return;
         }
+
         sp.edit().putBoolean("logged",true)
                 .putString("email",email)
-                .putString("firstname","John")
-                .putString("lastname", "Doe")
+                .putString("firstname",fn)
+                .putString("lastname", ln)
                 .apply();
         goToMainActivity();
     }
@@ -65,8 +86,8 @@ public class Login extends AppCompatActivity {
         finish();
     }
 
-    public void goToRegister(View view) {
-        Intent i = new Intent(this, Register.class);
+    public void goToLogin(View view) {
+        Intent i = new Intent(this, Login.class);
         startActivity(i);
         finish();
     }

@@ -6,6 +6,7 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.navigation.Navigation;
 
 import android.util.Patterns;
 import android.view.LayoutInflater;
@@ -28,35 +29,38 @@ public class EditProfileFragment extends Fragment {
 
         editProfileViewModel =  new ViewModelProvider(this).get(EditProfileViewModel.class);
 
-        sp = getContext().getSharedPreferences("register",getContext().MODE_PRIVATE);
+        sp = getContext().getSharedPreferences("login",getContext().MODE_PRIVATE);
 
         View root = inflater.inflate(R.layout.fragment_edit_profile, container, false);
 
-        fnView = root.findViewById(R.id.editTextTextPersonName);
-        fnView.setText(sp.getString("first_name", "First Name"));
+        fnView = root.findViewById(R.id.editTextFirstName);
+        fnView.setText(sp.getString("firstname", "First Name"));
 
-        lnView = root.findViewById(R.id.editTextTextPersonName2);
-        lnView.setText(sp.getString("last_name", "Last Name"));
+        lnView = root.findViewById(R.id.editTextLastName);
+        lnView.setText(sp.getString("lastname", "Last Name"));
 
-        emailView = root.findViewById(R.id.editTextTextPersonName3);
+        emailView = root.findViewById(R.id.editTextEmail);
         emailView.setText(sp.getString("email", "Email"));
 
         Button cancelBtn = (Button) root.findViewById(R.id.cancel_btn);
-        cancelBtn.setOnClickListener(this::cancel);
+        Button saveBtn = (Button) root.findViewById(R.id.save_btn);
 
-        Button editProfile = (Button) root.findViewById(R.id.save_btn);
-        editProfile.setOnClickListener(this::saveChanges);
+        cancelBtn.setOnClickListener(v->{
+            Navigation.findNavController(v).navigate(R.id.action_navigation_editprofile_to_navigation_profile);
+        });
+
+        saveBtn.setOnClickListener(v->{
+            saveChanges(v);
+            Navigation.findNavController(v).navigate(R.id.action_navigation_editprofile_to_navigation_profile);
+        });
+
 
         return root;
     }
 
-    public void cancel(View view) {
-        goToProfile();
-    }
-
     public void saveChanges(View view) {
 
-        SharedPreferences sp = getContext().getSharedPreferences("register",getContext().MODE_PRIVATE);
+        SharedPreferences sp = getContext().getSharedPreferences("login",getContext().MODE_PRIVATE);
 
         String email = emailView.getText().toString();
         String fn = fnView.getText().toString();
@@ -86,15 +90,7 @@ public class EditProfileFragment extends Fragment {
         }
 
         SharedPreferences.Editor editor = sp.edit();
-        editor.putString("first_name", fn).putString("last_name", ln).putString("email", email);
-
-        goToProfile();
+        editor.putString("firstname", fn).putString("lastname", ln).putString("email", email);
     }
 
-    private void goToProfile() {
-//        FragmentTransaction fragmentTransaction = getParentFragmentManager().beginTransaction();
-//        fragmentTransaction.replace(R.id.navigation_profile, ProfileFragment.class, null);
-//        fragmentTransaction.addToBackStack(null);
-//        fragmentTransaction.commit();
-    }
 }

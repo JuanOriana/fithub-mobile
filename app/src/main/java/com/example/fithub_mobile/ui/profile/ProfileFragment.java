@@ -47,8 +47,12 @@ public class ProfileFragment extends Fragment {
 
         View root = inflater.inflate(R.layout.fragment_profile, container, false);
 
+        String fn = sp.getString("firstname", "John");
+        String ln = sp.getString("lastname", "Doe");
+        String name = fn + " " + ln;
+
         TextView username = root.findViewById(R.id.userName);
-        username.setText(sp.getString("username", "User"));
+        username.setText(name);
 
         Button editButton = root.findViewById(R.id.edit_btn);
         editButton.setOnClickListener(v->{
@@ -74,6 +78,7 @@ public class ProfileFragment extends Fragment {
         startActivity(i);
         getActivity().finish();
     }
+
 
     public void logOut(View view) {
         sp.edit().putBoolean("logged",false).apply();
