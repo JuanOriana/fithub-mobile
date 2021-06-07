@@ -1,6 +1,7 @@
 package com.example.fithub_mobile.ui.search;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.graphics.text.LineBreaker;
 import android.os.Build;
 import android.os.Bundle;
@@ -8,6 +9,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
@@ -78,6 +80,7 @@ public class SearchFragment extends Fragment {
         inflater.inflate(R.menu.options_menu, menu);
         super.onCreateOptionsMenu(menu, inflater);
 
+
         SearchView searchView = (SearchView) menu.findItem(R.id.search).getActionView();
         searchView.setIconifiedByDefault(false);
         searchView.setIconified(false);
@@ -109,7 +112,15 @@ public class SearchFragment extends Fragment {
             }
         });
 
+    }
 
+    @Override
+    public boolean onOptionsItemSelected(@NonNull @NotNull MenuItem item) {
+            if(item.getItemId() == R.id.filter_menu_item){
+                FilterDialogFragment f = new FilterDialogFragment();
+                f.show(getParentFragmentManager(),"facha");
+            }
+        return super.onOptionsItemSelected(item);
     }
 
     public static void hideSoftKeyboard(Activity activity) {

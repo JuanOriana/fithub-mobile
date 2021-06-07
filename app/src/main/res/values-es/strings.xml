@@ -33,4 +33,8 @@
     <string name="logout">Log Out</string>
     <string name="current_exercise">Ejercicio actual</string>
     <string name="next_up">Siguiente</string>
+    <string name="sort_spinner_title">Ordenar por:</string>
+    <string name="spinner_name_item">Nombre</string>
+    <string name="filter_dialog_title">Filtros de Búsqueda</string>
+    <string name="spinner_difficulty_item">Dificultad</string>
 </resources>

@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="filter_items">
+        <item>Rating</item>
+        <item>@string/spinner_name_item</item>
+        <item>@string/spinner_difficulty_item</item>
+    </string-array>
+</resources>
