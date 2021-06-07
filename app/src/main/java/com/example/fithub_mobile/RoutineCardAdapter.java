@@ -102,7 +102,7 @@ public class RoutineCardAdapter extends RecyclerView.Adapter<RoutineCardAdapter.
                 filteredList.addAll(allRoutines);
             else {
                 for(RoutineCardData routine : allRoutines){
-                    if(routine.getTitle().toLowerCase().contains(constraint))
+                    if(routine.getTitle().toLowerCase().contains(constraint.toString().toLowerCase()))
                         filteredList.add(routine);
                 }
             }

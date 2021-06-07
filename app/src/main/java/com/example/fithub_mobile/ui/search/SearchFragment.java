@@ -12,11 +12,13 @@ import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.Filter;
 import android.widget.SearchView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
+import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -32,16 +34,17 @@ import com.example.fithub_mobile.ui.favorites.FavoritesViewModel;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 
-public class SearchFragment extends Fragment {
+public class SearchFragment extends Fragment implements FilterDialogListener {
 
         private SearchViewModel searchViewModel;
         private TextView routineNotFound;
         private RecyclerView cardContainer;
         private final ArrayList<RoutineCard> routines = new ArrayList<>();
-        private ArrayList<RoutineCardData> extractedRoutines = new ArrayList<>();
-    RoutineCardAdapter adapter;
+        public ArrayList<RoutineCardData> extractedRoutines = new ArrayList<>();
+        RoutineCardAdapter adapter;
 
         @RequiresApi(api = Build.VERSION_CODES.Q)
         public View onCreateView(@NonNull LayoutInflater inflater,
@@ -92,6 +95,7 @@ public class SearchFragment extends Fragment {
             @Override
             public void onViewDetachedFromWindow(View v) {
                 adapter.getFilter().filter("");
+                hideSoftKeyboard(requireActivity());
             }
         });
 
@@ -124,6 +128,7 @@ public class SearchFragment extends Fragment {
             case R.id.filter_menu_item:
                 FilterDialogFragment f = new FilterDialogFragment();
                 f.show(getParentFragmentManager(),"FilterFragment");
+                f.setTargetFragment(this,0);
                 break;
             default:
         }
@@ -141,4 +146,29 @@ public class SearchFragment extends Fragment {
             );
         }
     }
+
+    //TODO: Switch statement with something final (not the spinner text)
+    @Override
+    public void onDialogPositiveClick(DialogFragment dialog) {
+       FilterDialogFragment myDialog = (FilterDialogFragment)dialog;
+       switch (myDialog.selectedSortingCriteria){
+           case "Rating":
+               extractedRoutines.sort((o1, o2) -> o2.getRating().compareTo(o1.getRating()));
+               break;
+           case "Nombre":
+               extractedRoutines.sort((o1, o2) -> o1.getTitle().compareTo(o2.getTitle()));
+               break;
+       }
+       adapter.notifyDataSetChanged();
+    }
+
+    @Override
+    public void onDialogNegativeClick(DialogFragment dialog) {
+
+    }
+}
+
+interface FilterDialogListener {
+     void onDialogPositiveClick(DialogFragment dialog);
+     void onDialogNegativeClick(DialogFragment dialog);
 }
