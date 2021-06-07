@@ -53,4 +53,8 @@
     <string name="sunday">Domingo</string>
     <string name="secs">Segundos</string>
     <string name="reps">Repeticiones</string>
+    <string name="sort_spinner_default_item">Elija la categoría</string>
+    <string name="order_spinner_default_item">Elija el ordenamiento</string>
+    <string name="descending">Descendente</string>
+    <string name="ascending">Ascendente</string>
 </resources>

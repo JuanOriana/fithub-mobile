@@ -39,7 +39,13 @@ import java.util.List;
 
 public class SearchFragment extends Fragment implements FilterDialogListener {
 
-        private SearchViewModel searchViewModel;
+    private final static int RATING  = 1;
+    private final static int NAME  = 2;
+    private final static int DIFFICULTY  = 3;
+    private final static int ASC = 1;
+    private final static int DESC = 2;
+
+    private SearchViewModel searchViewModel;
         private TextView routineNotFound;
         private RecyclerView cardContainer;
         private final ArrayList<RoutineCard> routines = new ArrayList<>();
@@ -147,17 +153,23 @@ public class SearchFragment extends Fragment implements FilterDialogListener {
         }
     }
 
-    //TODO: Switch statement with something final (not the spinner text)
     @Override
     public void onDialogPositiveClick(DialogFragment dialog) {
        FilterDialogFragment myDialog = (FilterDialogFragment)dialog;
        switch (myDialog.selectedSortingCriteria){
-           case "Rating":
-               extractedRoutines.sort((o1, o2) -> o2.getRating().compareTo(o1.getRating()));
+           case RATING:
+               if(myDialog.selectedOrderCriteria == ASC)
+                    extractedRoutines.sort((o1, o2) -> o1.getRating().compareTo(o2.getRating()));
+               else if((myDialog.selectedOrderCriteria == DESC))
+                   extractedRoutines.sort((o1, o2) -> o2.getRating().compareTo(o1.getRating()));
                break;
-           case "Nombre":
-               extractedRoutines.sort((o1, o2) -> o1.getTitle().compareTo(o2.getTitle()));
+           case NAME:
+               if(myDialog.selectedOrderCriteria == ASC)
+                   extractedRoutines.sort((o1, o2) -> o1.getTitle().compareTo(o2.getTitle()));
+               else if((myDialog.selectedOrderCriteria == DESC))
+                   extractedRoutines.sort((o1, o2) -> o2.getTitle().compareTo(o1.getTitle()));
                break;
+           default: break;
        }
        adapter.notifyDataSetChanged();
     }
