@@ -20,7 +20,7 @@
         <activity android:name=".ExecutionQueueActivity" />
         <activity android:name=".ExecutionActivity" />
         <activity
-            android:name=".RoutineActivity"
+            android:name=".routine.RoutineActivity"
             android:label="@string/title_activity_routine"
             android:theme="@style/Theme.Fithubmobile.NoActionBar">
             <tools:validation testUrl="http://fithub.com/routine" />

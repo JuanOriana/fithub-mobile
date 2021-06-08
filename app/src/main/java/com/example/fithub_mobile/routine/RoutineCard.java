@@ -1,19 +1,16 @@
-package com.example.fithub_mobile;
+package com.example.fithub_mobile.routine;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
-import android.content.res.Resources;
 import android.net.Uri;
-import android.view.View;
 import android.widget.ImageButton;
 import android.widget.RatingBar;
 import android.widget.TextView;
 
+import com.example.fithub_mobile.R;
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.card.MaterialCardView;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.snackbar.Snackbar;
 
 @SuppressLint("ViewConstructor")
 public class RoutineCard extends MaterialCardView {
@@ -27,7 +24,7 @@ public class RoutineCard extends MaterialCardView {
 
     public RoutineCard(Context context, RoutineCardData routine) {
         super(context);
-        inflate(getContext(),R.layout.routine_card,this);
+        inflate(getContext(), R.layout.routine_card,this);
 
         TextView titleView = findViewById(R.id.title_card);
         titleView.setText(routine.getTitle());

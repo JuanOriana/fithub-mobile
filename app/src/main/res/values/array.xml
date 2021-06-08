@@ -1,8 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string-array name="filter_items">
+    <string-array name="sort_items">
+        <item>@string/sort_spinner_default_item</item>
         <item>Rating</item>
         <item>@string/spinner_name_item</item>
         <item>@string/spinner_difficulty_item</item>
+    </string-array>
+    <string-array name="sort_order_items">
+        <item>@string/order_spinner_default_item</item>
+        <item>@string/ascending</item>
+        <item>@string/descending</item>
     </string-array>
 </resources>

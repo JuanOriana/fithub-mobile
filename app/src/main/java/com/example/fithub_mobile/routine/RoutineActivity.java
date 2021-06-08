@@ -1,8 +1,14 @@
-package com.example.fithub_mobile;
+package com.example.fithub_mobile.routine;
 
 import android.content.Intent;
 import android.os.Bundle;
 
+import com.example.fithub_mobile.CycleData;
+import com.example.fithub_mobile.CycleDisplay;
+import com.example.fithub_mobile.ExecutionActivity;
+import com.example.fithub_mobile.NotificationDialogFragment;
+import com.example.fithub_mobile.QrGenActivity;
+import com.example.fithub_mobile.R;
 import com.google.android.material.appbar.CollapsingToolbarLayout;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
@@ -49,7 +55,7 @@ public class RoutineActivity extends AppCompatActivity {
 
         ImageButton qrBtn = findViewById(R.id.qr_btn);
         qrBtn.setOnClickListener(view -> {
-            Intent i = new Intent(this,QrGenActivity.class);
+            Intent i = new Intent(this, QrGenActivity.class);
             startActivity(i);
         });
 
@@ -62,7 +68,7 @@ public class RoutineActivity extends AppCompatActivity {
     }
 
     public void startExecution(){
-        Intent i = new Intent(this,ExecutionActivity.class);
+        Intent i = new Intent(this, ExecutionActivity.class);
         startActivity(i);
     }
 }

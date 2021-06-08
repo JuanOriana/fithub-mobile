@@ -55,4 +55,9 @@
     <string name="reps">Repeticiones</string>
     <string name="accept">Aceptar</string>
     <string name="when_do_you_want_to_be_notified_for_your_routine">Cuando quieres que se te notifique para tu rutina?</string>
+    <string name="sort_spinner_default_item">Elija la categoría</string>
+    <string name="order_spinner_default_item">Elija el ordenamiento</string>
+    <string name="descending">Descendente</string>
+    <string name="ascending">Ascendente</string>
+    <string name="order_spinner_title">Visualizar</string>
 </resources>

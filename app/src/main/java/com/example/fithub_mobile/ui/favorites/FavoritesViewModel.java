@@ -4,8 +4,6 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-import com.example.fithub_mobile.RoutineCard;
-
 public class FavoritesViewModel extends ViewModel {
 
     private MutableLiveData<String> mText;

@@ -1,22 +1,18 @@
-package com.example.fithub_mobile;
+package com.example.fithub_mobile.routine;
 
 import java.util.Objects;
 
-public class ExerciseData {
+public class RoutineCardData {
     private  Integer id;
     private String title;
     private String desc;
-    private Integer reps;
-    private Integer secs;
-    private String img;
+    private Integer rating;
 
-    public ExerciseData(Integer id, String title, String desc, Integer reps, Integer secs, String img) {
+    public RoutineCardData(Integer id, String title, String desc, Integer rating) {
         this.id = id;
         this.title = title;
         this.desc = desc;
-        this.reps = reps;
-        this.secs = secs;
-        this.img = img;
+        this.rating = rating;
     }
 
     public Integer getId() {
@@ -43,35 +39,19 @@ public class ExerciseData {
         this.desc = desc;
     }
 
-    public Integer getReps() {
-        return reps;
+    public Integer getRating() {
+        return rating;
     }
 
-    public void setReps(Integer reps) {
-        this.reps = reps;
-    }
-
-    public Integer getSecs() {
-        return secs;
-    }
-
-    public void setSecs(Integer secs) {
-        this.secs = secs;
-    }
-
-    public String getImg() {
-        return img;
-    }
-
-    public void setImg(String img) {
-        this.img = img;
+    public void setRating(Integer rating) {
+        this.rating = rating;
     }
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        ExerciseData that = (ExerciseData) o;
+        RoutineCardData that = (RoutineCardData) o;
         return Objects.equals(id, that.id);
     }
 
@@ -80,4 +60,3 @@ public class ExerciseData {
         return Objects.hash(id);
     }
 }
-

@@ -7,7 +7,8 @@ import android.widget.TextView;
 
 import androidx.constraintlayout.widget.ConstraintLayout;
 
-import com.example.fithub_mobile.R;
+import com.example.fithub_mobile.excercise.ExerciseData;
+import com.example.fithub_mobile.excercise.ExerciseItem;
 
 public class CycleDisplay extends ConstraintLayout {
     public CycleDisplay(Context context) {
