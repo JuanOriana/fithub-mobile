@@ -34,11 +34,13 @@ public class ExecutionQueueActivity extends AppCompatActivity {
         exercises.add(new ExerciseData(1,"Diácono","Prueba",4,4,"http://i.imgur.com/DvpvklR.png"));
         exercises.add(new ExerciseData(1,"Diácono","Prueba",4,4,"http://i.imgur.com/DvpvklR.png"));
         exercises.add(new ExerciseData(1,"Diácono","Prueba",4,4,"http://i.imgur.com/DvpvklR.png"));
+        ExerciseData currentExercise = new ExerciseData(1,"Diácono","Prueba",4,4,"http://i.imgur.com/DvpvklR.png");
 
         RecyclerView exerciseContainer = findViewById(R.id.exercise_container);
         exerciseContainer.setLayoutManager(new LinearLayoutManager(this));
         ExerciseAdapter adapter = new ExerciseAdapter(exercises);
         exerciseContainer.setAdapter(adapter);
+
 
     }
 

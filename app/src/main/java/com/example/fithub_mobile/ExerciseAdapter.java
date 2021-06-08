@@ -90,7 +90,6 @@ public class ExerciseAdapter extends RecyclerView.Adapter<ExerciseAdapter.ViewHo
         holder.getRepCount().setText(exercises.get(position).getReps().toString());
         holder.getSecsCount().setText(exercises.get(position).getSecs().toString());
       //  Picasso.get().load("https://i.imgur.com/DvpvklR.png").into(holder.getImage());
-
     }
 
     @Override

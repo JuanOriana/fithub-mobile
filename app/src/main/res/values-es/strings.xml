@@ -53,8 +53,6 @@
     <string name="sunday">Domingo</string>
     <string name="secs">Segundos</string>
     <string name="reps">Repeticiones</string>
-    <string name="description">Descripción</string>
-    <string name="title">Titulo</string>
     <string name="accept">Aceptar</string>
     <string name="when_do_you_want_to_be_notified_for_your_routine">Cuando quieres que se te notifique para tu rutina?</string>
     <string name="sort_spinner_default_item">Elija la categoría</string>
