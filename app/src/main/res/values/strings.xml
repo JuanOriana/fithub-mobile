@@ -57,6 +57,10 @@
     <string name="sunday">Sunday</string>
     <string name="secs">Seconds</string>
     <string name="reps">Repetitions</string>
+    <string name="description">Description</string>
+    <string name="title">Title</string>
+    <string name="accept">Accept</string>
+    <string name="when_do_you_want_to_be_notified_for_your_routine">When do you want to be notified for your routine?</string>
     <string name="sort_spinner_default_item">Choose the category</string>
     <string name="descending">Descending</string>
     <string name="ascending">Ascending</string>

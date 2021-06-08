@@ -61,7 +61,8 @@ public class RoutineActivity extends AppCompatActivity {
 
         ImageButton calendarBtn = findViewById(R.id.calendar_btn);
         calendarBtn.setOnClickListener(view -> {
-            new NotificationDialogFragment().show(getSupportFragmentManager(), NotificationDialogFragment.TAG);
+            Intent i = new Intent(this,NotificationActivity.class);
+            startActivity(i);
 
         });
     }
