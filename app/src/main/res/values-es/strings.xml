@@ -33,9 +33,9 @@
     <string name="cancel_btn">Cancelar</string>
     <string name="save_btn">Guardar</string>
     <string name="logout">Log Out</string>
-    <string name="no_account">No tenés cuenta?</string>
+    <string name="no_account">¿No tenés cuenta?</string>
     <string name="sign_up">Registrate</string>
-    <string name="account">Ya tenés cuenta?</string>
+    <string name="account">¿Ya tenés cuenta?</string>
     <string name="sign_in">Incia sesión</string>
     <string name="username">Nombre de usuario</string>
     <string name="current_exercise">Ejercicio actual</string>
@@ -46,11 +46,13 @@
     <string name="spinner_difficulty_item">Dificultad</string>
     <string name="monday">Lunes</string>
     <string name="tuesday">Martes</string>
-    <string name="wednesday">Miercoles</string>
+    <string name="wednesday">Miércoles</string>
     <string name="thursday">Jueves</string>
     <string name="friday">Viernes</string>
-    <string name="saturday">Sabado</string>
+    <string name="saturday">Sábado</string>
     <string name="sunday">Domingo</string>
     <string name="secs">Segundos</string>
     <string name="reps">Repeticiones</string>
+    <string name="description">Descripción</string>
+    <string name="title">Titulo</string>
 </resources>

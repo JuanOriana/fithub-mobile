@@ -57,5 +57,7 @@
     <string name="sunday">Sunday</string>
     <string name="secs">Seconds</string>
     <string name="reps">Repetitions</string>
+    <string name="description">Description</string>
+    <string name="title">Title</string>
 
 </resources>
