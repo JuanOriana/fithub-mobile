@@ -6,7 +6,7 @@ import android.os.Bundle;
 import com.example.fithub_mobile.CycleData;
 import com.example.fithub_mobile.CycleDisplay;
 import com.example.fithub_mobile.ExecutionActivity;
-import com.example.fithub_mobile.NotificationDialogFragment;
+import com.example.fithub_mobile.NotificationActivity;
 import com.example.fithub_mobile.QrGenActivity;
 import com.example.fithub_mobile.R;
 import com.google.android.material.appbar.CollapsingToolbarLayout;
@@ -61,7 +61,7 @@ public class RoutineActivity extends AppCompatActivity {
 
         ImageButton calendarBtn = findViewById(R.id.calendar_btn);
         calendarBtn.setOnClickListener(view -> {
-            Intent i = new Intent(this,NotificationActivity.class);
+            Intent i = new Intent(this, NotificationActivity.class);
             startActivity(i);
 
         });
