@@ -7,10 +7,17 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.fithub_mobile.excercise.ExerciseData;
 import com.example.fithub_mobile.ui.search.FilterDialogFragment;
+import com.squareup.picasso.Picasso;
 
 public class ExecutionActivity extends AppCompatActivity {
 
@@ -19,6 +26,25 @@ public class ExecutionActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_execution);
 
+        ExerciseData currentExercise = new ExerciseData(1,"Diácono","Prueba",4,4,"http://i.imgur.com/DvpvklR.png");
+
+        setCurrentInfo(currentExercise);
+    }
+
+    private void setCurrentInfo(ExerciseData currentExercise){
+        View current = this.findViewById(R.id.exercise_execution);
+
+        TextView currentText = current.findViewById(R.id.execution_title);
+        currentText.setText(currentExercise.getTitle());
+        currentText = current.findViewById(R.id.execution_desc);
+        currentText.setText(currentExercise.getDesc());
+        currentText = current.findViewById(R.id.execution_seconds);
+        currentText.setText(currentExercise.getSecs().toString());
+        currentText = current.findViewById(R.id.execution_reps);
+        currentText.setText(currentExercise.getReps().toString());
+
+        ImageView currentImage = current.findViewById(R.id.execution_img);
+        Picasso.get().load("https://i.imgur.com/DvpvklR.png").into(currentImage);
     }
 
     @Override
