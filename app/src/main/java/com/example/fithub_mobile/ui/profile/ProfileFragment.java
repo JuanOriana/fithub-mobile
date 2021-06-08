@@ -6,26 +6,21 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.fithub_mobile.Login;
 import com.example.fithub_mobile.R;
-import com.example.fithub_mobile.RoutineCard;
-import com.example.fithub_mobile.RoutineCardAdapter;
-import com.example.fithub_mobile.RoutineCardData;
+import com.example.fithub_mobile.routine.RoutineCardAdapter;
+import com.example.fithub_mobile.routine.RoutineCardData;
 
 import java.util.ArrayList;
 import java.util.Objects;
@@ -55,9 +50,7 @@ public class ProfileFragment extends Fragment {
         username.setText(name);
 
         Button editButton = root.findViewById(R.id.edit_btn);
-        editButton.setOnClickListener(v->{
-            Navigation.findNavController(v).navigate(R.id.action_navigation_profile_to_navigation_editprofile);
-        });
+        editButton.setOnClickListener(v-> Navigation.findNavController(v).navigate(R.id.action_navigation_profile_to_navigation_editprofile));
 
         cardContainer = root.findViewById(R.id.cardContainer);
 
@@ -76,7 +69,7 @@ public class ProfileFragment extends Fragment {
     public void goToLogin() {
         Intent i = new Intent(getContext(), Login.class);
         startActivity(i);
-        getActivity().finish();
+        requireActivity().finish();
     }
 
 

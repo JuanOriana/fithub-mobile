@@ -57,4 +57,5 @@
     <string name="order_spinner_default_item">Elija el ordenamiento</string>
     <string name="descending">Descendente</string>
     <string name="ascending">Ascendente</string>
+    <string name="order_spinner_title">Visualizar</string>
 </resources>

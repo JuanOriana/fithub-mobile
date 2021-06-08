@@ -60,7 +60,8 @@
     <string name="sort_spinner_default_item">Choose the category</string>
     <string name="descending">Descending</string>
     <string name="ascending">Ascending</string>
-    <string name="order_spinner_default_item">Ch0ose the order</string>
+    <string name="order_spinner_default_item">Choose the order</string>
+    <string name="order_spinner_title">View:</string>
 
 
 </resources>
