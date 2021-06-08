@@ -7,7 +7,8 @@
     android:layout_height="wrap_content"
     android:layout_gravity="center"
     android:background="@color/fithub_green"
-    app:strokeColor="@color/fithub_green">
+    app:strokeColor="@color/fithub_green"
+    android:layout_marginVertical="5dp">
 
     <TextView
         android:id="@+id/title_exercise"
@@ -18,10 +19,8 @@
         android:textColor="#FFFFFF"
         android:textSize="24sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.013" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/desc_exercise"
@@ -91,7 +90,7 @@
         app:layout_constraintStart_toEndOf="@+id/repeats_exercise" />
 
     <ImageView
-        android:id="@+id/imageView2"
+        android:id="@+id/img_exercise"
         android:layout_width="94dp"
         android:layout_height="86dp"
         android:layout_marginStart="16dp"
