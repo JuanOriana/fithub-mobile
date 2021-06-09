@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import android.widget.Filter;
 import android.widget.Filterable;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
 
@@ -16,6 +17,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.fithub_mobile.R;
 import com.google.android.material.button.MaterialButton;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -32,6 +34,9 @@ public class RoutineCardAdapter extends RecyclerView.Adapter<RoutineCardAdapter.
         private final RatingBar ratingBar;
         private final ImageButton shareBtn;
         private final MaterialButton routineBtn;
+        private final TextView userNameView;
+        private final ImageView userImgView;
+        private final TextView difficulty;
 
         public ViewHolder(View view) {
             super(view);
@@ -40,6 +45,9 @@ public class RoutineCardAdapter extends RecyclerView.Adapter<RoutineCardAdapter.
             ratingBar = view.findViewById(R.id.rating_bar);
             shareBtn = view.findViewById(R.id.share_btn);
             routineBtn = view.findViewById(R.id.routine_btn);
+            userNameView = view.findViewById(R.id.owner_name);
+            userImgView = view.findViewById(R.id.owner_img);
+            difficulty = view.findViewById(R.id.difficulty);
 
             //Sharing
             ImageButton shareBtn = view.findViewById(R.id.share_btn);
@@ -84,6 +92,18 @@ public class RoutineCardAdapter extends RecyclerView.Adapter<RoutineCardAdapter.
 
         public MaterialButton getRoutineBtn() {
             return routineBtn;
+        }
+
+        public TextView getUserNameView() {
+            return userNameView;
+        }
+
+        public ImageView getUserImgView() {
+            return userImgView;
+        }
+
+        public TextView getDifficulty() {
+            return difficulty;
         }
     }
 
@@ -137,6 +157,10 @@ public class RoutineCardAdapter extends RecyclerView.Adapter<RoutineCardAdapter.
         holder.getTitleView().setText(routines.get(position).getTitle());
         holder.getDescView().setText(routines.get(position).getDesc());
         holder.getRatingBar().setRating(routines.get(position).getRating());
+        holder.getUserNameView().setText(routines.get(position).getUserName());
+        Picasso.get().load(routines.get(position).getUserImg()).into(holder.getUserImgView());
+        holder.getDifficulty().setText(routines.get(position).getDifficulty());
+
 
     }
 

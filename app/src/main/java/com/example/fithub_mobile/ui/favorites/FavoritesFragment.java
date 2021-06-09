@@ -31,9 +31,12 @@ public class FavoritesFragment extends Fragment {
 
         cardContainer = root.findViewById(R.id.cardContainer);
 
-        routines.add(new RoutineCardData(1,"Titulo","Prueba",4));
-        routines.add(new RoutineCardData(2,"Titulo","Prueba",5));
-        routines.add(new RoutineCardData(3,"Titulo","Prueba",1));
+        routines.add(new RoutineCardData(1,"Titulo","Prueba",4,
+                "pollo","https://ep00.epimg.net/elcomidista/imagenes/2020/09/02/articulo/1599041159_343586_1599041590_rrss_normal.jpg", "hard"));
+        routines.add(new RoutineCardData(2,"Titulo","Prueba",5,
+                "pollo","https://ep00.epimg.net/elcomidista/imagenes/2020/09/02/articulo/1599041159_343586_1599041590_rrss_normal.jpg", "hard"));
+        routines.add(new RoutineCardData(3,"Titulo","Prueba",1,
+                "pollo","https://ep00.epimg.net/elcomidista/imagenes/2020/09/02/articulo/1599041159_343586_1599041590_rrss_normal.jpg", "hard"));
 
         cardContainer = root.findViewById(R.id.cardContainer);
         RoutineCardAdapter adapter = new RoutineCardAdapter(routines);

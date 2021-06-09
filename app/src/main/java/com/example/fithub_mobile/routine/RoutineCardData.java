@@ -7,12 +7,19 @@ public class RoutineCardData {
     private String title;
     private String desc;
     private Integer rating;
+    private String userName;
+    private String userImg;
+    private String difficulty;
 
-    public RoutineCardData(Integer id, String title, String desc, Integer rating) {
+    public RoutineCardData(Integer id, String title, String desc, Integer rating,
+                           String userName, String userImg, String difficulty) {
         this.id = id;
         this.title = title;
         this.desc = desc;
         this.rating = rating;
+        this.userName = userName;
+        this.userImg = userImg;
+        this.difficulty = difficulty;
     }
 
     public Integer getId() {
@@ -45,6 +52,30 @@ public class RoutineCardData {
 
     public void setRating(Integer rating) {
         this.rating = rating;
+    }
+
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
+
+    public String getUserImg() {
+        return userImg;
+    }
+
+    public void setUserImg(String userImg) {
+        this.userImg = userImg;
+    }
+
+    public String getDifficulty() {
+        return difficulty;
+    }
+
+    public void setDifficulty(String difficulty) {
+        this.difficulty = difficulty;
     }
 
     @Override

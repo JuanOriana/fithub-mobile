@@ -57,11 +57,16 @@ public class SearchFragment extends Fragment implements FilterDialogListener {
 
 
 
-            extractedRoutines.add(new RoutineCardData(1,"Diácono","Prueba",4));
-            extractedRoutines.add(new RoutineCardData(2,"Caballero","Prueba",2));
-            extractedRoutines.add(new RoutineCardData(3,"Titán","Prueba",1));
-            extractedRoutines.add(new RoutineCardData(4,"Terminator","Prueba",5));
-            extractedRoutines.add(new RoutineCardData(1,"Diaccordo","Prueba",3));
+            extractedRoutines.add(new RoutineCardData(1,"Diácono","Prueba",4,
+                    "pollo","https://ep00.epimg.net/elcomidista/imagenes/2020/09/02/articulo/1599041159_343586_1599041590_rrss_normal.jpg", "hard"));
+            extractedRoutines.add(new RoutineCardData(2,"Caballero","Prueba",2,
+                    "pollo","https://ep00.epimg.net/elcomidista/imagenes/2020/09/02/articulo/1599041159_343586_1599041590_rrss_normal.jpg", "hard"));
+            extractedRoutines.add(new RoutineCardData(3,"Titán","Prueba",1,
+                    "pollo","https://ep00.epimg.net/elcomidista/imagenes/2020/09/02/articulo/1599041159_343586_1599041590_rrss_normal.jpg", "hard"));
+            extractedRoutines.add(new RoutineCardData(4,"Terminator","Prueba",5,
+                    "pollo","https://ep00.epimg.net/elcomidista/imagenes/2020/09/02/articulo/1599041159_343586_1599041590_rrss_normal.jpg", "hard"));
+            extractedRoutines.add(new RoutineCardData(1,"Diaccordo","Prueba",3,
+                    "pollo","https://ep00.epimg.net/elcomidista/imagenes/2020/09/02/articulo/1599041159_343586_1599041590_rrss_normal.jpg", "hard"));
 
             cardContainer = root.findViewById(R.id.cardContainer);
             cardContainer.setLayoutManager(new GridLayoutManager(getContext(),getActivity().getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT ? 1 : 2));

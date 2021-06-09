@@ -27,7 +27,7 @@
         <!-- Buttons -->
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="157dp"
+            android:layout_height="200dp"
             android:orientation="vertical"
             android:padding="16dp">
 
@@ -36,6 +36,17 @@
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/difficulty"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="12dp"
+                    android:text="Principiante"
+                    android:textSize="12sp"
+                    app:layout_constraintBottom_toBottomOf="@+id/rating_bar"
+                    app:layout_constraintStart_toEndOf="@+id/rating_bar"
+                    app:layout_constraintTop_toTopOf="@+id/rating_bar" />
 
                 <TextView
                     android:id="@+id/title_card"
@@ -99,6 +110,38 @@
                 android:layout_height="2dp"
                 android:layout_marginTop="5dp"
                 android:background="#9F57B58C" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="15dp"
+                android:layout_marginTop="10dp"
+                android:orientation="horizontal">
+
+                <androidx.cardview.widget.CardView
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    app:cardCornerRadius="250dp"
+                    android:layout_gravity="center">
+                    <ImageView
+                        android:id="@+id/owner_img"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:scaleType="centerCrop"
+                        tools:srcCompat="@tools:sample/avatars"
+                        />
+                </androidx.cardview.widget.CardView>
+
+                <TextView
+                    android:id="@+id/owner_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginLeft="12dp"
+                    android:layout_weight="1"
+                    android:text="TextView" />
+            </LinearLayout>
 
             <TextView
                 android:id="@+id/desc_card"
