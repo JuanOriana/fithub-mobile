@@ -43,10 +43,10 @@ public class NotificationActivity extends AppCompatActivity {
 
             PendingIntent pendingNotifyIntent = PendingIntent.getBroadcast(
                     this,
-                    REQUEST_CODE_NOTIFY,
-                    new Intent(NotifyHandlerReceiver.ACTION),
-                    PendingIntent.FLAG_UPDATE_CURRENT);
-            alarmManager.set(AlarmManager.ELAPSED_REALTIME_WAKEUP, currentTimeMs + 10000, pendingNotifyIntent);
+                    42,
+                    new Intent( this, NotifyHandlerReceiver.class ),
+            PendingIntent.FLAG_UPDATE_CURRENT);
+            alarmManager.set(AlarmManager.ELAPSED_REALTIME_WAKEUP, currentTimeMs + 100000, pendingNotifyIntent);
         });
 
         cancelBtn.setOnClickListener(v->{
