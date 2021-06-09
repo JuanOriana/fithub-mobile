@@ -66,6 +66,12 @@
                 android:name="android.app.searchable"
                 android:resource="@xml/searchable" />
         </activity>
+
+        <receiver android:name=".NotifyHandlerReceiver">
+            <intent-filter>
+                <action android:name="me.pepyakin.defferednotify.action.NOTIFY" />
+            </intent-filter>
+        </receiver>
     </application>
 
 </manifest>
