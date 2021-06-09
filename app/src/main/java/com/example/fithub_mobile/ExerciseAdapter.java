@@ -17,6 +17,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.fithub_mobile.excercise.ExerciseData;
 import com.google.android.material.button.MaterialButton;
 import com.squareup.picasso.Picasso;
 
@@ -90,7 +91,6 @@ public class ExerciseAdapter extends RecyclerView.Adapter<ExerciseAdapter.ViewHo
         holder.getRepCount().setText(exercises.get(position).getReps().toString());
         holder.getSecsCount().setText(exercises.get(position).getSecs().toString());
         Picasso.get().load("https://i.imgur.com/DvpvklR.png").into(holder.getImage());
-
     }
 
     @Override

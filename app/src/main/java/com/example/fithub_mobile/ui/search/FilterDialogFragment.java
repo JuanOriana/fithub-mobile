@@ -2,33 +2,23 @@ package com.example.fithub_mobile.ui.search;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
-import android.content.Context;
-import android.content.DialogInterface;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.Filter;
 import android.widget.Spinner;
 
-import androidx.annotation.NonNull;
 import androidx.fragment.app.DialogFragment;
-import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.fithub_mobile.R;
-import com.example.fithub_mobile.RoutineCardData;
 
 import org.jetbrains.annotations.NotNull;
 
-import java.util.Comparator;
-import java.util.Objects;
-
 public class FilterDialogFragment extends DialogFragment
 {
-    String selectedSortingCriteria;
+    Integer selectedSortingCriteria;
+    Integer selectedOrderCriteria;
     @NotNull
     public Dialog onCreateDialog(Bundle savedInstanceState){
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
@@ -46,7 +36,7 @@ public class FilterDialogFragment extends DialogFragment
 
         Spinner sortCriteriaSpinner = view.findViewById(R.id.filter_spinner);
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(view.getContext(),
-                R.array.filter_items, android.R.layout.simple_spinner_item);
+                R.array.sort_items, android.R.layout.simple_spinner_item);
         // Specify the layout to use when the list of choices appears
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         // Apply the adapter to the spinner
@@ -54,8 +44,27 @@ public class FilterDialogFragment extends DialogFragment
         sortCriteriaSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                    selectedSortingCriteria = parent.getItemAtPosition(position).toString();
-                }
+                selectedSortingCriteria = position;
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+
+        Spinner sortOrderSpinner = view.findViewById(R.id.order_spinner);
+        ArrayAdapter<CharSequence> orderAdapter = ArrayAdapter.createFromResource(view.getContext(),
+                R.array.sort_order_items, android.R.layout.simple_spinner_item);
+        // Specify the layout to use when the list of choices appears
+        orderAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        // Apply the adapter to the spinner
+        sortOrderSpinner.setAdapter(orderAdapter);
+        sortOrderSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                selectedOrderCriteria = position;
+            }
 
             @Override
             public void onNothingSelected(AdapterView<?> parent) {

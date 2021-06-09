@@ -6,9 +6,9 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_gravity="center"
-    android:background="#DC399C70"
-    android:strokeColor="#DC399C70"
-    android:layout_marginVertical="5dp">
+    android:layout_marginVertical="5dp"
+    android:background="#CC454A48"
+    android:strokeColor="#DC399C70">
 
     <TextView
         android:id="@+id/title_exercise"
@@ -28,7 +28,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="136dp"
         android:layout_marginTop="12dp"
-        android:layout_marginBottom="19dp"
+        android:layout_marginBottom="20dp"
         android:text="Descripcion"
         android:textColor="#FFFFFF"
         android:textSize="16sp"
@@ -57,7 +57,7 @@
         android:id="@+id/textView15"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="4dp"
+        android:layout_marginStart="8dp"
         android:layout_marginBottom="4dp"
         android:text="@string/secs"
         android:textColor="#FFFFFF"

@@ -14,8 +14,12 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.TextView;
 
+import com.example.fithub_mobile.excercise.ExerciseData;
 import com.example.fithub_mobile.ui.home.HomeViewModel;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
@@ -31,13 +35,34 @@ public class ExecutionQueueActivity extends AppCompatActivity {
         exercises.add(new ExerciseData(1,"Diácono","Prueba",4,4,"http://i.imgur.com/DvpvklR.png"));
         exercises.add(new ExerciseData(1,"Diácono","Prueba",4,4,"http://i.imgur.com/DvpvklR.png"));
         exercises.add(new ExerciseData(1,"Diácono","Prueba",4,4,"http://i.imgur.com/DvpvklR.png"));
+        exercises.add(new ExerciseData(1,"Diácono","Prueba",4,4,"http://i.imgur.com/DvpvklR.png"));
+        exercises.add(new ExerciseData(1,"Diácono","Prueba",4,4,"http://i.imgur.com/DvpvklR.png"));
+        ExerciseData currentExercise = new ExerciseData(1,"Diácono","Prueba",4,4,"http://i.imgur.com/DvpvklR.png");
+
+        setCurrentInfo(currentExercise);
 
         RecyclerView exerciseContainer = findViewById(R.id.exercise_container);
         exerciseContainer.setLayoutManager(new LinearLayoutManager(this));
         ExerciseAdapter adapter = new ExerciseAdapter(exercises);
-        exerciseContainer.setLayoutManager(new LinearLayoutManager(this));
         exerciseContainer.setAdapter(adapter);
 
+
+    }
+
+    private void setCurrentInfo(ExerciseData currentExercise){
+        View current = this.findViewById(R.id.current_exercise_card);
+
+        TextView currentText = current.findViewById(R.id.current_title);
+        currentText.setText(currentExercise.getTitle());
+        currentText = current.findViewById(R.id.current_description);
+        currentText.setText(currentExercise.getDesc());
+        currentText = current.findViewById(R.id.current_seconds);
+        currentText.setText(currentExercise.getSecs().toString());
+        currentText = current.findViewById(R.id.currents_repetitions);
+        currentText.setText(currentExercise.getReps().toString());
+
+        ImageView currentImage = current.findViewById(R.id.current_image);
+        Picasso.get().load("https://i.imgur.com/DvpvklR.png").into(currentImage);
     }
 
     @Override

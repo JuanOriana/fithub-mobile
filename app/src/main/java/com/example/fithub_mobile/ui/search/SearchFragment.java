@@ -1,6 +1,7 @@
 package com.example.fithub_mobile.ui.search;
 
 import android.app.Activity;
+import android.content.res.Configuration;
 import android.os.Build;
 import android.os.Bundle;
 import android.content.Intent;
@@ -12,7 +13,6 @@ import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
-import android.widget.Filter;
 import android.widget.SearchView;
 import android.widget.TextView;
 
@@ -21,28 +21,29 @@ import androidx.annotation.RequiresApi;
 import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
-import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.fithub_mobile.QrScanner;
 import com.example.fithub_mobile.R;
-import com.example.fithub_mobile.RoutineCard;
-import com.example.fithub_mobile.RoutineCardAdapter;
-import com.example.fithub_mobile.RoutineCardData;
-import com.example.fithub_mobile.ui.favorites.FavoritesViewModel;
+import com.example.fithub_mobile.routine.RoutineCardAdapter;
+import com.example.fithub_mobile.routine.RoutineCardData;
 
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.List;
 
 public class SearchFragment extends Fragment implements FilterDialogListener {
 
-        private SearchViewModel searchViewModel;
+    private final static int RATING  = 1;
+    private final static int NAME  = 2;
+    private final static int DIFFICULTY  = 3;
+    private final static int ASC = 1;
+    private final static int DESC = 2;
+
+    private SearchViewModel searchViewModel;
         private TextView routineNotFound;
         private RecyclerView cardContainer;
-        private final ArrayList<RoutineCard> routines = new ArrayList<>();
         public ArrayList<RoutineCardData> extractedRoutines = new ArrayList<>();
         RoutineCardAdapter adapter;
 
@@ -57,20 +58,15 @@ public class SearchFragment extends Fragment implements FilterDialogListener {
 
 
             extractedRoutines.add(new RoutineCardData(1,"Diácono","Prueba",4));
-            extractedRoutines.add(new RoutineCardData(2,"Caballero","Prueba",5));
+            extractedRoutines.add(new RoutineCardData(2,"Caballero","Prueba",2));
             extractedRoutines.add(new RoutineCardData(3,"Titán","Prueba",1));
             extractedRoutines.add(new RoutineCardData(4,"Terminator","Prueba",5));
-            extractedRoutines.add(new RoutineCardData(1,"Diaccordo","Prueba",4));
+            extractedRoutines.add(new RoutineCardData(1,"Diaccordo","Prueba",3));
 
             cardContainer = root.findViewById(R.id.cardContainer);
-            cardContainer.setLayoutManager(new LinearLayoutManager(getContext()));
+            cardContainer.setLayoutManager(new GridLayoutManager(getContext(),getActivity().getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT ? 1 : 2));
             adapter = new RoutineCardAdapter(extractedRoutines);
-            cardContainer.setLayoutManager(new LinearLayoutManager(getContext()));
             cardContainer.setAdapter(adapter);
-
-            routineNotFound = new TextView(this.getContext());
-            routineNotFound.setTextSize(20);
-            routineNotFound.setGravity(1);
 
             return root;
         }
@@ -147,17 +143,23 @@ public class SearchFragment extends Fragment implements FilterDialogListener {
         }
     }
 
-    //TODO: Switch statement with something final (not the spinner text)
     @Override
     public void onDialogPositiveClick(DialogFragment dialog) {
        FilterDialogFragment myDialog = (FilterDialogFragment)dialog;
        switch (myDialog.selectedSortingCriteria){
-           case "Rating":
-               extractedRoutines.sort((o1, o2) -> o2.getRating().compareTo(o1.getRating()));
+           case RATING:
+               if(myDialog.selectedOrderCriteria == ASC)
+                    extractedRoutines.sort((o1, o2) -> o1.getRating().compareTo(o2.getRating()));
+               else if((myDialog.selectedOrderCriteria == DESC))
+                   extractedRoutines.sort((o1, o2) -> o2.getRating().compareTo(o1.getRating()));
                break;
-           case "Nombre":
-               extractedRoutines.sort((o1, o2) -> o1.getTitle().compareTo(o2.getTitle()));
+           case NAME:
+               if(myDialog.selectedOrderCriteria == ASC)
+                   extractedRoutines.sort((o1, o2) -> o1.getTitle().compareTo(o2.getTitle()));
+               else if((myDialog.selectedOrderCriteria == DESC))
+                   extractedRoutines.sort((o1, o2) -> o2.getTitle().compareTo(o1.getTitle()));
                break;
+           default: break;
        }
        adapter.notifyDataSetChanged();
     }

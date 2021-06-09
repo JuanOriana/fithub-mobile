@@ -1,22 +1,12 @@
-package com.example.fithub_mobile;
+package com.example.fithub_mobile.excercise;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
-import android.content.Intent;
-import android.content.res.Resources;
-import android.net.Uri;
-import android.view.View;
-import android.widget.ImageButton;
-import android.widget.LinearLayout;
-import android.widget.RatingBar;
 import android.widget.TextView;
 
 import androidx.constraintlayout.widget.ConstraintLayout;
 
-import com.google.android.material.button.MaterialButton;
-import com.google.android.material.card.MaterialCardView;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.snackbar.Snackbar;
+import com.example.fithub_mobile.R;
 
 @SuppressLint("ViewConstructor")
 public class ExerciseItem extends ConstraintLayout {

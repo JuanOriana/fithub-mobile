@@ -1,4 +1,4 @@
-package com.example.fithub_mobile;
+package com.example.fithub_mobile.routine;
 
 import android.content.Intent;
 import android.net.Uri;
@@ -14,13 +14,11 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.fithub_mobile.R;
 import com.google.android.material.button.MaterialButton;
-
-import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.List;
 
 public class RoutineCardAdapter extends RecyclerView.Adapter<RoutineCardAdapter.ViewHolder> implements Filterable {
 

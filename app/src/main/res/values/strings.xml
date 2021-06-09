@@ -59,5 +59,11 @@
     <string name="reps">Repetitions</string>
     <string name="accept">Accept</string>
     <string name="when_do_you_want_to_be_notified_for_your_routine">When do you want to be notified for your routine?</string>
-    <string name="time_to_train">It\'s time to train!</string>
+    <string name="sort_spinner_default_item">Choose the category</string>
+    <string name="descending">Descending</string>
+    <string name="ascending">Ascending</string>
+    <string name="order_spinner_default_item">Choose the order</string>
+    <string name="order_spinner_title">View:</string>
+
+
 </resources>
