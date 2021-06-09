@@ -64,6 +64,7 @@
     <string name="ascending">Ascending</string>
     <string name="order_spinner_default_item">Choose the order</string>
     <string name="order_spinner_title">View:</string>
+    <string name="time_to_train">It\'s time to train!</string>
 
 
 </resources>
