@@ -71,7 +71,7 @@ public class ProfileFragment extends Fragment {
 
         cardContainer = root.findViewById(R.id.cardContainer);
         RoutineCardAdapter adapter = new RoutineCardAdapter(routines);
-        cardContainer.setLayoutManager(new GridLayoutManager(getContext(),getActivity().getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT ? 1 : 2));
+        cardContainer.setLayoutManager(new LinearLayoutManager(getContext()));
         cardContainer.setAdapter(adapter);
 
         return root;

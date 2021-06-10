@@ -17,6 +17,7 @@ import android.util.Log;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.TimePicker;
+import android.widget.Toast;
 
 import java.util.Calendar;
 
@@ -24,6 +25,7 @@ import java.util.Calendar;
 public class NotificationActivity extends AppCompatActivity {
 
     static final private String CHANNEL_ID = "Routine Notif";
+    static final private String DAY_EXTRA = "com.example.fithub_mobile.DAY";
     public static final int REQUEST_CODE_NOTIFY = 1;
     private CheckBox[] days;
 
@@ -55,19 +57,29 @@ public class NotificationActivity extends AppCompatActivity {
 
         acceptBtn.setOnClickListener(v->{
             Calendar calendar = Calendar.getInstance();
-            calendar.setTimeInMillis(System.currentTimeMillis());
-            calendar.set(Calendar.HOUR_OF_DAY, tp.getHour());
-            calendar.set(Calendar.MINUTE, tp.getMinute());
-
             AlarmManager alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
 
-            PendingIntent pendingNotifyIntent = PendingIntent.getBroadcast(
-                    this,
-                    42,
-                    new Intent( this, NotifyHandlerReceiver.class ),
-            0);
-            alarmManager.setInexactRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(),
-                    AlarmManager.INTERVAL_DAY, pendingNotifyIntent);
+            for (int i = 0; i < 7; i ++){
+                if (days[i].isChecked()){
+                    calendar.setTimeInMillis(System.currentTimeMillis());
+                    calendar.set(Calendar.DAY_OF_WEEK,i+1);
+                    calendar.set(Calendar.HOUR_OF_DAY, tp.getHour());
+                    calendar.set(Calendar.MINUTE, tp.getMinute());
+                    Intent pending = new Intent( this, NotifyHandlerReceiver.class );
+                    pending.putExtra(DAY_EXTRA,42+i);
+                    PendingIntent pendingNotifyIntent = PendingIntent.getBroadcast(
+                            this,
+                            42+i,
+                            pending,
+                            0);
+                    alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(),
+                            AlarmManager.INTERVAL_DAY * 7, pendingNotifyIntent);
+                }
+            }
+
+            finish();
+            Toast.makeText(getApplicationContext(),"Reminder created succesfully",Toast.LENGTH_SHORT).show();
+
         });
 
         cancelBtn.setOnClickListener(v->{
