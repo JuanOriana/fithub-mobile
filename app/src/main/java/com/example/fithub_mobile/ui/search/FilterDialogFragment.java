@@ -2,22 +2,13 @@ package com.example.fithub_mobile.ui.search;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
-import android.content.Context;
-import android.graphics.Color;
 import android.os.Bundle;
-import android.util.AttributeSet;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.Adapter;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
-import android.widget.TextView;
-import android.widget.Toast;
 
-import androidx.annotation.NonNull;
 import androidx.fragment.app.DialogFragment;
 
 import com.example.fithub_mobile.R;
@@ -28,6 +19,8 @@ public class FilterDialogFragment extends DialogFragment
 {
     Integer selectedSortingCriteria;
     Integer selectedOrderCriteria;
+    Integer selectedFilterCriteria;
+    Integer selectedBasedCriteria;
     Boolean firstTimeSelectingCriteria = true;
     Boolean firstTimeSelectingOrder = true;
     @NotNull
@@ -45,7 +38,7 @@ public class FilterDialogFragment extends DialogFragment
                 })
         .setView(view);
 
-        Spinner sortCriteriaSpinner = view.findViewById(R.id.filter_spinner);
+        Spinner sortCriteriaSpinner = view.findViewById(R.id.sort_spinner);
 
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(view.getContext(),
                 R.array.sort_items, android.R.layout.simple_spinner_item);
@@ -53,7 +46,6 @@ public class FilterDialogFragment extends DialogFragment
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         // Apply the adapter to the spinner
         sortCriteriaSpinner.setAdapter(adapter);
-
         sortCriteriaSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -77,6 +69,51 @@ public class FilterDialogFragment extends DialogFragment
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 selectedOrderCriteria = position;
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+
+        Spinner basedFilterSpinner = view.findViewById(R.id.based_on_spinner);
+        ArrayAdapter<CharSequence> basedAdapter = new ArrayAdapter<>(view.getContext(),android.R.layout.simple_spinner_item);
+        basedAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        basedFilterSpinner.setAdapter(basedAdapter);
+        basedFilterSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                selectedBasedCriteria = position;
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+
+        CharSequence[] ratingList = {"Choose rating","1","2","3","4","5"};
+        CharSequence[] difficultyList = {"Choose difficulty","Easy","Medium","Hard"};
+
+        Spinner filterCriteriaSpinner = view.findViewById(R.id.filter_spinner);
+        ArrayAdapter<CharSequence> filterAdapter = ArrayAdapter.createFromResource(view.getContext(),
+                R.array.filter_items, android.R.layout.simple_spinner_item);
+        filterAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        filterCriteriaSpinner.setAdapter(filterAdapter);
+        filterCriteriaSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                selectedFilterCriteria = position;
+                if(position == 1){
+                    basedAdapter.clear();
+                    basedAdapter.addAll(ratingList);
+                }
+                else if(position == 2) {
+                    basedAdapter.clear();
+                    basedAdapter.addAll(difficultyList);
+                }
+                else basedAdapter.clear();
             }
 
             @Override
