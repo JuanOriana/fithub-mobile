@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
+import android.util.Log;
 import android.widget.ImageButton;
 import android.widget.RatingBar;
 import android.widget.TextView;
@@ -40,7 +41,7 @@ public class RoutineCard extends MaterialCardView {
             shareIntent.setType("text/plain");
             shareIntent.putExtra(Intent.EXTRA_SUBJECT, R.string.fithub);
             String shareMessage= "\n"+ getContext().getString(R.string.share_msg)+"\n\n";
-            shareMessage = shareMessage + "http://fithub.com/routine" +"\n\n";
+            shareMessage = shareMessage + "http://fithub.com/routine"+ routine.getId().toString() +"\n\n";
             shareIntent.putExtra(Intent.EXTRA_TEXT, shareMessage);
             getContext().startActivity(Intent.createChooser(shareIntent, "Choose one"));
         });
@@ -48,7 +49,7 @@ public class RoutineCard extends MaterialCardView {
         MaterialButton routineBtn = findViewById(R.id.routine_btn);
         routineBtn.setOnClickListener(view -> {
             Intent i = new Intent(Intent.ACTION_VIEW);
-            i.setData(Uri.parse("http://fithub.com/routine"));
+            i.setData(Uri.parse("http://fithub.com/routine/" + routine.getId().toString()));
             i.setPackage("com.example.fithub_mobile");
 //            i.putExtra(TITLE_MESSAGE, title);
 //            i.putExtra(RATING_MESSAGE, rating);

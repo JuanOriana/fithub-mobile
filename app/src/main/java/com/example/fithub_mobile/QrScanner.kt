@@ -1,9 +1,11 @@
 package com.example.fithub_mobile
 
+import android.content.Context
+import android.content.Intent
 import android.content.pm.PackageManager
+import android.net.Uri
 import android.os.Bundle
 import android.util.Log
-import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
@@ -37,8 +39,10 @@ class QrScanner : AppCompatActivity() {
 
             decodeCallback = DecodeCallback {
                 runOnUiThread{
-                    val scannerText = findViewById<TextView>(R.id.scanner_text)
-                    scannerText.text = it.text
+                    val i = Intent(Intent.ACTION_VIEW)
+                    i.data = Uri.parse(it.text);
+                    i.setPackage("com.example.fithub_mobile")
+                    startActivity(i)
                 }
             }
 

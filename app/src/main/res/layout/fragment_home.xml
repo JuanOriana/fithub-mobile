@@ -45,17 +45,17 @@
                 android:layout_marginTop="188dp"
                 android:layout_marginBottom="24dp"
                 android:background="@drawable/left_no_stroke"
+                android:paddingVertical="3dp"
                 android:paddingStart="10dp"
                 android:paddingEnd="10dp"
-                android:text="@string/explore_routines"
+                android:text="@string/latest_routines"
                 android:textColor="@color/fithub_green"
                 android:textSize="20sp"
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/recent_routines"
-                android:paddingVertical="3dp"/>
+                app:layout_constraintTop_toBottomOf="@+id/recent_routines" />
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/cardContainer"

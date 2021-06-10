@@ -15,12 +15,19 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
+import android.util.Log;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.RatingBar;
 import android.widget.TextView;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 public class RoutineActivity extends AppCompatActivity {
+
+    public static final String EXTRA_ID = "com.example.fithub_mobile.EXTRA_ID";
+    private int id;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,6 +35,8 @@ public class RoutineActivity extends AppCompatActivity {
         setContentView(R.layout.activity_routine);
 
         Intent intent = getIntent();
+
+        id = Integer.parseInt(intent.getData().getQueryParameter("id"));
         String title = intent.getStringExtra(RoutineCard.TITLE_MESSAGE);
         int rating = intent.getIntExtra(RoutineCard.RATING_MESSAGE,0);
         String desc = intent.getStringExtra(RoutineCard.DESC_MESSAGE);
@@ -56,6 +65,7 @@ public class RoutineActivity extends AppCompatActivity {
         ImageButton qrBtn = findViewById(R.id.qr_btn);
         qrBtn.setOnClickListener(view -> {
             Intent i = new Intent(this, QrGenActivity.class);
+            i.putExtra(EXTRA_ID,id);
             startActivity(i);
         });
 

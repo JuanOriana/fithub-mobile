@@ -24,7 +24,6 @@
             android:name=".routine.RoutineActivity"
             android:label="@string/title_activity_routine"
             android:theme="@style/Theme.Fithubmobile.NoActionBar">
-            <tools:validation testUrl="http://fithub.com/routine" />
 
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
@@ -34,7 +33,7 @@
 
                 <data
                     android:host="fithub.com"
-                    android:pathPattern="/routine"
+                    android:pathPrefix="/routine"
                     android:scheme="http" />
             </intent-filter>
         </activity>

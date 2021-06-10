@@ -31,7 +31,6 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         sp = getSharedPreferences("login",MODE_PRIVATE);
-
         if(!sp.getBoolean("logged",false)){
             goToLogin();
         }

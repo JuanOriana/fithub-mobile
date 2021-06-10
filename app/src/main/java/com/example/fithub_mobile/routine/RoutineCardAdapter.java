@@ -1,5 +1,6 @@
 package com.example.fithub_mobile.routine;
 
+import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.view.LayoutInflater;
@@ -37,6 +38,7 @@ public class RoutineCardAdapter extends RecyclerView.Adapter<RoutineCardAdapter.
         private final TextView userNameView;
         private final ImageView userImgView;
         private final TextView difficulty;
+        private Context context;
 
         public ViewHolder(View view) {
             super(view);
@@ -48,30 +50,8 @@ public class RoutineCardAdapter extends RecyclerView.Adapter<RoutineCardAdapter.
             userNameView = view.findViewById(R.id.owner_name);
             userImgView = view.findViewById(R.id.owner_img);
             difficulty = view.findViewById(R.id.difficulty);
+            context = view.getContext();
 
-            //Sharing
-            ImageButton shareBtn = view.findViewById(R.id.share_btn);
-            shareBtn.setOnClickListener(v -> {
-                Intent shareIntent = new Intent(Intent.ACTION_SEND);
-                shareIntent.setType("text/plain");
-                shareIntent.putExtra(Intent.EXTRA_SUBJECT, R.string.fithub);
-                String shareMessage = "\n" + view.getContext().getString(R.string.share_msg) + "\n\n";
-                shareMessage = shareMessage + "http://fithub.com/routine" + "\n\n";
-                shareIntent.putExtra(Intent.EXTRA_TEXT, shareMessage);
-                view.getContext().startActivity(Intent.createChooser(shareIntent, "Choose one"));
-            });
-
-            //Going to routine
-            MaterialButton routineBtn = view.findViewById(R.id.routine_btn);
-            routineBtn.setOnClickListener(v -> {
-                Intent i = new Intent(Intent.ACTION_VIEW);
-                i.setData(Uri.parse("http://fithub.com/routine"));
-                i.setPackage("com.example.fithub_mobile");
-//            i.putExtra(TITLE_MESSAGE, title);
-//            i.putExtra(RATING_MESSAGE, rating);
-//            i.putExtra(DESC_MESSAGE, desc);
-                view.getContext().startActivity(i);
-            });
         }
 
         public TextView getTitleView() {
@@ -104,6 +84,10 @@ public class RoutineCardAdapter extends RecyclerView.Adapter<RoutineCardAdapter.
 
         public TextView getDifficulty() {
             return difficulty;
+        }
+
+        public Context getContext() {
+            return context;
         }
     }
 
@@ -174,6 +158,30 @@ public class RoutineCardAdapter extends RecyclerView.Adapter<RoutineCardAdapter.
                 text = "";
         }
         holder.getDifficulty().setText(text);
+
+        //Sharing
+        ImageButton shareBtn = holder.getShareBtn();
+        shareBtn.setOnClickListener(v -> {
+            Intent shareIntent = new Intent(Intent.ACTION_SEND);
+            shareIntent.setType("text/plain");
+            shareIntent.putExtra(Intent.EXTRA_SUBJECT, R.string.fithub);
+            String shareMessage = "\n" + holder.getContext().getString(R.string.share_msg) + "\n\n";
+            shareMessage = shareMessage + "http://fithub.com/routine?id=" + routines.get(position).getId()+ "\n\n";
+            shareIntent.putExtra(Intent.EXTRA_TEXT, shareMessage);
+            holder.getContext().startActivity(Intent.createChooser(shareIntent, "Choose one"));
+        });
+
+        //Going to routine
+        MaterialButton routineBtn = holder.getRoutineBtn();
+        routineBtn.setOnClickListener(v -> {
+            Intent i = new Intent(Intent.ACTION_VIEW);
+            i.setData(Uri.parse("http://fithub.com/routine?id=" + routines.get(position).getId()));
+            i.setPackage("com.example.fithub_mobile");
+//            i.putExtra(TITLE_MESSAGE, title);
+//            i.putExtra(RATING_MESSAGE, rating);
+//            i.putExtra(DESC_MESSAGE, desc);
+            holder.getContext().startActivity(i);
+        });
     }
 
     @Override

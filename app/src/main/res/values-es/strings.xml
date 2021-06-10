@@ -22,8 +22,8 @@
     <string name="app_label">Buscar</string>
     <string name="search_hint">Busca rutinas</string>
     <string name="search_title">Buscar</string>
-    <string name="recent_routines">Rutinas Recientes</string>
-    <string name="explore_routines">Explorar Rutinas</string>
+    <string name="recent_routines">Tus Rutinas Recientes</string>
+    <string name="latest_routines">Rutinas Nuevas</string>
     <string name="share_msg">¡Hola! Quiero compartir mi rutina contigo: </string>
     <string name="NotFoundMessage">Oops… parece que no encontramos lo que buscabas.</string>
     <string name="qr_code_msg">Este ese el código QR para tu rutina, ¡Muéstraselo a un amigo para que pueda entrenar contigo!</string>
