@@ -5,14 +5,18 @@ import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
 public class SearchViewModel extends ViewModel {
-    private MutableLiveData<String> mText;
+    private MutableLiveData<String> query;
+
 
     public SearchViewModel() {
-        mText = new MutableLiveData<>();
-        mText.setValue("This is search fragment");
+        query = new MutableLiveData<>();
     }
 
-    public LiveData<String> getText() {
-        return mText;
+    public LiveData<String> getQuery() {
+        return query;
     }
+    public void setQuery(MutableLiveData<String> query) {
+        this.query = query;
+    }
+
 }

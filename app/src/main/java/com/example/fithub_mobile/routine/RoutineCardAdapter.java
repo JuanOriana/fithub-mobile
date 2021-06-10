@@ -159,9 +159,21 @@ public class RoutineCardAdapter extends RecyclerView.Adapter<RoutineCardAdapter.
         holder.getRatingBar().setRating(routines.get(position).getRating());
         holder.getUserNameView().setText(routines.get(position).getUserName());
         Picasso.get().load(routines.get(position).getUserImg()).into(holder.getUserImgView());
-        holder.getDifficulty().setText(routines.get(position).getDifficulty());
-
-
+        String text;
+        switch(routines.get(position).getDifficulty()) {
+            case RoutineCardData.EASY_DIFFICULTY:
+                text = holder.itemView.getContext().getString(R.string.easy_difficulty);
+                break;
+            case RoutineCardData.MEDIUM_DIFFICULTY:
+                text = holder.itemView.getContext().getString(R.string.medium_difficulty);
+                break;
+            case RoutineCardData.HARD_DIFFICULTY:
+                text = holder.itemView.getContext().getString(R.string.hard_difficulty);
+                break;
+            default:
+                text = "";
+        }
+        holder.getDifficulty().setText(text);
     }
 
     @Override

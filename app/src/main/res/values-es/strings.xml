@@ -21,7 +21,7 @@
     <string name="fithub">Fithub</string>
     <string name="app_label">Buscar</string>
     <string name="search_hint">Busca rutinas</string>
-    <string name="search_title">Buscador</string>
+    <string name="search_title">Buscar</string>
     <string name="recent_routines">Rutinas Recientes</string>
     <string name="explore_routines">Explorar Rutinas</string>
     <string name="share_msg">¡Hola! Quiero compartir mi rutina contigo: </string>
@@ -41,7 +41,6 @@
     <string name="current_exercise">Ejercicio actual</string>
     <string name="next_up">Siguiente</string>
     <string name="sort_spinner_title">Ordenar por:</string>
-    <string name="spinner_name_item">Nombre</string>
     <string name="filter_dialog_title">Filtros de Búsqueda</string>
     <string name="spinner_difficulty_item">Dificultad</string>
     <string name="monday">Lunes</string>
@@ -61,4 +60,13 @@
     <string name="ascending">Ascendente</string>
     <string name="order_spinner_title">Visualizar</string>
     <string name="time_to_train">¡Es tiempo de entrenar!</string>
+    <string name="spinner_creation_item">Fecha de Creación</string>
+    <string name="spinner_category_item">Categoría</string>
+    <string name="spinner_sport_item">Deporte</string>
+    <string name="hard_difficulty">Difícil</string>
+    <string name="easy_difficulty">Fácil</string>
+    <string name="medium_difficulty">Media</string>
+    <string name="based_spinner_title">En base a:</string>
+    <string name="filter_spinner_title">Filtrar por:</string>
+
 </resources>
