@@ -2,13 +2,22 @@ package com.example.fithub_mobile.ui.search;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
+import android.content.Context;
+import android.graphics.Color;
 import android.os.Bundle;
+import android.util.AttributeSet;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
+import android.view.ViewGroup;
+import android.widget.Adapter;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
+import android.widget.TextView;
+import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.DialogFragment;
 
 import com.example.fithub_mobile.R;
@@ -19,6 +28,8 @@ public class FilterDialogFragment extends DialogFragment
 {
     Integer selectedSortingCriteria;
     Integer selectedOrderCriteria;
+    Boolean firstTimeSelectingCriteria = true;
+    Boolean firstTimeSelectingOrder = true;
     @NotNull
     public Dialog onCreateDialog(Bundle savedInstanceState){
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
@@ -30,17 +41,19 @@ public class FilterDialogFragment extends DialogFragment
                     if(mySF != null)
                     mySF.onDialogPositiveClick(this);
                 })
-                .setNegativeButton(R.string.cancel_btn, (dialog, id) -> {
+                .setNegativeButton("cancelar", (dialog, id) -> {
                 })
         .setView(view);
 
         Spinner sortCriteriaSpinner = view.findViewById(R.id.filter_spinner);
+
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(view.getContext(),
                 R.array.sort_items, android.R.layout.simple_spinner_item);
         // Specify the layout to use when the list of choices appears
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         // Apply the adapter to the spinner
         sortCriteriaSpinner.setAdapter(adapter);
+
         sortCriteriaSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -75,3 +88,5 @@ public class FilterDialogFragment extends DialogFragment
         return builder.create();
     }
 }
+
+

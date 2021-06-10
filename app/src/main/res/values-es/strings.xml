@@ -66,5 +66,7 @@
     <string name="hard_difficulty">Difícil</string>
     <string name="easy_difficulty">Fácil</string>
     <string name="medium_difficulty">Media</string>
+    <string name="based_spinner_title">En base a:</string>
+    <string name="filter_spinner_title">Filtrar por:</string>
 
 </resources>
