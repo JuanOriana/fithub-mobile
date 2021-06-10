@@ -2,6 +2,7 @@ package com.example.fithub_mobile.ui.profile;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.res.Configuration;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -9,6 +10,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.Navigation;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -69,7 +71,7 @@ public class ProfileFragment extends Fragment {
 
         cardContainer = root.findViewById(R.id.cardContainer);
         RoutineCardAdapter adapter = new RoutineCardAdapter(routines);
-        cardContainer.setLayoutManager(new LinearLayoutManager(getContext()));
+        cardContainer.setLayoutManager(new GridLayoutManager(getContext(),getActivity().getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT ? 1 : 2));
         cardContainer.setAdapter(adapter);
 
         return root;
