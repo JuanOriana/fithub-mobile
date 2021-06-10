@@ -1,119 +1,125 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     tools:context=".Register"
-    android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:gravity="center|top">
-
-    <TextView
-        android:id="@+id/login_title"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
-        android:layout_marginBottom="32dp"
-        android:text="@string/title_home"
-        android:textColor="@color/fithub_green"
-        android:textSize="70sp"
-        android:textStyle="bold" />
-
-    <EditText
-        android:id="@+id/firstname_input"
-        android:layout_width="288dp"
-        android:layout_height="43dp"
-        android:ems="10"
-        android:hint="@string/first_name"
-        android:inputType="textEmailAddress"
-        android:padding="5dp"
-        android:paddingStart="15dp"
-        android:paddingEnd="15dp"
-        android:textColor="@color/black"
-        android:layout_marginBottom="16dp" />
-
-    <EditText
-        android:id="@+id/lastname_input"
-        android:layout_width="288dp"
-        android:layout_height="43dp"
-        android:ems="10"
-        android:hint="@string/last_name"
-        android:inputType="textEmailAddress"
-        android:padding="5dp"
-        android:paddingStart="15dp"
-        android:paddingEnd="15dp"
-        android:textColor="@color/black"
-        android:layout_marginBottom="16dp" />
-
-    <EditText
-        android:id="@+id/registerEmailInput"
-        android:layout_width="288dp"
-        android:layout_height="43dp"
-        android:ems="10"
-        android:hint="@string/emailInputHint"
-        android:inputType="textEmailAddress"
-        android:padding="5dp"
-        android:paddingStart="15dp"
-        android:paddingEnd="15dp"
-        android:textColor="@color/black"
-        android:layout_marginBottom="16dp" />
-
-    <EditText
-        android:id="@+id/edit_password"
-        android:layout_width="288dp"
-        android:layout_height="43dp"
-        android:ems="10"
-        android:hint="@string/passwordInputHint"
-        android:inputType="textPassword"
-        android:padding="5dp"
-        android:paddingStart="15dp"
-        android:paddingEnd="15dp"
-        android:textColor="@color/black"
-        android:layout_marginBottom="16dp" />
-
-    <EditText
-        android:id="@+id/edit_confirm_password"
-        android:layout_width="288dp"
-        android:layout_height="43dp"
-        android:ems="10"
-        android:hint="@string/confirm_password"
-        android:inputType="textPassword"
-        android:padding="5dp"
-        android:paddingStart="15dp"
-        android:paddingEnd="15dp"
-        android:textColor="@color/black" />
-
-    <Button
-        android:id="@+id/register_btn"
-        android:layout_width="256dp"
-        android:layout_height="78dp"
-        android:onClick="signUp"
-        android:text="@string/register"
-        android:textSize="20sp"
-        android:layout_marginTop="32dp" />
+    android:layout_height="match_parent">
 
     <LinearLayout
-        android:id="@+id/linearLayout"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_marginTop="10dp" >
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center|top">
 
         <TextView
-            android:id="@+id/text_account"
+            android:id="@+id/login_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/account" />
+            android:layout_marginTop="32dp"
+            android:layout_marginBottom="32dp"
+            android:text="@string/title_home"
+            android:textColor="@color/fithub_green"
+            android:textSize="70sp"
+            android:textStyle="bold" />
 
-        <TextView
-            android:id="@+id/text_sign_in"
+        <EditText
+            android:id="@+id/firstname_input"
+            android:layout_width="288dp"
+            android:layout_height="43dp"
+            android:ems="10"
+            android:hint="@string/first_name"
+            android:inputType="textEmailAddress"
+            android:padding="5dp"
+            android:paddingStart="15dp"
+            android:paddingEnd="15dp"
+            android:textColor="@color/black"
+            android:layout_marginBottom="16dp" />
+
+        <EditText
+            android:id="@+id/lastname_input"
+            android:layout_width="288dp"
+            android:layout_height="43dp"
+            android:ems="10"
+            android:hint="@string/last_name"
+            android:inputType="textEmailAddress"
+            android:padding="5dp"
+            android:paddingStart="15dp"
+            android:paddingEnd="15dp"
+            android:textColor="@color/black"
+            android:layout_marginBottom="16dp" />
+
+        <EditText
+            android:id="@+id/registerEmailInput"
+            android:layout_width="288dp"
+            android:layout_height="43dp"
+            android:ems="10"
+            android:hint="@string/emailInputHint"
+            android:inputType="textEmailAddress"
+            android:padding="5dp"
+            android:paddingStart="15dp"
+            android:paddingEnd="15dp"
+            android:textColor="@color/black"
+            android:layout_marginBottom="16dp" />
+
+        <EditText
+            android:id="@+id/edit_password"
+            android:layout_width="288dp"
+            android:layout_height="43dp"
+            android:ems="10"
+            android:hint="@string/passwordInputHint"
+            android:inputType="textPassword"
+            android:padding="5dp"
+            android:paddingStart="15dp"
+            android:paddingEnd="15dp"
+            android:textColor="@color/black"
+            android:layout_marginBottom="16dp" />
+
+        <EditText
+            android:id="@+id/edit_confirm_password"
+            android:layout_width="288dp"
+            android:layout_height="43dp"
+            android:ems="10"
+            android:hint="@string/confirm_password"
+            android:inputType="textPassword"
+            android:padding="5dp"
+            android:paddingStart="15dp"
+            android:paddingEnd="15dp"
+            android:textColor="@color/black" />
+
+        <Button
+            android:id="@+id/register_btn"
+            android:layout_width="256dp"
+            android:layout_height="78dp"
+            android:onClick="signUp"
+            android:text="@string/register"
+            android:textSize="20sp"
+            android:layout_marginTop="32dp" />
+
+        <LinearLayout
+            android:id="@+id/linearLayout"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="5dp"
-            android:clickable="true"
-            android:onClick="goToLogin"
-            android:text="@string/sign_in" />
+            android:orientation="horizontal"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp" >
+
+            <TextView
+                android:id="@+id/text_account"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/account" />
+
+            <TextView
+                android:id="@+id/text_sign_in"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="5dp"
+                android:clickable="true"
+                android:onClick="goToLogin"
+                android:text="@string/sign_in" />
+
+        </LinearLayout>
 
     </LinearLayout>
 
-</LinearLayout>
+</ScrollView>
