@@ -3,16 +3,23 @@ package com.example.fithub_mobile.routine;
 import java.util.Objects;
 
 public class RoutineCardData {
+
+    public static final int EASY_DIFFICULTY = 1;
+    public static final int MEDIUM_DIFFICULTY = 2;
+    public static final int HARD_DIFFICULTY = 3;
+
+
+
     private  Integer id;
     private String title;
     private String desc;
     private Integer rating;
     private String userName;
     private String userImg;
-    private String difficulty;
+    private Integer difficulty;
 
     public RoutineCardData(Integer id, String title, String desc, Integer rating,
-                           String userName, String userImg, String difficulty) {
+                           String userName, String userImg, Integer difficulty) {
         this.id = id;
         this.title = title;
         this.desc = desc;
@@ -70,11 +77,11 @@ public class RoutineCardData {
         this.userImg = userImg;
     }
 
-    public String getDifficulty() {
+    public Integer getDifficulty() {
         return difficulty;
     }
 
-    public void setDifficulty(String difficulty) {
+    public void setDifficulty(Integer difficulty) {
         this.difficulty = difficulty;
     }
 

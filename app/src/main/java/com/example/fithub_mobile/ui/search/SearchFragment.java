@@ -34,12 +34,14 @@ import org.jetbrains.annotations.NotNull;
 import java.util.ArrayList;
 
 public class SearchFragment extends Fragment implements FilterDialogListener {
+    public static final int ORDER_ASC = 1;
+    public static final int ORDER_DESC = 2;
+    public static final int RATING = 1;
+    public static final int DIFFICULTY = 2;
+    public static final int SPORT = 3;
+    public static final int CATEGORY = 4;
+    public static final int CREATION_DATE = 5;
 
-    private final static int RATING  = 1;
-    private final static int NAME  = 2;
-    private final static int DIFFICULTY  = 3;
-    private final static int ASC = 1;
-    private final static int DESC = 2;
 
     private SearchViewModel searchViewModel;
         private TextView routineNotFound;
@@ -58,15 +60,15 @@ public class SearchFragment extends Fragment implements FilterDialogListener {
 
 
             extractedRoutines.add(new RoutineCardData(1,"Diácono","Prueba",4,
-                    "pollo","https://ep00.epimg.net/elcomidista/imagenes/2020/09/02/articulo/1599041159_343586_1599041590_rrss_normal.jpg", "hard"));
+                    "pollo","https://ep00.epimg.net/elcomidista/imagenes/2020/09/02/articulo/1599041159_343586_1599041590_rrss_normal.jpg", RoutineCardData.EASY_DIFFICULTY));
             extractedRoutines.add(new RoutineCardData(2,"Caballero","Prueba",2,
-                    "pollo","https://ep00.epimg.net/elcomidista/imagenes/2020/09/02/articulo/1599041159_343586_1599041590_rrss_normal.jpg", "hard"));
+                    "pollo","https://ep00.epimg.net/elcomidista/imagenes/2020/09/02/articulo/1599041159_343586_1599041590_rrss_normal.jpg", RoutineCardData.MEDIUM_DIFFICULTY));
             extractedRoutines.add(new RoutineCardData(3,"Titán","Prueba",1,
-                    "pollo","https://ep00.epimg.net/elcomidista/imagenes/2020/09/02/articulo/1599041159_343586_1599041590_rrss_normal.jpg", "hard"));
+                    "pollo","https://ep00.epimg.net/elcomidista/imagenes/2020/09/02/articulo/1599041159_343586_1599041590_rrss_normal.jpg", RoutineCardData.HARD_DIFFICULTY));
             extractedRoutines.add(new RoutineCardData(4,"Terminator","Prueba",5,
-                    "pollo","https://ep00.epimg.net/elcomidista/imagenes/2020/09/02/articulo/1599041159_343586_1599041590_rrss_normal.jpg", "hard"));
+                    "pollo","https://ep00.epimg.net/elcomidista/imagenes/2020/09/02/articulo/1599041159_343586_1599041590_rrss_normal.jpg", RoutineCardData.EASY_DIFFICULTY));
             extractedRoutines.add(new RoutineCardData(1,"Diaccordo","Prueba",3,
-                    "pollo","https://ep00.epimg.net/elcomidista/imagenes/2020/09/02/articulo/1599041159_343586_1599041590_rrss_normal.jpg", "hard"));
+                    "pollo","https://ep00.epimg.net/elcomidista/imagenes/2020/09/02/articulo/1599041159_343586_1599041590_rrss_normal.jpg", RoutineCardData.MEDIUM_DIFFICULTY));
 
             cardContainer = root.findViewById(R.id.cardContainer);
             cardContainer.setLayoutManager(new GridLayoutManager(getContext(),getActivity().getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT ? 1 : 2));
@@ -151,19 +153,36 @@ public class SearchFragment extends Fragment implements FilterDialogListener {
     @Override
     public void onDialogPositiveClick(DialogFragment dialog) {
        FilterDialogFragment myDialog = (FilterDialogFragment)dialog;
+
        switch (myDialog.selectedSortingCriteria){
            case RATING:
-               if(myDialog.selectedOrderCriteria == ASC)
+               if(myDialog.selectedOrderCriteria == ORDER_ASC)
                     extractedRoutines.sort((o1, o2) -> o1.getRating().compareTo(o2.getRating()));
-               else if((myDialog.selectedOrderCriteria == DESC))
+               else if((myDialog.selectedOrderCriteria == ORDER_DESC))
                    extractedRoutines.sort((o1, o2) -> o2.getRating().compareTo(o1.getRating()));
                break;
-           case NAME:
-               if(myDialog.selectedOrderCriteria == ASC)
-                   extractedRoutines.sort((o1, o2) -> o1.getTitle().compareTo(o2.getTitle()));
-               else if((myDialog.selectedOrderCriteria == DESC))
-                   extractedRoutines.sort((o1, o2) -> o2.getTitle().compareTo(o1.getTitle()));
+           case DIFFICULTY:
+               if(myDialog.selectedOrderCriteria == ORDER_ASC)
+                   extractedRoutines.sort((o1, o2) -> o1.getDifficulty().compareTo(o2.getDifficulty()));
+               else if((myDialog.selectedOrderCriteria == ORDER_DESC))
+                   extractedRoutines.sort((o1, o2) -> o2.getDifficulty().compareTo(o1.getDifficulty()));
                break;
+           case SPORT:
+               if(myDialog.selectedOrderCriteria == ORDER_ASC)
+                   extractedRoutines.sort((o1, o2) -> o1.getDifficulty().compareTo(o2.getDifficulty()));
+               else if((myDialog.selectedOrderCriteria == ORDER_DESC))
+                   extractedRoutines.sort((o1, o2) -> o2.getDifficulty().compareTo(o1.getDifficulty()));
+           case CATEGORY:
+               if(myDialog.selectedOrderCriteria == ORDER_ASC)
+                   extractedRoutines.sort((o1, o2) -> o1.getDifficulty().compareTo(o2.getDifficulty()));
+               else if((myDialog.selectedOrderCriteria == ORDER_DESC))
+                   extractedRoutines.sort((o1, o2) -> o2.getDifficulty().compareTo(o1.getDifficulty()));
+           case CREATION_DATE:
+               if(myDialog.selectedOrderCriteria == ORDER_ASC)
+                   extractedRoutines.sort((o1, o2) -> o1.getDifficulty().compareTo(o2.getDifficulty()));
+               else if((myDialog.selectedOrderCriteria == ORDER_DESC))
+                   extractedRoutines.sort((o1, o2) -> o2.getDifficulty().compareTo(o1.getDifficulty()));
+
            default: break;
        }
        adapter.notifyDataSetChanged();
