@@ -30,12 +30,14 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.fithub_mobile.QrScanner;
 import com.example.fithub_mobile.R;
+import com.example.fithub_mobile.routine.RoutineCard;
 import com.example.fithub_mobile.routine.RoutineCardAdapter;
 import com.example.fithub_mobile.routine.RoutineCardData;
 
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
+import java.util.function.Predicate;
 
 public class SearchFragment extends Fragment implements FilterDialogListener {
     public static final int ORDER_ASC = 1;
@@ -52,6 +54,7 @@ public class SearchFragment extends Fragment implements FilterDialogListener {
         private String query;
         SearchView searchView;
         public ArrayList<RoutineCardData> extractedRoutines = new ArrayList<>();
+        public ArrayList<RoutineCardData> deletedRoutines = new ArrayList<>();
         RoutineCardAdapter adapter;
 
         @RequiresApi(api = Build.VERSION_CODES.Q)
@@ -160,6 +163,29 @@ public class SearchFragment extends Fragment implements FilterDialogListener {
     @Override
     public void onDialogPositiveClick(DialogFragment dialog) {
        FilterDialogFragment myDialog = (FilterDialogFragment)dialog;
+       extractedRoutines.addAll(deletedRoutines);
+       deletedRoutines.clear();
+       switch (myDialog.selectedFilterCriteria){
+           case RATING: {
+
+               for(RoutineCardData r : extractedRoutines){
+                   if(!r.getRating().equals(myDialog.selectedBasedCriteria))
+                       deletedRoutines.add(r);
+               }
+               extractedRoutines.removeIf(routineCardData -> !routineCardData.getRating().equals(myDialog.selectedBasedCriteria));
+               break;
+           }
+           case DIFFICULTY: {
+               for(RoutineCardData r : extractedRoutines){
+                   if(!r.getRating().equals(myDialog.selectedBasedCriteria))
+                       deletedRoutines.add(r);
+               }
+               extractedRoutines.removeIf(routineCardData -> !routineCardData.getDifficulty().equals(myDialog.selectedBasedCriteria));
+               break;
+           }
+           default:
+               break;
+       }
 
        switch (myDialog.selectedSortingCriteria){
            case RATING:
