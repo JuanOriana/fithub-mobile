@@ -38,11 +38,22 @@
                 app:layout_constraintTop_toTopOf="parent"
                 android:paddingVertical="3dp"/>
 
+            <HorizontalScrollView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="10dp"
+                >
+                <LinearLayout
+                    android:id="@+id/recent_container"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal" />
+            </HorizontalScrollView>
+
             <TextView
                 android:id="@+id/current_exercise"
                 android:layout_width="375dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="188dp"
                 android:layout_marginBottom="24dp"
                 android:background="@drawable/left_no_stroke"
                 android:paddingVertical="3dp"
