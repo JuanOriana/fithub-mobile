@@ -54,19 +54,23 @@
     <string name="reps">Repeticiones</string>
     <string name="accept">Aceptar</string>
     <string name="when_do_you_want_to_be_notified_for_your_routine">Cuando quieres que se te notifique para tu rutina?</string>
-    <string name="sort_spinner_default_item">Elija la categoría</string>
-    <string name="order_spinner_default_item">Elija el ordenamiento</string>
+    <string name="sort_spinner_placeholder">Elija la categoría</string>
+    <string name="order_spinner_placeholder">Elija el ordenamiento</string>
     <string name="descending">Descendente</string>
     <string name="ascending">Ascendente</string>
-    <string name="order_spinner_title">Visualizar</string>
+    <string name="order_spinner_title">Visualizar:</string>
     <string name="time_to_train">¡Es tiempo de entrenar!</string>
     <string name="spinner_creation_item">Fecha de Creación</string>
     <string name="spinner_category_item">Categoría</string>
     <string name="spinner_sport_item">Deporte</string>
     <string name="hard_difficulty">Difícil</string>
     <string name="easy_difficulty">Fácil</string>
-    <string name="medium_difficulty">Media</string>
+    <string name="medium_difficulty">Intermedia</string>
     <string name="based_spinner_title">En base a:</string>
     <string name="filter_spinner_title">Filtrar por:</string>
+    <string name="filter_spinner_default_item">Elija el filtro</string>
+    <string name="rating_spinner_placeholder">Elija la puntuacion</string>
+    <string name="empty_based_spinner_placeholder">Elija un filtro primero</string>
+    <string name="difficulty_spinner_placeholder">Elija la dificultad</string>
 
 </resources>
