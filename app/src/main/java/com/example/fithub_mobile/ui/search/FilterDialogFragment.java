@@ -2,18 +2,26 @@ package com.example.fithub_mobile.ui.search;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
+import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
+import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.DialogFragment;
 
 import com.example.fithub_mobile.R;
 
 import org.jetbrains.annotations.NotNull;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 public class FilterDialogFragment extends DialogFragment
 {
@@ -21,8 +29,7 @@ public class FilterDialogFragment extends DialogFragment
     Integer selectedOrderCriteria;
     Integer selectedFilterCriteria;
     Integer selectedBasedCriteria;
-    Boolean firstTimeSelectingCriteria = true;
-    Boolean firstTimeSelectingOrder = true;
+
     @NotNull
     public Dialog onCreateDialog(Bundle savedInstanceState){
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
@@ -40,12 +47,9 @@ public class FilterDialogFragment extends DialogFragment
 
         Spinner sortCriteriaSpinner = view.findViewById(R.id.sort_spinner);
 
-        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(view.getContext(),
-                R.array.sort_items, android.R.layout.simple_spinner_item);
-        // Specify the layout to use when the list of choices appears
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        // Apply the adapter to the spinner
-        sortCriteriaSpinner.setAdapter(adapter);
+        ArrayAdapter<CharSequence> custAdapter = new CustomFilterSpinnerAdapter(view.getContext(),
+                Arrays.asList(getResources().getStringArray(R.array.sort_items)),getString(R.string.sort_spinner_placeholder));
+        sortCriteriaSpinner.setAdapter(custAdapter);
         sortCriteriaSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -59,8 +63,8 @@ public class FilterDialogFragment extends DialogFragment
         });
 
         Spinner sortOrderSpinner = view.findViewById(R.id.order_spinner);
-        ArrayAdapter<CharSequence> orderAdapter = ArrayAdapter.createFromResource(view.getContext(),
-                R.array.sort_order_items, android.R.layout.simple_spinner_item);
+       CustomFilterSpinnerAdapter orderAdapter = new CustomFilterSpinnerAdapter(view.getContext(),
+               Arrays.asList(getResources().getStringArray(R.array.sort_order_items)),getString(R.string.order_spinner_placeholder));
         // Specify the layout to use when the list of choices appears
         orderAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         // Apply the adapter to the spinner
@@ -78,8 +82,8 @@ public class FilterDialogFragment extends DialogFragment
         });
 
         Spinner basedFilterSpinner = view.findViewById(R.id.based_on_spinner);
-        ArrayAdapter<CharSequence> basedAdapter = new ArrayAdapter<>(view.getContext(),android.R.layout.simple_spinner_item);
-        basedAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        CustomFilterSpinnerAdapter basedAdapter = new CustomFilterSpinnerAdapter(view.getContext(),
+                new ArrayList<>(),getString(R.string.filter_spinner_default_item));
         basedFilterSpinner.setAdapter(basedAdapter);
         basedFilterSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -93,13 +97,9 @@ public class FilterDialogFragment extends DialogFragment
             }
         });
 
-        CharSequence[] ratingList = {"Choose rating","1","2","3","4","5"};
-        CharSequence[] difficultyList = {"Choose difficulty","Easy","Medium","Hard"};
-
         Spinner filterCriteriaSpinner = view.findViewById(R.id.filter_spinner);
-        ArrayAdapter<CharSequence> filterAdapter = ArrayAdapter.createFromResource(view.getContext(),
-                R.array.filter_items, android.R.layout.simple_spinner_item);
-        filterAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        CustomFilterSpinnerAdapter filterAdapter = new CustomFilterSpinnerAdapter(view.getContext(),
+                Arrays.asList(getResources().getStringArray(R.array.filter_items)),getString(R.string.filter_spinner_default_item));
         filterCriteriaSpinner.setAdapter(filterAdapter);
         filterCriteriaSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -107,13 +107,18 @@ public class FilterDialogFragment extends DialogFragment
                 selectedFilterCriteria = position;
                 if(position == 1){
                     basedAdapter.clear();
-                    basedAdapter.addAll(ratingList);
+                    basedAdapter.addAll(getResources().getStringArray(R.array.rating_items));
+                    basedAdapter.setPlaceholderMessage(getString(R.string.rating_spinner_placeholder));
                 }
                 else if(position == 2) {
                     basedAdapter.clear();
-                    basedAdapter.addAll(difficultyList);
+                    basedAdapter.addAll(getResources().getStringArray(R.array.difficulty_items));
+                    basedAdapter.setPlaceholderMessage(getString(R.string.difficulty_spinner_placeholder));
                 }
-                else basedAdapter.clear();
+                else {
+                    basedAdapter.clear();
+                    basedAdapter.setPlaceholderMessage(getString(R.string.empty_based_spinner_placeholder));
+                }
             }
 
             @Override
@@ -123,6 +128,74 @@ public class FilterDialogFragment extends DialogFragment
         });
 
         return builder.create();
+    }
+}
+
+class CustomFilterSpinnerAdapter extends ArrayAdapter<CharSequence> {
+
+    CharSequence placeholderMessage;
+
+    public CustomFilterSpinnerAdapter(Context context, List<CharSequence> items, CharSequence placeholderMessage) {
+        super(context, android.R.layout.simple_spinner_item, items);
+        this.placeholderMessage = placeholderMessage;
+    }
+
+    @Override
+    public View getDropDownView(int position, View convertView, @NonNull ViewGroup parent) {
+        if (position == 0) {
+            return initialSelection(true);
+        }
+        return getCustomView(position, convertView, parent);
+    }
+
+    @NonNull
+    @Override
+    public View getView(int position, View convertView, @NonNull ViewGroup parent) {
+        if (position == 0) {
+            return initialSelection(false);
+        }
+        return getCustomView(position, convertView, parent);
+    }
+
+
+    @Override
+    public int getCount() {
+        return super.getCount() + 1; // Adjust for initial selection item
+    }
+
+    public void setPlaceholderMessage(CharSequence newPlaceholder){
+        placeholderMessage = newPlaceholder;
+    }
+
+    private View initialSelection(boolean dropdown) {
+        // Just an example using a simple TextView. Create whatever default view
+        // to suit your needs, inflating a separate layout if it's cleaner.
+        TextView view = new TextView(getContext());
+        view.setTextSize(16);
+        view.setText(placeholderMessage);
+        int spacing = getContext().getResources().getDimensionPixelSize(R.dimen.text_margin);
+        view.setPadding(17, spacing, 0, spacing);
+
+        if (dropdown) { // Hidden when the dropdown is opened
+            view.setHeight(0);
+        }
+
+        return view;
+    }
+
+    private View getCustomView(int position, View convertView, ViewGroup parent) {
+        // Distinguish "real" spinner items (that can be reused) from initial selection item
+        View row = convertView != null && !(convertView instanceof TextView)
+                ? convertView :
+                LayoutInflater.from(getContext()).inflate(android.R.layout.simple_spinner_dropdown_item, parent, false);
+
+        position = position - 1; // Adjust for initial selection item
+        CharSequence item = getItem(position);
+
+        // ... Resolve views & populate with data ...
+        TextView tRow = (TextView) row;
+        tRow.setText(item);
+        return tRow;
     }
 }
 

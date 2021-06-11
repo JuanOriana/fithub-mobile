@@ -16,6 +16,7 @@ import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.SearchView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
@@ -54,7 +55,7 @@ public class SearchFragment extends Fragment implements FilterDialogListener {
         private String query;
         SearchView searchView;
         public ArrayList<RoutineCardData> extractedRoutines = new ArrayList<>();
-        public ArrayList<RoutineCardData> deletedRoutines = new ArrayList<>();
+        public ArrayList<RoutineCardData> filteredRoutines = new ArrayList<>();
         RoutineCardAdapter adapter;
 
         @RequiresApi(api = Build.VERSION_CODES.Q)
@@ -66,8 +67,7 @@ public class SearchFragment extends Fragment implements FilterDialogListener {
             View root = inflater.inflate(R.layout.fragment_search, container, false);
             setHasOptionsMenu(true);
 
-
-                    extractedRoutines.add(new RoutineCardData(1, "Diácono", "Prueba", 4,
+            extractedRoutines.add(new RoutineCardData(1, "Diácono", "Prueba", 4,
                             "pollo", "https://ep00.epimg.net/elcomidista/imagenes/2020/09/02/articulo/1599041159_343586_1599041590_rrss_normal.jpg", RoutineCardData.EASY_DIFFICULTY));
             extractedRoutines.add(new RoutineCardData(2,"Caballero","Prueba",2,
                     "pollo","https://ep00.epimg.net/elcomidista/imagenes/2020/09/02/articulo/1599041159_343586_1599041590_rrss_normal.jpg", RoutineCardData.MEDIUM_DIFFICULTY));
@@ -115,7 +115,6 @@ public class SearchFragment extends Fragment implements FilterDialogListener {
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
-                Log.d("SEARCHING", query);
                 hideSoftKeyboard(requireActivity());
                 return true;
             }
@@ -139,6 +138,7 @@ public class SearchFragment extends Fragment implements FilterDialogListener {
                 startActivity(i);
                 return true;
             case R.id.filter_menu_item:
+
                 FilterDialogFragment f = new FilterDialogFragment();
                 f.show(getParentFragmentManager(),"FilterFragment");
                 f.setTargetFragment(this,0);
@@ -161,59 +161,60 @@ public class SearchFragment extends Fragment implements FilterDialogListener {
     }
 
     @Override
-    public void onDialogPositiveClick(DialogFragment dialog) {
-       FilterDialogFragment myDialog = (FilterDialogFragment)dialog;
-       extractedRoutines.addAll(deletedRoutines);
-       deletedRoutines.clear();
-       switch (myDialog.selectedFilterCriteria){
-           case RATING: {
-
-               for(RoutineCardData r : extractedRoutines){
-                   if(!r.getRating().equals(myDialog.selectedBasedCriteria))
-                       deletedRoutines.add(r);
+    public void onDialogPositiveClick(int[] dialogState) {
+       int selectedBasedCriteria = dialogState[FilterDialogFragment.BASED_CRITERIA];
+       int selectedFilterCriteria = dialogState[FilterDialogFragment.FILTER_CRITERIA];
+       int selectedSortingCriteria = dialogState[FilterDialogFragment.SORT_CRITERIA];
+       int selectedOrderCriteria = dialogState[FilterDialogFragment.ORDER_CRITERIA];
+       extractedRoutines.addAll(filteredRoutines);
+       filteredRoutines.clear();
+       if(selectedBasedCriteria > 0) {
+           switch (selectedFilterCriteria) {
+               case RATING: {
+                   for (RoutineCardData r : extractedRoutines)
+                       if (!r.getRating().equals(selectedBasedCriteria))
+                           filteredRoutines.add(r);
+                   extractedRoutines.removeIf(routineCardData -> !routineCardData.getRating().equals(selectedBasedCriteria));
+                   break;
                }
-               extractedRoutines.removeIf(routineCardData -> !routineCardData.getRating().equals(myDialog.selectedBasedCriteria));
-               break;
-           }
-           case DIFFICULTY: {
-               for(RoutineCardData r : extractedRoutines){
-                   if(!r.getRating().equals(myDialog.selectedBasedCriteria))
-                       deletedRoutines.add(r);
+               case DIFFICULTY: {
+                   for (RoutineCardData r : extractedRoutines)
+                       if (!r.getRating().equals(selectedBasedCriteria))
+                           filteredRoutines.add(r);
+                   extractedRoutines.removeIf(routineCardData -> !routineCardData.getDifficulty().equals(selectedBasedCriteria));
+                   break;
                }
-               extractedRoutines.removeIf(routineCardData -> !routineCardData.getDifficulty().equals(myDialog.selectedBasedCriteria));
-               break;
+               default:
+                   break;
            }
-           default:
-               break;
        }
-
-       switch (myDialog.selectedSortingCriteria){
+       switch (selectedSortingCriteria){
            case RATING:
-               if(myDialog.selectedOrderCriteria == ORDER_ASC)
+               if(selectedOrderCriteria == ORDER_ASC)
                     extractedRoutines.sort((o1, o2) -> o1.getRating().compareTo(o2.getRating()));
-               else if((myDialog.selectedOrderCriteria == ORDER_DESC))
+               else if((selectedOrderCriteria == ORDER_DESC))
                    extractedRoutines.sort((o1, o2) -> o2.getRating().compareTo(o1.getRating()));
                break;
            case DIFFICULTY:
-               if(myDialog.selectedOrderCriteria == ORDER_ASC)
+               if(selectedOrderCriteria == ORDER_ASC)
                    extractedRoutines.sort((o1, o2) -> o1.getDifficulty().compareTo(o2.getDifficulty()));
-               else if((myDialog.selectedOrderCriteria == ORDER_DESC))
+               else if((selectedOrderCriteria == ORDER_DESC))
                    extractedRoutines.sort((o1, o2) -> o2.getDifficulty().compareTo(o1.getDifficulty()));
                break;
            case SPORT:
-               if(myDialog.selectedOrderCriteria == ORDER_ASC)
+               if(selectedOrderCriteria == ORDER_ASC)
                    extractedRoutines.sort((o1, o2) -> o1.getDifficulty().compareTo(o2.getDifficulty()));
-               else if((myDialog.selectedOrderCriteria == ORDER_DESC))
+               else if((selectedOrderCriteria == ORDER_DESC))
                    extractedRoutines.sort((o1, o2) -> o2.getDifficulty().compareTo(o1.getDifficulty()));
            case CATEGORY:
-               if(myDialog.selectedOrderCriteria == ORDER_ASC)
+               if(selectedOrderCriteria == ORDER_ASC)
                    extractedRoutines.sort((o1, o2) -> o1.getDifficulty().compareTo(o2.getDifficulty()));
-               else if((myDialog.selectedOrderCriteria == ORDER_DESC))
+               else if((selectedOrderCriteria == ORDER_DESC))
                    extractedRoutines.sort((o1, o2) -> o2.getDifficulty().compareTo(o1.getDifficulty()));
            case CREATION_DATE:
-               if(myDialog.selectedOrderCriteria == ORDER_ASC)
+               if(selectedOrderCriteria == ORDER_ASC)
                    extractedRoutines.sort((o1, o2) -> o1.getDifficulty().compareTo(o2.getDifficulty()));
-               else if((myDialog.selectedOrderCriteria == ORDER_DESC))
+               else if((selectedOrderCriteria == ORDER_DESC))
                    extractedRoutines.sort((o1, o2) -> o2.getDifficulty().compareTo(o1.getDifficulty()));
 
            default: break;
@@ -228,6 +229,6 @@ public class SearchFragment extends Fragment implements FilterDialogListener {
 }
 
 interface FilterDialogListener {
-     void onDialogPositiveClick(DialogFragment dialog);
+     void onDialogPositiveClick(int[] dialogState);
      void onDialogNegativeClick(DialogFragment dialog);
 }
