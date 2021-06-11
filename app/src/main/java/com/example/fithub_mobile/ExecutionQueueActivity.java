@@ -14,6 +14,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -26,6 +27,10 @@ import java.util.ArrayList;
 public class ExecutionQueueActivity extends AppCompatActivity {
 
     ArrayList<ExerciseData> exercises = new ArrayList<>();
+    ArrayList<ExerciseData> doneExercises = new ArrayList<>();
+    ExerciseData currentExercise;
+    RecyclerView exerciseContainer;
+    ExerciseAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,18 +42,41 @@ public class ExecutionQueueActivity extends AppCompatActivity {
         exercises.add(new ExerciseData(1,"Diácono","Prueba",4,4,"http://i.imgur.com/DvpvklR.png"));
         exercises.add(new ExerciseData(1,"Diácono","Prueba",4,4,"http://i.imgur.com/DvpvklR.png"));
         exercises.add(new ExerciseData(1,"Diácono","Prueba",4,4,"http://i.imgur.com/DvpvklR.png"));
-        ExerciseData currentExercise = new ExerciseData(1,"Diácono","Prueba",4,4,"http://i.imgur.com/DvpvklR.png");
 
-        setCurrentInfo(currentExercise);
-
-        RecyclerView exerciseContainer = findViewById(R.id.exercise_container);
+        exerciseContainer = findViewById(R.id.exercise_container);
         exerciseContainer.setLayoutManager(new LinearLayoutManager(this));
-        ExerciseAdapter adapter = new ExerciseAdapter(exercises);
+        adapter = new ExerciseAdapter(exercises);
         exerciseContainer.setAdapter(adapter);
 
+        setNextExercise();
+
+        ImageButton nextBtn = findViewById(R.id.next_queue);
+        nextBtn.setOnClickListener(view -> setNextExercise());
 
     }
 
+    private void setNextExercise(){
+        if (exercises.size() == 0)
+            finish();
+        if (currentExercise != null){
+            doneExercises.add(currentExercise);
+        }
+        currentExercise = exercises.remove(0);
+        setCurrentInfo(currentExercise);
+        adapter.notifyDataSetChanged();
+    }
+
+
+//    private void setPrevExercise(){
+//        if (exercises.size() == 0)
+//            finish();
+//        if (currentExercise != null){
+//            doneExercises.add(currentExercise);
+//        }
+//        currentExercise = exercises.remove(0);
+//        setCurrentInfo(currentExercise);
+//        adapter.notifyDataSetChanged();
+//    }
     private void setCurrentInfo(ExerciseData currentExercise){
         View current = this.findViewById(R.id.current_exercise_card);
 
