@@ -28,32 +28,27 @@ import java.util.ArrayList;
 
 public class ExecutionQueueActivity extends AppCompatActivity {
 
-    ArrayList<ExerciseData> exercises = new ArrayList<>();
-    ArrayList<ExerciseData> doneExercises = new ArrayList<>();
-    ExerciseData currentExercise;
-    RecyclerView exerciseContainer;
-    ExerciseAdapter adapter;
-    ProgressBar pgBar;
-
+    private ArrayList<ExerciseData> exercises = new ArrayList<>();
+    private ExerciseAdapter adapter;
+    private ProgressBar pgBar;
+    private ExerciseQueueRealState exerciseQueueRealState;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_execution_queue);
 
-        exercises.add(new ExerciseData(1,"Diácono1","Prueba",4,4,"http://i.imgur.com/DvpvklR.png"));
-        exercises.add(new ExerciseData(1,"Diácono2","Prueba",4,4,"http://i.imgur.com/DvpvklR.png"));
-        exercises.add(new ExerciseData(1,"Diácono3","Prueba",4,4,"http://i.imgur.com/DvpvklR.png"));
-        exercises.add(new ExerciseData(1,"Diácono4","Prueba",4,4,"http://i.imgur.com/DvpvklR.png"));
-        exercises.add(new ExerciseData(1,"Diácono5","Prueba",4,4,"http://i.imgur.com/DvpvklR.png"));
+        exerciseQueueRealState = ExerciseQueueRealState.getInstance();
 
-        exerciseContainer = findViewById(R.id.exercise_container);
+
+        RecyclerView exerciseContainer = findViewById(R.id.exercise_container);
         exerciseContainer.setLayoutManager(new LinearLayoutManager(this));
-        adapter = new ExerciseAdapter(exercises);
+        adapter = new ExerciseAdapter(exerciseQueueRealState.getExercises());
         exerciseContainer.setAdapter(adapter);
 
         pgBar = findViewById(R.id.progressBarQueue);
         pgBar.setProgress(0);
 
+        setPrevExercise();
         setNextExercise();
 
         ImageButton nextBtn = findViewById(R.id.next_queue);
@@ -64,26 +59,20 @@ public class ExecutionQueueActivity extends AppCompatActivity {
     }
 
     private void setNextExercise(){
-        if (exercises.size() == 0) {
+        if (exerciseQueueRealState.setNextExercise() == -1)
             finish();
-            return;
-        }
-        if (currentExercise != null){
-            doneExercises.add(currentExercise);
-        }
-        currentExercise = exercises.remove(0);
-        setCurrentInfo(currentExercise);
+
+        setCurrentInfo(exerciseQueueRealState.getCurrentExercise());
         adapter.notifyDataSetChanged();
         updateProgress();
     }
 
 
     private void setPrevExercise(){
-        if (doneExercises.size() == 0)
+        if (exerciseQueueRealState.setPrevExercise() == -1)
             return;
-        exercises.add(0,currentExercise);
-        currentExercise = doneExercises.remove(doneExercises.size()-1);
-        setCurrentInfo(currentExercise);
+
+        setCurrentInfo(exerciseQueueRealState.getCurrentExercise());
         adapter.notifyDataSetChanged();
         updateProgress();
     }
@@ -107,10 +96,7 @@ public class ExecutionQueueActivity extends AppCompatActivity {
     private void updateProgress(){
         if (pgBar == null)
             return;
-        int nextLen = exercises.size();
-        int doneLen = doneExercises.size();
-        double ratio = doneLen*1.0/(nextLen+doneLen);
-        pgBar.setProgress((int)(ratio*100));
+        pgBar.setProgress((int)(exerciseQueueRealState.ratio()*100));
     }
 
     @Override

@@ -8,7 +8,9 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -19,16 +21,58 @@ import com.example.fithub_mobile.excercise.ExerciseData;
 import com.example.fithub_mobile.ui.search.FilterDialogFragment;
 import com.squareup.picasso.Picasso;
 
+import java.util.ArrayList;
+
 public class ExecutionActivity extends AppCompatActivity {
+
+    private ArrayList<ExerciseData> exercises = new ArrayList<>();
+    private ProgressBar pgBar;
+    private ExerciseQueueRealState exerciseQueueRealState;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_execution);
 
+        exercises.add(new ExerciseData(1,"Diácono1","Prueba",4,4,"http://i.imgur.com/DvpvklR.png"));
+        exercises.add(new ExerciseData(1,"Diácono2","Prueba",4,4,"http://i.imgur.com/DvpvklR.png"));
+        exercises.add(new ExerciseData(1,"Diácono3","Prueba",4,4,"http://i.imgur.com/DvpvklR.png"));
+        exercises.add(new ExerciseData(1,"Diácono4","Prueba",4,4,"http://i.imgur.com/DvpvklR.png"));
+        exercises.add(new ExerciseData(1,"Diácono5","Prueba",4,4,"http://i.imgur.com/DvpvklR.png"));
+
+        exerciseQueueRealState = ExerciseQueueRealState.getInstance();
+        exerciseQueueRealState.setNewRoutine(exercises);
+
         ExerciseData currentExercise = new ExerciseData(1,"Diácono","Prueba",4,4,"http://i.imgur.com/DvpvklR.png");
 
-        setCurrentInfo(currentExercise);
+        pgBar = findViewById(R.id.progressBar);
+        pgBar.setProgress(0);
+
+        setPrevExercise();
+        setNextExercise();
+
+        ImageButton nextBtn = findViewById(R.id.next);
+        nextBtn.setOnClickListener(view -> setNextExercise());
+        ImageButton prevBtn = findViewById(R.id.prev);
+        prevBtn.setOnClickListener(view -> setPrevExercise());
+    }
+
+
+    private void setNextExercise(){
+        if (exerciseQueueRealState.setNextExercise() == -1)
+            finish();
+
+        setCurrentInfo(exerciseQueueRealState.getCurrentExercise());
+        updateProgress();
+    }
+
+
+    private void setPrevExercise(){
+        if (exerciseQueueRealState.setPrevExercise() == -1)
+            return;
+
+        setCurrentInfo(exerciseQueueRealState.getCurrentExercise());
+        updateProgress();
     }
 
     private void setCurrentInfo(ExerciseData currentExercise){
@@ -45,6 +89,12 @@ public class ExecutionActivity extends AppCompatActivity {
 
         ImageView currentImage = current.findViewById(R.id.execution_img);
         Picasso.get().load("https://i.imgur.com/DvpvklR.png").into(currentImage);
+    }
+
+    private void updateProgress(){
+        if (pgBar == null)
+            return;
+        pgBar.setProgress((int)(exerciseQueueRealState.ratio()*100));
     }
 
     @Override
