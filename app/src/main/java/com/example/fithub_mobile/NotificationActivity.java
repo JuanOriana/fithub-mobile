@@ -26,6 +26,8 @@ public class NotificationActivity extends AppCompatActivity {
 
     static final private String CHANNEL_ID = "Routine Notif";
     static final private String DAY_EXTRA = "com.example.fithub_mobile.DAY";
+    static final private String ID_EXTRA = "com.example.fithub_mobile.ID";
+    static final private String ID_PARENT_EXTRA = "com.example.fithub_mobile.ID_PARENT";
     public static final int REQUEST_CODE_NOTIFY = 1;
     private CheckBox[] days;
 
@@ -37,10 +39,12 @@ public class NotificationActivity extends AppCompatActivity {
         setContentView(R.layout.activity_notif);
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            int importance = NotificationManager.IMPORTANCE_DEFAULT;
-            NotificationChannel channel = new NotificationChannel(CHANNEL_ID, CHANNEL_ID, importance);
-            NotificationManager notificationManager = getSystemService(NotificationManager.class);
-            notificationManager.createNotificationChannel(channel);
+            for (int i = 0; i < 7; i++) {
+                int importance = NotificationManager.IMPORTANCE_DEFAULT;
+                NotificationChannel channel = new NotificationChannel(String.valueOf(42+i), String.valueOf(42+i), importance);
+                NotificationManager notificationManager = getSystemService(NotificationManager.class);
+                notificationManager.createNotificationChannel(channel);
+            }
         };
 
         Button cancelBtn = findViewById(R.id.cancel_btn_notif);
@@ -67,6 +71,7 @@ public class NotificationActivity extends AppCompatActivity {
                     calendar.set(Calendar.MINUTE, tp.getMinute());
                     Intent pending = new Intent( this, NotifyHandlerReceiver.class );
                     pending.putExtra(DAY_EXTRA,42+i);
+                    pending.putExtra(ID_EXTRA,getIntent().getIntExtra(ID_PARENT_EXTRA,0));
                     PendingIntent pendingNotifyIntent = PendingIntent.getBroadcast(
                             this,
                             42+i,

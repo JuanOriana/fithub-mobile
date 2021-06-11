@@ -32,7 +32,7 @@
             android:padding="5dp"
             android:paddingStart="15dp"
             android:paddingEnd="15dp"
-            android:textColor="@color/black"
+            android:textColor="@color/fithub_green"
             android:layout_marginBottom="16dp" />
 
         <EditText
@@ -45,7 +45,7 @@
             android:padding="5dp"
             android:paddingStart="15dp"
             android:paddingEnd="15dp"
-            android:textColor="@color/black"
+            android:textColor="@color/fithub_green"
             android:layout_marginBottom="16dp" />
 
         <EditText
@@ -58,7 +58,7 @@
             android:padding="5dp"
             android:paddingStart="15dp"
             android:paddingEnd="15dp"
-            android:textColor="@color/black"
+            android:textColor="@color/fithub_green"
             android:layout_marginBottom="16dp" />
 
         <EditText
@@ -71,7 +71,7 @@
             android:padding="5dp"
             android:paddingStart="15dp"
             android:paddingEnd="15dp"
-            android:textColor="@color/black"
+            android:textColor="@color/fithub_green"
             android:layout_marginBottom="16dp" />
 
         <EditText
@@ -84,7 +84,7 @@
             android:padding="5dp"
             android:paddingStart="15dp"
             android:paddingEnd="15dp"
-            android:textColor="@color/black" />
+            android:textColor="@color/fithub_green" />
 
         <Button
             android:id="@+id/register_btn"
