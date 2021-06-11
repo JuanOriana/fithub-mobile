@@ -9,6 +9,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.QuickContactBadge;
 import android.widget.Spinner;
 import android.widget.TextView;
 
@@ -25,25 +27,18 @@ import java.util.List;
 
 public class FilterDialogFragment extends DialogFragment
 {
-    Integer selectedSortingCriteria;
-    Integer selectedOrderCriteria;
-    Integer selectedFilterCriteria;
-    Integer selectedBasedCriteria;
+    int[] filterState = new int[4];
+    static final int SORT_CRITERIA = 0;
+    static final int ORDER_CRITERIA = 1;
+    static final int FILTER_CRITERIA = 2;
+    static final int BASED_CRITERIA = 3;;
 
     @NotNull
     public Dialog onCreateDialog(Bundle savedInstanceState){
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         LayoutInflater inflater = requireActivity().getLayoutInflater();
         View view = inflater.inflate(R.layout.dialog_filter, null);
-        builder.setMessage(R.string.filter_dialog_title)
-                .setPositiveButton(R.string.save_btn, (dialog, id) -> {
-                    SearchFragment mySF = (SearchFragment) getTargetFragment();
-                    if(mySF != null)
-                    mySF.onDialogPositiveClick(this);
-                })
-                .setNegativeButton("cancelar", (dialog, id) -> {
-                })
-        .setView(view);
+        builder.setView(view).setMessage(R.string.filter_dialog_title);
 
         Spinner sortCriteriaSpinner = view.findViewById(R.id.sort_spinner);
 
@@ -53,7 +48,7 @@ public class FilterDialogFragment extends DialogFragment
         sortCriteriaSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                selectedSortingCriteria = position;
+                filterState[SORT_CRITERIA] = position;
             }
 
             @Override
@@ -72,7 +67,7 @@ public class FilterDialogFragment extends DialogFragment
         sortOrderSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                selectedOrderCriteria = position;
+                filterState[ORDER_CRITERIA] = position;
             }
 
             @Override
@@ -88,7 +83,7 @@ public class FilterDialogFragment extends DialogFragment
         basedFilterSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                selectedBasedCriteria = position;
+                filterState[BASED_CRITERIA] = position;
             }
 
             @Override
@@ -104,7 +99,7 @@ public class FilterDialogFragment extends DialogFragment
         filterCriteriaSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                selectedFilterCriteria = position;
+                filterState[FILTER_CRITERIA] = position;
                 if(position == 1){
                     basedAdapter.clear();
                     basedAdapter.addAll(getResources().getStringArray(R.array.rating_items));
@@ -126,8 +121,20 @@ public class FilterDialogFragment extends DialogFragment
 
             }
         });
+        final AlertDialog filterDialog = builder.create();
+        Button positiveButton  = view.findViewById(R.id.button5);
+        positiveButton.setOnClickListener(v -> {
+            SearchFragment mySF = (SearchFragment) getTargetFragment();
+            if(mySF != null)
+                mySF.onDialogPositiveClick(filterState);
+            filterDialog.dismiss();
+        });
+        Button negativeButton  = view.findViewById(R.id.button4);
+        negativeButton.setOnClickListener(v -> {
+            filterDialog.dismiss();
+        });
 
-        return builder.create();
+        return filterDialog;
     }
 }
 
