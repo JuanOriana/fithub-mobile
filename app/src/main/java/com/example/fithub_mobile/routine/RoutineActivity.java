@@ -27,6 +27,7 @@ import java.util.regex.Pattern;
 public class RoutineActivity extends AppCompatActivity {
 
     public static final String EXTRA_ID = "com.example.fithub_mobile.EXTRA_ID";
+    static final private String ID_PARENT_EXTRA = "com.example.fithub_mobile.ID_PARENT";
     private int id;
 
     @Override
@@ -72,6 +73,7 @@ public class RoutineActivity extends AppCompatActivity {
         ImageButton calendarBtn = findViewById(R.id.calendar_btn);
         calendarBtn.setOnClickListener(view -> {
             Intent i = new Intent(this, NotificationActivity.class);
+            i.putExtra(ID_PARENT_EXTRA,id);
             startActivity(i);
 
         });

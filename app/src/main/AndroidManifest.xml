@@ -22,6 +22,7 @@
         <activity android:name=".ExecutionActivity" />
         <activity
             android:name=".routine.RoutineActivity"
+            android:parentActivityName=".MainActivity"
             android:label="@string/title_activity_routine"
             android:theme="@style/Theme.Fithubmobile.NoActionBar">
 
