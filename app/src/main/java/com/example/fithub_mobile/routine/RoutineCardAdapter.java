@@ -3,6 +3,7 @@ package com.example.fithub_mobile.routine;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,13 +13,18 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
+import android.widget.Toast;
 import android.widget.ToggleButton;
 
 import androidx.annotation.NonNull;
+import androidx.lifecycle.LifecycleOwner;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.fithub_mobile.App;
 import com.example.fithub_mobile.R;
 import com.example.fithub_mobile.backend.models.FullRoutine;
+import com.example.fithub_mobile.repository.Resource;
+import com.example.fithub_mobile.repository.Status;
 import com.google.android.material.button.MaterialButton;
 import com.squareup.picasso.Picasso;
 
@@ -190,6 +196,30 @@ public class RoutineCardAdapter extends RecyclerView.Adapter<RoutineCardAdapter.
 //            i.putExtra(RATING_MESSAGE, rating);
 //            i.putExtra(DESC_MESSAGE, desc);
             holder.getContext().startActivity(i);
+        });
+
+        ToggleButton favBtn = holder.getFavButton();
+        favBtn.setOnCheckedChangeListener((v,isChecked)->{
+            App app = (App)(holder.getContext().getApplicationContext());
+            if (isChecked){
+                app.getFavouriteRepository().addFavourite(routines.get(position).getId()).observe((LifecycleOwner) holder.getContext(), r -> {
+                    if (r.getStatus() == Status.SUCCESS) {
+                        notifyDataSetChanged();
+                        return;
+                    } else {
+                        Resource.defaultResourceHandler(r);
+                    }
+                });
+            }else{
+                app.getFavouriteRepository().deleteFavourite(routines.get(position).getId()).observe((LifecycleOwner) holder.getContext(), r -> {
+                    if (r.getStatus() == Status.SUCCESS) {
+                        notifyDataSetChanged();
+                        return;
+                    } else {
+                        Resource.defaultResourceHandler(r);
+                    }
+                });
+            }
         });
     }
 

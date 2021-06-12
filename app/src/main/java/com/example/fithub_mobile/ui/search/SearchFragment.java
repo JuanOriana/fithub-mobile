@@ -84,30 +84,30 @@ public class SearchFragment extends Fragment implements FilterDialogListener {
 
     public void initRoutines() {
         App app = (App) getActivity().getApplication();
-        app.getRoutineRepository().getRoutines().observe(getViewLifecycleOwner(), r -> {
-            if (r.getStatus() == Status.SUCCESS) {
-                assert r.getData() != null;
-                extractedRoutines.addAll(r.getData().getContent());
-                Log.d("RUTINAS", extractedRoutines.toString());
+        app.getFavouriteRepository().getFavourites().observe(getViewLifecycleOwner(), rfav -> {
+            if (rfav.getStatus() == Status.SUCCESS) {
+                assert rfav.getData() != null;
 
-                app.getFavouriteRepository().getFavourites().observe(getViewLifecycleOwner(), rfav -> {
-                    if (rfav.getStatus() == Status.SUCCESS) {
-                        assert rfav.getData() != null;
+                app.getRoutineRepository().getRoutines().observe(getViewLifecycleOwner(), r -> {
+                    if (r.getStatus() == Status.SUCCESS) {
+                        assert r.getData() != null;
+                        extractedRoutines.addAll(r.getData().getContent());
                         for (FullRoutine routine : extractedRoutines){
                             if (rfav.getData().getContent().contains(routine)) {
                                 routine.setFavourite(true);
                                 adapter.notifyDataSetChanged();
                             }
                         }
+                        Log.d("RUTINAS", extractedRoutines.toString());
+
+                        adapter.notifyDataSetChanged();
+
                     } else {
-                        Resource.defaultResourceHandler(rfav);
+                        Resource.defaultResourceHandler(r);
                     }
                 });
-
-                adapter.notifyDataSetChanged();
-
             } else {
-                Resource.defaultResourceHandler(r);
+                Resource.defaultResourceHandler(rfav);
             }
         });
     }

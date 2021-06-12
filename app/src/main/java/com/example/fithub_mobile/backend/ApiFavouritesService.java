@@ -19,10 +19,10 @@ public interface ApiFavouritesService {
     @GET("favourites")
     LiveData<ApiResponse<PagedList<FullRoutine>>> getFavourites();
 
-    @POST("favourites/{routineId}")
+    @POST("favourites/{routineId}/")
     LiveData<ApiResponse<Void>> addFavourite(@Path("routineId") int routineId);
 
-    @DELETE("favourites/{sportId}")
+    @DELETE("favourites/{routineId}/")
     LiveData<ApiResponse<Void>> deleteFavourite(@Path("routineId") int routineId);
 
 }
