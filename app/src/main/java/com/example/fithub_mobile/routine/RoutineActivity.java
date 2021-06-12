@@ -48,8 +48,12 @@ public class RoutineActivity extends AppCompatActivity {
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         CollapsingToolbarLayout toolBarLayout = findViewById(R.id.toolbar_layout);
-        if (title!=null)
+        if (title != null)
             toolBarLayout.setTitle(title);
+
+        TextView titleView = findViewById(R.id.title_routine);
+        if (desc != null)
+            titleView.setText(title);
 
         RatingBar ratingBar = findViewById(R.id.rating_bar_routine_view);
         ratingBar.setRating(rating);
