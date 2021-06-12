@@ -89,14 +89,35 @@ public class ProfileFragment extends Fragment {
         app.getUserRepository().getUserRoutines().observe(getViewLifecycleOwner(), r -> {
             if (r.getStatus() == Status.SUCCESS) {
                 assert r.getData() != null;
+                TextView routineCount = root.findViewById(R.id.routine_count_val);
+                routineCount.setText(r.getData().getTotalCount().toString());
                 routines.addAll(r.getData().getContent());
                 for (FullRoutine routine : routines){
                     routine.setUser(new PublicUser(1,name.get(),null,userImg.get(),0,0));
                 }
+
+                app.getFavouriteRepository().getFavourites().observe(getViewLifecycleOwner(), rfav -> {
+                    if (rfav.getStatus() == Status.SUCCESS) {
+                        assert rfav.getData() != null;
+                        for (FullRoutine routine : routines){
+                            if (rfav.getData().getContent().contains(routine)) {
+                                routine.setFavourite(true);
+                                adapter.notifyDataSetChanged();
+                            }
+                        }
+                    } else {
+                        Resource.defaultResourceHandler(rfav);
+                    }
+                });
+
+
                 adapter.notifyDataSetChanged();
             } else {
                 Resource.defaultResourceHandler(r);
             }
         });
+
     }
+
+
 }

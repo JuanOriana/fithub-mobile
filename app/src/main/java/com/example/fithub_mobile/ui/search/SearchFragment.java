@@ -89,6 +89,21 @@ public class SearchFragment extends Fragment implements FilterDialogListener {
                 assert r.getData() != null;
                 extractedRoutines.addAll(r.getData().getContent());
                 Log.d("RUTINAS", extractedRoutines.toString());
+
+                app.getFavouriteRepository().getFavourites().observe(getViewLifecycleOwner(), rfav -> {
+                    if (rfav.getStatus() == Status.SUCCESS) {
+                        assert rfav.getData() != null;
+                        for (FullRoutine routine : extractedRoutines){
+                            if (rfav.getData().getContent().contains(routine)) {
+                                routine.setFavourite(true);
+                                adapter.notifyDataSetChanged();
+                            }
+                        }
+                    } else {
+                        Resource.defaultResourceHandler(rfav);
+                    }
+                });
+
                 adapter.notifyDataSetChanged();
 
             } else {

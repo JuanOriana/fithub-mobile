@@ -88,12 +88,28 @@ public class HomeFragment extends Fragment {
             if (r.getStatus() == Status.SUCCESS) {
                 assert r.getData() != null;
                 routines.addAll(r.getData().getContent());
+
+                app.getFavouriteRepository().getFavourites().observe(getViewLifecycleOwner(), rfav -> {
+                    if (rfav.getStatus() == Status.SUCCESS) {
+                        assert rfav.getData() != null;
+                        for (FullRoutine routine : routines){
+                            if (rfav.getData().getContent().contains(routine)) {
+                                routine.setFavourite(true);
+                                adapter.notifyDataSetChanged();
+                            }
+                        }
+                    } else {
+                        Resource.defaultResourceHandler(rfav);
+                    }
+                });
+
                 adapter.notifyDataSetChanged();
 
             } else {
                 Resource.defaultResourceHandler(r);
             }
         });
+
     }
 
 }

@@ -3,6 +3,8 @@ package com.example.fithub_mobile.backend.models;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
+import java.util.Objects;
+
 public class FullRoutine {
 
     @SerializedName("id")
@@ -35,6 +37,8 @@ public class FullRoutine {
     @SerializedName("metadata")
     @Expose
     private Object metadata;
+
+    private boolean isFavourite = false;
 
     /**
      * No args constructor for use in serialization
@@ -69,6 +73,7 @@ public class FullRoutine {
         this.category = category;
         this.metadata = metadata;
     }
+
 
     public int getId() {
         return id;
@@ -150,4 +155,24 @@ public class FullRoutine {
         this.metadata = metadata;
     }
 
+    public boolean isFavourite() {
+        return isFavourite;
+    }
+
+    public void setFavourite(boolean favourite) {
+        isFavourite = favourite;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        FullRoutine that = (FullRoutine) o;
+        return id == that.id;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
+    }
 }

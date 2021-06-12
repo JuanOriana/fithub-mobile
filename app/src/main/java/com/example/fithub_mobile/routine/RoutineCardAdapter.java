@@ -12,6 +12,7 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
+import android.widget.ToggleButton;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -39,6 +40,7 @@ public class RoutineCardAdapter extends RecyclerView.Adapter<RoutineCardAdapter.
         private final TextView userNameView;
         private final ImageView userImgView;
         private final TextView difficulty;
+        private final ToggleButton favButton;
         private Context context;
 
         public ViewHolder(View view) {
@@ -52,7 +54,12 @@ public class RoutineCardAdapter extends RecyclerView.Adapter<RoutineCardAdapter.
             userImgView = view.findViewById(R.id.owner_img);
             difficulty = view.findViewById(R.id.difficulty);
             context = view.getContext();
+            favButton = view.findViewById(R.id.fav_button);
 
+        }
+
+        public ToggleButton getFavButton() {
+            return favButton;
         }
 
         public TextView getTitleView() {
@@ -143,6 +150,7 @@ public class RoutineCardAdapter extends RecyclerView.Adapter<RoutineCardAdapter.
         holder.getDescView().setText(routines.get(position).getDetail());
         holder.getRatingBar().setRating(routines.get(position).getAverageRating());
         holder.getUserNameView().setText(routines.get(position).getUser().getUsername());
+        holder.getFavButton().setChecked(routines.get(position).isFavourite());
         Picasso.get().load(routines.get(position).getUser().getAvatarUrl()).into(holder.getUserImgView());
 //        String text;
 //        switch(routines.get(position).getDifficulty()) {
