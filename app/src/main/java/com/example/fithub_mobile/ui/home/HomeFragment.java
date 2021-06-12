@@ -1,11 +1,16 @@
 package com.example.fithub_mobile.ui.home;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.TextureView;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -14,11 +19,17 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.fithub_mobile.R;
-import com.example.fithub_mobile.excercise.LastlyExecutedExerciseCard;
+import com.example.fithub_mobile.excercise.LastlyExecutedCard;
+import com.example.fithub_mobile.excercise.LastlyExecutedCardData;
+import com.example.fithub_mobile.excercise.LastlyExecutedCardDataManager;
 import com.example.fithub_mobile.routine.RoutineCardAdapter;
 import com.example.fithub_mobile.routine.RoutineCardData;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 
+import java.lang.reflect.Type;
 import java.util.ArrayList;
+import java.util.Objects;
 
 public class HomeFragment extends Fragment {
 
@@ -36,10 +47,21 @@ public class HomeFragment extends Fragment {
         View root = inflater.inflate(R.layout.fragment_home, container, false);
 
         recentContainer = root.findViewById(R.id.recent_container);
-        recentContainer.addView(new LastlyExecutedExerciseCard(root.getContext(),"Hola","Que tal"));
-        recentContainer.addView(new LastlyExecutedExerciseCard(root.getContext(),"Hola","Que tal"));
-        recentContainer.addView(new LastlyExecutedExerciseCard(root.getContext(),"Hola","Que tal"));
-        recentContainer.addView(new LastlyExecutedExerciseCard(root.getContext(),"Hola","Que tal"));
+
+        SharedPreferences sp = requireActivity().getSharedPreferences("lastly_exec", Context.MODE_PRIVATE);
+        String stringedData = sp.getString("lastly_exec_ex","");
+        Gson gson = new Gson();
+        Type type = new TypeToken<LastlyExecutedCardDataManager>() {}.getType();
+        LastlyExecutedCardDataManager lastlyExecManager = gson.fromJson(stringedData,type);
+        if (lastlyExecManager == null){
+            TextView noDataText = new TextView(root.getContext());
+            noDataText.setText("NO HAY EJERCICIOS");
+            recentContainer.addView(noDataText);
+        }
+        else {
+            for (LastlyExecutedCardData item : lastlyExecManager.getData())
+            recentContainer.addView(new LastlyExecutedCard(root.getContext(), item.getTitle(), item.getDescription()));
+        }
 
 
 

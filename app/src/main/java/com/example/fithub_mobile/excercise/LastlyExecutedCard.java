@@ -8,9 +8,9 @@ import com.example.fithub_mobile.R;
 import com.google.android.material.card.MaterialCardView;
 
 
-public class LastlyExecutedExerciseCard extends MaterialCardView {
+public class LastlyExecutedCard extends MaterialCardView {
 
-    public LastlyExecutedExerciseCard(Context context, String title, String description) {
+    public LastlyExecutedCard(Context context, String title, String description) {
         super(context);
         inflate(getContext(), R.layout.lastly_executed_exercise,this);
 

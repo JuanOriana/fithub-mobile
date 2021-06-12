@@ -9,6 +9,9 @@ import android.view.MenuInflater;
 import android.view.View;
 import android.widget.Toast;
 
+import com.example.fithub_mobile.backend.models.Error;
+import com.example.fithub_mobile.repository.Resource;
+import com.example.fithub_mobile.repository.Status;
 import com.example.fithub_mobile.ui.profile.EditProfileFragment;
 import com.example.fithub_mobile.ui.profile.ProfileFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -53,10 +56,33 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void logOut(View view){
-        sp.edit().putBoolean("logged",false).apply();
-        goToLogin();
+
+        App app = (App)getApplication();
+        app.getUserRepository().logout().observe(this, r -> {
+            if (r.getStatus() == Status.SUCCESS) {
+                Log.d("LOGIN", "Funciono");
+                sp.edit().putBoolean("logged",false).apply();
+                goToLogin();
+            } else {
+
+                defaultResourceHandler(r);
+            }
+        });
+
     }
 
+    private void defaultResourceHandler(Resource<?> resource) {
+        switch (resource.getStatus()) {
+            case LOADING:
+                Log.d("LOGIN", "CARGANDO");
+                break;
+            case ERROR:
+                Error error = resource.getError();
+                assert error != null;
+                Log.d("LOGIN", error.getDescription() + error.getCode() + "");
+                break;
+        }
+    }
 
 
 }
