@@ -67,7 +67,8 @@ public class Login extends AppCompatActivity {
                 goToMainActivity();
             } else {
                 defaultResourceHandler(r);
-                Toast.makeText(getApplicationContext(),"Your username/password is not valid",Toast.LENGTH_LONG).show();
+                if (r.getStatus() == Status.ERROR)
+                    Toast.makeText(getApplicationContext(),"Your username/password is not valid",Toast.LENGTH_LONG).show();
             }
         });
 

@@ -27,7 +27,9 @@ import com.example.fithub_mobile.App;
 import com.example.fithub_mobile.Login;
 import com.example.fithub_mobile.R;
 import com.example.fithub_mobile.backend.models.Error;
+import com.example.fithub_mobile.backend.models.FullRoutine;
 import com.example.fithub_mobile.backend.models.FullUser;
+import com.example.fithub_mobile.backend.models.PublicUser;
 import com.example.fithub_mobile.repository.Resource;
 import com.example.fithub_mobile.repository.Status;
 import com.example.fithub_mobile.routine.RoutineCard;
@@ -44,7 +46,7 @@ public class ProfileFragment extends Fragment {
 
     private ProfileViewModel profileViewModel;
     private RecyclerView cardContainer;
-    private ArrayList<RoutineCardData> routines = new ArrayList<>();
+    private ArrayList<FullRoutine> routines = new ArrayList<>();
     private View root;
     private FullUser user;
     SharedPreferences sp;
@@ -62,14 +64,14 @@ public class ProfileFragment extends Fragment {
         Button editButton = root.findViewById(R.id.edit_btn);
         editButton.setOnClickListener(v -> Navigation.findNavController(v).navigate(R.id.action_navigation_profile_to_navigation_editprofile));
 
-        cardContainer = root.findViewById(R.id.cardContainer);
 
-        routines.add(new RoutineCardData(1, "Titulo", "Prueba", 4,
-                "pollo", "https://ep00.epimg.net/elcomidista/imagenes/2020/09/02/articulo/1599041159_343586_1599041590_rrss_normal.jpg", RoutineCardData.HARD_DIFFICULTY));
-        routines.add(new RoutineCardData(2, "Titulo", "Prueba", 5,
-                "pollo", "https://ep00.epimg.net/elcomidista/imagenes/2020/09/02/articulo/1599041159_343586_1599041590_rrss_normal.jpg", RoutineCardData.HARD_DIFFICULTY));
-        routines.add(new RoutineCardData(3, "Titulo", "Prueba", 1,
-                "pollo", "https://ep00.epimg.net/elcomidista/imagenes/2020/09/02/articulo/1599041159_343586_1599041590_rrss_normal.jpg", RoutineCardData.HARD_DIFFICULTY));
+        PublicUser user = new PublicUser(1,"fede","f","https://ep00.epimg.net/elcomidista/imagenes/2020/09/02/articulo/1599041159_343586_1599041590_rrss_normal.jpg",3,3);
+        FullRoutine routine = new FullRoutine(1,"Hola","hola",13213123,4,true,"Advanced",user,null,null);
+
+        routines.add(routine);
+        routines.add(routine);
+        routines.add(routine);
+        routines.add(routine);
 
         cardContainer = root.findViewById(R.id.cardContainer);
         RoutineCardAdapter adapter = new RoutineCardAdapter(routines);

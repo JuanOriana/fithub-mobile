@@ -9,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.TextureView;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -18,14 +19,20 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.fithub_mobile.App;
 import com.example.fithub_mobile.R;
+import com.example.fithub_mobile.backend.models.FullRoutine;
+import com.example.fithub_mobile.backend.models.PublicUser;
 import com.example.fithub_mobile.excercise.LastlyExecutedCard;
 import com.example.fithub_mobile.excercise.LastlyExecutedCardData;
 import com.example.fithub_mobile.excercise.LastlyExecutedCardDataManager;
+import com.example.fithub_mobile.repository.Resource;
+import com.example.fithub_mobile.repository.Status;
 import com.example.fithub_mobile.routine.RoutineCardAdapter;
 import com.example.fithub_mobile.routine.RoutineCardData;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+import com.squareup.picasso.Picasso;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
@@ -36,7 +43,8 @@ public class HomeFragment extends Fragment {
     private HomeViewModel homeViewModel;
     private RecyclerView cardContainer;
     private LinearLayout recentContainer;
-    private ArrayList<RoutineCardData> routines = new ArrayList<>();
+    private RoutineCardAdapter adapter;
+    private ArrayList<FullRoutine> routines = new ArrayList<>();
 
 
     public View onCreateView(@NonNull LayoutInflater inflater,
@@ -64,21 +72,29 @@ public class HomeFragment extends Fragment {
         }
 
 
-
-        routines.add(new RoutineCardData(1,"Titulo","Prueba",4,
-                "pollo","https://ep00.epimg.net/elcomidista/imagenes/2020/09/02/articulo/1599041159_343586_1599041590_rrss_normal.jpg", RoutineCardData.HARD_DIFFICULTY));
-        routines.add(new RoutineCardData(2,"Titulo","Prueba",5,
-                "pollo","https://ep00.epimg.net/elcomidista/imagenes/2020/09/02/articulo/1599041159_343586_1599041590_rrss_normal.jpg", RoutineCardData.HARD_DIFFICULTY));
-        routines.add(new RoutineCardData(3,"Titulo","Prueba",1,
-                "pollo","https://ep00.epimg.net/elcomidista/imagenes/2020/09/02/articulo/1599041159_343586_1599041590_rrss_normal.jpg", RoutineCardData.HARD_DIFFICULTY));
-
         cardContainer = root.findViewById(R.id.cardContainer);
-        RoutineCardAdapter adapter = new RoutineCardAdapter(routines);
+        adapter = new RoutineCardAdapter(routines);
         cardContainer.setLayoutManager(new GridLayoutManager(getContext(),getActivity().getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT ? 1 : 2));
         cardContainer.setAdapter(adapter);
+
+        initRoutines();
         return root;
     }
 
 
+    public void initRoutines() {
+        App app = (App) getActivity().getApplication();
+        app.getRoutineRepository().getRoutines().observe(getViewLifecycleOwner(), r -> {
+            if (r.getStatus() == Status.SUCCESS) {
+                assert r.getData() != null;
+                routines.addAll(r.getData().getContent());
+                Log.d("RUTINAS", routines.toString());
+                adapter.notifyDataSetChanged();
+
+            } else {
+                Resource.defaultResourceHandler(r);
+            }
+        });
+    }
 
 }

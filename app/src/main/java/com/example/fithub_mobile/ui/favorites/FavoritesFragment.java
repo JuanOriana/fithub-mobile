@@ -14,6 +14,9 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.fithub_mobile.R;
+import com.example.fithub_mobile.backend.models.FullRoutine;
+import com.example.fithub_mobile.backend.models.FullUser;
+import com.example.fithub_mobile.backend.models.PublicUser;
 import com.example.fithub_mobile.routine.RoutineCardAdapter;
 import com.example.fithub_mobile.routine.RoutineCardData;
 
@@ -21,7 +24,7 @@ import java.util.ArrayList;
 
 public class FavoritesFragment extends Fragment {
 
-    private ArrayList<RoutineCardData> routines = new ArrayList<>();
+    private ArrayList<FullRoutine> routines = new ArrayList<>();
     private FavoritesViewModel favoritesViewModel;
     private RecyclerView cardContainer;
 
@@ -33,12 +36,13 @@ public class FavoritesFragment extends Fragment {
 
         cardContainer = root.findViewById(R.id.cardContainer);
 
-        routines.add(new RoutineCardData(1,"Titulo","Prueba",4,
-                "pollo","https://ep00.epimg.net/elcomidista/imagenes/2020/09/02/articulo/1599041159_343586_1599041590_rrss_normal.jpg", RoutineCardData.EASY_DIFFICULTY));
-        routines.add(new RoutineCardData(2,"Titulo","Prueba",5,
-                "pollo","https://ep00.epimg.net/elcomidista/imagenes/2020/09/02/articulo/1599041159_343586_1599041590_rrss_normal.jpg", RoutineCardData.MEDIUM_DIFFICULTY));
-        routines.add(new RoutineCardData(3,"Titulo","Prueba",1,
-                "pollo","https://ep00.epimg.net/elcomidista/imagenes/2020/09/02/articulo/1599041159_343586_1599041590_rrss_normal.jpg", RoutineCardData.HARD_DIFFICULTY));
+        PublicUser user = new PublicUser(1,"fede","f","https://ep00.epimg.net/elcomidista/imagenes/2020/09/02/articulo/1599041159_343586_1599041590_rrss_normal.jpg",3,3);
+        FullRoutine routine = new FullRoutine(1,"Hola","hola",13213123,4,true,"Advanced",user,null,null);
+
+        routines.add(routine);
+        routines.add(routine);
+        routines.add(routine);
+        routines.add(routine);
 
         cardContainer = root.findViewById(R.id.cardContainer);
         RoutineCardAdapter adapter = new RoutineCardAdapter(routines);
