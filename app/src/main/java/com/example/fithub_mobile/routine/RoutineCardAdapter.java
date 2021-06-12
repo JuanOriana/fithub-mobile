@@ -204,7 +204,6 @@ public class RoutineCardAdapter extends RecyclerView.Adapter<RoutineCardAdapter.
             if (isChecked){
                 app.getFavouriteRepository().addFavourite(routines.get(position).getId()).observe((LifecycleOwner) holder.getContext(), r -> {
                     if (r.getStatus() == Status.SUCCESS) {
-                        notifyDataSetChanged();
                         return;
                     } else {
                         Resource.defaultResourceHandler(r);
@@ -213,7 +212,6 @@ public class RoutineCardAdapter extends RecyclerView.Adapter<RoutineCardAdapter.
             }else{
                 app.getFavouriteRepository().deleteFavourite(routines.get(position).getId()).observe((LifecycleOwner) holder.getContext(), r -> {
                     if (r.getStatus() == Status.SUCCESS) {
-                        notifyDataSetChanged();
                         return;
                     } else {
                         Resource.defaultResourceHandler(r);
