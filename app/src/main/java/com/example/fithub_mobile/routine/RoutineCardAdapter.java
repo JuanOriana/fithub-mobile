@@ -3,6 +3,7 @@ package com.example.fithub_mobile.routine;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,11 +13,18 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
+import android.widget.Toast;
+import android.widget.ToggleButton;
 
 import androidx.annotation.NonNull;
+import androidx.lifecycle.LifecycleOwner;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.fithub_mobile.App;
 import com.example.fithub_mobile.R;
+import com.example.fithub_mobile.backend.models.FullRoutine;
+import com.example.fithub_mobile.repository.Resource;
+import com.example.fithub_mobile.repository.Status;
 import com.google.android.material.button.MaterialButton;
 import com.squareup.picasso.Picasso;
 
@@ -25,8 +33,8 @@ import java.util.Collection;
 
 public class RoutineCardAdapter extends RecyclerView.Adapter<RoutineCardAdapter.ViewHolder> implements Filterable {
 
-    private ArrayList<RoutineCardData> routines;
-    private ArrayList<RoutineCardData> allRoutines;
+    private ArrayList<FullRoutine> routines;
+    private ArrayList<FullRoutine> allRoutines;
 
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
@@ -38,6 +46,7 @@ public class RoutineCardAdapter extends RecyclerView.Adapter<RoutineCardAdapter.
         private final TextView userNameView;
         private final ImageView userImgView;
         private final TextView difficulty;
+        private final ToggleButton favButton;
         private Context context;
 
         public ViewHolder(View view) {
@@ -51,7 +60,12 @@ public class RoutineCardAdapter extends RecyclerView.Adapter<RoutineCardAdapter.
             userImgView = view.findViewById(R.id.owner_img);
             difficulty = view.findViewById(R.id.difficulty);
             context = view.getContext();
+            favButton = view.findViewById(R.id.fav_button);
 
+        }
+
+        public ToggleButton getFavButton() {
+            return favButton;
         }
 
         public TextView getTitleView() {
@@ -99,12 +113,12 @@ public class RoutineCardAdapter extends RecyclerView.Adapter<RoutineCardAdapter.
     Filter filter  = new Filter() {
         @Override
         protected FilterResults performFiltering(CharSequence constraint) {
-            ArrayList<RoutineCardData> filteredList = new ArrayList<>();
+            ArrayList<FullRoutine> filteredList = new ArrayList<>();
             if(constraint.toString().isEmpty())
                 filteredList.addAll(allRoutines);
             else {
-                for(RoutineCardData routine : allRoutines){
-                    if(routine.getTitle().toLowerCase().contains(constraint.toString().toLowerCase()))
+                for(FullRoutine routine : allRoutines){
+                    if(routine.getName().toLowerCase().contains(constraint.toString().toLowerCase()))
                         filteredList.add(routine);
                 }
             }
@@ -116,12 +130,12 @@ public class RoutineCardAdapter extends RecyclerView.Adapter<RoutineCardAdapter.
         @Override
         protected void publishResults(CharSequence constraint, FilterResults results) {
             routines.clear();
-            routines.addAll((Collection<? extends RoutineCardData>) results.values);
+            routines.addAll((Collection<? extends FullRoutine>) results.values);
             notifyDataSetChanged();
         }
     };
 
-    public RoutineCardAdapter(ArrayList<RoutineCardData> routines){
+    public RoutineCardAdapter(ArrayList<FullRoutine> routines){
 
         this.routines = routines;
         this.allRoutines = new ArrayList<>(routines);
@@ -138,26 +152,27 @@ public class RoutineCardAdapter extends RecyclerView.Adapter<RoutineCardAdapter.
 
     @Override
     public void onBindViewHolder(@NonNull RoutineCardAdapter.ViewHolder holder, int position) {
-        holder.getTitleView().setText(routines.get(position).getTitle());
-        holder.getDescView().setText(routines.get(position).getDesc());
-        holder.getRatingBar().setRating(routines.get(position).getRating());
-        holder.getUserNameView().setText(routines.get(position).getUserName());
-        Picasso.get().load(routines.get(position).getUserImg()).into(holder.getUserImgView());
-        String text;
-        switch(routines.get(position).getDifficulty()) {
-            case RoutineCardData.EASY_DIFFICULTY:
-                text = holder.itemView.getContext().getString(R.string.easy_difficulty);
-                break;
-            case RoutineCardData.MEDIUM_DIFFICULTY:
-                text = holder.itemView.getContext().getString(R.string.medium_difficulty);
-                break;
-            case RoutineCardData.HARD_DIFFICULTY:
-                text = holder.itemView.getContext().getString(R.string.hard_difficulty);
-                break;
-            default:
-                text = "";
-        }
-        holder.getDifficulty().setText(text);
+        holder.getTitleView().setText(routines.get(position).getName());
+        holder.getDescView().setText(routines.get(position).getDetail());
+        holder.getRatingBar().setRating(routines.get(position).getAverageRating());
+        holder.getUserNameView().setText(routines.get(position).getUser().getUsername());
+        holder.getFavButton().setChecked(routines.get(position).isFavourite());
+        Picasso.get().load(routines.get(position).getUser().getAvatarUrl()).into(holder.getUserImgView());
+//        String text;
+//        switch(routines.get(position).getDifficulty()) {
+//            case RoutineCardData.EASY_DIFFICULTY:
+//                text = holder.itemView.getContext().getString(R.string.easy_difficulty);
+//                break;
+//            case RoutineCardData.MEDIUM_DIFFICULTY:
+//                text = holder.itemView.getContext().getString(R.string.medium_difficulty);
+//                break;
+//            case RoutineCardData.HARD_DIFFICULTY:
+//                text = holder.itemView.getContext().getString(R.string.hard_difficulty);
+//                break;
+//            default:
+//                text = "";
+//        }
+        holder.getDifficulty().setText(routines.get(position).getDifficulty());
 
         //Sharing
         ImageButton shareBtn = holder.getShareBtn();
@@ -181,6 +196,28 @@ public class RoutineCardAdapter extends RecyclerView.Adapter<RoutineCardAdapter.
 //            i.putExtra(RATING_MESSAGE, rating);
 //            i.putExtra(DESC_MESSAGE, desc);
             holder.getContext().startActivity(i);
+        });
+
+        ToggleButton favBtn = holder.getFavButton();
+        favBtn.setOnCheckedChangeListener((v,isChecked)->{
+            App app = (App)(holder.getContext().getApplicationContext());
+            if (isChecked){
+                app.getFavouriteRepository().addFavourite(routines.get(position).getId()).observe((LifecycleOwner) holder.getContext(), r -> {
+                    if (r.getStatus() == Status.SUCCESS) {
+                        return;
+                    } else {
+                        Resource.defaultResourceHandler(r);
+                    }
+                });
+            }else{
+                app.getFavouriteRepository().deleteFavourite(routines.get(position).getId()).observe((LifecycleOwner) holder.getContext(), r -> {
+                    if (r.getStatus() == Status.SUCCESS) {
+                        return;
+                    } else {
+                        Resource.defaultResourceHandler(r);
+                    }
+                });
+            }
         });
     }
 

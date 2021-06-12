@@ -88,12 +88,13 @@ public class EditProfileFragment extends Fragment {
         app.getUserRepository().editCurrentUser(user).observe(getViewLifecycleOwner(), r -> {
             if (r.getStatus() == Status.SUCCESS) {
                 Navigation.findNavController(view).navigate(R.id.action_navigation_editprofile_to_navigation_profile);
-                Toast.makeText(getActivity().getApplicationContext(),"Profile edited sucessfully",Toast.LENGTH_LONG).show();
+                Toast.makeText(getContext(),"Profile edited sucessfully",Toast.LENGTH_LONG).show();
 
             } else {
                 Resource.defaultResourceHandler(r);
                 Navigation.findNavController(view).navigate(R.id.action_navigation_editprofile_to_navigation_profile);
-                Toast.makeText(getActivity().getApplicationContext(),"Something went wrong editing your profile",Toast.LENGTH_LONG).show();
+                if (r.getStatus() == Status.ERROR)
+                    Toast.makeText(getContext(),"Something went wrong editing your profile",Toast.LENGTH_LONG).show();
             }
         });
 

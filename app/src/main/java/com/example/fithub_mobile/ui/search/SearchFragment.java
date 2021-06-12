@@ -29,8 +29,13 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.fithub_mobile.App;
 import com.example.fithub_mobile.QrScanner;
 import com.example.fithub_mobile.R;
+import com.example.fithub_mobile.backend.models.FullRoutine;
+import com.example.fithub_mobile.backend.models.PublicUser;
+import com.example.fithub_mobile.repository.Resource;
+import com.example.fithub_mobile.repository.Status;
 import com.example.fithub_mobile.routine.RoutineCard;
 import com.example.fithub_mobile.routine.RoutineCardAdapter;
 import com.example.fithub_mobile.routine.RoutineCardData;
@@ -54,8 +59,8 @@ public class SearchFragment extends Fragment implements FilterDialogListener {
         private RecyclerView cardContainer;
         private String query;
         SearchView searchView;
-        public ArrayList<RoutineCardData> extractedRoutines = new ArrayList<>();
-        public ArrayList<RoutineCardData> filteredRoutines = new ArrayList<>();
+        public ArrayList<FullRoutine> extractedRoutines = new ArrayList<>();
+        public ArrayList<FullRoutine> filteredRoutines = new ArrayList<>();
         RoutineCardAdapter adapter;
 
         @RequiresApi(api = Build.VERSION_CODES.Q)
@@ -67,24 +72,45 @@ public class SearchFragment extends Fragment implements FilterDialogListener {
             View root = inflater.inflate(R.layout.fragment_search, container, false);
             setHasOptionsMenu(true);
 
-            extractedRoutines.add(new RoutineCardData(1, "Diácono", "Prueba", 4,
-                            "pollo", "https://ep00.epimg.net/elcomidista/imagenes/2020/09/02/articulo/1599041159_343586_1599041590_rrss_normal.jpg", RoutineCardData.EASY_DIFFICULTY));
-            extractedRoutines.add(new RoutineCardData(2,"Caballero","Prueba",2,
-                    "pollo","https://ep00.epimg.net/elcomidista/imagenes/2020/09/02/articulo/1599041159_343586_1599041590_rrss_normal.jpg", RoutineCardData.MEDIUM_DIFFICULTY));
-            extractedRoutines.add(new RoutineCardData(3,"Titán","Prueba",1,
-                    "pollo","https://ep00.epimg.net/elcomidista/imagenes/2020/09/02/articulo/1599041159_343586_1599041590_rrss_normal.jpg", RoutineCardData.HARD_DIFFICULTY));
-            extractedRoutines.add(new RoutineCardData(4,"Terminator","Prueba",5,
-                    "pollo","https://ep00.epimg.net/elcomidista/imagenes/2020/09/02/articulo/1599041159_343586_1599041590_rrss_normal.jpg", RoutineCardData.EASY_DIFFICULTY));
-            extractedRoutines.add(new RoutineCardData(1,"Diaccordo","Prueba",3,
-                    "pollo","https://ep00.epimg.net/elcomidista/imagenes/2020/09/02/articulo/1599041159_343586_1599041590_rrss_normal.jpg", RoutineCardData.MEDIUM_DIFFICULTY));
-
             cardContainer = root.findViewById(R.id.cardContainer);
             cardContainer.setLayoutManager(new GridLayoutManager(getContext(),getActivity().getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT ? 1 : 2));
             adapter = new RoutineCardAdapter(extractedRoutines);
             cardContainer.setAdapter(adapter);
 
+            initRoutines();
+
             return root;
         }
+
+    public void initRoutines() {
+        App app = (App) getActivity().getApplication();
+        app.getFavouriteRepository().getFavourites().observe(getViewLifecycleOwner(), rfav -> {
+            if (rfav.getStatus() == Status.SUCCESS) {
+                assert rfav.getData() != null;
+
+                app.getRoutineRepository().getRoutines().observe(getViewLifecycleOwner(), r -> {
+                    if (r.getStatus() == Status.SUCCESS) {
+                        assert r.getData() != null;
+                        extractedRoutines.addAll(r.getData().getContent());
+                        for (FullRoutine routine : extractedRoutines){
+                            if (rfav.getData().getContent().contains(routine)) {
+                                routine.setFavourite(true);
+                                adapter.notifyDataSetChanged();
+                            }
+                        }
+                        Log.d("RUTINAS", extractedRoutines.toString());
+
+                        adapter.notifyDataSetChanged();
+
+                    } else {
+                        Resource.defaultResourceHandler(r);
+                    }
+                });
+            } else {
+                Resource.defaultResourceHandler(rfav);
+            }
+        });
+    }
 
 
     @Override
@@ -171,15 +197,15 @@ public class SearchFragment extends Fragment implements FilterDialogListener {
        if(selectedBasedCriteria > 0) {
            switch (selectedFilterCriteria) {
                case RATING: {
-                   for (RoutineCardData r : extractedRoutines)
-                       if (!r.getRating().equals(selectedBasedCriteria))
+                   for (FullRoutine r : extractedRoutines)
+                       if (!(r.getAverageRating() == selectedBasedCriteria))
                            filteredRoutines.add(r);
-                   extractedRoutines.removeIf(routineCardData -> !routineCardData.getRating().equals(selectedBasedCriteria));
+                   extractedRoutines.removeIf(routineCardData -> !(routineCardData.getAverageRating() == (selectedBasedCriteria)));
                    break;
                }
                case DIFFICULTY: {
-                   for (RoutineCardData r : extractedRoutines)
-                       if (!r.getRating().equals(selectedBasedCriteria))
+                   for (FullRoutine r : extractedRoutines)
+                       if (!r.getDifficulty().equals(selectedBasedCriteria))
                            filteredRoutines.add(r);
                    extractedRoutines.removeIf(routineCardData -> !routineCardData.getDifficulty().equals(selectedBasedCriteria));
                    break;
@@ -191,9 +217,9 @@ public class SearchFragment extends Fragment implements FilterDialogListener {
        switch (selectedSortingCriteria){
            case RATING:
                if(selectedOrderCriteria == ORDER_ASC)
-                    extractedRoutines.sort((o1, o2) -> o1.getRating().compareTo(o2.getRating()));
+                    extractedRoutines.sort((o1, o2) -> o1.getAverageRating() - o2.getAverageRating());
                else if((selectedOrderCriteria == ORDER_DESC))
-                   extractedRoutines.sort((o1, o2) -> o2.getRating().compareTo(o1.getRating()));
+                   extractedRoutines.sort((o1, o2) -> o2.getAverageRating() - o1.getAverageRating());
                break;
            case DIFFICULTY:
                if(selectedOrderCriteria == ORDER_ASC)

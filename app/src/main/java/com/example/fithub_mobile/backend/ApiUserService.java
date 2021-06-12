@@ -4,7 +4,9 @@ import androidx.lifecycle.LiveData;
 
 
 import com.example.fithub_mobile.backend.models.Credentials;
+import com.example.fithub_mobile.backend.models.FullRoutine;
 import com.example.fithub_mobile.backend.models.FullUser;
+import com.example.fithub_mobile.backend.models.PagedList;
 import com.example.fithub_mobile.backend.models.Token;
 
 import retrofit2.http.Body;
@@ -22,6 +24,9 @@ public interface ApiUserService {
 
     @GET("users/current")
     LiveData<ApiResponse<FullUser>> getCurrentUser();
+
+    @GET("users/current/routines/")
+    LiveData<ApiResponse<PagedList<FullRoutine>>> getUserRoutines();
 
     @PUT("users/current")
     LiveData<ApiResponse<FullUser>> editCurrentUser(@Body FullUser user);
