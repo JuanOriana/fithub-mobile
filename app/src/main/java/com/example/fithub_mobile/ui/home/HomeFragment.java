@@ -88,7 +88,6 @@ public class HomeFragment extends Fragment {
             if (r.getStatus() == Status.SUCCESS) {
                 assert r.getData() != null;
                 routines.addAll(r.getData().getContent());
-                Log.d("RUTINAS", routines.toString());
                 adapter.notifyDataSetChanged();
 
             } else {
