@@ -6,9 +6,11 @@ import android.os.Bundle;
 import com.example.fithub_mobile.CycleData;
 import com.example.fithub_mobile.CycleDisplay;
 import com.example.fithub_mobile.ExecutionActivity;
+import com.example.fithub_mobile.ExerciseQueueRealState;
 import com.example.fithub_mobile.NotificationActivity;
 import com.example.fithub_mobile.QrGenActivity;
 import com.example.fithub_mobile.R;
+import com.example.fithub_mobile.excercise.ExerciseData;
 import com.google.android.material.appbar.CollapsingToolbarLayout;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
@@ -21,6 +23,7 @@ import android.widget.LinearLayout;
 import android.widget.RatingBar;
 import android.widget.TextView;
 
+import java.util.ArrayList;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -80,6 +83,15 @@ public class RoutineActivity extends AppCompatActivity {
     }
 
     public void startExecution(){
+        ArrayList<ExerciseData> exercises = new ArrayList<>();
+        exercises.add(new ExerciseData(1,"Diácono1","Prueba",4,4,"http://i.imgur.com/DvpvklR.png"));
+        exercises.add(new ExerciseData(1,"Diácono2","Prueba",4,4,"http://i.imgur.com/DvpvklR.png"));
+        exercises.add(new ExerciseData(1,"Diácono3","Prueba",4,4,"http://i.imgur.com/DvpvklR.png"));
+        exercises.add(new ExerciseData(1,"Diácono4","Prueba",4,4,"http://i.imgur.com/DvpvklR.png"));
+        exercises.add(new ExerciseData(1,"Diácono5","Prueba",4,4,"http://i.imgur.com/DvpvklR.png"));
+
+        ExerciseQueueRealState exerciseQueueRealState = ExerciseQueueRealState.getInstance();
+        exerciseQueueRealState.setNewRoutine(exercises);
         Intent i = new Intent(this, ExecutionActivity.class);
         startActivity(i);
     }
