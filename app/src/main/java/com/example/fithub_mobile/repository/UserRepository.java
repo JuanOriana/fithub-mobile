@@ -51,4 +51,15 @@ public class UserRepository {
             }
         }.asLiveData();
     }
+
+    public LiveData<Resource<FullUser>> editCurrentUser(FullUser user) {
+        return new NetworkBoundResource<FullUser, FullUser>()
+        {
+            @NonNull
+            @Override
+            protected LiveData<ApiResponse<FullUser>> createCall() {
+                return apiService.editCurrentUser(user);
+            }
+        }.asLiveData();
+    }
 }

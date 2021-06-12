@@ -6,6 +6,7 @@ import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.util.Patterns;
 import android.view.MotionEvent;
 import android.view.View;
@@ -13,6 +14,10 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.fithub_mobile.backend.models.Credentials;
+import com.example.fithub_mobile.backend.models.Error;
+import com.example.fithub_mobile.repository.Resource;
+import com.example.fithub_mobile.repository.Status;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 
 public class Login extends AppCompatActivity {
@@ -51,12 +56,22 @@ public class Login extends AppCompatActivity {
             toast.show();
             return;
         }
-        sp.edit().putBoolean("logged",true)
-                .putString("email",email)
-                .putString("firstname","John")
-                .putString("lastname", "Doe")
-                .apply();
-        goToMainActivity();
+
+        Credentials credentials = new Credentials(email, pass);
+        App app = (App)getApplication();
+        app.getUserRepository().login(credentials).observe(this, r -> {
+            if (r.getStatus() == Status.SUCCESS) {
+                Log.d("LOGIN", "Funciono");
+                app.getPreferences().setAuthToken(r.getData().getToken());
+                sp.edit().putBoolean("logged",true).apply();
+                goToMainActivity();
+            } else {
+                defaultResourceHandler(r);
+                Toast.makeText(getApplicationContext(),"Your username/password is not valid",Toast.LENGTH_LONG).show();
+            }
+        });
+
+
     }
 
     public void goToMainActivity(){
@@ -69,5 +84,18 @@ public class Login extends AppCompatActivity {
         Intent i = new Intent(this, Register.class);
         startActivity(i);
         finish();
+    }
+
+    private void defaultResourceHandler(Resource<?> resource) {
+        switch (resource.getStatus()) {
+            case LOADING:
+                Log.d("LOGIN", "CARGANDO");
+                break;
+            case ERROR:
+                Error error = resource.getError();
+                assert error != null;
+                Log.d("LOGIN", error.getDescription() + error.getCode() + "");
+                break;
+        }
     }
 }

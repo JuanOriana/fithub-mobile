@@ -1,6 +1,8 @@
 package com.example.fithub_mobile.repository;
 
 
+import android.util.Log;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
@@ -55,4 +57,19 @@ public class Resource<T> {
     public static <T> Resource<T> loading(@Nullable T data) {
         return new Resource<>(LOADING, data, null);
     }
+
+    public static void defaultResourceHandler(Resource<?> resource) {
+        switch (resource.getStatus()) {
+            case LOADING:
+                Log.d("LOGIN", "CARGANDO");
+                break;
+            case ERROR:
+                Error error = resource.getError();
+                assert error != null;
+                Log.d("LOGIN", error.getDescription() + error.getCode() + "");
+                break;
+        }
+    }
 }
+
+

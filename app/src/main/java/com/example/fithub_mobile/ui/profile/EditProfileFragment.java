@@ -8,42 +8,43 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.Navigation;
 
+import android.util.Log;
 import android.util.Patterns;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.fithub_mobile.App;
 import com.example.fithub_mobile.R;
+import com.example.fithub_mobile.backend.models.FullUser;
+import com.example.fithub_mobile.repository.Resource;
+import com.example.fithub_mobile.repository.Status;
+import com.squareup.picasso.Picasso;
 
 public class EditProfileFragment extends Fragment {
 
     private EditProfileViewModel editProfileViewModel;
     EditText fnView, lnView, emailView;
-    SharedPreferences sp;
+    FullUser user;
+    View root;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
 
         editProfileViewModel =  new ViewModelProvider(this).get(EditProfileViewModel.class);
 
-        sp = getContext().getSharedPreferences("login",getContext().MODE_PRIVATE);
 
-        View root = inflater.inflate(R.layout.fragment_edit_profile, container, false);
+        root = inflater.inflate(R.layout.fragment_edit_profile, container, false);
 
-        fnView = root.findViewById(R.id.editTextFirstName);
-        fnView.setText(sp.getString("firstname", "First Name"));
+        getUserData();
 
-        lnView = root.findViewById(R.id.editTextLastName);
-        lnView.setText(sp.getString("lastname", "Last Name"));
-
-        emailView = root.findViewById(R.id.editTextEmail);
-        emailView.setText(sp.getString("email", "Email"));
-
-        Button cancelBtn = (Button) root.findViewById(R.id.cancel_btn);
-        Button saveBtn = (Button) root.findViewById(R.id.save_btn);
+        Button cancelBtn = root.findViewById(R.id.cancel_btn);
+        Button saveBtn = root.findViewById(R.id.save_btn);
 
         cancelBtn.setOnClickListener(v->{
             Navigation.findNavController(v).navigate(R.id.action_navigation_editprofile_to_navigation_profile);
@@ -51,7 +52,6 @@ public class EditProfileFragment extends Fragment {
 
         saveBtn.setOnClickListener(v->{
             saveChanges(v);
-            Navigation.findNavController(v).navigate(R.id.action_navigation_editprofile_to_navigation_profile);
         });
 
 
@@ -60,18 +60,11 @@ public class EditProfileFragment extends Fragment {
 
     public void saveChanges(View view) {
 
-        SharedPreferences sp = getContext().getSharedPreferences("login",getContext().MODE_PRIVATE);
-
-        String email = emailView.getText().toString();
         String fn = fnView.getText().toString();
         String ln = lnView.getText().toString();
 
         boolean error = false;
 
-        if (!Patterns.EMAIL_ADDRESS.matcher(email).matches() || email.trim().length() == 0){
-            error = true;
-            emailView.setError("The email is not valid");
-        }
 
         if (fn.trim().length() == 0){
             error = true;
@@ -88,9 +81,43 @@ public class EditProfileFragment extends Fragment {
             toast.show();
             return;
         }
+        user.setFirstName(fn);
+        user.setLastName(ln);
 
-        SharedPreferences.Editor editor = sp.edit();
-        editor.putString("firstname", fn).putString("lastname", ln).putString("email", email);
+        App app = (App) getActivity().getApplication();
+        app.getUserRepository().editCurrentUser(user).observe(getViewLifecycleOwner(), r -> {
+            if (r.getStatus() == Status.SUCCESS) {
+                Navigation.findNavController(view).navigate(R.id.action_navigation_editprofile_to_navigation_profile);
+                Toast.makeText(getActivity().getApplicationContext(),"Profile edited sucessfully",Toast.LENGTH_LONG).show();
+
+            } else {
+                Resource.defaultResourceHandler(r);
+                Navigation.findNavController(view).navigate(R.id.action_navigation_editprofile_to_navigation_profile);
+                Toast.makeText(getActivity().getApplicationContext(),"Something went wrong editing your profile",Toast.LENGTH_LONG).show();
+            }
+        });
+
+
+    }
+
+    public void getUserData() {
+        App app = (App) getActivity().getApplication();
+        app.getUserRepository().getCurrentUser().observe(getViewLifecycleOwner(), r -> {
+            if (r.getStatus() == Status.SUCCESS) {
+                user = r.getData();
+                fnView = root.findViewById(R.id.editTextFirstName);
+                fnView.setText(user.getFirstName());
+
+                lnView = root.findViewById(R.id.editTextLastName);
+                lnView.setText(user.getLastName());
+
+                ImageView userImg = root.findViewById(R.id.userImg);
+                Picasso.get().load(user.getAvatarUrl()).into(userImg);
+
+            } else {
+                Resource.defaultResourceHandler(r);
+            }
+        });
     }
 
 }

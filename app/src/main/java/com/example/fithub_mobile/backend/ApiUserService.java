@@ -10,8 +10,10 @@ import com.example.fithub_mobile.backend.models.Token;
 import retrofit2.http.Body;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
+import retrofit2.http.PUT;
 
 public interface ApiUserService {
+
     @POST("users/login")
     LiveData<ApiResponse<Token>> login(@Body Credentials credentials);
 
@@ -20,4 +22,8 @@ public interface ApiUserService {
 
     @GET("users/current")
     LiveData<ApiResponse<FullUser>> getCurrentUser();
+
+    @PUT("users/current")
+    LiveData<ApiResponse<FullUser>> editCurrentUser(@Body FullUser user);
+
 }
