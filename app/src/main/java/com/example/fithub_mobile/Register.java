@@ -6,12 +6,18 @@ import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.util.Patterns;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.example.fithub_mobile.backend.models.Credentials;
+import com.example.fithub_mobile.backend.models.RegisterCredentials;
+import com.example.fithub_mobile.repository.Resource;
+import com.example.fithub_mobile.repository.Status;
 
 
 public class Register extends AppCompatActivity {
@@ -72,12 +78,17 @@ public class Register extends AppCompatActivity {
             return;
         }
 
-        sp.edit().putBoolean("logged",true)
-                .putString("email",email)
-                .putString("firstname",fn)
-                .putString("lastname", ln)
-                .apply();
-        goToMainActivity();
+        RegisterCredentials credentials = new RegisterCredentials(email,pass,fn,ln,email,"https://png.pngitem.com/pimgs/s/421-4213053_default-avatar-icon-hd-png-download.png");
+        App app = (App)getApplication();
+        app.getUserRepository().register(credentials).observe(this, r -> {
+            if (r.getStatus() == Status.SUCCESS) {
+                Toast.makeText(getApplicationContext(),"Register successful. Please confirm your email to proceed.",Toast.LENGTH_LONG).show();
+            } else {
+                Resource.defaultResourceHandler(r);
+                if (r.getStatus() == Status.ERROR)
+                    Toast.makeText(getApplicationContext(),"This account exist already",Toast.LENGTH_LONG).show();
+            }
+        });
     }
 
     public void goToMainActivity(){
