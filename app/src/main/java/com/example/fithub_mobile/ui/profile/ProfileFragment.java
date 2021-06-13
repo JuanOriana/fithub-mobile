@@ -1,5 +1,6 @@
 package com.example.fithub_mobile.ui.profile;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -72,6 +73,7 @@ public class ProfileFragment extends Fragment {
         requireActivity().finish();
     }
 
+    @SuppressLint("SetTextI18n")
     public void getUserData() {
         App app = (App) getActivity().getApplication();
         AtomicReference<String> name = new AtomicReference<>();
@@ -93,9 +95,13 @@ public class ProfileFragment extends Fragment {
         app.getFavouriteRepository().getFavourites().observe(getViewLifecycleOwner(), rfav -> {
             if (rfav.getStatus() == Status.SUCCESS) {
                 assert rfav.getData() != null;
+                TextView favCount = root.findViewById(R.id.fav_count_val);
+                favCount.setText(rfav.getData().getTotalCount().toString());
 
                 app.getUserRepository().getUserRoutines().observe(getViewLifecycleOwner(), r -> {
                     if (r.getStatus() == Status.SUCCESS) {
+                        TextView routCount = root.findViewById(R.id.routine_count_val);
+                        routCount.setText(r.getData().getTotalCount().toString());
                         assert r.getData() != null;
                         routines.addAll(r.getData().getContent());
                         for (FullRoutine routine : routines){
