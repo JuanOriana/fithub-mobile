@@ -50,8 +50,8 @@ public class ExecutionQueueActivity extends AppCompatActivity {
         pgBar = findViewById(R.id.progressBarQueue);
         pgBar.setProgress(0);
 
-        setPrevExercise();
-        setNextExercise();
+        setCurrentInfo(exerciseQueueRealState.getCurrentExercise());
+        updateProgress();
 
         ImageButton nextBtn = findViewById(R.id.next_queue);
         nextBtn.setOnClickListener(view -> setNextExercise());
