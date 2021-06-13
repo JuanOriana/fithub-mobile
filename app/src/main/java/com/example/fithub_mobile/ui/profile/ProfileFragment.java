@@ -1,6 +1,7 @@
 package com.example.fithub_mobile.ui.profile;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -40,6 +41,7 @@ public class ProfileFragment extends Fragment {
     private View root;
     private FullUser user;
     RoutineCardAdapter adapter;
+    SharedPreferences sp;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -48,6 +50,8 @@ public class ProfileFragment extends Fragment {
                 new ViewModelProvider(this).get(ProfileViewModel.class);
 
         root = inflater.inflate(R.layout.fragment_profile, container, false);
+
+        sp = getContext().getSharedPreferences("login", 0);
 
         Button editButton = root.findViewById(R.id.edit_btn);
         editButton.setOnClickListener(v -> Navigation.findNavController(v).navigate(R.id.action_navigation_profile_to_navigation_editprofile));
@@ -90,13 +94,13 @@ public class ProfileFragment extends Fragment {
             if (rfav.getStatus() == Status.SUCCESS) {
                 assert rfav.getData() != null;
 
-                app.getRoutineRepository().getRoutines().observe(getViewLifecycleOwner(), r -> {
+                app.getUserRepository().getUserRoutines().observe(getViewLifecycleOwner(), r -> {
                     if (r.getStatus() == Status.SUCCESS) {
                         assert r.getData() != null;
                         routines.addAll(r.getData().getContent());
                         for (FullRoutine routine : routines){
+                            routine.setUser(new PublicUser(1,name.get(),null,userImg.get(),0,0));
                             if (rfav.getData().getContent().contains(routine)) {
-                                routine.setUser(new PublicUser(1,name.get(),null,userImg.get(),0,0));
                                 routine.setFavourite(true);
                             }
                         }
@@ -112,6 +116,22 @@ public class ProfileFragment extends Fragment {
         });
 
 
+
+    }
+
+    public void logOut(View view){
+
+        App app = (App)getContext().getApplicationContext();
+        app.getUserRepository().logout().observe(this, r -> {
+            if (r.getStatus() == Status.SUCCESS) {
+                Log.d("LOGIN", "Funciono");
+                sp.edit().putBoolean("logged",false).apply();
+                goToLogin();
+            } else {
+
+                Resource.defaultResourceHandler(r);
+            }
+        });
 
     }
 
