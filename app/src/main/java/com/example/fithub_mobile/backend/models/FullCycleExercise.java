@@ -4,7 +4,7 @@ package com.example.fithub_mobile.backend.models;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class FullCycleExercise {
+public class FullCycleExercise implements Comparable<FullCycleExercise> {
 
     @SerializedName("exercise")
     @Expose
@@ -21,6 +21,8 @@ public class FullCycleExercise {
     @SerializedName("metadata")
     @Expose
     private Object metadata;
+
+    private FullCycle cycle;
 
     /**
      * No args constructor for use in serialization
@@ -86,4 +88,21 @@ public class FullCycleExercise {
         this.metadata = metadata;
     }
 
+    public FullCycle getCycle() {
+        return cycle;
+    }
+
+    public void setCycle(FullCycle cycle) {
+        this.cycle = cycle;
+    }
+
+    @Override
+    public int compareTo(FullCycleExercise o) {
+        if (this.cycle != null && o.cycle != null){
+            int c= this.cycle.getOrder() - o.cycle.getOrder();
+            if (c!=0)
+                return c;
+        }
+        return this.getOrder() - o.getOrder();
+    }
 }

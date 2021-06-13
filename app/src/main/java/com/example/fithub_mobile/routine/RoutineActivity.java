@@ -38,6 +38,8 @@ import android.widget.Toast;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -124,17 +126,24 @@ public class RoutineActivity extends AppCompatActivity {
                     app.getCycleRepository().getCycleExercises(cycle.getId()).observe(this, rEx -> {
                         if (rEx.getStatus() == Status.SUCCESS) {
                             assert rEx.getData() != null;
+                            exerciseQueueRealState.addCycle();
                             List<FullCycleExercise> cycleExercises = rEx.getData().getContent();
+                            for (FullCycleExercise ex : cycleExercises)
+                                ex.setCycle(cycle);
                             for (int i = 0; i < cycle.getRepetitions(); i ++)
                                 exerciseQueueRealState.getExercises().addAll(cycleExercises);
+
+                            if (exerciseQueueRealState.getCycleCount() == cycles.size()){
+                                Collections.sort(exerciseQueueRealState.getExercises());
+                                Intent i = new Intent(this, ExecutionActivity.class);
+                                startActivity(i);
+                            }
 
                         } else {
                             Resource.defaultResourceHandler(rEx);
                         }
                     });
                 }
-                Intent i = new Intent(this, ExecutionActivity.class);
-                startActivity(i);
             } else {
                 Resource.defaultResourceHandler(r);
             }

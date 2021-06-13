@@ -68,7 +68,7 @@ public class HomeFragment extends Fragment {
         }
         else {
             for (LastlyExecutedCardData item : lastlyExecManager.getData())
-            recentContainer.addView(new LastlyExecutedCard(root.getContext(), item.getTitle(), item.getDescription()));
+            recentContainer.addView(new LastlyExecutedCard(root.getContext(),item.getId(), item.getTitle(), item.getDescription()));
         }
 
 

@@ -13,6 +13,7 @@ public class ExerciseQueueRealState
     private ArrayList<FullCycleExercise> exercises = new ArrayList<>();
     private ArrayList<FullCycleExercise> doneExercises = new ArrayList<>();
     private FullCycleExercise currentExercise = null;
+    int cycleCount = 0;
 
     public ArrayList<FullCycleExercise> getExercises() {
         return exercises;
@@ -43,8 +44,20 @@ public class ExerciseQueueRealState
         this.exercises = new ArrayList<>(exercises);
         this.doneExercises = new ArrayList<>();
         currentExercise = null;
+        cycleCount = 0;
     }
 
+    public int getCycleCount() {
+        return cycleCount;
+    }
+
+    public void setCycleCount(int cycleCount) {
+        this.cycleCount = cycleCount;
+    }
+
+    public void addCycle() {
+        this.cycleCount = cycleCount+1;
+    }
 
     public int setNextExercise(){
         if (exercises.size() == 0) {
