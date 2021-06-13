@@ -10,6 +10,7 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
@@ -82,10 +83,21 @@ public class ExecutionActivity extends AppCompatActivity {
         currentText = current.findViewById(R.id.execution_desc);
         currentText.setText(currentExercise.getExercise().getDetail());
         currentText = current.findViewById(R.id.execution_seconds);
-        currentText.setText(Integer.toString(currentExercise.getDuration()));
+        int exerciseVal = currentExercise.getDuration();
+        if(exerciseVal <= 0) {
+            currentText.setVisibility(View.GONE);
+            current.findViewById(R.id.seconds_title).setVisibility(View.GONE);
+        } else {
+            currentText.setText(Integer.toString(exerciseVal));
+        }
         currentText = current.findViewById(R.id.execution_reps);
-        currentText.setText(Integer.toString(currentExercise.getRepetitions()));
-
+        exerciseVal = currentExercise.getRepetitions();
+        if(exerciseVal <= 0) {
+            currentText.setVisibility(View.GONE);
+            current.findViewById(R.id.rep_title).setVisibility(View.GONE);
+        } else {
+            currentText.setText(Integer.toString(exerciseVal));
+        }
         ImageView currentImage = current.findViewById(R.id.execution_img);
         Picasso.get().load("https://i.imgur.com/DvpvklR.png").into(currentImage);
     }
