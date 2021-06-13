@@ -17,6 +17,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.fithub_mobile.backend.models.FullCycleExercise;
 import com.example.fithub_mobile.excercise.ExerciseData;
 import com.google.android.material.button.MaterialButton;
 import com.squareup.picasso.Picasso;
@@ -26,7 +27,7 @@ import java.util.Collection;
 
 public class ExerciseAdapter extends RecyclerView.Adapter<ExerciseAdapter.ViewHolder> {
 
-    private ArrayList<ExerciseData> exercises;
+    private ArrayList<FullCycleExercise> exercises;
 
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
@@ -69,7 +70,7 @@ public class ExerciseAdapter extends RecyclerView.Adapter<ExerciseAdapter.ViewHo
     }
 
 
-    public ExerciseAdapter(ArrayList<ExerciseData> exercises){
+    public ExerciseAdapter(ArrayList<FullCycleExercise> exercises){
 
         this.exercises = exercises;
     }
@@ -86,10 +87,10 @@ public class ExerciseAdapter extends RecyclerView.Adapter<ExerciseAdapter.ViewHo
     @SuppressLint("SetTextI18n")
     @Override
     public void onBindViewHolder(@NonNull ExerciseAdapter.ViewHolder holder, int position) {
-        holder.getTitleView().setText(exercises.get(position).getTitle());
-        holder.getDescView().setText(exercises.get(position).getDesc());
-        holder.getRepCount().setText(exercises.get(position).getReps().toString());
-        holder.getSecsCount().setText(exercises.get(position).getSecs().toString());
+        holder.getTitleView().setText(exercises.get(position).getExercise().getName());
+        holder.getDescView().setText(exercises.get(position).getExercise().getDetail());
+        holder.getRepCount().setText(Integer.toString(exercises.get(position).getRepetitions()));
+        holder.getSecsCount().setText(Integer.toString(exercises.get(position).getDuration()));
         Picasso.get().load("https://i.imgur.com/DvpvklR.png").into(holder.getImage());
     }
 

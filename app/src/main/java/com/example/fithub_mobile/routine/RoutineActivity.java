@@ -13,6 +13,7 @@ import com.example.fithub_mobile.NotificationActivity;
 import com.example.fithub_mobile.QrGenActivity;
 import com.example.fithub_mobile.R;
 import com.example.fithub_mobile.backend.models.FullCycle;
+import com.example.fithub_mobile.backend.models.FullCycleExercise;
 import com.example.fithub_mobile.backend.models.FullRoutine;
 import com.example.fithub_mobile.excercise.ExerciseData;
 import com.example.fithub_mobile.excercise.LastlyExecutedCard;
@@ -76,9 +77,6 @@ public class RoutineActivity extends AppCompatActivity {
             }
         });
 
-
-
-
         LinearLayout cycleContainer = findViewById(R.id.cycle_container);
 
         app.getCycleRepository().getCycles(id).observe(this, r -> {
@@ -112,15 +110,36 @@ public class RoutineActivity extends AppCompatActivity {
     }
 
     public void startExecution(){
-        ArrayList<ExerciseData> exercises = new ArrayList<>();
-        exercises.add(new ExerciseData(1,"Diácono1","Prueba",4,4,"http://i.imgur.com/DvpvklR.png"));
-        exercises.add(new ExerciseData(1,"Diácono2","Prueba",4,4,"http://i.imgur.com/DvpvklR.png"));
-        exercises.add(new ExerciseData(1,"Diácono3","Prueba",4,4,"http://i.imgur.com/DvpvklR.png"));
-        exercises.add(new ExerciseData(1,"Diácono4","Prueba",4,4,"http://i.imgur.com/DvpvklR.png"));
-        exercises.add(new ExerciseData(1,"Diácono5","Prueba",4,4,"http://i.imgur.com/DvpvklR.png"));
 
-        ExerciseQueueRealState exerciseQueueRealState = ExerciseQueueRealState.getInstance();
-        exerciseQueueRealState.setNewRoutine(exercises);
+        App app = (App)getApplication();
+        app.getCycleRepository().getCycles(id).observe(this, r -> {
+            if (r.getStatus() == Status.SUCCESS) {
+                assert r.getData() != null;
+                cycles = r.getData().getContent();
+
+                ExerciseQueueRealState exerciseQueueRealState = ExerciseQueueRealState.getInstance();
+                exerciseQueueRealState.setNewRoutine(new ArrayList<>());
+
+                for (FullCycle cycle : cycles) {
+                    app.getCycleRepository().getCycleExercises(cycle.getId()).observe(this, rEx -> {
+                        if (rEx.getStatus() == Status.SUCCESS) {
+                            assert rEx.getData() != null;
+                            List<FullCycleExercise> cycleExercises = rEx.getData().getContent();
+                            for (int i = 0; i < cycle.getRepetitions(); i ++)
+                                exerciseQueueRealState.getExercises().addAll(cycleExercises);
+
+                        } else {
+                            Resource.defaultResourceHandler(rEx);
+                        }
+                    });
+                }
+                Intent i = new Intent(this, ExecutionActivity.class);
+                startActivity(i);
+            } else {
+                Resource.defaultResourceHandler(r);
+            }
+        });
+
 
         //Adding to lastlyExecData
 
@@ -139,7 +158,5 @@ public class RoutineActivity extends AppCompatActivity {
         stringedData = gson.toJson(lastlyExecManager);
         sp.edit().putString("lastly_exec_ex",stringedData).apply();
 
-        Intent i = new Intent(this, ExecutionActivity.class);
-        startActivity(i);
     }
 }

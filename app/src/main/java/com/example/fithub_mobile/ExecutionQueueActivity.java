@@ -6,6 +6,7 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -20,6 +21,7 @@ import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import com.example.fithub_mobile.backend.models.FullCycleExercise;
 import com.example.fithub_mobile.excercise.ExerciseData;
 import com.example.fithub_mobile.ui.home.HomeViewModel;
 import com.squareup.picasso.Picasso;
@@ -28,7 +30,7 @@ import java.util.ArrayList;
 
 public class ExecutionQueueActivity extends AppCompatActivity {
 
-    private ArrayList<ExerciseData> exercises = new ArrayList<>();
+    private ArrayList<FullCycleExercise> exercises = new ArrayList<>();
     private ExerciseAdapter adapter;
     private ProgressBar pgBar;
     private ExerciseQueueRealState exerciseQueueRealState;
@@ -77,17 +79,18 @@ public class ExecutionQueueActivity extends AppCompatActivity {
         updateProgress();
     }
 
-    private void setCurrentInfo(ExerciseData currentExercise){
+    @SuppressLint("SetTextI18n")
+    private void setCurrentInfo(FullCycleExercise currentExercise){
         View current = this.findViewById(R.id.current_exercise_card);
 
         TextView currentText = current.findViewById(R.id.current_title);
-        currentText.setText(currentExercise.getTitle());
+        currentText.setText(currentExercise.getExercise().getName());
         currentText = current.findViewById(R.id.current_description);
-        currentText.setText(currentExercise.getDesc());
+        currentText.setText(currentExercise.getExercise().getDetail());
         currentText = current.findViewById(R.id.current_seconds);
-        currentText.setText(currentExercise.getSecs().toString());
+        currentText.setText(Integer.toString(currentExercise.getDuration()));
         currentText = current.findViewById(R.id.currents_repetitions);
-        currentText.setText(currentExercise.getReps().toString());
+        currentText.setText(Integer.toString(currentExercise.getRepetitions()));
 
         ImageView currentImage = current.findViewById(R.id.current_image);
         Picasso.get().load("https://i.imgur.com/DvpvklR.png").into(currentImage);
