@@ -108,6 +108,7 @@ public class ExerciseAdapter extends RecyclerView.Adapter<ExerciseAdapter.ViewHo
         holder.getTitleView().setText(exercises.get(position).getExercise().getName());
         holder.getDescView().setText(exercises.get(position).getExercise().getDetail());
 
+
         int seconds = exercises.get(position).getDuration();
         if(seconds <= 0) {
             holder.getSecsCount().setVisibility(View.GONE);
