@@ -66,14 +66,18 @@ public class RoutineActivity extends AppCompatActivity {
 
         RatingBar ratingBar = findViewById(R.id.rating_bar_routine_view);
         TextView descView = findViewById(R.id.desc_routine);
+        TextView titleView = findViewById(R.id.title_routine);
 
         App app = (App)getApplication();
         app.getRoutineRepository().getRoutine(id).observe(this, r -> {
             if (r.getStatus() == Status.SUCCESS) {
                 routine = r.getData();
-                toolBarLayout.setTitle(routine.getName());
                 ratingBar.setRating(routine.getAverageRating());
                 descView.setText(routine.getDetail());
+                if(toolBarLayout != null)
+                    toolBarLayout.setTitle(routine.getName());
+                else
+                    titleView.setText(routine.getName());
             } else {
                 Resource.defaultResourceHandler(r);
             }

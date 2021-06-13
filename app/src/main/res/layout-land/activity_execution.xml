@@ -38,7 +38,7 @@
         app:srcCompat="@android:drawable/ic_media_next" />
 
     <TextView
-        android:id="@+id/rep_title"
+        android:id="@+id/queue_rep_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="12dp"
@@ -67,9 +67,9 @@
         android:textColor="#CC454A48"
         android:textSize="24sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="@+id/seconds_title"
+        app:layout_constraintBottom_toBottomOf="@+id/execution_seconds_title"
         app:layout_constraintStart_toStartOf="@+id/execution_reps"
-        app:layout_constraintTop_toTopOf="@+id/seconds_title"
+        app:layout_constraintTop_toTopOf="@+id/execution_seconds_title"
         app:layout_constraintVertical_bias="0.867" />
 
     <ImageButton
@@ -90,7 +90,7 @@
         app:srcCompat="@android:drawable/ic_media_next" />
 
     <TextView
-        android:id="@+id/seconds_title"
+        android:id="@+id/execution_seconds_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="12dp"
@@ -98,7 +98,7 @@
         android:textColor="#CC454A48"
         android:textSize="24sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/rep_title"
+        app:layout_constraintBottom_toTopOf="@+id/queue_rep_title"
         app:layout_constraintStart_toEndOf="@+id/execution_seconds" />
 
     <TextView
@@ -123,9 +123,9 @@
         android:textColor="#CC454A48"
         android:textSize="24sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="@+id/rep_title"
+        app:layout_constraintBottom_toBottomOf="@+id/queue_rep_title"
         app:layout_constraintStart_toStartOf="@+id/execution_desc"
-        app:layout_constraintTop_toTopOf="@+id/rep_title"
+        app:layout_constraintTop_toTopOf="@+id/queue_rep_title"
         app:layout_constraintVertical_bias="0.0" />
 
     <ToggleButton
