@@ -94,13 +94,13 @@ public class ProfileFragment extends Fragment {
             if (rfav.getStatus() == Status.SUCCESS) {
                 assert rfav.getData() != null;
 
-                app.getRoutineRepository().getRoutines().observe(getViewLifecycleOwner(), r -> {
+                app.getUserRepository().getUserRoutines().observe(getViewLifecycleOwner(), r -> {
                     if (r.getStatus() == Status.SUCCESS) {
                         assert r.getData() != null;
                         routines.addAll(r.getData().getContent());
                         for (FullRoutine routine : routines){
+                            routine.setUser(new PublicUser(1,name.get(),null,userImg.get(),0,0));
                             if (rfav.getData().getContent().contains(routine)) {
-                                routine.setUser(new PublicUser(1,name.get(),null,userImg.get(),0,0));
                                 routine.setFavourite(true);
                             }
                         }
