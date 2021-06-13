@@ -195,6 +195,7 @@ public class RoutineCardAdapter extends RecyclerView.Adapter<RoutineCardAdapter.
 //            i.putExtra(TITLE_MESSAGE, title);
 //            i.putExtra(RATING_MESSAGE, rating);
 //            i.putExtra(DESC_MESSAGE, desc);
+            i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
             holder.getContext().startActivity(i);
         });
 

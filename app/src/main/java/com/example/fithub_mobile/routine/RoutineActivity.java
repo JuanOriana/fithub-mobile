@@ -9,6 +9,7 @@ import com.example.fithub_mobile.CycleData;
 import com.example.fithub_mobile.CycleDisplay;
 import com.example.fithub_mobile.ExecutionActivity;
 import com.example.fithub_mobile.ExerciseQueueRealState;
+import com.example.fithub_mobile.MainActivity;
 import com.example.fithub_mobile.NotificationActivity;
 import com.example.fithub_mobile.QrGenActivity;
 import com.example.fithub_mobile.R;
@@ -177,5 +178,10 @@ public class RoutineActivity extends AppCompatActivity {
         stringedData = gson.toJson(lastlyExecManager);
         sp.edit().putString("lastly_exec_ex",stringedData).apply();
 
+    }
+
+    public void onBackPressed(){
+        startActivity(new Intent(this, MainActivity.class));
+        finish();
     }
 }

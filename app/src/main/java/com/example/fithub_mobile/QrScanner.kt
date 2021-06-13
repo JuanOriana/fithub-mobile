@@ -9,16 +9,20 @@ import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
+import androidx.core.app.TaskStackBuilder
 import androidx.core.content.ContextCompat
 import com.budiyev.android.codescanner.*
 
 private const val CAMERA_REQ_CODE = 101
 
+
 class QrScanner : AppCompatActivity() {
     private lateinit var codeScanner: CodeScanner
+    private lateinit var context : Context
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_qr_scanner)
+        context = this;
 
         setUpPermissions()
         codeScanner()
@@ -42,6 +46,8 @@ class QrScanner : AppCompatActivity() {
                     val i = Intent(Intent.ACTION_VIEW)
                     i.data = Uri.parse(it.text);
                     i.setPackage("com.example.fithub_mobile")
+                    // Create the TaskStackBuilder and add the intent, which inflates the back stack
+                    i.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
                     startActivity(i)
                 }
             }
