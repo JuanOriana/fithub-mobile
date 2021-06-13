@@ -23,6 +23,8 @@ import android.widget.TextView;
 
 import com.example.fithub_mobile.backend.models.FullCycleExercise;
 import com.example.fithub_mobile.excercise.ExerciseData;
+import com.example.fithub_mobile.repository.Resource;
+import com.example.fithub_mobile.repository.Status;
 import com.example.fithub_mobile.ui.home.HomeViewModel;
 import com.squareup.picasso.Picasso;
 
@@ -93,7 +95,15 @@ public class ExecutionQueueActivity extends AppCompatActivity {
         currentText.setText(Integer.toString(currentExercise.getRepetitions()));
 
         ImageView currentImage = current.findViewById(R.id.current_image);
-        Picasso.get().load("https://i.imgur.com/DvpvklR.png").into(currentImage);
+        App app = (App)getApplication();
+        app.getExerciseImageRepository().getExerciseImages(currentExercise.getExercise().getId()).observe(this, r -> {
+            if (r.getStatus() == Status.SUCCESS) {
+                String url = r.getData().getContent().get(0).getUrl();
+                Picasso.get().load(url).into(currentImage);
+            } else {
+                Resource.defaultResourceHandler(r);
+            }
+        });
     }
 
     private void updateProgress(){

@@ -25,6 +25,7 @@ import com.google.android.material.appbar.CollapsingToolbarLayout;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+import com.squareup.picasso.Picasso;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -128,8 +129,17 @@ public class RoutineActivity extends AppCompatActivity {
                             assert rEx.getData() != null;
                             exerciseQueueRealState.addCycle();
                             List<FullCycleExercise> cycleExercises = rEx.getData().getContent();
-                            for (FullCycleExercise ex : cycleExercises)
+                            for (FullCycleExercise ex : cycleExercises) {
                                 ex.setCycle(cycle);
+                                app.getExerciseImageRepository().getExerciseImages(ex.getExercise().getId()).observe(this, rImg -> {
+                                    if (rImg.getStatus() == Status.SUCCESS) {
+                                        assert rImg.getData() != null;
+                                        ex.setImg(rImg.getData().getContent().get(0).getUrl());
+                                    } else {
+                                        Resource.defaultResourceHandler(rImg);
+                                    }
+                                });
+                            }
                             for (int i = 0; i < cycle.getRepetitions(); i ++)
                                 exerciseQueueRealState.getExercises().addAll(cycleExercises);
 

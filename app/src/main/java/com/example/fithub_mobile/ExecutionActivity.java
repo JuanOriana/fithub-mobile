@@ -22,6 +22,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.fithub_mobile.backend.models.FullCycleExercise;
 import com.example.fithub_mobile.excercise.ExerciseData;
+import com.example.fithub_mobile.repository.Resource;
+import com.example.fithub_mobile.repository.Status;
 import com.example.fithub_mobile.ui.search.FilterDialogFragment;
 import com.squareup.picasso.Picasso;
 
@@ -98,8 +100,18 @@ public class ExecutionActivity extends AppCompatActivity {
         } else {
             currentText.setText(Integer.toString(exerciseVal));
         }
+
         ImageView currentImage = current.findViewById(R.id.execution_img);
-        Picasso.get().load("https://i.imgur.com/DvpvklR.png").into(currentImage);
+        App app = (App)getApplication();
+        app.getExerciseImageRepository().getExerciseImages(currentExercise.getExercise().getId()).observe(this, r -> {
+            if (r.getStatus() == Status.SUCCESS) {
+                String url = r.getData().getContent().get(0).getUrl();
+                Picasso.get().load(url).into(currentImage);
+            } else {
+                Resource.defaultResourceHandler(r);
+            }
+        });
+
     }
 
     private void updateProgress(){

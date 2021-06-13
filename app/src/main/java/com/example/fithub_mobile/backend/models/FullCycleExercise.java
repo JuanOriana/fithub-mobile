@@ -22,6 +22,8 @@ public class FullCycleExercise implements Comparable<FullCycleExercise> {
     @Expose
     private Object metadata;
 
+    private String img;
+
     private FullCycle cycle;
 
     /**
@@ -94,6 +96,14 @@ public class FullCycleExercise implements Comparable<FullCycleExercise> {
 
     public void setCycle(FullCycle cycle) {
         this.cycle = cycle;
+    }
+
+    public String getImg() {
+        return img;
+    }
+
+    public void setImg(String img) {
+        this.img = img;
     }
 
     @Override
