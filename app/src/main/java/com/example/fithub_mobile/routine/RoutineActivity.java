@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 
+import com.example.fithub_mobile.App;
 import com.example.fithub_mobile.CycleData;
 import com.example.fithub_mobile.CycleDisplay;
 import com.example.fithub_mobile.ExecutionActivity;
@@ -11,10 +12,14 @@ import com.example.fithub_mobile.ExerciseQueueRealState;
 import com.example.fithub_mobile.NotificationActivity;
 import com.example.fithub_mobile.QrGenActivity;
 import com.example.fithub_mobile.R;
+import com.example.fithub_mobile.backend.models.FullCycle;
+import com.example.fithub_mobile.backend.models.FullRoutine;
 import com.example.fithub_mobile.excercise.ExerciseData;
 import com.example.fithub_mobile.excercise.LastlyExecutedCard;
 import com.example.fithub_mobile.excercise.LastlyExecutedCardData;
 import com.example.fithub_mobile.excercise.LastlyExecutedCardDataManager;
+import com.example.fithub_mobile.repository.Resource;
+import com.example.fithub_mobile.repository.Status;
 import com.google.android.material.appbar.CollapsingToolbarLayout;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.gson.Gson;
@@ -28,9 +33,11 @@ import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.RatingBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -38,9 +45,9 @@ public class RoutineActivity extends AppCompatActivity {
 
     public static final String EXTRA_ID = "com.example.fithub_mobile.EXTRA_ID";
     static final private String ID_PARENT_EXTRA = "com.example.fithub_mobile.ID_PARENT";
+    private FullRoutine routine;
+    private List<FullCycle> cycles;
     private int id;
-    private String title;
-    private String desc;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,33 +55,42 @@ public class RoutineActivity extends AppCompatActivity {
         setContentView(R.layout.activity_routine);
 
         Intent intent = getIntent();
-
         id = Integer.parseInt(intent.getData().getQueryParameter("id"));
-        title = intent.getStringExtra(RoutineCard.TITLE_MESSAGE);
-        int rating = intent.getIntExtra(RoutineCard.RATING_MESSAGE,0);
-        desc = intent.getStringExtra(RoutineCard.DESC_MESSAGE);
 
         Toolbar toolbar = findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
         CollapsingToolbarLayout toolBarLayout = findViewById(R.id.toolbar_layout);
-        if (title != null)
-            toolBarLayout.setTitle(title);
-
-        TextView titleView = findViewById(R.id.title_routine);
-        if (desc != null)
-            titleView.setText(title);
+        setSupportActionBar(toolbar);
 
         RatingBar ratingBar = findViewById(R.id.rating_bar_routine_view);
-        ratingBar.setRating(rating);
-
         TextView descView = findViewById(R.id.desc_routine);
-        if (desc != null)
-            descView.setText(desc);
+
+        App app = (App)getApplication();
+        app.getRoutineRepository().getRoutine(id).observe(this, r -> {
+            if (r.getStatus() == Status.SUCCESS) {
+                routine = r.getData();
+                toolBarLayout.setTitle(routine.getName());
+                ratingBar.setRating(routine.getAverageRating());
+                descView.setText(routine.getDetail());
+            } else {
+                Resource.defaultResourceHandler(r);
+            }
+        });
+
+
+
 
         LinearLayout cycleContainer = findViewById(R.id.cycle_container);
-        cycleContainer.addView(new CycleDisplay(this,new CycleData(1,"Uno",4)));
-        cycleContainer.addView(new CycleDisplay(this,new CycleData(1,"Uno",4)));
-        cycleContainer.addView(new CycleDisplay(this,new CycleData(1,"Uno",4)));
+
+        app.getCycleRepository().getCycles(id).observe(this, r -> {
+            if (r.getStatus() == Status.SUCCESS) {
+                cycles = r.getData().getContent();
+                for (FullCycle cycle : cycles) {
+                    cycleContainer.addView(new CycleDisplay(this,cycle));
+                }
+            } else {
+                Resource.defaultResourceHandler(r);
+            }
+        });
 
         FloatingActionButton fab = findViewById(R.id.fab);
         fab.setOnClickListener(view -> startExecution());
@@ -117,8 +133,8 @@ public class RoutineActivity extends AppCompatActivity {
             lastlyExecManager = new LastlyExecutedCardDataManager();
         }
 
-        lastlyExecManager.add(new LastlyExecutedCardData((title != null)?title:"titulo",
-                (desc!=null)?desc:"desc",id));
+        lastlyExecManager.add(new LastlyExecutedCardData(routine.getName(),
+                routine.getDetail(),id));
 
         stringedData = gson.toJson(lastlyExecManager);
         sp.edit().putString("lastly_exec_ex",stringedData).apply();
