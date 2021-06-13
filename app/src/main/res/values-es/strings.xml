@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">fithub-mobile</string>
+    <string name="app_name">Fithub</string>
     <string name="title_home">Fithub</string>
     <string name="title_profile">Perfil</string>
     <string name="emailInputHint">Correo Electrónico</string>
