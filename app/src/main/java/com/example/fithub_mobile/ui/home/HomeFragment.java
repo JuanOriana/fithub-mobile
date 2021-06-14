@@ -56,19 +56,16 @@ public class HomeFragment extends Fragment {
 
         recentContainer = root.findViewById(R.id.recent_container);
 
-        SharedPreferences sp = requireActivity().getSharedPreferences("lastly_exec", Context.MODE_PRIVATE);
-        String stringedData = sp.getString("lastly_exec_ex","");
-        Gson gson = new Gson();
-        Type type = new TypeToken<LastlyExecutedCardDataManager>() {}.getType();
-        LastlyExecutedCardDataManager lastlyExecManager = gson.fromJson(stringedData,type);
-        if (lastlyExecManager == null){
+        LastlyExecutedCardDataManager lastlyExecManager = LastlyExecutedCardDataManager.getInstance();
+
+        if (lastlyExecManager.getData(root.getContext()).size() == 0){
             TextView noDataText = new TextView(root.getContext());
             noDataText.setText("NO HAY EJERCICIOS");
             recentContainer.addView(noDataText);
         }
         else {
-            for (LastlyExecutedCardData item : lastlyExecManager.getData())
-            recentContainer.addView(new LastlyExecutedCard(root.getContext(),item.getId(), item.getTitle(), item.getDescription()));
+            for (LastlyExecutedCardData item : lastlyExecManager.getData(root.getContext()))
+                recentContainer.addView(new LastlyExecutedCard(root.getContext(),item.getId(), item.getTitle(), item.getDescription()));
         }
 
 

@@ -163,20 +163,10 @@ public class RoutineActivity extends AppCompatActivity {
 
         //Adding to lastlyExecData
 
-        SharedPreferences sp = getSharedPreferences("lastly_exec",MODE_PRIVATE);
-        String stringedData = sp.getString("lastly_exec_ex","");
-        Gson gson = new Gson();
-        Type type = new TypeToken<LastlyExecutedCardDataManager>() {}.getType();
-        LastlyExecutedCardDataManager lastlyExecManager = gson.fromJson(stringedData,type);
-        if (lastlyExecManager == null){
-            lastlyExecManager = new LastlyExecutedCardDataManager();
-        }
+        LastlyExecutedCardDataManager lastlyExecManager = LastlyExecutedCardDataManager.getInstance();
 
-        lastlyExecManager.add(new LastlyExecutedCardData(routine.getName(),
+        lastlyExecManager.add(this,new LastlyExecutedCardData(routine.getName(),
                 routine.getDetail(),id));
-
-        stringedData = gson.toJson(lastlyExecManager);
-        sp.edit().putString("lastly_exec_ex",stringedData).apply();
 
     }
 
