@@ -8,6 +8,7 @@ import com.example.fithub_mobile.backend.ApiClient;
 import com.example.fithub_mobile.backend.ApiResponse;
 import com.example.fithub_mobile.backend.ApiUserService;
 import com.example.fithub_mobile.backend.models.Credentials;
+import com.example.fithub_mobile.backend.models.EmailConfirmation;
 import com.example.fithub_mobile.backend.models.FullRoutine;
 import com.example.fithub_mobile.backend.models.FullUser;
 import com.example.fithub_mobile.backend.models.PagedList;
@@ -51,6 +52,17 @@ public class UserRepository {
             @Override
             protected LiveData<ApiResponse<FullUser>> createCall() {
                 return apiService.register(credentials);
+            }
+        }.asLiveData();
+    }
+
+    public LiveData<Resource<Void>> verifyEmail(EmailConfirmation credentials) {
+        return new NetworkBoundResource<Void, Void>()
+        {
+            @NonNull
+            @Override
+            protected LiveData<ApiResponse<Void>> createCall() {
+                return apiService.verifyEmail(credentials);
             }
         }.asLiveData();
     }
