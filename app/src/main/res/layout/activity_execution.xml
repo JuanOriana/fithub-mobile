@@ -19,24 +19,6 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent" />
 
-    <ImageButton
-        android:id="@+id/next"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="16dp"
-        android:backgroundTint="?attr/colorPrimary"
-        android:backgroundTintMode="src_in"
-        android:minWidth="100dp"
-        android:minHeight="80dp"
-        android:scaleType="fitXY"
-        android:tint="#FFFFFF"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/toolbar3"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toEndOf="@+id/toggleButton3"
-        app:layout_constraintTop_toTopOf="@+id/toolbar3"
-        app:srcCompat="@android:drawable/ic_media_next" />
-
     <View
         android:id="@+id/view"
         android:layout_width="300dp"
@@ -47,23 +29,6 @@
         app:layout_constraintHorizontal_bias="0.522"
         app:layout_constraintStart_toStartOf="@+id/execution_title"
         app:layout_constraintTop_toBottomOf="@+id/execution_title" />
-
-    <ImageButton
-        android:id="@+id/prev"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:backgroundTint="?attr/colorPrimary"
-        android:minWidth="100dp"
-        android:minHeight="80dp"
-        android:rotationY="180"
-        android:scaleType="fitXY"
-        android:tint="#FFFFFF"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/toggleButton3"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/toolbar3"
-        app:srcCompat="@android:drawable/ic_media_next" />
 
     <TextView
         android:id="@+id/execution_title"
@@ -79,26 +44,6 @@
         app:layout_constraintHorizontal_bias="0.514"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
-
-    <ToggleButton
-        android:id="@+id/toggleButton3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="@drawable/pause_check"
-        android:backgroundTint="?attr/colorPrimary"
-        android:backgroundTintMode="screen"
-        android:minWidth="80dp"
-        android:minHeight="80dp"
-        android:scaleType="fitXY"
-        android:text=""
-        android:textIsSelectable="false"
-        android:textOff=""
-        android:textOn=""
-        android:tint="#FFFFFF"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/toolbar3"
-        app:layout_constraintStart_toStartOf="@+id/toolbar3"
-        app:layout_constraintTop_toTopOf="@+id/toolbar3" />
 
     <ProgressBar
         android:id="@+id/progressBar"
@@ -141,6 +86,56 @@
         app:layout_constraintHorizontal_bias="0.513"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/view" />
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="@+id/toolbar3"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <ImageButton
+            android:id="@+id/prev"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:backgroundTint="?attr/colorPrimary"
+            android:minWidth="100dp"
+            android:minHeight="80dp"
+            android:rotationY="180"
+            android:scaleType="fitXY"
+            android:tint="#FFFFFF"
+            app:srcCompat="@android:drawable/ic_media_next" />
+
+        <ToggleButton
+            android:id="@+id/play_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/pause_check"
+            android:backgroundTint="?attr/colorPrimary"
+            android:backgroundTintMode="screen"
+            android:minWidth="80dp"
+            android:minHeight="80dp"
+            android:scaleType="fitXY"
+            android:text=""
+            android:textIsSelectable="false"
+            android:textOff=""
+            android:textOn=""
+            android:tint="#FFFFFF" />
+
+        <ImageButton
+            android:id="@+id/next"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="16dp"
+            android:backgroundTint="?attr/colorPrimary"
+            android:backgroundTintMode="src_in"
+            android:minWidth="100dp"
+            android:minHeight="80dp"
+            android:scaleType="fitXY"
+            android:tint="#FFFFFF"
+            app:srcCompat="@android:drawable/ic_media_next" />
+    </LinearLayout>
 
     <LinearLayout
         android:id="@+id/linearLayout3"
