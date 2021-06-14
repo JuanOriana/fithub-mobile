@@ -70,18 +70,16 @@ public class SearchFragment extends Fragment implements FilterDialogListener {
         View root = inflater.inflate(R.layout.fragment_search, container, false);
         setHasOptionsMenu(true);
 
+        initRoutines();
         cardContainer = root.findViewById(R.id.cardContainer);
         cardContainer.setLayoutManager(new GridLayoutManager(getContext(), getActivity().getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT ? 1 : 2));
-        adapter = new RoutineCardAdapter(extractedRoutines);
-        cardContainer.setAdapter(adapter);
 
-        initRoutines();
 
         return root;
     }
 
     public void initRoutines() {
-        App app = (App) requireActivity().getApplication();
+        App app = (App) getActivity().getApplication();
         app.getFavouriteRepository().getFavourites().observe(getViewLifecycleOwner(), rfav -> {
             if (rfav.getStatus() == Status.SUCCESS) {
                 assert rfav.getData() != null;
@@ -93,11 +91,10 @@ public class SearchFragment extends Fragment implements FilterDialogListener {
                         for (FullRoutine routine : extractedRoutines) {
                             if (rfav.getData().getContent().contains(routine)) {
                                 routine.setFavourite(true);
-                                adapter.notifyDataSetChanged();
                             }
                         }
-                        Log.d("RUTINAS", extractedRoutines.toString());
-
+                        adapter = new RoutineCardAdapter(extractedRoutines);
+                        cardContainer.setAdapter(adapter);
                         adapter.notifyDataSetChanged();
 
                     } else {
