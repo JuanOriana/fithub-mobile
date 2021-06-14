@@ -4,4 +4,8 @@
         <item name="colorControlActivated">@color/fithub_green</item>
         <item name="colorControlNormal">@color/fithub_light</item>
     </style>
+    <style name="RatingBar2" parent="Theme.AppCompat">
+        <item name="colorControlNormal">@color/fithub_green_darkest</item>
+        <item name="colorControlActivated">#FFFFFF</item>
+    </style>
 </resources>

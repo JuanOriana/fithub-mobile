@@ -2,15 +2,12 @@ package com.example.fithub_mobile;
 
 
 import android.annotation.SuppressLint;
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
@@ -18,8 +15,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.fithub_mobile.backend.models.FullCycleExercise;
 import com.example.fithub_mobile.excercise.ExerciseData;
@@ -83,23 +78,30 @@ public class ExecutionActivity extends AppCompatActivity {
     private void setCurrentInfo(FullCycleExercise currentExercise){
         View current = this.findViewById(R.id.exercise_execution);
 
+        findViewById(R.id.execution_seconds).setVisibility(View.VISIBLE);
+        findViewById(R.id.execution_seconds_title).setVisibility(View.VISIBLE);
+        findViewById(R.id.execution_rep_title).setVisibility(View.VISIBLE);
+        findViewById(R.id.execution_reps).setVisibility(View.VISIBLE);
+
         TextView currentText = current.findViewById(R.id.execution_title);
         currentText.setText(currentExercise.getExercise().getName());
         currentText = current.findViewById(R.id.execution_desc);
         currentText.setText(currentExercise.getExercise().getDetail());
+
         currentText = current.findViewById(R.id.execution_seconds);
         int exerciseVal = currentExercise.getDuration();
         if(exerciseVal <= 0) {
             currentText.setVisibility(View.GONE);
-            current.findViewById(R.id.seconds_title).setVisibility(View.GONE);
+            current.findViewById(R.id.execution_seconds_title).setVisibility(View.GONE);
         } else {
             currentText.setText(Integer.toString(exerciseVal));
         }
+
         currentText = current.findViewById(R.id.execution_reps);
         exerciseVal = currentExercise.getRepetitions();
         if(exerciseVal <= 0) {
-            currentText.setVisibility(View.GONE);
-            current.findViewById(R.id.rep_title).setVisibility(View.GONE);
+            currentText.setVisibility(View.INVISIBLE);
+            current.findViewById(R.id.execution_rep_title).setVisibility(View.INVISIBLE);
         } else {
             currentText.setText(Integer.toString(exerciseVal));
         }

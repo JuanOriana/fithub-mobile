@@ -53,6 +53,7 @@
             android:layout_height="40dp"
             android:layout_marginEnd="10dp"
             android:background="@drawable/qr"
+            android:backgroundTint="@color/fithub_green_darkest"
             app:layout_constraintBottom_toBottomOf="@+id/rating_bar_routine_view"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="@+id/rating_bar_routine_view" />
@@ -63,6 +64,7 @@
             android:layout_height="40dp"
             android:layout_marginEnd="10dp"
             android:background="@drawable/calendar"
+            android:backgroundTint="@color/fithub_green_darkest"
             app:layout_constraintBottom_toBottomOf="@+id/qr_btn"
             app:layout_constraintEnd_toStartOf="@+id/qr_btn"
             app:layout_constraintTop_toTopOf="@+id/qr_btn" />
