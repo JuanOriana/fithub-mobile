@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">fithub-mobile</string>
+    <string name="app_name">Fithub</string>
     <string name="title_home">Fithub</string>
     <string name="title_profile">Profile</string>
     <string name="emailInputHint">Email</string>
@@ -76,6 +76,8 @@
     <string name="rating_spinner_placeholder">Choose the rating</string>
     <string name="empty_based_spinner_placeholder">Select a filter first</string>
     <string name="difficulty_spinner_placeholder">Choose the difficulty</string>
+    <string name="no_recent_routines">You haven\'t trained recently!</string>
+    <string name="success_routine">Routine finished sucessfully!</string>
 
 
 </resources>

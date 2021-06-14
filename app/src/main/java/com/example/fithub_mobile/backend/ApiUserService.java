@@ -7,6 +7,7 @@ import com.example.fithub_mobile.backend.models.Credentials;
 import com.example.fithub_mobile.backend.models.FullRoutine;
 import com.example.fithub_mobile.backend.models.FullUser;
 import com.example.fithub_mobile.backend.models.PagedList;
+import com.example.fithub_mobile.backend.models.RegisterCredentials;
 import com.example.fithub_mobile.backend.models.Token;
 
 import retrofit2.http.Body;
@@ -21,6 +22,9 @@ public interface ApiUserService {
 
     @POST("users/logout")
     LiveData<ApiResponse<Void>> logout();
+
+    @POST("users")
+    LiveData<ApiResponse<FullUser>> register(@Body RegisterCredentials credentials);
 
     @GET("users/current")
     LiveData<ApiResponse<FullUser>> getCurrentUser();

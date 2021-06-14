@@ -9,6 +9,8 @@
     <color name="fithub_green_darker">#256146</color>
     <color name="fithub_secondary">#8C5DCF</color>
     <color name="fithub_light">#8AA197</color>
+    <color name="fithub_green_darkest">#454A48</color>
+    <color name="fithub_green_darkest_lighter">#CC454A48</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
 </resources>

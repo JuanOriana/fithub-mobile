@@ -1,5 +1,6 @@
 package com.example.fithub_mobile;
 
+import com.example.fithub_mobile.backend.models.FullCycleExercise;
 import com.example.fithub_mobile.excercise.ExerciseData;
 
 import java.util.ArrayList;
@@ -9,19 +10,20 @@ public class ExerciseQueueRealState
     // static variable single_instance of type Singleton
     private static ExerciseQueueRealState single_instance = null;
 
-    private ArrayList<ExerciseData> exercises = new ArrayList<>();
-    private ArrayList<ExerciseData> doneExercises = new ArrayList<>();
-    private ExerciseData currentExercise = null;
+    private ArrayList<FullCycleExercise> exercises = new ArrayList<>();
+    private ArrayList<FullCycleExercise> doneExercises = new ArrayList<>();
+    private FullCycleExercise currentExercise = null;
+    int cycleCount = 0;
 
-    public ArrayList<ExerciseData> getExercises() {
+    public ArrayList<FullCycleExercise> getExercises() {
         return exercises;
     }
 
-    public ArrayList<ExerciseData> getDoneExercises() {
+    public ArrayList<FullCycleExercise> getDoneExercises() {
         return doneExercises;
     }
 
-    public ExerciseData getCurrentExercise() {
+    public FullCycleExercise getCurrentExercise() {
         return currentExercise;
     }
 
@@ -38,12 +40,24 @@ public class ExerciseQueueRealState
         return;
     }
 
-    public void setNewRoutine(ArrayList<ExerciseData> exercises){
+    public void setNewRoutine(ArrayList<FullCycleExercise> exercises){
         this.exercises = new ArrayList<>(exercises);
         this.doneExercises = new ArrayList<>();
         currentExercise = null;
+        cycleCount = 0;
     }
 
+    public int getCycleCount() {
+        return cycleCount;
+    }
+
+    public void setCycleCount(int cycleCount) {
+        this.cycleCount = cycleCount;
+    }
+
+    public void addCycle() {
+        this.cycleCount = cycleCount+1;
+    }
 
     public int setNextExercise(){
         if (exercises.size() == 0) {

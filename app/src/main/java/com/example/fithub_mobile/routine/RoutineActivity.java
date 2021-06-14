@@ -4,21 +4,29 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 
+import com.example.fithub_mobile.App;
 import com.example.fithub_mobile.CycleData;
 import com.example.fithub_mobile.CycleDisplay;
 import com.example.fithub_mobile.ExecutionActivity;
 import com.example.fithub_mobile.ExerciseQueueRealState;
+import com.example.fithub_mobile.MainActivity;
 import com.example.fithub_mobile.NotificationActivity;
 import com.example.fithub_mobile.QrGenActivity;
 import com.example.fithub_mobile.R;
+import com.example.fithub_mobile.backend.models.FullCycle;
+import com.example.fithub_mobile.backend.models.FullCycleExercise;
+import com.example.fithub_mobile.backend.models.FullRoutine;
 import com.example.fithub_mobile.excercise.ExerciseData;
 import com.example.fithub_mobile.excercise.LastlyExecutedCard;
 import com.example.fithub_mobile.excercise.LastlyExecutedCardData;
 import com.example.fithub_mobile.excercise.LastlyExecutedCardDataManager;
+import com.example.fithub_mobile.repository.Resource;
+import com.example.fithub_mobile.repository.Status;
 import com.google.android.material.appbar.CollapsingToolbarLayout;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+import com.squareup.picasso.Picasso;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -28,9 +36,13 @@ import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.RatingBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -38,9 +50,9 @@ public class RoutineActivity extends AppCompatActivity {
 
     public static final String EXTRA_ID = "com.example.fithub_mobile.EXTRA_ID";
     static final private String ID_PARENT_EXTRA = "com.example.fithub_mobile.ID_PARENT";
+    private FullRoutine routine;
+    private List<FullCycle> cycles;
     private int id;
-    private String title;
-    private String desc;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,33 +60,43 @@ public class RoutineActivity extends AppCompatActivity {
         setContentView(R.layout.activity_routine);
 
         Intent intent = getIntent();
-
         id = Integer.parseInt(intent.getData().getQueryParameter("id"));
-        title = intent.getStringExtra(RoutineCard.TITLE_MESSAGE);
-        int rating = intent.getIntExtra(RoutineCard.RATING_MESSAGE,0);
-        desc = intent.getStringExtra(RoutineCard.DESC_MESSAGE);
 
         Toolbar toolbar = findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
         CollapsingToolbarLayout toolBarLayout = findViewById(R.id.toolbar_layout);
-        if (title != null)
-            toolBarLayout.setTitle(title);
-
-        TextView titleView = findViewById(R.id.title_routine);
-        if (desc != null)
-            titleView.setText(title);
+        setSupportActionBar(toolbar);
 
         RatingBar ratingBar = findViewById(R.id.rating_bar_routine_view);
-        ratingBar.setRating(rating);
-
         TextView descView = findViewById(R.id.desc_routine);
-        if (desc != null)
-            descView.setText(desc);
+        TextView titleView = findViewById(R.id.title_routine);
+
+        App app = (App)getApplication();
+        app.getRoutineRepository().getRoutine(id).observe(this, r -> {
+            if (r.getStatus() == Status.SUCCESS) {
+                routine = r.getData();
+                ratingBar.setRating(routine.getAverageRating());
+                descView.setText(routine.getDetail());
+                if(toolBarLayout != null)
+                    toolBarLayout.setTitle(routine.getName());
+                else
+                    titleView.setText(routine.getName());
+            } else {
+                Resource.defaultResourceHandler(r);
+            }
+        });
 
         LinearLayout cycleContainer = findViewById(R.id.cycle_container);
-        cycleContainer.addView(new CycleDisplay(this,new CycleData(1,"Uno",4)));
-        cycleContainer.addView(new CycleDisplay(this,new CycleData(1,"Uno",4)));
-        cycleContainer.addView(new CycleDisplay(this,new CycleData(1,"Uno",4)));
+
+        app.getCycleRepository().getCycles(id).observe(this, r -> {
+            if (r.getStatus() == Status.SUCCESS) {
+                cycles = r.getData().getContent();
+                for (FullCycle cycle : cycles) {
+                    cycleContainer.addView(new CycleDisplay(this,cycle));
+                }
+            } else {
+                Resource.defaultResourceHandler(r);
+            }
+        });
 
         FloatingActionButton fab = findViewById(R.id.fab);
         fab.setOnClickListener(view -> startExecution());
@@ -96,34 +118,64 @@ public class RoutineActivity extends AppCompatActivity {
     }
 
     public void startExecution(){
-        ArrayList<ExerciseData> exercises = new ArrayList<>();
-        exercises.add(new ExerciseData(1,"Diácono1","Prueba",4,4,"http://i.imgur.com/DvpvklR.png"));
-        exercises.add(new ExerciseData(1,"Diácono2","Prueba",4,4,"http://i.imgur.com/DvpvklR.png"));
-        exercises.add(new ExerciseData(1,"Diácono3","Prueba",4,4,"http://i.imgur.com/DvpvklR.png"));
-        exercises.add(new ExerciseData(1,"Diácono4","Prueba",4,4,"http://i.imgur.com/DvpvklR.png"));
-        exercises.add(new ExerciseData(1,"Diácono5","Prueba",4,4,"http://i.imgur.com/DvpvklR.png"));
 
-        ExerciseQueueRealState exerciseQueueRealState = ExerciseQueueRealState.getInstance();
-        exerciseQueueRealState.setNewRoutine(exercises);
+        App app = (App)getApplication();
+        app.getCycleRepository().getCycles(id).observe(this, r -> {
+            if (r.getStatus() == Status.SUCCESS) {
+                assert r.getData() != null;
+                cycles = r.getData().getContent();
+
+                ExerciseQueueRealState exerciseQueueRealState = ExerciseQueueRealState.getInstance();
+                exerciseQueueRealState.setNewRoutine(new ArrayList<>());
+
+                for (FullCycle cycle : cycles) {
+                    app.getCycleRepository().getCycleExercises(cycle.getId()).observe(this, rEx -> {
+                        if (rEx.getStatus() == Status.SUCCESS) {
+                            assert rEx.getData() != null;
+                            exerciseQueueRealState.addCycle();
+                            List<FullCycleExercise> cycleExercises = rEx.getData().getContent();
+                            for (FullCycleExercise ex : cycleExercises) {
+                                ex.setCycle(cycle);
+                                app.getExerciseImageRepository().getExerciseImages(ex.getExercise().getId()).observe(this, rImg -> {
+                                    if (rImg.getStatus() == Status.SUCCESS) {
+                                        assert rImg.getData() != null;
+                                        ex.setImg(rImg.getData().getContent().get(0).getUrl());
+                                    } else {
+                                        Resource.defaultResourceHandler(rImg);
+                                    }
+                                });
+                            }
+                            for (int i = 0; i < cycle.getRepetitions(); i ++)
+                                exerciseQueueRealState.getExercises().addAll(cycleExercises);
+
+                            if (exerciseQueueRealState.getCycleCount() == cycles.size()){
+                                Collections.sort(exerciseQueueRealState.getExercises());
+                                Intent i = new Intent(this, ExecutionActivity.class);
+                                startActivity(i);
+                            }
+
+                        } else {
+                            Resource.defaultResourceHandler(rEx);
+                        }
+                    });
+                }
+            } else {
+                Resource.defaultResourceHandler(r);
+            }
+        });
+
 
         //Adding to lastlyExecData
 
-        SharedPreferences sp = getSharedPreferences("lastly_exec",MODE_PRIVATE);
-        String stringedData = sp.getString("lastly_exec_ex","");
-        Gson gson = new Gson();
-        Type type = new TypeToken<LastlyExecutedCardDataManager>() {}.getType();
-        LastlyExecutedCardDataManager lastlyExecManager = gson.fromJson(stringedData,type);
-        if (lastlyExecManager == null){
-            lastlyExecManager = new LastlyExecutedCardDataManager();
-        }
+        LastlyExecutedCardDataManager lastlyExecManager = LastlyExecutedCardDataManager.getInstance();
 
-        lastlyExecManager.add(new LastlyExecutedCardData((title != null)?title:"titulo",
-                (desc!=null)?desc:"desc",id));
+        lastlyExecManager.add(this,new LastlyExecutedCardData(routine.getName(),
+                routine.getDetail(),id));
 
-        stringedData = gson.toJson(lastlyExecManager);
-        sp.edit().putString("lastly_exec_ex",stringedData).apply();
+    }
 
-        Intent i = new Intent(this, ExecutionActivity.class);
-        startActivity(i);
+    public void onBackPressed(){
+        startActivity(new Intent(this, MainActivity.class));
+        finish();
     }
 }

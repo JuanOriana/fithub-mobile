@@ -38,7 +38,7 @@
         app:srcCompat="@android:drawable/ic_media_next" />
 
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/queue_rep_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="12dp"
@@ -63,13 +63,12 @@
         android:id="@+id/execution_seconds"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="n"
         android:textColor="#CC454A48"
         android:textSize="24sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="@+id/textView4"
+        app:layout_constraintBottom_toBottomOf="@+id/execution_seconds_title"
         app:layout_constraintStart_toStartOf="@+id/execution_reps"
-        app:layout_constraintTop_toTopOf="@+id/textView4"
+        app:layout_constraintTop_toTopOf="@+id/execution_seconds_title"
         app:layout_constraintVertical_bias="0.867" />
 
     <ImageButton
@@ -90,7 +89,7 @@
         app:srcCompat="@android:drawable/ic_media_next" />
 
     <TextView
-        android:id="@+id/textView4"
+        android:id="@+id/execution_seconds_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="12dp"
@@ -98,7 +97,7 @@
         android:textColor="#CC454A48"
         android:textSize="24sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/textView"
+        app:layout_constraintBottom_toTopOf="@+id/queue_rep_title"
         app:layout_constraintStart_toEndOf="@+id/execution_seconds" />
 
     <TextView
@@ -107,7 +106,6 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
         android:layout_marginTop="36dp"
-        android:text="Ejercicio n"
         android:textAppearance="@style/TextAppearance.AppCompat.Body1"
         android:textColor="#454A48"
         android:textSize="30sp"
@@ -119,13 +117,12 @@
         android:id="@+id/execution_reps"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="n"
         android:textColor="#CC454A48"
         android:textSize="24sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="@+id/textView"
+        app:layout_constraintBottom_toBottomOf="@+id/queue_rep_title"
         app:layout_constraintStart_toStartOf="@+id/execution_desc"
-        app:layout_constraintTop_toTopOf="@+id/textView"
+        app:layout_constraintTop_toTopOf="@+id/queue_rep_title"
         app:layout_constraintVertical_bias="0.0" />
 
     <ToggleButton
@@ -171,15 +168,13 @@
         android:scaleType="centerCrop"
         app:layout_constraintBottom_toTopOf="@+id/progressBar"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/ic_launcher_background" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/execution_desc"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
-        android:text="Description"
         android:textColor="#CC454A48"
         android:textSize="24sp"
         android:textStyle="bold"

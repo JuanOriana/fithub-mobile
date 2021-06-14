@@ -18,7 +18,7 @@
         android:elevation="3dp">
 
         <TextView
-            android:id="@+id/textView19"
+            android:id="@+id/queue_rep_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
@@ -30,10 +30,10 @@
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/currents_repetitions" />
+            app:layout_constraintStart_toEndOf="@+id/queue_repetitions" />
 
         <TextView
-            android:id="@+id/currents_repetitions"
+            android:id="@+id/queue_repetitions"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="28dp"
@@ -44,7 +44,7 @@
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toEndOf="@+id/textView17"
-            app:layout_constraintTop_toTopOf="@+id/textView18" />
+            app:layout_constraintTop_toTopOf="@+id/exercise_card_reps_title" />
 
         <TextView
             android:id="@+id/textView17"
@@ -57,10 +57,10 @@
             android:textSize="16sp"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/current_seconds" />
+            app:layout_constraintStart_toEndOf="@+id/queue_seconds" />
 
         <TextView
-            android:id="@+id/current_seconds"
+            android:id="@+id/queue_seconds"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="60dp"

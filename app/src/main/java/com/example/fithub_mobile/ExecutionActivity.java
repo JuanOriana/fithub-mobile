@@ -1,7 +1,7 @@
 package com.example.fithub_mobile;
 
 
-import android.app.Activity;
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
@@ -12,12 +12,14 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.fithub_mobile.backend.models.FullCycleExercise;
 import com.example.fithub_mobile.excercise.ExerciseData;
+import com.example.fithub_mobile.repository.Resource;
+import com.example.fithub_mobile.repository.Status;
 import com.example.fithub_mobile.ui.search.FilterDialogFragment;
 import com.squareup.picasso.Picasso;
 
@@ -25,7 +27,7 @@ import java.util.ArrayList;
 
 public class ExecutionActivity extends AppCompatActivity {
 
-    private ArrayList<ExerciseData> exercises = new ArrayList<>();
+    private ArrayList<FullCycleExercise> exercises = new ArrayList<>();
     private ProgressBar pgBar;
     private ExerciseQueueRealState exerciseQueueRealState;
 
@@ -36,8 +38,6 @@ public class ExecutionActivity extends AppCompatActivity {
 
 
         exerciseQueueRealState = ExerciseQueueRealState.getInstance();
-
-        ExerciseData currentExercise = new ExerciseData(1,"Diácono","Prueba",4,4,"http://i.imgur.com/DvpvklR.png");
 
         pgBar = findViewById(R.id.progressBar);
         pgBar.setProgress(0);
@@ -53,9 +53,11 @@ public class ExecutionActivity extends AppCompatActivity {
 
 
     private void setNextExercise(){
-        if (exerciseQueueRealState.setNextExercise() == -1)
+        if (exerciseQueueRealState.setNextExercise() == -1) {
+            Toast.makeText(getApplicationContext(),getText(R.string.success_routine),Toast.LENGTH_LONG).show();
             finish();
-
+            return;
+        }
         setCurrentInfo(exerciseQueueRealState.getCurrentExercise());
         updateProgress();
     }
@@ -65,29 +67,62 @@ public class ExecutionActivity extends AppCompatActivity {
         if (exerciseQueueRealState.setPrevExercise() == -1)
             return;
 
-        setCurrentInfo(exerciseQueueRealState.getCurrentExercise());
-        updateProgress();
+
+        if (exerciseQueueRealState.getCurrentExercise() != null) {
+            setCurrentInfo(exerciseQueueRealState.getCurrentExercise());
+            updateProgress();
+        }
     }
 
-    private void setCurrentInfo(ExerciseData currentExercise){
+    @SuppressLint("SetTextI18n")
+    private void setCurrentInfo(FullCycleExercise currentExercise){
         View current = this.findViewById(R.id.exercise_execution);
 
+        findViewById(R.id.execution_seconds).setVisibility(View.VISIBLE);
+        findViewById(R.id.execution_seconds_title).setVisibility(View.VISIBLE);
+        findViewById(R.id.execution_rep_title).setVisibility(View.VISIBLE);
+        findViewById(R.id.execution_reps).setVisibility(View.VISIBLE);
+
         TextView currentText = current.findViewById(R.id.execution_title);
-        currentText.setText(currentExercise.getTitle());
+        currentText.setText(currentExercise.getExercise().getName());
         currentText = current.findViewById(R.id.execution_desc);
-        currentText.setText(currentExercise.getDesc());
+        currentText.setText(currentExercise.getExercise().getDetail());
+
         currentText = current.findViewById(R.id.execution_seconds);
-        currentText.setText(currentExercise.getSecs().toString());
+        int exerciseVal = currentExercise.getDuration();
+        if(exerciseVal <= 0) {
+            currentText.setVisibility(View.GONE);
+            current.findViewById(R.id.execution_seconds_title).setVisibility(View.GONE);
+        } else {
+            currentText.setText(Integer.toString(exerciseVal));
+        }
+
         currentText = current.findViewById(R.id.execution_reps);
-        currentText.setText(currentExercise.getReps().toString());
+        exerciseVal = currentExercise.getRepetitions();
+        if(exerciseVal <= 0) {
+            currentText.setVisibility(View.INVISIBLE);
+            current.findViewById(R.id.execution_rep_title).setVisibility(View.INVISIBLE);
+        } else {
+            currentText.setText(Integer.toString(exerciseVal));
+        }
 
         ImageView currentImage = current.findViewById(R.id.execution_img);
-        Picasso.get().load("https://i.imgur.com/DvpvklR.png").into(currentImage);
+        App app = (App)getApplication();
+        app.getExerciseImageRepository().getExerciseImages(currentExercise.getExercise().getId()).observe(this, r -> {
+            if (r.getStatus() == Status.SUCCESS) {
+                String url = r.getData().getContent().get(0).getUrl();
+                Picasso.get().load(url).into(currentImage);
+            } else {
+                Resource.defaultResourceHandler(r);
+            }
+        });
+
     }
 
     private void updateProgress(){
         if (pgBar == null)
             return;
+
         pgBar.setProgress((int)(exerciseQueueRealState.ratio()*100));
     }
 
