@@ -124,7 +124,7 @@ public class ExerciseAdapter extends RecyclerView.Adapter<ExerciseAdapter.ViewHo
         } else {
             holder.getRepCount().setText(Integer.toString(reps));
         }
-        Picasso.get().load("https://i.imgur.com/DvpvklR.png").into(holder.getImage());
+        Picasso.get().load(exercises.get(position).getImg()).into(holder.getImage());
     }
 
     @Override
