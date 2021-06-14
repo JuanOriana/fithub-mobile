@@ -1,5 +1,6 @@
 package com.example.fithub_mobile.ui.home;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
@@ -47,6 +48,7 @@ public class HomeFragment extends Fragment {
     private ArrayList<FullRoutine> routines = new ArrayList<>();
 
 
+    @SuppressLint("SetTextI18n")
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
 
@@ -60,7 +62,9 @@ public class HomeFragment extends Fragment {
 
         if (lastlyExecManager.getData(root.getContext()).size() == 0){
             TextView noDataText = new TextView(root.getContext());
-            noDataText.setText("NO HAY EJERCICIOS");
+            noDataText.setText(getText(R.string.no_recent_routines));
+            noDataText.setTextSize(20);
+            noDataText.setPadding(30,40,10,70);
             recentContainer.addView(noDataText);
         }
         else {

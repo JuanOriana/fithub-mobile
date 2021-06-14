@@ -34,13 +34,12 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="28dp"
-            android:text="n"
             android:textColor="#FFFFFF"
             android:textSize="16sp"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="@+id/textView17"
             app:layout_constraintStart_toEndOf="@+id/textView17"
-            app:layout_constraintTop_toTopOf="@+id/textView18" />
+            app:layout_constraintTop_toTopOf="@+id/textView17" />
 
         <TextView
             android:id="@+id/textView17"
@@ -86,7 +85,6 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="172dp"
             android:layout_marginTop="16dp"
-            android:text="Title"
             android:textColor="#FFFFFF"
             android:textSize="26sp"
             android:textStyle="bold"
@@ -99,7 +97,6 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="172dp"
             android:layout_marginTop="8dp"
-            android:text="Description"
             android:textColor="#FFFFFF"
             android:textSize="18sp"
             app:layout_constraintStart_toStartOf="parent"

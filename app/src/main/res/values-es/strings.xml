@@ -72,5 +72,6 @@
     <string name="rating_spinner_placeholder">Elija la puntuacion</string>
     <string name="empty_based_spinner_placeholder">Elija un filtro primero</string>
     <string name="difficulty_spinner_placeholder">Elija la dificultad</string>
+    <string name="no_recent_routines">¡No entrenaste recientemente!</string>
 
 </resources>
