@@ -51,13 +51,11 @@ public class SearchFragment extends Fragment implements FilterDialogListener {
     public static final int ORDER_DESC = 2;
     public static final int RATING = 1;
     public static final int DIFFICULTY = 2;
-    public static final int CATEGORY = 3;
-    public static final int CREATION_DATE = 4;
+    public static final int CREATION_DATE = 3;
 
 
     private SearchViewModel searchViewModel;
     private RecyclerView cardContainer;
-    private String query;
     SearchView searchView;
     public ArrayList<FullRoutine> extractedRoutines = new ArrayList<>();
     public ArrayList<FullRoutine> filteredRoutines = new ArrayList<>();

@@ -158,21 +158,28 @@ public class RoutineCardAdapter extends RecyclerView.Adapter<RoutineCardAdapter.
         holder.getUserNameView().setText(routines.get(position).getUser().getUsername());
         holder.getFavButton().setChecked(routines.get(position).isFavourite());
         Picasso.get().load(routines.get(position).getUser().getAvatarUrl()).into(holder.getUserImgView());
-//        String text;
-//        switch(routines.get(position).getDifficulty()) {
-//            case RoutineCardData.EASY_DIFFICULTY:
-//                text = holder.itemView.getContext().getString(R.string.easy_difficulty);
-//                break;
-//            case RoutineCardData.MEDIUM_DIFFICULTY:
-//                text = holder.itemView.getContext().getString(R.string.medium_difficulty);
-//                break;
-//            case RoutineCardData.HARD_DIFFICULTY:
-//                text = holder.itemView.getContext().getString(R.string.hard_difficulty);
-//                break;
-//            default:
-//                text = "";
-//        }
-        holder.getDifficulty().setText(routines.get(position).getDifficulty());
+        String text;
+        switch(routines.get(position).getDifficulty()) {
+            case "rookie":
+                text = holder.getContext().getString(R.string.rookie_difficulty);
+                break;
+            case "beginner":
+                text = holder.getContext().getString(R.string.beginner_difficulty);
+                break;
+            case "intermediate":
+                text = holder.getContext().getString(R.string.intermediate_difficulty);
+                break;
+            case "advanced":
+                text = holder.getContext().getString(R.string.advanced_difficulty);
+                break;
+            case "expert":
+                text = holder.getContext().getString(R.string.expert_difficulty);
+                break;
+            default:
+                text = "";
+                break;
+        }
+        holder.getDifficulty().setText(text);
 
         //Sharing
         ImageButton shareBtn = holder.getShareBtn();
