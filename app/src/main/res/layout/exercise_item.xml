@@ -18,49 +18,44 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:id="@+id/reps_count"
+    <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="3dp"
-        android:textStyle="bold"
-        android:textColor="@color/fithub_green"
-        app:layout_constraintBottom_toBottomOf="@+id/reps_tag"
-        app:layout_constraintEnd_toStartOf="@+id/reps_tag"
-        app:layout_constraintTop_toTopOf="@+id/reps_tag" />
-
-    <TextView
-        android:id="@+id/reps_tag"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:layout_marginEnd="10dp"
-        android:layout_marginBottom="10dp"
-        android:text="@string/reps"
-        android:textColor="@color/fithub_green"
+        android:orientation="horizontal"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent">
 
-    <TextView
-        android:id="@+id/secs_count"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="3dp"
-        android:textStyle="bold"
-        android:textColor="@color/fithub_green"
-        app:layout_constraintBottom_toBottomOf="@+id/textView16"
-        app:layout_constraintEnd_toStartOf="@+id/textView16"
-        app:layout_constraintTop_toTopOf="@+id/textView16" />
+        <TextView
+            android:id="@+id/secs_count"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="3dp"
+            android:textColor="@color/fithub_green"
+            android:textStyle="bold" />
 
-    <TextView
-        android:id="@+id/textView16"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="10dp"
-        android:text="@string/secs"
-        android:textColor="@color/fithub_green"
-        app:layout_constraintBottom_toBottomOf="@+id/reps_count"
-        app:layout_constraintEnd_toStartOf="@+id/reps_count"
-        app:layout_constraintTop_toTopOf="@+id/reps_count" />
+        <TextView
+            android:id="@+id/item_secs_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="10dp"
+            android:text="@string/secs"
+            android:textColor="@color/fithub_green" />
+
+        <TextView
+            android:id="@+id/reps_count"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="3dp"
+            android:textColor="@color/fithub_green"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/item_reps_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="10dp"
+            android:text="@string/reps"
+            android:textColor="@color/fithub_green" />
+    </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
