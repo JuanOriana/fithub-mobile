@@ -20,7 +20,7 @@
         app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
-        android:id="@+id/queue_rep_title"
+        android:id="@+id/execution_rep_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="12dp"
@@ -62,7 +62,7 @@
         android:textColor="#CC454A48"
         android:textSize="24sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/queue_rep_title"
+        app:layout_constraintBottom_toTopOf="@+id/execution_rep_title"
         app:layout_constraintStart_toEndOf="@+id/execution_seconds" />
 
     <TextView
@@ -85,9 +85,9 @@
         android:textColor="#CC454A48"
         android:textSize="24sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="@+id/queue_rep_title"
+        app:layout_constraintBottom_toBottomOf="@+id/execution_rep_title"
         app:layout_constraintStart_toStartOf="@+id/execution_desc"
-        app:layout_constraintTop_toTopOf="@+id/queue_rep_title"
+        app:layout_constraintTop_toTopOf="@+id/execution_rep_title"
         app:layout_constraintVertical_bias="0.0" />
 
     <LinearLayout
