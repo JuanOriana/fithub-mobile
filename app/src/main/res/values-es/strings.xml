@@ -33,9 +33,9 @@
     <string name="cancel_btn">Cancelar</string>
     <string name="save_btn">Guardar</string>
     <string name="logout">Log Out</string>
-    <string name="no_account">¿No tenés cuenta?</string>
+    <string name="no_account">¿No tienes una cuenta?</string>
     <string name="sign_up">Registrate</string>
-    <string name="account">¿Ya tenés cuenta?</string>
+    <string name="account">¿Ya tienes una cuenta?</string>
     <string name="sign_in">Inicia sesión</string>
     <string name="username">Nombre de usuario</string>
     <string name="current_exercise">Ejercicio actual</string>
