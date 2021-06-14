@@ -36,7 +36,7 @@
     <string name="no_account">¿No tenés cuenta?</string>
     <string name="sign_up">Registrate</string>
     <string name="account">¿Ya tenés cuenta?</string>
-    <string name="sign_in">Incia sesión</string>
+    <string name="sign_in">Inicia sesión</string>
     <string name="username">Nombre de usuario</string>
     <string name="current_exercise">Ejercicio actual</string>
     <string name="next_up">Siguiente</string>
@@ -53,7 +53,7 @@
     <string name="secs">Segundos</string>
     <string name="reps">Repeticiones</string>
     <string name="accept">Aceptar</string>
-    <string name="when_do_you_want_to_be_notified_for_your_routine">Cuando quieres que se te notifique para tu rutina?</string>
+    <string name="when_do_you_want_to_be_notified_for_your_routine">¿Cuando quieres que se te notifique para tu rutina?</string>
     <string name="sort_spinner_placeholder">Elija la categoría</string>
     <string name="order_spinner_placeholder">Elija el ordenamiento</string>
     <string name="descending">Descendente</string>
@@ -76,5 +76,7 @@
     <string name="intermediate_difficulty">Intermedio</string>
     <string name="advanced_difficulty">Avanzado</string>
     <string name="expert_difficulty">Experto</string>
+    <string name="verif_success">¡Cuenta verificada exitosamente!</string>
+    <string name="verif_fail">Hubo un problema verificando tu cuenta</string>
 
 </resources>

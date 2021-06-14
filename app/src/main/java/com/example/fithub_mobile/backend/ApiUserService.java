@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData;
 
 
 import com.example.fithub_mobile.backend.models.Credentials;
+import com.example.fithub_mobile.backend.models.EmailConfirmation;
 import com.example.fithub_mobile.backend.models.FullRoutine;
 import com.example.fithub_mobile.backend.models.FullUser;
 import com.example.fithub_mobile.backend.models.PagedList;
@@ -25,6 +26,9 @@ public interface ApiUserService {
 
     @POST("users")
     LiveData<ApiResponse<FullUser>> register(@Body RegisterCredentials credentials);
+
+    @POST("users/verify_email")
+    LiveData<ApiResponse<Void>> verifyEmail(@Body EmailConfirmation credentials);
 
     @GET("users/current")
     LiveData<ApiResponse<FullUser>> getCurrentUser();
