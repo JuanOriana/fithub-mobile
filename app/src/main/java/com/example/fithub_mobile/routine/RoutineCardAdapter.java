@@ -156,6 +156,7 @@ public class RoutineCardAdapter extends RecyclerView.Adapter<RoutineCardAdapter.
         holder.getDescView().setText(routines.get(position).getDetail());
         holder.getRatingBar().setRating(routines.get(position).getAverageRating());
         holder.getUserNameView().setText(routines.get(position).getUser().getUsername());
+        holder.getFavButton().setOnCheckedChangeListener(null);
         holder.getFavButton().setChecked(routines.get(position).isFavourite());
         Picasso.get().load(routines.get(position).getUser().getAvatarUrl()).into(holder.getUserImgView());
         String text;
