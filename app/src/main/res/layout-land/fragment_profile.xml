@@ -10,8 +10,8 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/userContainer"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="279dp"
+        android:layout_height="193dp"
         android:layout_marginStart="25dp"
         android:layout_marginTop="20dp"
         android:background="@color/fithub_green"
@@ -20,14 +20,11 @@
 
         <ImageView
             android:id="@+id/userImg"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
+            android:layout_width="122dp"
+            android:layout_height="126dp"
             android:layout_marginStart="20dp"
-            android:layout_marginEnd="20dp"
             android:scaleType="centerCrop"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/userName"
-            app:layout_constraintHorizontal_bias="0.072"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.466" />
@@ -36,8 +33,8 @@
             android:id="@+id/userName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:layout_marginEnd="30dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="10dp"
             android:textColor="@color/white"
             android:textSize="22sp"
             android:textStyle="bold"
@@ -45,15 +42,26 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
+            android:id="@+id/favtext"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="@string/favouriteTag"
+            android:textColor="@color/white"
+            app:layout_constraintEnd_toEndOf="@+id/fav_count_val"
+            app:layout_constraintHorizontal_bias="0.482"
+            app:layout_constraintStart_toStartOf="@+id/fav_count_val"
+            app:layout_constraintTop_toBottomOf="@+id/fav_count_val" />
+
+        <TextView
             android:id="@+id/routineText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
-            android:layout_marginBottom="15dp"
+            android:layout_marginTop="12dp"
+            android:layout_marginEnd="40dp"
+            android:text="@string/RoutineTag"
             android:textColor="@color/white"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="@+id/routine_count_val"
-            app:layout_constraintStart_toStartOf="@+id/routine_count_val"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/routine_count_val" />
 
         <TextView
@@ -62,10 +70,19 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:textColor="@color/white"
-            app:layout_constraintEnd_toEndOf="@+id/userName"
-            app:layout_constraintHorizontal_bias="0.493"
-            app:layout_constraintStart_toStartOf="@+id/userName"
+            app:layout_constraintEnd_toEndOf="@+id/routineText"
+            app:layout_constraintStart_toStartOf="@+id/routineText"
             app:layout_constraintTop_toBottomOf="@+id/userName" />
+
+        <TextView
+            android:id="@+id/fav_count_val"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:textColor="@color/white"
+            app:layout_constraintEnd_toEndOf="@+id/routineText"
+            app:layout_constraintStart_toStartOf="@+id/routineText"
+            app:layout_constraintTop_toBottomOf="@+id/routineText" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -73,11 +90,11 @@
         android:id="@+id/edit_btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
+        android:layout_marginStart="20dp"
         android:text="@string/edit_profile"
-        app:layout_constraintEnd_toEndOf="@+id/userContainer"
-        app:layout_constraintStart_toStartOf="@+id/userContainer"
-        app:layout_constraintTop_toBottomOf="@+id/userContainer" />
+        app:layout_constraintBottom_toBottomOf="@+id/logout_btn"
+        app:layout_constraintStart_toEndOf="@+id/logout_btn"
+        app:layout_constraintTop_toTopOf="@+id/logout_btn" />
 
     <LinearLayout
         android:layout_width="0dp"
@@ -86,13 +103,15 @@
         android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toEndOf="@+id/userContainer"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0">
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/cardContainer"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_gravity="center_horizontal"
             android:layout_marginBottom="60dp"
             android:divider="@drawable/divider"
@@ -106,12 +125,13 @@
         android:id="@+id/logout_btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="38dp"
+        android:layout_marginTop="10dp"
         android:backgroundTint="#CC4545"
         android:onClick="logOut"
         android:text="@string/logout"
-        app:layout_constraintEnd_toEndOf="@+id/userContainer"
-        app:layout_constraintStart_toStartOf="@+id/userContainer"
-        app:layout_constraintTop_toBottomOf="@+id/edit_btn" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/userContainer" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
