@@ -15,6 +15,7 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -58,6 +59,7 @@ public class ExecutionActivity extends AppCompatActivity {
 
     private void setNextExercise(){
         if (exerciseQueueRealState.setNextExercise() == -1) {
+            Toast.makeText(getApplicationContext(),getText(R.string.success_routine),Toast.LENGTH_LONG).show();
             finish();
             return;
         }
@@ -69,6 +71,7 @@ public class ExecutionActivity extends AppCompatActivity {
     private void setPrevExercise(){
         if (exerciseQueueRealState.setPrevExercise() == -1)
             return;
+
 
         if (exerciseQueueRealState.getCurrentExercise() != null) {
             setCurrentInfo(exerciseQueueRealState.getCurrentExercise());
@@ -117,6 +120,7 @@ public class ExecutionActivity extends AppCompatActivity {
     private void updateProgress(){
         if (pgBar == null)
             return;
+
         pgBar.setProgress((int)(exerciseQueueRealState.ratio()*100));
     }
 

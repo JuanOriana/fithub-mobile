@@ -77,6 +77,7 @@
     <string name="empty_based_spinner_placeholder">Select a filter first</string>
     <string name="difficulty_spinner_placeholder">Choose the difficulty</string>
     <string name="no_recent_routines">You haven\'t trained recently!</string>
+    <string name="success_routine">Routine finished sucessfully!</string>
 
 
 </resources>

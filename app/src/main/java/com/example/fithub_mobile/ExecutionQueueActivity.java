@@ -20,6 +20,7 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.fithub_mobile.backend.models.FullCycleExercise;
 import com.example.fithub_mobile.excercise.ExerciseData;
@@ -63,8 +64,11 @@ public class ExecutionQueueActivity extends AppCompatActivity {
     }
 
     private void setNextExercise(){
-        if (exerciseQueueRealState.setNextExercise() == -1)
+        if (exerciseQueueRealState.setNextExercise() == -1) {
+            Toast.makeText(getApplicationContext(), getText(R.string.success_routine), Toast.LENGTH_LONG).show();
             finish();
+            return;
+        }
 
         setCurrentInfo(exerciseQueueRealState.getCurrentExercise());
         adapter.notifyDataSetChanged();
