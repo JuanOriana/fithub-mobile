@@ -3,9 +3,7 @@
     <string-array name="sort_items">
         <item>Rating</item>
         <item>@string/spinner_difficulty_item</item>
-        <item>@string/spinner_sport_item</item>
         <item>@string/spinner_creation_item</item>
-        <item>@string/spinner_category_item</item>
     </string-array>
     <string-array name="sort_order_items">
         <item>@string/ascending</item>
@@ -23,8 +21,10 @@
         <item>5</item>
     </string-array>
     <string-array name="difficulty_items">
-        <item>@string/easy_difficulty</item>
-        <item>@string/medium_difficulty</item>
-        <item>@string/hard_difficulty</item>
+        <item>@string/rookie_difficulty</item>
+        <item>@string/beginner_difficulty</item>
+        <item>@string/intermediate_difficulty</item>
+        <item>@string/advanced_difficulty</item>
+        <item>@string/expert_difficulty</item>
     </string-array>
 </resources>

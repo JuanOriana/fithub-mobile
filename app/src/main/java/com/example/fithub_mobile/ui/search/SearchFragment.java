@@ -43,6 +43,7 @@ import com.example.fithub_mobile.routine.RoutineCardData;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
+import java.util.Objects;
 import java.util.function.Predicate;
 
 public class SearchFragment extends Fragment implements FilterDialogListener {
@@ -50,40 +51,39 @@ public class SearchFragment extends Fragment implements FilterDialogListener {
     public static final int ORDER_DESC = 2;
     public static final int RATING = 1;
     public static final int DIFFICULTY = 2;
-    public static final int SPORT = 3;
-    public static final int CATEGORY = 4;
-    public static final int CREATION_DATE = 5;
+    public static final int CATEGORY = 3;
+    public static final int CREATION_DATE = 4;
 
 
     private SearchViewModel searchViewModel;
-        private RecyclerView cardContainer;
-        private String query;
-        SearchView searchView;
-        public ArrayList<FullRoutine> extractedRoutines = new ArrayList<>();
-        public ArrayList<FullRoutine> filteredRoutines = new ArrayList<>();
-        RoutineCardAdapter adapter;
+    private RecyclerView cardContainer;
+    private String query;
+    SearchView searchView;
+    public ArrayList<FullRoutine> extractedRoutines = new ArrayList<>();
+    public ArrayList<FullRoutine> filteredRoutines = new ArrayList<>();
+    RoutineCardAdapter adapter;
 
-        @RequiresApi(api = Build.VERSION_CODES.Q)
-        public View onCreateView(@NonNull LayoutInflater inflater,
-                                 ViewGroup container, Bundle savedInstanceState) {
-            super.onCreateView(inflater,container,savedInstanceState);
-            searchViewModel =
-                    new ViewModelProvider(this).get(SearchViewModel.class);
-            View root = inflater.inflate(R.layout.fragment_search, container, false);
-            setHasOptionsMenu(true);
+    @RequiresApi(api = Build.VERSION_CODES.Q)
+    public View onCreateView(@NonNull LayoutInflater inflater,
+                             ViewGroup container, Bundle savedInstanceState) {
+        super.onCreateView(inflater, container, savedInstanceState);
+        searchViewModel =
+                new ViewModelProvider(this).get(SearchViewModel.class);
+        View root = inflater.inflate(R.layout.fragment_search, container, false);
+        setHasOptionsMenu(true);
 
-            cardContainer = root.findViewById(R.id.cardContainer);
-            cardContainer.setLayoutManager(new GridLayoutManager(getContext(),getActivity().getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT ? 1 : 2));
-            adapter = new RoutineCardAdapter(extractedRoutines);
-            cardContainer.setAdapter(adapter);
+        cardContainer = root.findViewById(R.id.cardContainer);
+        cardContainer.setLayoutManager(new GridLayoutManager(getContext(), getActivity().getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT ? 1 : 2));
+        adapter = new RoutineCardAdapter(extractedRoutines);
+        cardContainer.setAdapter(adapter);
 
-            initRoutines();
+        initRoutines();
 
-            return root;
-        }
+        return root;
+    }
 
     public void initRoutines() {
-        App app = (App) getActivity().getApplication();
+        App app = (App) requireActivity().getApplication();
         app.getFavouriteRepository().getFavourites().observe(getViewLifecycleOwner(), rfav -> {
             if (rfav.getStatus() == Status.SUCCESS) {
                 assert rfav.getData() != null;
@@ -92,7 +92,7 @@ public class SearchFragment extends Fragment implements FilterDialogListener {
                     if (r.getStatus() == Status.SUCCESS) {
                         assert r.getData() != null;
                         extractedRoutines.addAll(r.getData().getContent());
-                        for (FullRoutine routine : extractedRoutines){
+                        for (FullRoutine routine : extractedRoutines) {
                             if (rfav.getData().getContent().contains(routine)) {
                                 routine.setFavourite(true);
                                 adapter.notifyDataSetChanged();
@@ -127,7 +127,7 @@ public class SearchFragment extends Fragment implements FilterDialogListener {
         searchView.addOnAttachStateChangeListener(new View.OnAttachStateChangeListener() {
             @Override
             public void onViewAttachedToWindow(View v) {
-                searchView.setQuery("",false);
+                searchView.setQuery("", false);
             }
 
             @Override
@@ -166,8 +166,8 @@ public class SearchFragment extends Fragment implements FilterDialogListener {
             case R.id.filter_menu_item:
 
                 FilterDialogFragment f = new FilterDialogFragment();
-                f.show(getParentFragmentManager(),"FilterFragment");
-                f.setTargetFragment(this,0);
+                f.show(getParentFragmentManager(), "FilterFragment");
+                f.setTargetFragment(this, 0);
                 break;
             default:
         }
@@ -178,7 +178,7 @@ public class SearchFragment extends Fragment implements FilterDialogListener {
         InputMethodManager inputMethodManager =
                 (InputMethodManager) activity.getSystemService(
                         Activity.INPUT_METHOD_SERVICE);
-        if(inputMethodManager.isAcceptingText()){
+        if (inputMethodManager.isAcceptingText()) {
             inputMethodManager.hideSoftInputFromWindow(
                     activity.getCurrentFocus().getWindowToken(),
                     0
@@ -188,69 +188,76 @@ public class SearchFragment extends Fragment implements FilterDialogListener {
 
     @Override
     public void onDialogPositiveClick(int[] dialogState) {
-       int selectedBasedCriteria = dialogState[FilterDialogFragment.BASED_CRITERIA];
-       int selectedFilterCriteria = dialogState[FilterDialogFragment.FILTER_CRITERIA];
-       int selectedSortingCriteria = dialogState[FilterDialogFragment.SORT_CRITERIA];
-       int selectedOrderCriteria = dialogState[FilterDialogFragment.ORDER_CRITERIA];
-       extractedRoutines.addAll(filteredRoutines);
-       filteredRoutines.clear();
-       if(selectedBasedCriteria > 0) {
-           switch (selectedFilterCriteria) {
-               case RATING: {
-                   for (FullRoutine r : extractedRoutines)
-                       if (!(r.getAverageRating() == selectedBasedCriteria))
-                           filteredRoutines.add(r);
-                   extractedRoutines.removeIf(routineCardData -> !(routineCardData.getAverageRating() == (selectedBasedCriteria)));
-                   break;
-               }
-               case DIFFICULTY: {
-                   for (FullRoutine r : extractedRoutines)
-                       if (!r.getDifficulty().equals(selectedBasedCriteria))
-                           filteredRoutines.add(r);
-                   extractedRoutines.removeIf(routineCardData -> !routineCardData.getDifficulty().equals(selectedBasedCriteria));
-                   break;
-               }
-               default:
-                   break;
-           }
-       }
-       switch (selectedSortingCriteria){
-           case RATING:
-               if(selectedOrderCriteria == ORDER_ASC)
+        int selectedBasedCriteria = dialogState[FilterDialogFragment.BASED_CRITERIA];
+        int selectedFilterCriteria = dialogState[FilterDialogFragment.FILTER_CRITERIA];
+        int selectedSortingCriteria = dialogState[FilterDialogFragment.SORT_CRITERIA];
+        int selectedOrderCriteria = dialogState[FilterDialogFragment.ORDER_CRITERIA];
+        extractedRoutines.addAll(filteredRoutines);
+        filteredRoutines.clear();
+        if (selectedBasedCriteria > 0) {
+            switch (selectedFilterCriteria) {
+                case RATING: {
+                    for (FullRoutine r : extractedRoutines)
+                        if (!(r.getAverageRating() == selectedBasedCriteria))
+                            filteredRoutines.add(r);
+                    extractedRoutines.removeIf(routineCardData -> !(routineCardData.getAverageRating() == (selectedBasedCriteria)));
+                    break;
+                }
+                case DIFFICULTY: {
+                    for (FullRoutine r : extractedRoutines)
+                        if (!getDifficultyId(r.getDifficulty()).equals(selectedBasedCriteria))
+                            filteredRoutines.add(r);
+                    extractedRoutines.removeIf(routineCardData -> !getDifficultyId(routineCardData.getDifficulty()).equals(selectedBasedCriteria));
+                    break;
+                }
+                default:
+                    break;
+            }
+        }
+        switch (selectedSortingCriteria) {
+            case RATING:
+                if (selectedOrderCriteria == ORDER_ASC)
                     extractedRoutines.sort((o1, o2) -> o1.getAverageRating() - o2.getAverageRating());
-               else if((selectedOrderCriteria == ORDER_DESC))
-                   extractedRoutines.sort((o1, o2) -> o2.getAverageRating() - o1.getAverageRating());
-               break;
-           case DIFFICULTY:
-               if(selectedOrderCriteria == ORDER_ASC)
-                   extractedRoutines.sort((o1, o2) -> o1.getDifficulty().compareTo(o2.getDifficulty()));
-               else if((selectedOrderCriteria == ORDER_DESC))
-                   extractedRoutines.sort((o1, o2) -> o2.getDifficulty().compareTo(o1.getDifficulty()));
-               break;
-           case SPORT:
-               if(selectedOrderCriteria == ORDER_ASC)
-                   extractedRoutines.sort((o1, o2) -> o1.getDifficulty().compareTo(o2.getDifficulty()));
-               else if((selectedOrderCriteria == ORDER_DESC))
-                   extractedRoutines.sort((o1, o2) -> o2.getDifficulty().compareTo(o1.getDifficulty()));
-           case CATEGORY:
-               if(selectedOrderCriteria == ORDER_ASC)
-                   extractedRoutines.sort((o1, o2) -> o1.getDifficulty().compareTo(o2.getDifficulty()));
-               else if((selectedOrderCriteria == ORDER_DESC))
-                   extractedRoutines.sort((o1, o2) -> o2.getDifficulty().compareTo(o1.getDifficulty()));
-           case CREATION_DATE:
-               if(selectedOrderCriteria == ORDER_ASC)
-                   extractedRoutines.sort((o1, o2) -> o1.getDifficulty().compareTo(o2.getDifficulty()));
-               else if((selectedOrderCriteria == ORDER_DESC))
-                   extractedRoutines.sort((o1, o2) -> o2.getDifficulty().compareTo(o1.getDifficulty()));
+                else if ((selectedOrderCriteria == ORDER_DESC))
+                    extractedRoutines.sort((o1, o2) -> o2.getAverageRating() - o1.getAverageRating());
+                break;
+            case DIFFICULTY:
+                if (selectedOrderCriteria == ORDER_ASC)
+                    extractedRoutines.sort((o1, o2) -> getDifficultyId(o1.getDifficulty()).compareTo(getDifficultyId(o2.getDifficulty())));
+                else if ((selectedOrderCriteria == ORDER_DESC))
+                    extractedRoutines.sort((o1, o2) -> getDifficultyId(o2.getDifficulty()).compareTo(getDifficultyId(o1.getDifficulty())));
+                break;
+            case CREATION_DATE:
+                if (selectedOrderCriteria == ORDER_ASC)
+                    extractedRoutines.sort((o1, o2) -> Long.compare(o1.getDate(), o2.getDate()));
+                else if ((selectedOrderCriteria == ORDER_DESC))
+                    extractedRoutines.sort((o1, o2) -> Long.compare(o2.getDate(), o1.getDate()));
 
-           default: break;
-       }
-       adapter.notifyDataSetChanged();
+            default:
+                break;
+        }
+        adapter.notifyDataSetChanged();
     }
 
     @Override
     public void onDialogNegativeClick(DialogFragment dialog) {
+    }
 
+    private Integer getDifficultyId(String difficulty) {
+        switch (difficulty) {
+            case "rookie":
+                return 1;
+            case "beginner":
+                return 2;
+            case "intermediate":
+                return 3;
+            case "advanced":
+                return 4;
+            case "expert":
+                return 5;
+            default:
+                return 0;
+        }
     }
 }
 

@@ -63,9 +63,6 @@
     <string name="spinner_creation_item">Fecha de Creación</string>
     <string name="spinner_category_item">Categoría</string>
     <string name="spinner_sport_item">Deporte</string>
-    <string name="hard_difficulty">Difícil</string>
-    <string name="easy_difficulty">Fácil</string>
-    <string name="medium_difficulty">Intermedia</string>
     <string name="based_spinner_title">En base a:</string>
     <string name="filter_spinner_title">Filtrar por:</string>
     <string name="filter_spinner_default_item">Elija el filtro</string>
@@ -74,5 +71,10 @@
     <string name="difficulty_spinner_placeholder">Elija la dificultad</string>
     <string name="no_recent_routines">¡No entrenaste recientemente!</string>
     <string name="success_routine">¡Rutina finalizada exitosamente!</string>
+    <string name="rookie_difficulty">Novato</string>
+    <string name="beginner_difficulty">Principiante</string>
+    <string name="intermediate_difficulty">Intermedio</string>
+    <string name="advanced_difficulty">Avanzado</string>
+    <string name="expert_difficulty">Experto</string>
 
 </resources>
