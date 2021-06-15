@@ -72,6 +72,7 @@ public class NotificationActivity extends AppCompatActivity {
                     calendar.add(Calendar.DATE,diff);
                     calendar.set(Calendar.HOUR_OF_DAY, tp.getHour());
                     calendar.set(Calendar.MINUTE, tp.getMinute());
+                    Log.d("CALENDAR",calendar.toString());
                     Intent pending = new Intent( this, NotifyHandlerReceiver.class );
                     pending.putExtra(DAY_EXTRA,42+i);
                     pending.putExtra(ID_EXTRA,getIntent().getIntExtra(ID_PARENT_EXTRA,0));
@@ -79,7 +80,7 @@ public class NotificationActivity extends AppCompatActivity {
                             this,
                             42+i,
                             pending,
-                            0);
+                            PendingIntent.FLAG_CANCEL_CURRENT);
                     alarmManager.set(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), pendingNotifyIntent);
                 }
             }
