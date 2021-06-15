@@ -44,4 +44,17 @@ public class SearchViewModel extends ViewModel {
     public int getSortingCriteria(){
         return filters[FilterDialogFragment.SORT_CRITERIA];
     }
+
+    public void setBasedCriteria(int basedCriteria){
+        filters[FilterDialogFragment.BASED_CRITERIA] = basedCriteria;
+    }
+    public void setFilterCriteria(int filterCriteria){
+        filters[FilterDialogFragment.FILTER_CRITERIA] = filterCriteria;
+    }
+    public void setOrderCriteria(int orderCriteria){
+        filters[FilterDialogFragment.ORDER_CRITERIA] = orderCriteria;
+    }
+    public void setSortingCriteria(int sortingCriteria){
+        filters[FilterDialogFragment.SORT_CRITERIA] = sortingCriteria;
+    }
 }

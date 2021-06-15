@@ -1,6 +1,7 @@
 package com.example.fithub_mobile.ui.search;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.res.Configuration;
 import android.os.Build;
 import android.os.Bundle;
@@ -15,6 +16,7 @@ import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.Filter;
 import android.widget.SearchView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -100,7 +102,7 @@ public class SearchFragment extends Fragment implements FilterDialogListener {
                         cardContainer.setAdapter(adapter);
                         adapter.notifyDataSetChanged();
                         adapter.getFilter().filter(searchViewModel.getSearchQuery());
-                        filter(searchViewModel.filters);
+                        filter();
 
                     } else {
                         Resource.defaultResourceHandler(r);
@@ -121,7 +123,6 @@ public class SearchFragment extends Fragment implements FilterDialogListener {
 
 
         searchView = (SearchView) menu.findItem(R.id.search).getActionView();
-        searchView.setIconifiedByDefault(false);
         searchView.setIconified(false);
 
         searchView.addOnAttachStateChangeListener(new View.OnAttachStateChangeListener() {
@@ -132,9 +133,8 @@ public class SearchFragment extends Fragment implements FilterDialogListener {
 
             @Override
             public void onViewDetachedFromWindow(View v) {
-                adapter.getFilter().filter("");
-                if (isAdded())
-                    hideSoftKeyboard(requireActivity());
+                searchView.setQuery("", false);
+
             }
         });
 
@@ -148,7 +148,7 @@ public class SearchFragment extends Fragment implements FilterDialogListener {
             @Override
             public boolean onQueryTextChange(String newText) {
                 searchViewModel.setSearchQuery(newText);
-                adapter.getFilter().filter(searchViewModel.getSearchQuery());
+                adapter.getFilter().filter(searchViewModel.getSearchQuery(), count -> filter());
                 return true;
             }
         });
@@ -165,10 +165,11 @@ public class SearchFragment extends Fragment implements FilterDialogListener {
                 startActivity(i);
                 return true;
             case R.id.filter_menu_item:
-
                 FilterDialogFragment f = new FilterDialogFragment();
                 f.show(getParentFragmentManager(), "FilterFragment");
                 f.setTargetFragment(this, 0);
+                searchViewModel.clearFilters();
+                filter();
                 break;
             default:
         }
@@ -189,11 +190,11 @@ public class SearchFragment extends Fragment implements FilterDialogListener {
 
     @Override
     public void onDialogPositiveClick(int[] dialogState) {
-        filter(dialogState);
+        searchViewModel.setFilters(dialogState);
+        filter();
     }
 
-    private void filter(int[] dialogState) {
-        searchViewModel.setFilters(dialogState);
+    private void filter() {
         extractedRoutines.addAll(filteredRoutines);
         filteredRoutines.clear();
         if (searchViewModel.getBasedCriteria() > 0) {
@@ -201,14 +202,16 @@ public class SearchFragment extends Fragment implements FilterDialogListener {
                 case RATING: {
                     for (FullRoutine r : extractedRoutines)
                         if (!(r.getAverageRating() == searchViewModel.getBasedCriteria()))
-                            filteredRoutines.add(r);
+                            if(!filteredRoutines.contains(r))
+                                filteredRoutines.add(r);
                     extractedRoutines.removeIf(routineCardData -> !(routineCardData.getAverageRating() == (searchViewModel.getBasedCriteria())));
                     break;
                 }
                 case DIFFICULTY: {
                     for (FullRoutine r : extractedRoutines)
                         if (!getDifficultyId(r.getDifficulty()).equals(searchViewModel.getBasedCriteria()))
-                            filteredRoutines.add(r);
+                            if(!filteredRoutines.contains(r))
+                                filteredRoutines.add(r);
                     extractedRoutines.removeIf(routineCardData -> !getDifficultyId(routineCardData.getDifficulty()).equals(searchViewModel.getBasedCriteria()));
                     break;
                 }
@@ -234,7 +237,6 @@ public class SearchFragment extends Fragment implements FilterDialogListener {
                     extractedRoutines.sort((o1, o2) -> Long.compare(o1.getDate(), o2.getDate()));
                 else if ((searchViewModel.getOrderCriteria() == ORDER_DESC))
                     extractedRoutines.sort((o1, o2) -> Long.compare(o2.getDate(), o1.getDate()));
-
             default:
                 break;
         }
@@ -242,8 +244,7 @@ public class SearchFragment extends Fragment implements FilterDialogListener {
     }
 
     @Override
-    public void onDialogNegativeClick(DialogFragment dialog) {
-        searchViewModel.clearFilters();
+    public void onDialogNegativeClick(int[] dialogState) { ;
     }
 
     private Integer getDifficultyId(String difficulty) {
@@ -266,5 +267,5 @@ public class SearchFragment extends Fragment implements FilterDialogListener {
 
 interface FilterDialogListener {
      void onDialogPositiveClick(int[] dialogState);
-     void onDialogNegativeClick(DialogFragment dialog);
+     void onDialogNegativeClick(int[] dialogState);
 }
