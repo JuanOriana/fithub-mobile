@@ -5,6 +5,7 @@ import android.content.res.Configuration;
 import android.os.Build;
 import android.os.Bundle;
 import android.content.Intent;
+import android.os.Parcelable;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -19,12 +20,14 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.LifecycleOwner;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.Observer;
+import androidx.lifecycle.SavedStateViewModelFactory;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -47,6 +50,7 @@ import java.util.Objects;
 import java.util.function.Predicate;
 
 public class SearchFragment extends Fragment implements FilterDialogListener {
+
     public static final int ORDER_ASC = 1;
     public static final int ORDER_DESC = 2;
     public static final int RATING = 1;
@@ -61,6 +65,7 @@ public class SearchFragment extends Fragment implements FilterDialogListener {
     public ArrayList<FullRoutine> filteredRoutines = new ArrayList<>();
     RoutineCardAdapter adapter;
 
+
     @RequiresApi(api = Build.VERSION_CODES.Q)
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -73,8 +78,6 @@ public class SearchFragment extends Fragment implements FilterDialogListener {
         initRoutines();
         cardContainer = root.findViewById(R.id.cardContainer);
         cardContainer.setLayoutManager(new GridLayoutManager(getContext(), getActivity().getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT ? 1 : 2));
-
-
         return root;
     }
 
@@ -96,6 +99,8 @@ public class SearchFragment extends Fragment implements FilterDialogListener {
                         adapter = new RoutineCardAdapter(extractedRoutines);
                         cardContainer.setAdapter(adapter);
                         adapter.notifyDataSetChanged();
+                        adapter.getFilter().filter(searchViewModel.getSearchQuery());
+                        filter(searchViewModel.filters);
 
                     } else {
                         Resource.defaultResourceHandler(r);
@@ -142,7 +147,8 @@ public class SearchFragment extends Fragment implements FilterDialogListener {
 
             @Override
             public boolean onQueryTextChange(String newText) {
-                adapter.getFilter().filter(newText);
+                searchViewModel.setSearchQuery(newText);
+                adapter.getFilter().filter(searchViewModel.getSearchQuery());
                 return true;
             }
         });
@@ -183,49 +189,50 @@ public class SearchFragment extends Fragment implements FilterDialogListener {
 
     @Override
     public void onDialogPositiveClick(int[] dialogState) {
-        int selectedBasedCriteria = dialogState[FilterDialogFragment.BASED_CRITERIA];
-        int selectedFilterCriteria = dialogState[FilterDialogFragment.FILTER_CRITERIA];
-        int selectedSortingCriteria = dialogState[FilterDialogFragment.SORT_CRITERIA];
-        int selectedOrderCriteria = dialogState[FilterDialogFragment.ORDER_CRITERIA];
+        filter(dialogState);
+    }
+
+    private void filter(int[] dialogState) {
+        searchViewModel.setFilters(dialogState);
         extractedRoutines.addAll(filteredRoutines);
         filteredRoutines.clear();
-        if (selectedBasedCriteria > 0) {
-            switch (selectedFilterCriteria) {
+        if (searchViewModel.getBasedCriteria() > 0) {
+            switch (searchViewModel.getFilterCriteria()) {
                 case RATING: {
                     for (FullRoutine r : extractedRoutines)
-                        if (!(r.getAverageRating() == selectedBasedCriteria))
+                        if (!(r.getAverageRating() == searchViewModel.getBasedCriteria()))
                             filteredRoutines.add(r);
-                    extractedRoutines.removeIf(routineCardData -> !(routineCardData.getAverageRating() == (selectedBasedCriteria)));
+                    extractedRoutines.removeIf(routineCardData -> !(routineCardData.getAverageRating() == (searchViewModel.getBasedCriteria())));
                     break;
                 }
                 case DIFFICULTY: {
                     for (FullRoutine r : extractedRoutines)
-                        if (!getDifficultyId(r.getDifficulty()).equals(selectedBasedCriteria))
+                        if (!getDifficultyId(r.getDifficulty()).equals(searchViewModel.getBasedCriteria()))
                             filteredRoutines.add(r);
-                    extractedRoutines.removeIf(routineCardData -> !getDifficultyId(routineCardData.getDifficulty()).equals(selectedBasedCriteria));
+                    extractedRoutines.removeIf(routineCardData -> !getDifficultyId(routineCardData.getDifficulty()).equals(searchViewModel.getBasedCriteria()));
                     break;
                 }
                 default:
                     break;
             }
         }
-        switch (selectedSortingCriteria) {
+        switch (searchViewModel.getSortingCriteria()) {
             case RATING:
-                if (selectedOrderCriteria == ORDER_ASC)
+                if (searchViewModel.getOrderCriteria() == ORDER_ASC)
                     extractedRoutines.sort((o1, o2) -> o1.getAverageRating() - o2.getAverageRating());
-                else if ((selectedOrderCriteria == ORDER_DESC))
+                else if ((searchViewModel.getOrderCriteria() == ORDER_DESC))
                     extractedRoutines.sort((o1, o2) -> o2.getAverageRating() - o1.getAverageRating());
                 break;
             case DIFFICULTY:
-                if (selectedOrderCriteria == ORDER_ASC)
+                if (searchViewModel.getOrderCriteria() == ORDER_ASC)
                     extractedRoutines.sort((o1, o2) -> getDifficultyId(o1.getDifficulty()).compareTo(getDifficultyId(o2.getDifficulty())));
-                else if ((selectedOrderCriteria == ORDER_DESC))
+                else if ((searchViewModel.getOrderCriteria() == ORDER_DESC))
                     extractedRoutines.sort((o1, o2) -> getDifficultyId(o2.getDifficulty()).compareTo(getDifficultyId(o1.getDifficulty())));
                 break;
             case CREATION_DATE:
-                if (selectedOrderCriteria == ORDER_ASC)
+                if (searchViewModel.getOrderCriteria() == ORDER_ASC)
                     extractedRoutines.sort((o1, o2) -> Long.compare(o1.getDate(), o2.getDate()));
-                else if ((selectedOrderCriteria == ORDER_DESC))
+                else if ((searchViewModel.getOrderCriteria() == ORDER_DESC))
                     extractedRoutines.sort((o1, o2) -> Long.compare(o2.getDate(), o1.getDate()));
 
             default:
@@ -236,6 +243,7 @@ public class SearchFragment extends Fragment implements FilterDialogListener {
 
     @Override
     public void onDialogNegativeClick(DialogFragment dialog) {
+        searchViewModel.clearFilters();
     }
 
     private Integer getDifficultyId(String difficulty) {
