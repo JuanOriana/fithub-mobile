@@ -11,41 +11,42 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/userContainer"
         android:layout_width="279dp"
-        android:layout_height="193dp"
+        android:layout_height="150dp"
         android:layout_marginStart="25dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="30dp"
         android:background="@color/fithub_green"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
         <ImageView
             android:id="@+id/userImg"
-            android:layout_width="122dp"
-            android:layout_height="126dp"
+            android:layout_width="64dp"
+            android:layout_height="64dp"
             android:layout_marginStart="20dp"
+            android:layout_marginTop="10dp"
             android:scaleType="centerCrop"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/userName"
             app:layout_constraintVertical_bias="0.466" />
 
         <TextView
             android:id="@+id/userName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:layout_marginEnd="10dp"
+            android:layout_marginTop="8dp"
             android:textColor="@color/white"
             android:textSize="22sp"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/favtext"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="3dp"
             android:text="@string/favouriteTag"
             android:textColor="@color/white"
             app:layout_constraintEnd_toEndOf="@+id/fav_count_val"
@@ -57,32 +58,33 @@
             android:id="@+id/routineText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="12dp"
-            android:layout_marginEnd="40dp"
+            android:layout_marginStart="22dp"
+            android:layout_marginTop="3dp"
             android:text="@string/RoutineTag"
             android:textColor="@color/white"
-            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/userImg"
             app:layout_constraintTop_toBottomOf="@+id/routine_count_val" />
 
         <TextView
             android:id="@+id/routine_count_val"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
             android:textColor="@color/white"
+            app:layout_constraintBottom_toBottomOf="@+id/userImg"
             app:layout_constraintEnd_toEndOf="@+id/routineText"
             app:layout_constraintStart_toStartOf="@+id/routineText"
-            app:layout_constraintTop_toBottomOf="@+id/userName" />
+            app:layout_constraintTop_toTopOf="@+id/userImg" />
 
         <TextView
             android:id="@+id/fav_count_val"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
+            android:layout_marginStart="80dp"
             android:textColor="@color/white"
-            app:layout_constraintEnd_toEndOf="@+id/routineText"
-            app:layout_constraintStart_toStartOf="@+id/routineText"
-            app:layout_constraintTop_toBottomOf="@+id/routineText" />
+            app:layout_constraintBottom_toBottomOf="@+id/routine_count_val"
+            app:layout_constraintStart_toEndOf="@+id/routine_count_val"
+            app:layout_constraintTop_toTopOf="@+id/routine_count_val" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

@@ -39,8 +39,8 @@ public class NotifyHandlerReceiver extends BroadcastReceiver {
                 .setSmallIcon(R.drawable.fav_full)
                 .setAutoCancel(true)
                 .setContentIntent(resultPendingIntent);
-        NotificationManager managerCompat  = (NotificationManager)context.getSystemService(Context. NOTIFICATION_SERVICE );
-        managerCompat.notify(id,builder.build());
+        NotificationManager managerCompat  = (NotificationManager)context.getSystemService(Context.NOTIFICATION_SERVICE );
+        managerCompat.notify(42,builder.build());
 
     }
 }

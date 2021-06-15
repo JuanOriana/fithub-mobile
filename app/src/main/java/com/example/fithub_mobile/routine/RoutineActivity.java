@@ -3,6 +3,7 @@ package com.example.fithub_mobile.routine;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.res.Configuration;
 import android.os.Bundle;
 
 import com.example.fithub_mobile.App;
@@ -30,11 +31,14 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.squareup.picasso.Picasso;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.lifecycle.LifecycleOwner;
 
 import android.util.Log;
+import android.view.MenuItem;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.RatingBar;
@@ -46,6 +50,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
+import java.util.Objects;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -64,17 +69,18 @@ public class RoutineActivity extends AppCompatActivity {
         setContentView(R.layout.activity_routine);
         context = this;
 
-
         Intent intent = getIntent();
         id = Integer.parseInt(intent.getData().getQueryParameter("id"));
 
         Toolbar toolbar = findViewById(R.id.toolbar);
         CollapsingToolbarLayout toolBarLayout = findViewById(R.id.toolbar_layout);
         setSupportActionBar(toolbar);
+        Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+
 
         RatingBar ratingBar = findViewById(R.id.rating_bar_routine_view);
         TextView descView = findViewById(R.id.desc_routine);
-        TextView titleView = findViewById(R.id.title_routine);
 
         App app = (App)getApplication();
         app.getRoutineRepository().getRoutine(id).observe(this, r -> {
@@ -82,10 +88,7 @@ public class RoutineActivity extends AppCompatActivity {
                 routine = r.getData();
                 ratingBar.setRating(routine.getAverageRating());
                 descView.setText(routine.getDetail());
-                if(toolBarLayout != null)
-                    toolBarLayout.setTitle(routine.getName());
-                else
-                    titleView.setText(routine.getName());
+                toolBarLayout.setTitle(routine.getName());
             } else {
                 Resource.defaultResourceHandler(r);
             }
@@ -95,6 +98,7 @@ public class RoutineActivity extends AppCompatActivity {
 
         app.getCycleRepository().getCycles(id).observe(this, r -> {
             if (r.getStatus() == Status.SUCCESS) {
+                assert r.getData() != null;
                 cycles = r.getData().getContent();
                 for (FullCycle cycle : cycles) {
                     cycleContainer.addView(new CycleDisplay(this,cycle));
@@ -201,5 +205,13 @@ public class RoutineActivity extends AppCompatActivity {
     public void onBackPressed(){
         startActivity(new Intent(this, MainActivity.class));
         finish();
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        if (item.getItemId() == android.R.id.home) {
+            onBackPressed();
+        }
+        return super.onOptionsItemSelected(item);
     }
 }
