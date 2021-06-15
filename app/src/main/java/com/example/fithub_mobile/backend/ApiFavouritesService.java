@@ -16,7 +16,7 @@ import retrofit2.http.Path;
 
 public interface ApiFavouritesService {
 
-    @GET("favourites")
+    @GET("favourites?size=50")
     LiveData<ApiResponse<PagedList<FullRoutine>>> getFavourites();
 
     @POST("favourites/{routineId}/")

@@ -1,5 +1,7 @@
 package com.example.fithub_mobile;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.NotificationCompat;
 import androidx.core.app.NotificationManagerCompat;
@@ -14,6 +16,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.SystemClock;
 import android.util.Log;
+import android.view.MenuItem;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.TimePicker;
@@ -37,6 +40,11 @@ public class NotificationActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_notif);
+
+
+        ActionBar ab = getSupportActionBar();
+        // Enable the Up button
+        ab.setDisplayHomeAsUpEnabled(true);
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             for (int i = 0; i < 7; i++) {
@@ -72,6 +80,7 @@ public class NotificationActivity extends AppCompatActivity {
                     calendar.add(Calendar.DATE,diff);
                     calendar.set(Calendar.HOUR_OF_DAY, tp.getHour());
                     calendar.set(Calendar.MINUTE, tp.getMinute());
+                    Log.d("CALENDAR",calendar.toString());
                     Intent pending = new Intent( this, NotifyHandlerReceiver.class );
                     pending.putExtra(DAY_EXTRA,42+i);
                     pending.putExtra(ID_EXTRA,getIntent().getIntExtra(ID_PARENT_EXTRA,0));
@@ -79,8 +88,9 @@ public class NotificationActivity extends AppCompatActivity {
                             this,
                             42+i,
                             pending,
-                            0);
-                    alarmManager.set(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), pendingNotifyIntent);
+                            PendingIntent.FLAG_CANCEL_CURRENT);
+                    alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(),
+                            AlarmManager.INTERVAL_DAY * 7, pendingNotifyIntent);
                 }
             }
 
@@ -92,6 +102,14 @@ public class NotificationActivity extends AppCompatActivity {
         cancelBtn.setOnClickListener(v->{
             finish();
         });
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        if (item.getItemId() == android.R.id.home) {
+            finish();
+        }
+        return super.onOptionsItemSelected(item);
     }
 
 }

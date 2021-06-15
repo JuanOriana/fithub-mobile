@@ -10,6 +10,7 @@ import android.view.View;
 import android.widget.Toast;
 
 import com.example.fithub_mobile.backend.models.Error;
+import com.example.fithub_mobile.excercise.LastlyExecutedCardDataManager;
 import com.example.fithub_mobile.repository.Resource;
 import com.example.fithub_mobile.repository.Status;
 import com.example.fithub_mobile.ui.profile.EditProfileFragment;
@@ -27,6 +28,7 @@ import androidx.navigation.ui.NavigationUI;
 public class MainActivity extends AppCompatActivity {
 
     SharedPreferences sp;
+    AppBarConfiguration appBarConfiguration;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,7 +43,7 @@ public class MainActivity extends AppCompatActivity {
         BottomNavigationView navView = findViewById(R.id.nav_view);
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
-        AppBarConfiguration appBarConfiguration = new AppBarConfiguration.Builder(
+        appBarConfiguration = new AppBarConfiguration.Builder(
                 R.id.navigation_home,R.id.navigation_search, R.id.navigation_favorites, R.id.navigation_profile)
                 .build();
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
@@ -60,7 +62,8 @@ public class MainActivity extends AppCompatActivity {
         App app = (App)getApplication();
         app.getUserRepository().logout().observe(this, r -> {
             if (r.getStatus() == Status.SUCCESS) {
-                Log.d("LOGIN", "Funciono");
+                LastlyExecutedCardDataManager lastlyExecutedCardDataManager = new LastlyExecutedCardDataManager();
+                lastlyExecutedCardDataManager.cleanData(view.getContext());
                 sp.edit().putBoolean("logged",false).apply();
                 goToLogin();
             } else {
@@ -82,6 +85,13 @@ public class MainActivity extends AppCompatActivity {
                 Log.d("LOGIN", error.getDescription() + error.getCode() + "");
                 break;
         }
+    }
+
+    @Override
+    public boolean onSupportNavigateUp() {
+        NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
+        return NavigationUI.navigateUp(navController, appBarConfiguration)
+                || super.onSupportNavigateUp();
     }
 
 

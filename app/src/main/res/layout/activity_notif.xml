@@ -17,6 +17,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:text="@string/when_do_you_want_to_be_notified_for_your_routine"
+            android:layout_marginLeft="10dp"
             android:textSize="18sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -39,7 +40,6 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
             android:orientation="horizontal"
-            android:gravity="center"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/current_title">
@@ -54,18 +54,21 @@
                     android:id="@+id/checkBox_mon"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:textColor="@color/fithub_green"
                     android:text="@string/monday" />
 
                 <CheckBox
                     android:id="@+id/checkBox_wed"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:textColor="@color/fithub_green"
                     android:text="@string/wednesday" />
 
                 <CheckBox
                     android:id="@+id/checkBox_fri"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:textColor="@color/fithub_green"
                     android:text="@string/friday" />
             </LinearLayout>
 
@@ -79,24 +82,28 @@
                     android:id="@+id/checkBox_tue"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:textColor="@color/fithub_green"
                     android:text="@string/tuesday" />
 
                 <CheckBox
                     android:id="@+id/checkBox_thu"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:textColor="@color/fithub_green"
                     android:text="@string/thursday" />
 
                 <CheckBox
                     android:id="@+id/checkBox_sat"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:textColor="@color/fithub_green"
                     android:text="@string/saturday" />
 
                 <CheckBox
                     android:id="@+id/checkBox_sun"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:textColor="@color/fithub_green"
                     android:text="@string/sunday" />
             </LinearLayout>
         </LinearLayout>

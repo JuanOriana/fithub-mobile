@@ -50,9 +50,7 @@ public class EditProfileFragment extends Fragment {
             Navigation.findNavController(v).navigate(R.id.action_navigation_editprofile_to_navigation_profile);
         });
 
-        saveBtn.setOnClickListener(v->{
-            saveChanges(v);
-        });
+        saveBtn.setOnClickListener(this::saveChanges);
 
 
         return root;

@@ -29,6 +29,7 @@ import com.example.fithub_mobile.excercise.LastlyExecutedCardData;
 import com.example.fithub_mobile.excercise.LastlyExecutedCardDataManager;
 import com.example.fithub_mobile.repository.Resource;
 import com.example.fithub_mobile.repository.Status;
+import com.example.fithub_mobile.routine.RoutineCard;
 import com.example.fithub_mobile.routine.RoutineCardAdapter;
 import com.example.fithub_mobile.routine.RoutineCardData;
 import com.google.gson.Gson;
@@ -46,6 +47,8 @@ public class HomeFragment extends Fragment {
     private LinearLayout recentContainer;
     private RoutineCardAdapter adapter;
     private ArrayList<FullRoutine> routines = new ArrayList<>();
+    private LastlyExecutedCardDataManager lastlyExecManager;
+    View root;
 
 
     @SuppressLint("SetTextI18n")
@@ -54,11 +57,13 @@ public class HomeFragment extends Fragment {
 
         homeViewModel =
                 new ViewModelProvider(this).get(HomeViewModel.class);
-        View root = inflater.inflate(R.layout.fragment_home, container, false);
+        root = inflater.inflate(R.layout.fragment_home, container, false);
 
         recentContainer = root.findViewById(R.id.recent_container);
 
-        LastlyExecutedCardDataManager lastlyExecManager = LastlyExecutedCardDataManager.getInstance();
+        root.findViewById(R.id.recommendation_wrap).setVisibility(View.GONE);
+
+        lastlyExecManager = LastlyExecutedCardDataManager.getInstance();
 
         if (lastlyExecManager.getData(root.getContext()).size() == 0){
             TextView noDataText = new TextView(root.getContext());
@@ -72,6 +77,7 @@ public class HomeFragment extends Fragment {
                 recentContainer.addView(new LastlyExecutedCard(root.getContext(),item.getId(), item.getTitle(), item.getDescription()));
         }
 
+        findFavourite();
 
         cardContainer = root.findViewById(R.id.cardContainer);
         adapter = new RoutineCardAdapter(routines);
@@ -110,6 +116,49 @@ public class HomeFragment extends Fragment {
                 Resource.defaultResourceHandler(r);
             }
         });
+    }
+
+    private void findFavourite(){
+        LinearLayout container = root.findViewById(R.id.recommendation_wrap);
+        if (lastlyExecManager.getData(root.getContext()).size() == 0) {
+            container.setVisibility(View.GONE);
+            return;
+        }
+        else
+            container.setVisibility(View.VISIBLE);
+
+        int id = lastlyExecManager.getData(root.getContext()).get(0).getId();
+
+
+        // Find a routine just as hard as the last executed
+        App app = (App) getActivity().getApplication();
+        app.getRoutineRepository().getRoutine(id).observe(getViewLifecycleOwner(), r -> {
+            if (r.getStatus() == Status.SUCCESS) {
+                assert r.getData() != null;
+                app.getRoutineRepository().getRoutinesByDiff(r.getData().getDifficulty()).observe(getViewLifecycleOwner(), rDiff -> {
+                    if (rDiff.getStatus() == Status.SUCCESS) {
+                        assert rDiff.getData() != null;
+                        if (rDiff.getData().getTotalCount() < 2){
+                            container.setVisibility(View.GONE);
+                        }
+                        for (FullRoutine routine : rDiff.getData().getContent()){
+                            if (routine.getId() != id){
+                                container.addView(new RoutineCard(root.getContext(), routine));
+                                return;
+                            }
+                        }
+                    } else {
+                        Resource.defaultResourceHandler(rDiff);
+                    }
+                });
+
+            } else {
+                Resource.defaultResourceHandler(r);
+            }
+        });
+
+
+
 
     }
 

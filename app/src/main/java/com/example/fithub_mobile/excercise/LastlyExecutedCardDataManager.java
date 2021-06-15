@@ -62,6 +62,14 @@ public class LastlyExecutedCardDataManager {
         return data;
     }
 
+    public void cleanData(Context context){
+        data = new ArrayList<>();
+        Gson gson = new Gson();
+        SharedPreferences sp = context.getSharedPreferences("lastly_exec",0);
+        String stringedData = gson.toJson(data);
+        sp.edit().putString("lastly_exec_ex",stringedData).apply();
+    }
+
 
 
 }
