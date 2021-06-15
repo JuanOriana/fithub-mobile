@@ -32,6 +32,18 @@ public class RoutineRepository {
         }.asLiveData();
     }
 
+
+    public LiveData<Resource<PagedList<FullRoutine>>> getRoutinesByDiff(String difficulty) {
+        return new NetworkBoundResource<PagedList<FullRoutine>, PagedList<FullRoutine>>()
+        {
+            @NonNull
+            @Override
+            protected LiveData<ApiResponse<PagedList<FullRoutine>>> createCall() {
+                return apiService.getRoutinesByDiff(difficulty);
+            }
+        }.asLiveData();
+    }
+
     public LiveData<Resource<FullRoutine>> getRoutine(int routineId) {
         return new NetworkBoundResource<FullRoutine, FullRoutine>()
         {
