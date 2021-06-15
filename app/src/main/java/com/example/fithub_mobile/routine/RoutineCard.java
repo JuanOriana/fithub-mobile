@@ -10,9 +10,15 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
+import android.widget.ToggleButton;
 
+import androidx.lifecycle.LifecycleOwner;
+
+import com.example.fithub_mobile.App;
 import com.example.fithub_mobile.R;
 import com.example.fithub_mobile.backend.models.FullRoutine;
+import com.example.fithub_mobile.repository.Resource;
+import com.example.fithub_mobile.repository.Status;
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.card.MaterialCardView;
 import com.squareup.picasso.Picasso;
@@ -42,6 +48,7 @@ public class RoutineCard extends MaterialCardView {
         ratingBar.setRating(routine.getAverageRating());
         TextView userNameView = findViewById(R.id.owner_name);
         userNameView.setText(routine.getUser().getUsername());
+        ToggleButton favButton = findViewById(R.id.fav_button);
         ImageView userImgView = findViewById(R.id.owner_img);
         TextView difficulty = findViewById(R.id.difficulty);
         Picasso.get().load(routine.getUser().getAvatarUrl()).into(userImgView);
@@ -89,6 +96,40 @@ public class RoutineCard extends MaterialCardView {
             i.setPackage("com.example.fithub_mobile");
             context.startActivity(i);
         });
+
+        App app = (App)context.getApplicationContext();
+        app.getFavouriteRepository().getFavourites().observe((LifecycleOwner) context, rfav -> {
+            if (rfav.getStatus() == Status.SUCCESS) {
+                assert rfav.getData() != null;
+                favButton.setOnCheckedChangeListener(null);
+                if (rfav.getData().getContent().contains(routine)) {
+                    favButton.toggle();
+                }
+                favButton.setOnCheckedChangeListener((v,isChecked)->{
+                    if (isChecked){
+                        app.getFavouriteRepository().addFavourite(routine.getId()).observe((LifecycleOwner) context, r -> {
+                            if (r.getStatus() == Status.SUCCESS) {
+                                return;
+                            } else {
+                                Resource.defaultResourceHandler(r);
+                            }
+                        });
+                    }else{
+                        app.getFavouriteRepository().deleteFavourite(routine.getId()).observe((LifecycleOwner) context, r -> {
+                            if (r.getStatus() == Status.SUCCESS) {
+                                return;
+                            } else {
+                                Resource.defaultResourceHandler(r);
+                            }
+                        });
+                    }
+                });
+            } else {
+                Resource.defaultResourceHandler(rfav);
+            }
+        });
+
+
 
     }
 

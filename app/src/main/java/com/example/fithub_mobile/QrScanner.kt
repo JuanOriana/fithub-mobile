@@ -6,10 +6,10 @@ import android.content.pm.PackageManager
 import android.net.Uri
 import android.os.Bundle
 import android.util.Log
+import android.view.MenuItem
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
-import androidx.core.app.TaskStackBuilder
 import androidx.core.content.ContextCompat
 import com.budiyev.android.codescanner.*
 
@@ -23,6 +23,9 @@ class QrScanner : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_qr_scanner)
         context = this;
+
+        val ab = supportActionBar
+        ab!!.setDisplayHomeAsUpEnabled(true)
 
         setUpPermissions()
         codeScanner()
@@ -95,6 +98,12 @@ class QrScanner : AppCompatActivity() {
                 }
             }
         }
+    }
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        if (item.itemId == android.R.id.home) {
+            finish()
+        }
+        return super.onOptionsItemSelected(item)
     }
 
 }
