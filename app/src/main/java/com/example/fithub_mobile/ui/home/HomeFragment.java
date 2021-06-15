@@ -125,11 +125,29 @@ public class HomeFragment extends Fragment {
 
         int id = lastlyExecManager.getData(root.getContext()).get(0).getId();
 
+
+        // Find a routine just as hard as the last executed
         App app = (App) getActivity().getApplication();
         app.getRoutineRepository().getRoutine(id).observe(getViewLifecycleOwner(), r -> {
             if (r.getStatus() == Status.SUCCESS) {
                 assert r.getData() != null;
-                container.addView(new RoutineCard(root.getContext(),r.getData()));
+                app.getRoutineRepository().getRoutinesByDiff(r.getData().getDifficulty()).observe(getViewLifecycleOwner(), rDiff -> {
+                    if (rDiff.getStatus() == Status.SUCCESS) {
+                        assert rDiff.getData() != null;
+                        if (rDiff.getData().getTotalCount() < 2){
+                            container.setVisibility(View.GONE);
+                        }
+                        for (FullRoutine routine : rDiff.getData().getContent()){
+                            if (routine.getId() != id){
+                                container.addView(new RoutineCard(root.getContext(), routine));
+                                return;
+                            }
+                        }
+                    } else {
+                        Resource.defaultResourceHandler(rDiff);
+                    }
+                });
+
             } else {
                 Resource.defaultResourceHandler(r);
             }
