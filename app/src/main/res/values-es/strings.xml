@@ -78,5 +78,6 @@
     <string name="expert_difficulty">Experto</string>
     <string name="verif_success">¡Cuenta verificada exitosamente!</string>
     <string name="verif_fail">Hubo un problema verificando tu cuenta</string>
+    <string name="rated">Puntuaste esta rutina</string>
 
 </resources>

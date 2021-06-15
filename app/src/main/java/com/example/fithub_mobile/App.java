@@ -5,6 +5,7 @@ import android.app.Application;
 import com.example.fithub_mobile.repository.CycleRepository;
 import com.example.fithub_mobile.repository.ExerciseImageRepository;
 import com.example.fithub_mobile.repository.FavouriteRepository;
+import com.example.fithub_mobile.repository.ReviewRepository;
 import com.example.fithub_mobile.repository.RoutineRepository;
 import com.example.fithub_mobile.repository.SportRepository;
 import com.example.fithub_mobile.repository.UserRepository;
@@ -19,6 +20,7 @@ public class App extends Application {
     private FavouriteRepository favouriteRepository;
     private CycleRepository cycleRepository;
     private ExerciseImageRepository exerciseImageRepository;
+    private ReviewRepository reviewRepository;
 
     public AppPreferences getPreferences() { return preferences; }
 
@@ -46,6 +48,10 @@ public class App extends Application {
         return exerciseImageRepository;
     }
 
+    public ReviewRepository getReviewRepository() {
+        return reviewRepository;
+    }
+
     @Override
     public void onCreate() {
         super.onCreate();
@@ -63,5 +69,7 @@ public class App extends Application {
         cycleRepository = new CycleRepository(this);
 
         exerciseImageRepository = new ExerciseImageRepository(this);
+
+        reviewRepository = new ReviewRepository(this);
     }
 }

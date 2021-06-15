@@ -82,6 +82,7 @@
     <string name="success_routine">Routine finished successfully!</string>
     <string name="verif_success">Account verified successfully!</string>
     <string name="verif_fail">There was a problem verifying your account</string>
+    <string name="rated">You have rated this routine</string>
 
 
 </resources>

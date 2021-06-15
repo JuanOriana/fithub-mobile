@@ -1,5 +1,6 @@
 package com.example.fithub_mobile.routine;
 
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -16,6 +17,7 @@ import com.example.fithub_mobile.R;
 import com.example.fithub_mobile.backend.models.FullCycle;
 import com.example.fithub_mobile.backend.models.FullCycleExercise;
 import com.example.fithub_mobile.backend.models.FullRoutine;
+import com.example.fithub_mobile.backend.models.Review;
 import com.example.fithub_mobile.excercise.ExerciseData;
 import com.example.fithub_mobile.excercise.LastlyExecutedCard;
 import com.example.fithub_mobile.excercise.LastlyExecutedCardData;
@@ -30,6 +32,7 @@ import com.squareup.picasso.Picasso;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.lifecycle.LifecycleOwner;
 
 import android.util.Log;
 import android.widget.ImageButton;
@@ -53,11 +56,14 @@ public class RoutineActivity extends AppCompatActivity {
     private FullRoutine routine;
     private List<FullCycle> cycles;
     private int id;
+    private Context context;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_routine);
+        context = this;
+
 
         Intent intent = getIntent();
         id = Integer.parseInt(intent.getData().getQueryParameter("id"));
@@ -114,6 +120,24 @@ public class RoutineActivity extends AppCompatActivity {
             i.putExtra(ID_PARENT_EXTRA,id);
             startActivity(i);
 
+        });
+
+        ratingBar.setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener() {
+            @Override
+            public void onRatingChanged(RatingBar ratingBar, float rating, boolean fromUser) {
+                ratingBar.setIsIndicator(false);
+                if (fromUser) {
+                    app.getReviewRepository().addReview(id, new Review((int)rating,"")).observe((LifecycleOwner) context, r -> {
+                        if (r.getStatus() == Status.SUCCESS) {
+                            Toast.makeText(context,getText(R.string.rated),Toast.LENGTH_SHORT).show();
+                            ratingBar.setIsIndicator(true);
+
+                        }else {
+                            Resource.defaultResourceHandler(r);
+                        }
+                    });
+                }
+            }
         });
     }
 

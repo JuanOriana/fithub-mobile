@@ -41,5 +41,6 @@ public class NotifyHandlerReceiver extends BroadcastReceiver {
                 .setContentIntent(resultPendingIntent);
         NotificationManager managerCompat  = (NotificationManager)context.getSystemService(Context. NOTIFICATION_SERVICE );
         managerCompat.notify(id,builder.build());
+
     }
 }
