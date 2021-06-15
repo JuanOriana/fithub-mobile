@@ -10,12 +10,12 @@
         android:id="@+id/current_exercise_card"
         android:layout_width="wrap_content"
         android:layout_height="0dp"
-        android:background="#62D6A3"
+        android:background="#34403B"
+        android:elevation="3dp"
         app:layout_constraintBottom_toTopOf="@+id/progressBarQueue"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="1.0"
-        android:elevation="3dp">
+        app:layout_constraintVertical_bias="1.0">
 
         <TextView
             android:id="@+id/queue_rep_title"
@@ -122,7 +122,7 @@
         android:paddingStart="10dp"
         android:paddingEnd="10dp"
         android:text="@string/next_up"
-        android:textColor="#CC454A48"
+        android:textColor="@color/fithub_green"
         android:textSize="20sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"

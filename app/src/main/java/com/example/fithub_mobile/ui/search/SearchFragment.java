@@ -148,7 +148,8 @@ public class SearchFragment extends Fragment implements FilterDialogListener {
             @Override
             public boolean onQueryTextChange(String newText) {
                 searchViewModel.setSearchQuery(newText);
-                adapter.getFilter().filter(searchViewModel.getSearchQuery(), count -> filter());
+                if (adapter != null)
+                    adapter.getFilter().filter(searchViewModel.getSearchQuery(), count -> filter());
 
                 return true;
             }
