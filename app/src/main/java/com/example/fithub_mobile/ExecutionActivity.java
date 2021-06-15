@@ -4,15 +4,18 @@ package com.example.fithub_mobile;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.CompoundButton;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.widget.ToggleButton;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -30,6 +33,8 @@ public class ExecutionActivity extends AppCompatActivity {
     private ArrayList<FullCycleExercise> exercises = new ArrayList<>();
     private ProgressBar pgBar;
     private ExerciseQueueRealState exerciseQueueRealState;
+    private CountDownTimer cTimer;
+    private long millisLeft = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,6 +54,30 @@ public class ExecutionActivity extends AppCompatActivity {
         nextBtn.setOnClickListener(view -> setNextExercise());
         ImageButton prevBtn = findViewById(R.id.prev);
         prevBtn.setOnClickListener(view -> setPrevExercise());
+        ToggleButton playBtn = findViewById(R.id.play_btn);
+        playBtn.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (millisLeft == 0) return;
+                if (isChecked && cTimer != null){
+                    cTimer.cancel();
+                }
+                else{
+                    cTimer = new CountDownTimer(millisLeft, 1000) {
+                        @SuppressLint("SetTextI18n")
+                        public void onTick(long millisUntilFinished) {
+                            ((TextView)findViewById(R.id.execution_seconds)).setText(Integer.toString((int)millisUntilFinished / 1000));
+                            millisLeft = (int)millisUntilFinished;
+                        }
+
+                        public void onFinish() {
+                            setNextExercise();
+                        }
+
+                    }.start();
+                }
+            }
+        });
     }
 
 
@@ -76,6 +105,9 @@ public class ExecutionActivity extends AppCompatActivity {
 
     @SuppressLint("SetTextI18n")
     private void setCurrentInfo(FullCycleExercise currentExercise){
+        if (cTimer != null){
+            cTimer.cancel();
+        }
         View current = this.findViewById(R.id.exercise_execution);
 
         findViewById(R.id.execution_seconds).setVisibility(View.VISIBLE);
@@ -88,13 +120,31 @@ public class ExecutionActivity extends AppCompatActivity {
         currentText = current.findViewById(R.id.execution_desc);
         currentText.setText(currentExercise.getExercise().getDetail());
 
-        currentText = current.findViewById(R.id.execution_seconds);
+        final TextView  secondsView = current.findViewById(R.id.execution_seconds);
+        ToggleButton playBtn = findViewById(R.id.play_btn);
+        playBtn.setChecked(false);
         int exerciseVal = currentExercise.getDuration();
         if(exerciseVal <= 0) {
-            currentText.setVisibility(View.GONE);
+            playBtn.setVisibility(View.GONE);
+            secondsView.setVisibility(View.GONE);
             current.findViewById(R.id.execution_seconds_title).setVisibility(View.GONE);
         } else {
-            currentText.setText(Integer.toString(exerciseVal));
+            playBtn.setVisibility(View.VISIBLE);
+            secondsView.setText(Integer.toString(exerciseVal));
+
+            millisLeft = exerciseVal*1000;
+            cTimer = new CountDownTimer(millisLeft, 1000) {
+                public void onTick(long millisUntilFinished) {
+                    secondsView.setText(Integer.toString((int)millisUntilFinished / 1000));
+                    millisLeft = (int)millisUntilFinished;
+                }
+
+                public void onFinish() {
+                    setNextExercise();
+                }
+
+            }.start();
+
         }
 
         currentText = current.findViewById(R.id.execution_reps);
@@ -116,6 +166,7 @@ public class ExecutionActivity extends AppCompatActivity {
                 Resource.defaultResourceHandler(r);
             }
         });
+
 
     }
 
