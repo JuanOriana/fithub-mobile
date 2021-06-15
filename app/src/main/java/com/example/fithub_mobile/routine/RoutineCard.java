@@ -86,6 +86,7 @@ public class RoutineCard extends MaterialCardView {
             Intent i = new Intent(Intent.ACTION_VIEW);
             i.setData(Uri.parse("http://fithub.com/routine?id=" + routine.getId()));
             i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+            i.setPackage("com.example.fithub_mobile");
             context.startActivity(i);
         });
 

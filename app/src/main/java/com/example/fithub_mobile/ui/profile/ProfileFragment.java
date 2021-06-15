@@ -26,6 +26,7 @@ import com.example.fithub_mobile.R;
 import com.example.fithub_mobile.backend.models.FullRoutine;
 import com.example.fithub_mobile.backend.models.FullUser;
 import com.example.fithub_mobile.backend.models.PublicUser;
+import com.example.fithub_mobile.excercise.LastlyExecutedCardDataManager;
 import com.example.fithub_mobile.repository.Resource;
 import com.example.fithub_mobile.repository.Status;
 import com.example.fithub_mobile.routine.RoutineCardAdapter;
@@ -130,7 +131,8 @@ public class ProfileFragment extends Fragment {
         App app = (App)getContext().getApplicationContext();
         app.getUserRepository().logout().observe(this, r -> {
             if (r.getStatus() == Status.SUCCESS) {
-                Log.d("LOGIN", "Funciono");
+                LastlyExecutedCardDataManager lastlyExecutedCardDataManager = new LastlyExecutedCardDataManager();
+                lastlyExecutedCardDataManager.cleanData(root.getContext());
                 sp.edit().putBoolean("logged",false).apply();
                 goToLogin();
             } else {

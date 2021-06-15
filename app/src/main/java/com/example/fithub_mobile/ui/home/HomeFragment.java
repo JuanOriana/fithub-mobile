@@ -61,6 +61,8 @@ public class HomeFragment extends Fragment {
 
         recentContainer = root.findViewById(R.id.recent_container);
 
+        root.findViewById(R.id.recommendation_wrap).setVisibility(View.GONE);
+
         lastlyExecManager = LastlyExecutedCardDataManager.getInstance();
 
         if (lastlyExecManager.getData(root.getContext()).size() == 0){
@@ -118,8 +120,10 @@ public class HomeFragment extends Fragment {
 
     private void findFavourite(){
         LinearLayout container = root.findViewById(R.id.recommendation_wrap);
-        if (lastlyExecManager.getData(root.getContext()).size() == 0)
+        if (lastlyExecManager.getData(root.getContext()).size() == 0) {
             container.setVisibility(View.GONE);
+            return;
+        }
         else
             container.setVisibility(View.VISIBLE);
 

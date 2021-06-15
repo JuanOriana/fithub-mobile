@@ -10,6 +10,7 @@ import android.view.View;
 import android.widget.Toast;
 
 import com.example.fithub_mobile.backend.models.Error;
+import com.example.fithub_mobile.excercise.LastlyExecutedCardDataManager;
 import com.example.fithub_mobile.repository.Resource;
 import com.example.fithub_mobile.repository.Status;
 import com.example.fithub_mobile.ui.profile.EditProfileFragment;
@@ -61,7 +62,8 @@ public class MainActivity extends AppCompatActivity {
         App app = (App)getApplication();
         app.getUserRepository().logout().observe(this, r -> {
             if (r.getStatus() == Status.SUCCESS) {
-                Log.d("LOGIN", "Funciono");
+                LastlyExecutedCardDataManager lastlyExecutedCardDataManager = new LastlyExecutedCardDataManager();
+                lastlyExecutedCardDataManager.cleanData(view.getContext());
                 sp.edit().putBoolean("logged",false).apply();
                 goToLogin();
             } else {
