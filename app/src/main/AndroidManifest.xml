@@ -29,8 +29,8 @@
                     android:scheme="http" />
             </intent-filter>
         </activity>
-        <activity android:name=".NotificationActivity" />
-        <activity android:name=".QrGenActivity" />
+        <activity android:name=".NotificationActivity"/>
+        <activity android:name=".QrGenActivity"/>
         <activity android:name=".QrScanner" />
         <activity android:name=".ExecutionQueueActivity" />
         <activity android:name=".ExecutionActivity" />
