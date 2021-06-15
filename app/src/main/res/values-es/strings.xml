@@ -79,5 +79,6 @@
     <string name="verif_success">¡Cuenta verificada exitosamente!</string>
     <string name="verif_fail">Hubo un problema verificando tu cuenta</string>
     <string name="rated">Puntuaste esta rutina</string>
+    <string name="recommendation_title">Una rutina para ti...</string>
 
 </resources>
