@@ -10,7 +10,6 @@
     android:layout_marginTop="12dp"
     android:layout_marginHorizontal="16dp"
     android:layout_marginBottom="6dp"
-    android:maxWidth="20dp"
     app:cardCornerRadius="16dp"
     app:cardElevation="3dp"
     app:strokeColor="@color/fithub_green"
