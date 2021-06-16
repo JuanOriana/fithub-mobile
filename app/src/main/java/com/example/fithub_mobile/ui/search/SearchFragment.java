@@ -66,6 +66,7 @@ public class SearchFragment extends Fragment implements FilterDialogListener {
     public ArrayList<FullRoutine> extractedRoutines = new ArrayList<>();
     public ArrayList<FullRoutine> filteredRoutines = new ArrayList<>();
     RoutineCardAdapter adapter;
+    private boolean changedOrientation = false;
 
 
     @RequiresApi(api = Build.VERSION_CODES.Q)
@@ -100,9 +101,8 @@ public class SearchFragment extends Fragment implements FilterDialogListener {
                         }
                         adapter = new RoutineCardAdapter(extractedRoutines);
                         cardContainer.setAdapter(adapter);
+                        adapter.getFilter().filter(searchViewModel.getSearchQuery(), count -> filter());
                         adapter.notifyDataSetChanged();
-                        adapter.getFilter().filter(searchViewModel.getSearchQuery());
-                        filter();
 
                     } else {
                         Resource.defaultResourceHandler(r);
@@ -133,7 +133,6 @@ public class SearchFragment extends Fragment implements FilterDialogListener {
 
             @Override
             public void onViewDetachedFromWindow(View v) {
-                searchView.setQuery("", false);
 
             }
         });
