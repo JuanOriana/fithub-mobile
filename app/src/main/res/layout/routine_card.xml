@@ -87,6 +87,17 @@
                     app:layout_constraintTop_toTopOf="@+id/title_card"
                     app:layout_constraintVertical_bias="0.4" />
 
+                <ImageView
+                    android:id="@+id/lock_img"
+                    android:layout_width="22dp"
+                    android:layout_height="22dp"
+                    android:layout_marginStart="4dp"
+                    android:visibility="invisible"
+                    android:background="@android:drawable/ic_lock_lock"
+                    app:layout_constraintBottom_toBottomOf="@+id/title_card"
+                    app:layout_constraintStart_toEndOf="@+id/title_card"
+                    app:layout_constraintTop_toTopOf="@+id/title_card" />
+
                 <RatingBar
                     android:id="@+id/rating_bar"
                     style="@style/Base.Widget.AppCompat.RatingBar.Small"

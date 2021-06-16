@@ -67,7 +67,7 @@ public class Login extends AppCompatActivity {
             } else {
                 defaultResourceHandler(r);
                 if (r.getStatus() == Status.ERROR)
-                    Toast.makeText(getApplicationContext(),"Your username/password is not valid",Toast.LENGTH_LONG).show();
+                    Toast.makeText(getApplicationContext(),getText(R.string.invalid_credentials),Toast.LENGTH_LONG).show();
             }
         });
 
