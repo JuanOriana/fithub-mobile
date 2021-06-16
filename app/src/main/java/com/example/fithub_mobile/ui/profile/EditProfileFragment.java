@@ -36,7 +36,25 @@ public class EditProfileFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
 
-S    }
+        editProfileViewModel =  new ViewModelProvider(this).get(EditProfileViewModel.class);
+
+
+        root = inflater.inflate(R.layout.fragment_edit_profile, container, false);
+
+        getUserData();
+
+        Button cancelBtn = root.findViewById(R.id.cancel_btn);
+        Button saveBtn = root.findViewById(R.id.save_btn);
+
+        cancelBtn.setOnClickListener(v->{
+            Navigation.findNavController(v).navigate(R.id.action_navigation_editprofile_to_navigation_profile);
+        });
+
+        saveBtn.setOnClickListener(this::saveChanges);
+
+
+        return root;
+    }
 
     public void saveChanges(View view) {
 
