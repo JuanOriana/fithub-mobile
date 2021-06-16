@@ -39,6 +39,7 @@ import androidx.lifecycle.LifecycleOwner;
 
 import android.util.Log;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.RatingBar;
@@ -79,8 +80,10 @@ public class RoutineActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayShowHomeEnabled(true);
 
 
+
         RatingBar ratingBar = findViewById(R.id.rating_bar_routine_view);
         TextView descView = findViewById(R.id.desc_routine);
+        ImageButton qrBtn = findViewById(R.id.qr_btn);
 
         App app = (App)getApplication();
         app.getRoutineRepository().getRoutine(id).observe(this, r -> {
@@ -89,6 +92,9 @@ public class RoutineActivity extends AppCompatActivity {
                 ratingBar.setRating(routine.getAverageRating());
                 descView.setText(routine.getDetail());
                 toolBarLayout.setTitle(routine.getName());
+                if (!routine.isIsPublic()){
+                    qrBtn.setVisibility(View.GONE);
+                }
             } else {
                 Resource.defaultResourceHandler(r);
             }
@@ -111,7 +117,6 @@ public class RoutineActivity extends AppCompatActivity {
         FloatingActionButton fab = findViewById(R.id.fab);
         fab.setOnClickListener(view -> startExecution());
 
-        ImageButton qrBtn = findViewById(R.id.qr_btn);
         qrBtn.setOnClickListener(view -> {
             Intent i = new Intent(this, QrGenActivity.class);
             i.putExtra(EXTRA_ID,id);
