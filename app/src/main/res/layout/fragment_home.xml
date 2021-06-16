@@ -96,10 +96,10 @@
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/cardContainer"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="600dp"
+                android:layout_gravity="center_horizontal"
                 android:layout_marginBottom="60dp"
                 android:divider="@drawable/divider"
-                android:layout_gravity="center_horizontal"
                 android:orientation="vertical"
                 android:showDividers="middle" />
 

@@ -49,31 +49,31 @@ public class Register extends AppCompatActivity {
 
         if (fn.trim().length() == 0){
             error = true;
-            fnView.setError("The first name is not valid");
+            fnView.setError(getText(R.string.invalid_fn));
         }
 
         if (ln.trim().length() == 0){
             error = true;
-            lnView.setError("The last name is not valid");
+            lnView.setError(getText(R.string.invalid_ln));
         }
 
         if (!Patterns.EMAIL_ADDRESS.matcher(email).matches() || email.trim().length() == 0){
             error = true;
-            emailView.setError("The email is not valid");
+            emailView.setError(getText(R.string.invalid_email));
         }
 
         if (pass.trim().length() == 0){
             error = true;
-            passView.setError("The password is not valid");
+            passView.setError(getText(R.string.invalid_password));
         }
 
         if (passConf.trim().length() == 0 || !passConf.equals(pass)){
             error = true;
-            passConfView.setError("The password doesn't match");
+            passConfView.setError(getText(R.string.invalid_password_conf));
         }
 
         if (error){
-            Toast toast=Toast.makeText(getApplicationContext(),"Error in parameters",Toast.LENGTH_SHORT);
+            Toast toast=Toast.makeText(getApplicationContext(),getText(R.string.error_params),Toast.LENGTH_SHORT);
             toast.show();
             return;
         }
@@ -82,11 +82,11 @@ public class Register extends AppCompatActivity {
         App app = (App)getApplication();
         app.getUserRepository().register(credentials).observe(this, r -> {
             if (r.getStatus() == Status.SUCCESS) {
-                Toast.makeText(getApplicationContext(),"Register successful. Please confirm your email to proceed.",Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext(),getText(R.string.success_register),Toast.LENGTH_LONG).show();
             } else {
                 Resource.defaultResourceHandler(r);
                 if (r.getStatus() == Status.ERROR)
-                    Toast.makeText(getApplicationContext(),"This account exist already",Toast.LENGTH_LONG).show();
+                    Toast.makeText(getApplicationContext(),getText(R.string.existing_account),Toast.LENGTH_LONG).show();
             }
         });
     }

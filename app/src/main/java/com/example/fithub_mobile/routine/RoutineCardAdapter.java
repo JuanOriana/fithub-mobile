@@ -47,6 +47,7 @@ public class RoutineCardAdapter extends RecyclerView.Adapter<RoutineCardAdapter.
         private final ImageView userImgView;
         private final TextView difficulty;
         private final ToggleButton favButton;
+        private final ImageView lockImg;
         private Context context;
 
         public ViewHolder(View view) {
@@ -61,6 +62,8 @@ public class RoutineCardAdapter extends RecyclerView.Adapter<RoutineCardAdapter.
             difficulty = view.findViewById(R.id.difficulty);
             context = view.getContext();
             favButton = view.findViewById(R.id.fav_button);
+            lockImg = view.findViewById(R.id.lock_img);
+
 
         }
 
@@ -102,6 +105,10 @@ public class RoutineCardAdapter extends RecyclerView.Adapter<RoutineCardAdapter.
 
         public Context getContext() {
             return context;
+        }
+
+        public ImageView getLockImg() {
+            return lockImg;
         }
     }
 
@@ -159,6 +166,13 @@ public class RoutineCardAdapter extends RecyclerView.Adapter<RoutineCardAdapter.
         holder.getFavButton().setOnCheckedChangeListener(null);
         holder.getFavButton().setChecked(routines.get(position).isFavourite());
         Picasso.get().load(routines.get(position).getUser().getAvatarUrl()).into(holder.getUserImgView());
+
+        if (routines.get(position).isIsPublic()){
+            holder.getLockImg().setVisibility(View.INVISIBLE);
+        }
+        else{
+            holder.getLockImg().setVisibility(View.VISIBLE);
+        }
         String text;
         switch(routines.get(position).getDifficulty()) {
             case "rookie":

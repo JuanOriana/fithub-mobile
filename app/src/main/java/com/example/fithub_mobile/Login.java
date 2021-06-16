@@ -44,15 +44,15 @@ public class Login extends AppCompatActivity {
         boolean error = false;
         if (!Patterns.EMAIL_ADDRESS.matcher(email).matches() || email.trim().length() == 0){
             error = true;
-            emailView.setError("The email is not valid");
+            emailView.setError(getText(R.string.invalid_email));
         }
 
         if (pass.trim().length() == 0){
             error = true;
-            passView.setError("The password is not valid");
+            passView.setError(getText(R.string.invalid_password));
         }
         if (error){
-            Toast toast=Toast.makeText(getApplicationContext(),"Error in parameters",Toast.LENGTH_SHORT);
+            Toast toast=Toast.makeText(getApplicationContext(),getText(R.string.error_params),Toast.LENGTH_SHORT);
             toast.show();
             return;
         }
@@ -61,14 +61,13 @@ public class Login extends AppCompatActivity {
         App app = (App)getApplication();
         app.getUserRepository().login(credentials).observe(this, r -> {
             if (r.getStatus() == Status.SUCCESS) {
-                Log.d("LOGIN", "Funciono");
                 app.getPreferences().setAuthToken(r.getData().getToken());
                 sp.edit().putBoolean("logged",true).apply();
                 goToMainActivity();
             } else {
                 defaultResourceHandler(r);
                 if (r.getStatus() == Status.ERROR)
-                    Toast.makeText(getApplicationContext(),"Your username/password is not valid",Toast.LENGTH_LONG).show();
+                    Toast.makeText(getApplicationContext(),getText(R.string.invalid_credentials),Toast.LENGTH_LONG).show();
             }
         });
 

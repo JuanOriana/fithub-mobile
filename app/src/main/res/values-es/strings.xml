@@ -5,7 +5,7 @@
     <string name="title_profile">Perfil</string>
     <string name="emailInputHint">Correo Electrónico</string>
     <string name="passwordInputHint">Contraseña</string>
-    <string name="confirm_password">Confirmar Contraseña</string>
+    <string name="confirm_password">Repetir Contraseña</string>
     <string name="logInBtnText">Ingresar</string>
     <string name="register">Registrar</string>
     <string name="RoutineTag">Rutinas</string>
@@ -15,7 +15,7 @@
     <string name="title_favorites">Favoritos</string>
     <string name="title_activity_routine">Rutina</string>
     <string name="action_settings">Ajustes</string>
-    <string name="sets">sets</string>
+    <string name="sets">serie/s</string>
     <string name="exercise_cycle">Ciclo de ejercitación</string>
     <string name="start_routine">Comenzar rutina</string>
     <string name="fithub">Fithub</string>
@@ -32,7 +32,7 @@
     <string name="last_name">Apellido</string>
     <string name="cancel_btn">Cancelar</string>
     <string name="save_btn">Guardar</string>
-    <string name="logout">Log Out</string>
+    <string name="logout">Cerrar sesión</string>
     <string name="no_account">¿No tienes una cuenta?</string>
     <string name="sign_up">Registrate</string>
     <string name="account">¿Ya tienes una cuenta?</string>
@@ -79,10 +79,22 @@
     <string name="verif_success">¡Cuenta verificada exitosamente!</string>
     <string name="verif_fail">Hubo un problema verificando tu cuenta</string>
     <string name="rated">Puntuaste esta rutina</string>
-    <string name="recommendation_title">Una rutina para ti…</string>
+    <string name="recommendation_title">Rutina Recomendada</string>
     <string name="set_up_notification">Set up notification</string>
     <string name="gen_qr">Generar QR</string>
     <string name="scan_qr">Escanea tu QR</string>
     <string name="no_fav_routine_msg">¡Parece que aún no tenés rutinas favoritas!</string>
+    <string name="profile_options">Opciones del perfil</string>
+    <string name="screenshot">Screenshot</string>
+    <string name="invalid_fn">El nombre no es valido</string>
+    <string name="invalid_ln">El apellido no es valido</string>
+    <string name="invalid_email">El email no es valido</string>
+    <string name="invalid_password">La contraseña no es valida</string>
+    <string name="invalid_password_conf">Las contraseñas no coinciden</string>
+    <string name="invalid_credentials">Tu usuario/contraseña no es valido</string>
+    <string name="error_params">Errores en parametros</string>
+    <string name="success_register">Registro exitoso. Confirma tu email para continuar.</string>
+    <string name="existing_account">Esta cuenta ya existe</string>
+
 
 </resources>

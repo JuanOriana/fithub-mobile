@@ -15,9 +15,9 @@
             android:id="@+id/current_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
             android:layout_marginTop="10dp"
             android:text="@string/when_do_you_want_to_be_notified_for_your_routine"
-            android:layout_marginLeft="10dp"
             android:textSize="18sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -27,25 +27,27 @@
             android:id="@+id/cancel_btn_notif"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="50dp"
             android:layout_marginTop="20dp"
+            android:layout_marginEnd="60dp"
             android:backgroundTint="#AE1212"
             android:text="@string/cancel_btn"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/accept_btn"
             app:layout_constraintTop_toBottomOf="@+id/notif_tp" />
 
         <LinearLayout
             android:id="@+id/linearLayout2"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginStart="30dp"
             android:layout_marginTop="20dp"
+            android:layout_marginEnd="30dp"
             android:orientation="horizontal"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/current_title">
 
             <LinearLayout
-                android:layout_width="0dp"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:orientation="vertical">
@@ -54,26 +56,26 @@
                     android:id="@+id/checkBox_mon"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:textColor="@color/fithub_green"
-                    android:text="@string/monday" />
+                    android:text="@string/monday"
+                    android:textColor="@color/fithub_green" />
 
                 <CheckBox
                     android:id="@+id/checkBox_wed"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:textColor="@color/fithub_green"
-                    android:text="@string/wednesday" />
+                    android:text="@string/wednesday"
+                    android:textColor="@color/fithub_green" />
 
                 <CheckBox
                     android:id="@+id/checkBox_fri"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:textColor="@color/fithub_green"
-                    android:text="@string/friday" />
+                    android:text="@string/friday"
+                    android:textColor="@color/fithub_green" />
             </LinearLayout>
 
             <LinearLayout
-                android:layout_width="0dp"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:orientation="vertical">
@@ -82,29 +84,29 @@
                     android:id="@+id/checkBox_tue"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:textColor="@color/fithub_green"
-                    android:text="@string/tuesday" />
+                    android:text="@string/tuesday"
+                    android:textColor="@color/fithub_green" />
 
                 <CheckBox
                     android:id="@+id/checkBox_thu"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:textColor="@color/fithub_green"
-                    android:text="@string/thursday" />
+                    android:text="@string/thursday"
+                    android:textColor="@color/fithub_green" />
 
                 <CheckBox
                     android:id="@+id/checkBox_sat"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:textColor="@color/fithub_green"
-                    android:text="@string/saturday" />
+                    android:text="@string/saturday"
+                    android:textColor="@color/fithub_green" />
 
                 <CheckBox
                     android:id="@+id/checkBox_sun"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:textColor="@color/fithub_green"
-                    android:text="@string/sunday" />
+                    android:text="@string/sunday"
+                    android:textColor="@color/fithub_green" />
             </LinearLayout>
         </LinearLayout>
 
@@ -120,10 +122,11 @@
             android:id="@+id/accept_btn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="50dp"
+            android:layout_marginStart="160dp"
             android:text="@string/accept"
             app:layout_constraintBottom_toBottomOf="@+id/cancel_btn_notif"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="@+id/cancel_btn_notif" />
 
 
