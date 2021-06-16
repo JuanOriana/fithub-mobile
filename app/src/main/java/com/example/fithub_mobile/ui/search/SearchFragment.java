@@ -140,7 +140,8 @@ public class SearchFragment extends Fragment implements FilterDialogListener {
 
             @Override
             public void onViewDetachedFromWindow(View v) {
-                hideSoftKeyboard(requireActivity());
+                if (isAdded())
+                    hideSoftKeyboard(requireActivity());;
             }
         });
 
