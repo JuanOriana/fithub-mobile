@@ -32,7 +32,7 @@
     <string name="last_name">Apellido</string>
     <string name="cancel_btn">Cancelar</string>
     <string name="save_btn">Guardar</string>
-    <string name="logout">Log Out</string>
+    <string name="logout">Cerrar sesión</string>
     <string name="no_account">¿No tienes una cuenta?</string>
     <string name="sign_up">Registrate</string>
     <string name="account">¿Ya tienes una cuenta?</string>

@@ -43,12 +43,7 @@ public class EditProfileFragment extends Fragment {
 
         getUserData();
 
-        Button cancelBtn = root.findViewById(R.id.cancel_btn);
         Button saveBtn = root.findViewById(R.id.save_btn);
-
-        cancelBtn.setOnClickListener(v->{
-            Navigation.findNavController(v).navigate(R.id.action_navigation_editprofile_to_navigation_profile);
-        });
 
         saveBtn.setOnClickListener(this::saveChanges);
 
