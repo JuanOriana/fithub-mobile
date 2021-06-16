@@ -150,7 +150,7 @@
         android:layout_height="wrap_content"
         android:max="100"
         android:progress="30"
-        android:progressTint="@color/fithub_light"
+        android:progressTint="#75FDC2"
         app:layout_constraintBottom_toTopOf="@+id/toolbar3"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />

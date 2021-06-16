@@ -23,6 +23,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.fithub_mobile.routine.RoutineActivity;
@@ -58,6 +59,8 @@ public class QrGenActivity extends AppCompatActivity {
         ab.setDisplayHomeAsUpEnabled(true);
 
         int id = getIntent().getIntExtra(RoutineActivity.EXTRA_ID,0);
+        String title = getIntent().getStringExtra(RoutineActivity.TITLE_QR_ID);
+        ((TextView)findViewById(R.id.title_qr_view)).setText(title);
 
         Bitmap myBitmap = QRCode.from("http://fithub.com/routine?id="+ id).bitmap();
         ImageView myImage = findViewById(R.id.qr_code);

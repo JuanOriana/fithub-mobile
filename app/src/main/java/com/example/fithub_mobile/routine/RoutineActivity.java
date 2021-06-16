@@ -59,6 +59,7 @@ public class RoutineActivity extends AppCompatActivity {
 
     public static final String EXTRA_ID = "com.example.fithub_mobile.EXTRA_ID";
     static final private String ID_PARENT_EXTRA = "com.example.fithub_mobile.ID_PARENT";
+    static final public String TITLE_QR_ID = "com.example.fithub_mobile.TITLE_QR_ID";
     private FullRoutine routine;
     private List<FullCycle> cycles;
     private int id;
@@ -120,6 +121,7 @@ public class RoutineActivity extends AppCompatActivity {
         qrBtn.setOnClickListener(view -> {
             Intent i = new Intent(this, QrGenActivity.class);
             i.putExtra(EXTRA_ID,id);
+            i.putExtra(TITLE_QR_ID, routine.getName());
             startActivity(i);
         });
 
