@@ -87,7 +87,8 @@
     <string name="set_up_notification">Set up notification</string>
     <string name="gen_qr">Generate QR</string>
     <string name="scan_qr">Scan your QR</string>
-    <string name="profile_options" translatable="false">Profile options</string>
+    <string name="profile_options">Profile options</string>
+    <string name="screenshot">Screenshot</string>
     <string name="no_fav_routine_msg">Looks like you don\'t have favorite routines yet!</string>
 
 

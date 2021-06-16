@@ -6,10 +6,12 @@
     android:layout_height="match_parent">
 
     <LinearLayout
-        android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="center|top">
+        android:layout_gravity="center"
+        android:layout_marginBottom="30dp"
+        android:gravity="center|top"
+        android:orientation="vertical">
 
         <TextView
             android:id="@+id/login_title"
@@ -26,53 +28,53 @@
             android:id="@+id/firstname_input"
             android:layout_width="288dp"
             android:layout_height="43dp"
+            android:layout_marginBottom="16dp"
             android:ems="10"
             android:hint="@string/first_name"
             android:inputType="textEmailAddress"
             android:padding="5dp"
             android:paddingStart="15dp"
             android:paddingEnd="15dp"
-            android:textColor="@color/fithub_green"
-            android:layout_marginBottom="16dp" />
+            android:textColor="@color/fithub_green" />
 
         <EditText
             android:id="@+id/lastname_input"
             android:layout_width="288dp"
             android:layout_height="43dp"
+            android:layout_marginBottom="16dp"
             android:ems="10"
             android:hint="@string/last_name"
             android:inputType="textEmailAddress"
             android:padding="5dp"
             android:paddingStart="15dp"
             android:paddingEnd="15dp"
-            android:textColor="@color/fithub_green"
-            android:layout_marginBottom="16dp" />
+            android:textColor="@color/fithub_green" />
 
         <EditText
             android:id="@+id/registerEmailInput"
             android:layout_width="288dp"
             android:layout_height="43dp"
+            android:layout_marginBottom="16dp"
             android:ems="10"
             android:hint="@string/emailInputHint"
             android:inputType="textEmailAddress"
             android:padding="5dp"
             android:paddingStart="15dp"
             android:paddingEnd="15dp"
-            android:textColor="@color/fithub_green"
-            android:layout_marginBottom="16dp" />
+            android:textColor="@color/fithub_green" />
 
         <EditText
             android:id="@+id/edit_password"
             android:layout_width="288dp"
             android:layout_height="43dp"
+            android:layout_marginBottom="16dp"
             android:ems="10"
             android:hint="@string/passwordInputHint"
             android:inputType="textPassword"
             android:padding="5dp"
             android:paddingStart="15dp"
             android:paddingEnd="15dp"
-            android:textColor="@color/fithub_green"
-            android:layout_marginBottom="16dp" />
+            android:textColor="@color/fithub_green" />
 
         <EditText
             android:id="@+id/edit_confirm_password"
@@ -90,18 +92,18 @@
             android:id="@+id/register_btn"
             android:layout_width="256dp"
             android:layout_height="78dp"
+            android:layout_marginTop="32dp"
             android:onClick="signUp"
             android:text="@string/register"
-            android:textSize="20sp"
-            android:layout_marginTop="32dp" />
+            android:textSize="20sp" />
 
         <LinearLayout
             android:id="@+id/linearLayout"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
             android:layout_marginTop="10dp"
-            android:layout_marginBottom="10dp" >
+            android:layout_marginBottom="10dp"
+            android:orientation="horizontal">
 
             <TextView
                 android:id="@+id/text_account"
@@ -116,7 +118,9 @@
                 android:layout_marginStart="5dp"
                 android:clickable="true"
                 android:onClick="goToLogin"
-                android:text="@string/sign_in" />
+                android:text="@string/sign_in"
+                android:textColor="@color/fithub_green"
+                android:textStyle="bold" />
 
         </LinearLayout>
 
