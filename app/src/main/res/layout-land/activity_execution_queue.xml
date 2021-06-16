@@ -10,7 +10,7 @@
         android:id="@+id/current_exercise_card"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:background="#34403B"
+        android:background="@color/fithub_green_darker"
         android:elevation="3dp"
         app:layout_constraintBottom_toTopOf="@+id/progressBarQueue"
         app:layout_constraintEnd_toStartOf="@+id/guideline4"
