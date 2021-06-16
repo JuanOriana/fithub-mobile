@@ -46,8 +46,10 @@ import com.example.fithub_mobile.routine.RoutineCardAdapter;
 import com.example.fithub_mobile.routine.RoutineCardData;
 
 import org.jetbrains.annotations.NotNull;
+import org.w3c.dom.Text;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Objects;
 import java.util.function.Predicate;
 
@@ -66,18 +68,20 @@ public class SearchFragment extends Fragment implements FilterDialogListener {
     public ArrayList<FullRoutine> extractedRoutines = new ArrayList<>();
     public ArrayList<FullRoutine> filteredRoutines = new ArrayList<>();
     RoutineCardAdapter adapter;
-    private boolean changedOrientation = false;
+    TextView msg;
 
 
     @RequiresApi(api = Build.VERSION_CODES.Q)
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         super.onCreateView(inflater, container, savedInstanceState);
+
         searchViewModel =
                 new ViewModelProvider(this).get(SearchViewModel.class);
         View root = inflater.inflate(R.layout.fragment_search, container, false);
+        msg = root.findViewById(R.id.notFoundMessage);
+        msg.setVisibility(View.GONE);
         setHasOptionsMenu(true);
-
         initRoutines();
         cardContainer = root.findViewById(R.id.cardContainer);
         cardContainer.setLayoutManager(new GridLayoutManager(getContext(), getActivity().getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT ? 1 : 2));
@@ -89,7 +93,6 @@ public class SearchFragment extends Fragment implements FilterDialogListener {
         app.getFavouriteRepository().getFavourites().observe(getViewLifecycleOwner(), rfav -> {
             if (rfav.getStatus() == Status.SUCCESS) {
                 assert rfav.getData() != null;
-
                 app.getRoutineRepository().getRoutines().observe(getViewLifecycleOwner(), r -> {
                     if (r.getStatus() == Status.SUCCESS) {
                         assert r.getData() != null;
@@ -101,9 +104,11 @@ public class SearchFragment extends Fragment implements FilterDialogListener {
                         }
                         adapter = new RoutineCardAdapter(extractedRoutines);
                         cardContainer.setAdapter(adapter);
-                        adapter.getFilter().filter(searchViewModel.getSearchQuery(), count -> filter());
+                        adapter.getFilter().filter(searchViewModel.getSearchQuery(), count -> {
+                            filter();
+                            msg.setVisibility( extractedRoutines.size() > 0 ? View.GONE : View.VISIBLE);
+                        });
                         adapter.notifyDataSetChanged();
-
                     } else {
                         Resource.defaultResourceHandler(r);
                     }
@@ -123,7 +128,9 @@ public class SearchFragment extends Fragment implements FilterDialogListener {
 
 
         searchView = (SearchView) menu.findItem(R.id.search).getActionView();
-        searchView.setIconified(false);
+        searchView.setIconifiedByDefault(false);
+
+        searchView.setQueryHint(getString(R.string.search_hint));
 
         searchView.addOnAttachStateChangeListener(new View.OnAttachStateChangeListener() {
             @Override
@@ -133,7 +140,7 @@ public class SearchFragment extends Fragment implements FilterDialogListener {
 
             @Override
             public void onViewDetachedFromWindow(View v) {
-
+                hideSoftKeyboard(requireActivity());
             }
         });
 
@@ -148,7 +155,12 @@ public class SearchFragment extends Fragment implements FilterDialogListener {
             public boolean onQueryTextChange(String newText) {
                 searchViewModel.setSearchQuery(newText);
                 if (adapter != null)
-                    adapter.getFilter().filter(searchViewModel.getSearchQuery(), count -> filter());
+                    adapter.getFilter().filter(searchViewModel.getSearchQuery(), count -> {
+                        filter();
+                        msg.setVisibility( extractedRoutines.size() > 0 ? View.GONE : View.VISIBLE);
+                    });
+
+
 
                 return true;
             }
