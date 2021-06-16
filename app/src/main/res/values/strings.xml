@@ -26,7 +26,7 @@
     <string name="latest_routines">Latest Routines</string>
     <string name="fithub_url" translatable="false">fithub.com</string>
     <string name="share_msg">Hey! I want to share my routine with you: </string>
-    <string name="NotFoundMessage">Oops… looks like we couldn\'t find what you were searching for.</string>
+    <string name="NotFoundMessage">Oops! Looks like we couldn\'t find what you were searching for.</string>
     <string name="qr_code_msg">This is the QR code for your routine, show it to a friend so he can scan it and train with you!</string>
     <string name="scan_your_code">Scan your code…</string>
     <string name="execution_view" translatable="false">Execution View</string>
@@ -83,12 +83,13 @@
     <string name="verif_success">Account verified successfully!</string>
     <string name="verif_fail">There was a problem verifying your account</string>
     <string name="rated">You have rated this routine</string>
-    <string name="recommendation_title">A routine for you...</string>
+    <string name="recommendation_title">A routine for you…</string>
     <string name="set_up_notification">Set up notification</string>
     <string name="gen_qr">Generate QR</string>
     <string name="scan_qr">Scan your QR</string>
     <string name="profile_options">Profile options</string>
     <string name="screenshot">Screenshot</string>
+    <string name="no_fav_routine_msg">Looks like you don\'t have favorite routines yet!</string>
 
 
 </resources>

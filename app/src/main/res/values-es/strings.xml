@@ -25,7 +25,7 @@
     <string name="recent_routines">Tus Rutinas Recientes</string>
     <string name="latest_routines">Rutinas Nuevas</string>
     <string name="share_msg">¡Hola! Quiero compartir mi rutina contigo: </string>
-    <string name="NotFoundMessage">Oops… parece que no encontramos lo que buscabas.</string>
+    <string name="NotFoundMessage">¡Oops! Parece que no encontramos lo que buscabas.</string>
     <string name="qr_code_msg">Este ese el código QR para tu rutina, ¡Muéstraselo a un amigo para que pueda entrenar contigo!</string>
     <string name="scan_your_code">Escaneá tu código…</string>
     <string name="first_name">Nombre</string>
@@ -83,5 +83,6 @@
     <string name="set_up_notification">Set up notification</string>
     <string name="gen_qr">Generar QR</string>
     <string name="scan_qr">Escanea tu QR</string>
+    <string name="no_fav_routine_msg">¡Parece que aún no tenés rutinas favoritas!</string>
 
 </resources>

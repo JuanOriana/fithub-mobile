@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -31,6 +32,7 @@ public class FavoritesFragment extends Fragment {
     private ArrayList<FullRoutine> routines = new ArrayList<>();
     private FavoritesViewModel favoritesViewModel;
     private RecyclerView cardContainer;
+    TextView noFavsMessage;
     RoutineCardAdapter adapter;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
@@ -38,7 +40,8 @@ public class FavoritesFragment extends Fragment {
         favoritesViewModel =
                 new ViewModelProvider(this).get(FavoritesViewModel.class);
         View root = inflater.inflate(R.layout.fragment_favorites, container, false);
-
+        noFavsMessage = root.findViewById(R.id.no_fav_routines_msg);
+        noFavsMessage.setVisibility(View.GONE);
         cardContainer = root.findViewById(R.id.cardContainer);
 
         cardContainer = root.findViewById(R.id.cardContainer);
@@ -60,6 +63,7 @@ public class FavoritesFragment extends Fragment {
                 for (FullRoutine routine : routines){
                     routine.setFavourite(true);
                 }
+                noFavsMessage.setVisibility(routines.size() > 0 ? View.GONE : View.VISIBLE);
                 adapter.notifyDataSetChanged();
 
             } else {
