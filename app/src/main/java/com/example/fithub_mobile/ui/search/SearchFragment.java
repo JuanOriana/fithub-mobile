@@ -128,14 +128,19 @@ public class SearchFragment extends Fragment implements FilterDialogListener {
 
 
         searchView = (SearchView) menu.findItem(R.id.search).getActionView();
-        searchView.setIconifiedByDefault(false);
+
+        searchView.setIconified(false);
 
         searchView.setQueryHint(getString(R.string.search_hint));
+        searchView.setFocusableInTouchMode(true);
+        searchView.setFocusable(true);
 
         searchView.addOnAttachStateChangeListener(new View.OnAttachStateChangeListener() {
             @Override
             public void onViewAttachedToWindow(View v) {
                 searchView.setQuery("", false);
+                searchView.setIconified(true);
+                searchView.setIconified(false);
             }
 
             @Override
