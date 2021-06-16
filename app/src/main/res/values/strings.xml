@@ -88,6 +88,7 @@
     <string name="gen_qr">Generate QR</string>
     <string name="scan_qr">Scan your QR</string>
     <string name="profile_options">Profile options</string>
+    <string name="screenshot">Screenshot</string>
 
 
 </resources>
