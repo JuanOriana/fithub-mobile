@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string-array name="sort_items">
-        <item>Rating</item>
+        <item>@string/rating</item>
         <item>@string/spinner_difficulty_item</item>
         <item>@string/spinner_creation_item</item>
     </string-array>
@@ -10,7 +10,7 @@
         <item>@string/descending</item>
     </string-array>
     <string-array name="filter_items">
-        <item>Rating</item>
+        <item>@string/rating</item>
         <item>@string/spinner_difficulty_item</item>
     </string-array>
     <string-array name="rating_items">
