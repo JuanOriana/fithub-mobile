@@ -90,6 +90,17 @@
     <string name="profile_options">Profile options</string>
     <string name="screenshot">Screenshot</string>
     <string name="no_fav_routine_msg">Looks like you don\'t have favorite routines yet!</string>
+    <string name="invalid_fn">The first name is not valid</string>
+    <string name="invalid_ln">The last name is not valid</string>
+    <string name="invalid_email">The email is not valid</string>
+    <string name="invalid_password">The password is not valid</string>
+    <string name="invalid_password_conf">The passwords dont match</string>
+    <string name="invalid_credentials">Your username/password is not valid</string>
+    <string name="error_params">Error in parameters</string>
+    <string name="success_register">Register successful. Please confirm your email to proceed.</string>
+    <string name="existing_account">This account exist already</string>
+
+
 
 
 </resources>

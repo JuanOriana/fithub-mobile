@@ -84,5 +84,17 @@
     <string name="gen_qr">Generar QR</string>
     <string name="scan_qr">Escanea tu QR</string>
     <string name="no_fav_routine_msg">¡Parece que aún no tenés rutinas favoritas!</string>
+    <string name="profile_options">Opciones del perfil</string>
+    <string name="screenshot">Screenshot</string>
+    <string name="invalid_fn">El nombre no es valido</string>
+    <string name="invalid_ln">El apellido no es valido</string>
+    <string name="invalid_email">El email no es valido</string>
+    <string name="invalid_password">La contraseña no es valida</string>
+    <string name="invalid_password_conf">Las contraseñas no coinciden</string>
+    <string name="invalid_credentials">Tu usuario/contraseña no es valido</string>
+    <string name="error_params">Errores en parametros</string>
+    <string name="success_register">Registro exitoso. Confirma tu email para continuar.</string>
+    <string name="existing_account">Esta cuenta ya existe</string>
+
 
 </resources>
