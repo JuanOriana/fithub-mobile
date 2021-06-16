@@ -13,6 +13,15 @@ import java.util.List;
 public class SearchViewModel extends ViewModel {
     private String searchQuery = "";
     int[] filters  = new int[4];
+    int orientation;
+
+    public int getOrientation() {
+        return orientation;
+    }
+
+    public void setOrientation(int orientation) {
+        this.orientation = orientation;
+    }
 
     public String getSearchQuery() {
         return searchQuery;
