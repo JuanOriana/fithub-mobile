@@ -10,7 +10,7 @@
     <string name="userlogged" translatable="false">false</string>
     <string name="RoutineTag">Routines</string>
     <string name="favouriteTag">Favorites</string>
-    <string name="edit_profile">Edit profile</string>
+    <string name="edit_profile">Edit Profile</string>
     <string name="title_search">Search</string>
     <string name="title_favorites">Favorites</string>
     <string name="title_activity_routine">Routine</string>
@@ -87,6 +87,7 @@
     <string name="set_up_notification">Set up notification</string>
     <string name="gen_qr">Generate QR</string>
     <string name="scan_qr">Scan your QR</string>
+    <string name="profile_options">Profile options</string>
 
 
 </resources>
