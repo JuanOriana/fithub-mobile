@@ -14,6 +14,9 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -22,6 +25,7 @@ import android.widget.TextView;
 
 import com.example.fithub_mobile.App;
 import com.example.fithub_mobile.Login;
+import com.example.fithub_mobile.QrScanner;
 import com.example.fithub_mobile.R;
 import com.example.fithub_mobile.backend.models.FullRoutine;
 import com.example.fithub_mobile.backend.models.FullUser;
@@ -30,9 +34,11 @@ import com.example.fithub_mobile.excercise.LastlyExecutedCardDataManager;
 import com.example.fithub_mobile.repository.Resource;
 import com.example.fithub_mobile.repository.Status;
 import com.example.fithub_mobile.routine.RoutineCardAdapter;
+import com.example.fithub_mobile.ui.search.FilterDialogFragment;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
+import java.util.Objects;
 import java.util.concurrent.atomic.AtomicReference;
 
 public class ProfileFragment extends Fragment {
@@ -55,15 +61,13 @@ public class ProfileFragment extends Fragment {
 
         sp = getContext().getSharedPreferences("login", 0);
 
-        Button editButton = root.findViewById(R.id.edit_btn);
-        editButton.setOnClickListener(v -> Navigation.findNavController(v).navigate(R.id.action_navigation_profile_to_navigation_editprofile));
-
         cardContainer = root.findViewById(R.id.cardContainer);
         adapter = new RoutineCardAdapter(routines);
         cardContainer.setLayoutManager(new LinearLayoutManager(getContext()));
         cardContainer.setAdapter(adapter);
 
         getUserData();
+        setHasOptionsMenu(true);
 
         return root;
     }
@@ -141,6 +145,28 @@ public class ProfileFragment extends Fragment {
             }
         });
 
+    }
+
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        inflater.inflate(R.menu.profile_menu, menu);
+        super.onCreateOptionsMenu(menu, inflater);
+    }
+
+    @SuppressLint("NonConstantResourceId")
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle item selection
+        switch (item.getItemId()) {
+            case R.id.edit_profile_option:
+                Navigation.findNavController(requireView()).navigate(R.id.action_navigation_profile_to_navigation_editprofile);
+                return true;
+            case R.id.log_out_option:
+                logOut(getView());
+                return true;
+            default:
+        }
+        return super.onOptionsItemSelected(item);
     }
 
 
