@@ -86,6 +86,7 @@ public class HomeFragment extends Fragment {
         DisplayMetrics displayMetrics = root.getContext().getResources().getDisplayMetrics();
         float dpWidth = displayMetrics.widthPixels / displayMetrics.density;
         if(dpWidth >= 1024 || (dpWidth >= 600 && getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT)) {
+            root.findViewById(R.id.recommendation_wrap).getLayoutParams().width = displayMetrics.widthPixels/2;
             cardContainer.setLayoutManager(new GridLayoutManager(getContext(),getActivity().getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT ? 2 : 3));
         } else {
             cardContainer.setLayoutManager(new GridLayoutManager(getContext(),getActivity().getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT ? 1 : 2));
