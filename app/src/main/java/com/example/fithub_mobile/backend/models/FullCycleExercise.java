@@ -108,6 +108,12 @@ public class FullCycleExercise implements Comparable<FullCycleExercise> {
 
     @Override
     public int compareTo(FullCycleExercise o) {
+        if (!this.cycle.getType().equals(o.cycle.getType())){
+            if (this.cycle.getType().equals("cooldown"))
+                return 1;
+            if (o.cycle.getType().equals("cooldown"))
+                return -1;
+        }
         if (this.cycle != null && o.cycle != null){
             int c= this.cycle.getOrder() - o.cycle.getOrder();
             if (c!=0)

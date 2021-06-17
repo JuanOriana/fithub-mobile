@@ -17,6 +17,7 @@ import com.example.fithub_mobile.QrGenActivity;
 import com.example.fithub_mobile.R;
 import com.example.fithub_mobile.backend.models.FullCycle;
 import com.example.fithub_mobile.backend.models.FullCycleExercise;
+import com.example.fithub_mobile.backend.models.FullExercise;
 import com.example.fithub_mobile.backend.models.FullRoutine;
 import com.example.fithub_mobile.backend.models.Review;
 import com.example.fithub_mobile.excercise.ExerciseData;
@@ -108,8 +109,11 @@ public class RoutineActivity extends AppCompatActivity {
                 assert r.getData() != null;
                 cycles = r.getData().getContent();
                 for (FullCycle cycle : cycles) {
-                    cycleContainer.addView(new CycleDisplay(this,cycle));
+                    if (!cycle.getType().equals("cooldown"))
+                        cycleContainer.addView(new CycleDisplay(this,cycle));
                 }
+                if (cycles.size() > 1)
+                    cycleContainer.addView(new CycleDisplay(this,cycles.get(1)));
             } else {
                 Resource.defaultResourceHandler(r);
             }
