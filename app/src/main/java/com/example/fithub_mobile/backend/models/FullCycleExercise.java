@@ -26,6 +26,8 @@ public class FullCycleExercise implements Comparable<FullCycleExercise> {
 
     private FullCycle cycle;
 
+    private int set;
+
     /**
      * No args constructor for use in serialization
      *
@@ -106,6 +108,15 @@ public class FullCycleExercise implements Comparable<FullCycleExercise> {
         this.img = img;
     }
 
+
+    public int getSet() {
+        return set;
+    }
+
+    public void setSet(int set) {
+        this.set = set;
+    }
+
     @Override
     public int compareTo(FullCycleExercise o) {
         if (!this.cycle.getType().equals(o.cycle.getType())){
@@ -114,11 +125,16 @@ public class FullCycleExercise implements Comparable<FullCycleExercise> {
             if (o.cycle.getType().equals("cooldown"))
                 return -1;
         }
+        int c;
         if (this.cycle != null && o.cycle != null){
-            int c= this.cycle.getOrder() - o.cycle.getOrder();
+            c= this.cycle.getOrder() - o.cycle.getOrder();
             if (c!=0)
                 return c;
         }
+        c = this.getSet() - o.getSet();
+        if (c!=0)
+            return c;
+
         return this.getOrder() - o.getOrder();
     }
 }

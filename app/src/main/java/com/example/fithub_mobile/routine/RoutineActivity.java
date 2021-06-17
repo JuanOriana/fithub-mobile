@@ -184,8 +184,12 @@ public class RoutineActivity extends AppCompatActivity {
                                     }
                                 });
                             }
-                            for (int i = 0; i < cycle.getRepetitions(); i ++)
+                            for (int i = 0; i < cycle.getRepetitions(); i ++) {
+                                for (FullCycleExercise ex : cycleExercises) {
+                                    ex.setSet(i);
+                                }
                                 exerciseQueueRealState.getExercises().addAll(cycleExercises);
+                            }
 
                             if (exerciseQueueRealState.getCycleCount() == cycles.size()){
                                 Collections.sort(exerciseQueueRealState.getExercises());
