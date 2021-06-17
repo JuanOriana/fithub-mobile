@@ -18,7 +18,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Fithubmobile">
-        <activity android:name=".RegisterVerification">
+        <activity android:name=".ui.register.RegisterVerification">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
 
@@ -58,10 +58,10 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".Login"
+            android:name=".ui.login.Login"
             android:label="@string/logInBtnText" />
         <activity
-            android:name=".Register"
+            android:name=".ui.register.Register"
             android:label="@string/register" />
         <activity
             android:name=".MainActivity"

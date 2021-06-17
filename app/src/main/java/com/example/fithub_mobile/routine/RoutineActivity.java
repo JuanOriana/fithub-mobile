@@ -10,7 +10,7 @@ import com.example.fithub_mobile.App;
 import com.example.fithub_mobile.CycleDisplay;
 import com.example.fithub_mobile.ExecutionActivity;
 import com.example.fithub_mobile.ExerciseQueueRealState;
-import com.example.fithub_mobile.Login;
+import com.example.fithub_mobile.ui.login.Login;
 import com.example.fithub_mobile.MainActivity;
 import com.example.fithub_mobile.NotificationActivity;
 import com.example.fithub_mobile.QrGenActivity;

@@ -1,4 +1,4 @@
-package com.example.fithub_mobile;
+package com.example.fithub_mobile.ui.register;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -6,9 +6,12 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Toast;
 
+import com.example.fithub_mobile.App;
+import com.example.fithub_mobile.R;
 import com.example.fithub_mobile.backend.models.EmailConfirmation;
 import com.example.fithub_mobile.repository.Resource;
 import com.example.fithub_mobile.repository.Status;
+import com.example.fithub_mobile.ui.login.Login;
 
 public class RegisterVerification extends AppCompatActivity {
 

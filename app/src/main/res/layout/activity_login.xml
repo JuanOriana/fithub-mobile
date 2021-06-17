@@ -2,7 +2,7 @@
 
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:tools="http://schemas.android.com/tools"
-        tools:context=".Login"
+        tools:context=".ui.login.Login"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_gravity="center">
@@ -13,7 +13,8 @@
         android:layout_gravity="center"
         android:layout_marginBottom="0dp"
         android:gravity="center|top"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:paddingBottom="40dp">
 
         <TextView
             android:id="@+id/login_title"

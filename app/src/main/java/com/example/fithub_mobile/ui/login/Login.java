@@ -1,25 +1,25 @@
-package com.example.fithub_mobile;
+package com.example.fithub_mobile.ui.login;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.util.Patterns;
-import android.view.MotionEvent;
 import android.view.View;
 import android.widget.EditText;
-import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.fithub_mobile.App;
+import com.example.fithub_mobile.MainActivity;
+import com.example.fithub_mobile.R;
+import com.example.fithub_mobile.ui.register.Register;
 import com.example.fithub_mobile.backend.models.Credentials;
 import com.example.fithub_mobile.backend.models.Error;
 import com.example.fithub_mobile.repository.Resource;
 import com.example.fithub_mobile.repository.Status;
-import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 
 public class Login extends AppCompatActivity {
 
