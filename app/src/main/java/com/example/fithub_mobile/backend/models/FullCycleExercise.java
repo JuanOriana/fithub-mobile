@@ -1,6 +1,8 @@
 
 package com.example.fithub_mobile.backend.models;
 
+import android.util.Log;
+
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
@@ -132,6 +134,7 @@ public class FullCycleExercise implements Comparable<FullCycleExercise> {
                 return c;
         }
         c = this.getSet() - o.getSet();
+
         if (c!=0)
             return c;
 

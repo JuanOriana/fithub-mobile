@@ -185,9 +185,14 @@ public class RoutineActivity extends AppCompatActivity {
                                 });
                             }
                             for (int i = 0; i < cycle.getRepetitions(); i ++) {
-                                List<FullCycleExercise> setExercises = new ArrayList<>(cycleExercises);
-                                for (FullCycleExercise ex : setExercises) {
+                                List<FullCycleExercise> setExercises = new ArrayList<>();
+                                for (FullCycleExercise ex : cycleExercises) {
+                                    FullCycleExercise newEx = new FullCycleExercise(
+                                            ex.getExercise(),ex.getOrder(),ex.getDuration(),ex.getRepetitions(),null
+                                    );
+                                    newEx.setCycle(ex.getCycle());
                                     ex.setSet(i);
+                                    setExercises.add(newEx);
                                 }
                                 exerciseQueueRealState.getExercises().addAll(setExercises);
                             }
