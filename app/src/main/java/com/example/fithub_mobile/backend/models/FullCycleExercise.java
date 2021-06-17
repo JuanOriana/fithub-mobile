@@ -1,6 +1,8 @@
 
 package com.example.fithub_mobile.backend.models;
 
+import android.util.Log;
+
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
@@ -25,6 +27,8 @@ public class FullCycleExercise implements Comparable<FullCycleExercise> {
     private String img;
 
     private FullCycle cycle;
+
+    private int set;
 
     /**
      * No args constructor for use in serialization
@@ -106,13 +110,34 @@ public class FullCycleExercise implements Comparable<FullCycleExercise> {
         this.img = img;
     }
 
+
+    public int getSet() {
+        return set;
+    }
+
+    public void setSet(int set) {
+        this.set = set;
+    }
+
     @Override
     public int compareTo(FullCycleExercise o) {
+        if (!this.cycle.getType().equals(o.cycle.getType())){
+            if (this.cycle.getType().equals("cooldown"))
+                return 1;
+            if (o.cycle.getType().equals("cooldown"))
+                return -1;
+        }
+        int c;
         if (this.cycle != null && o.cycle != null){
-            int c= this.cycle.getOrder() - o.cycle.getOrder();
+            c= this.cycle.getOrder() - o.cycle.getOrder();
             if (c!=0)
                 return c;
         }
+        c = this.getSet() - o.getSet();
+
+        if (c!=0)
+            return c;
+
         return this.getOrder() - o.getOrder();
     }
 }

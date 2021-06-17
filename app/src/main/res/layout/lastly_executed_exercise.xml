@@ -28,7 +28,6 @@
             android:id="@+id/lastly_exec_exercise_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Brazos extremos"
             android:textSize="20sp"
             android:layout_gravity="center"
             android:textColor="@color/fithub_green"
@@ -38,7 +37,7 @@
             android:id="@+id/lastly_exec_exercise_desc"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Brazos extremos"
+            android:maxWidth="250dp"
             android:textSize="14sp"
             android:layout_gravity="center"/>
 

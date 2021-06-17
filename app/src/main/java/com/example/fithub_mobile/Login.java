@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.util.Patterns;
@@ -22,7 +23,9 @@ import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 
 public class Login extends AppCompatActivity {
 
+    public static final String COMEBACK_URL = "com.example.fithub_mobile.COMEBACK_URL";
     SharedPreferences sp;
+    Uri uri;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,6 +33,10 @@ public class Login extends AppCompatActivity {
         setContentView(R.layout.activity_login);
 
         sp = getSharedPreferences("login",MODE_PRIVATE);
+        if (getIntent().getExtras() == null || getIntent().getExtras().getString(COMEBACK_URL) == null)
+            uri = null;
+        else
+            uri = Uri.parse(getIntent().getExtras().getString(COMEBACK_URL));
 
         if (sp.getBoolean("logged",false)){
             goToMainActivity();
@@ -63,7 +70,15 @@ public class Login extends AppCompatActivity {
             if (r.getStatus() == Status.SUCCESS) {
                 app.getPreferences().setAuthToken(r.getData().getToken());
                 sp.edit().putBoolean("logged",true).apply();
-                goToMainActivity();
+                if (uri != null){
+                    Intent i = new Intent(Intent.ACTION_VIEW);
+                    i.setData(uri);
+                    i.setPackage("com.example.fithub_mobile");
+                    i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                    startActivity(i);
+                }else {
+                    goToMainActivity();
+                }
             } else {
                 defaultResourceHandler(r);
                 if (r.getStatus() == Status.ERROR)

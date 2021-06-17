@@ -2,6 +2,7 @@ package com.example.fithub_mobile.ui.favorites;
 
 import android.content.res.Configuration;
 import android.os.Bundle;
+import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -46,7 +47,16 @@ public class FavoritesFragment extends Fragment {
 
         cardContainer = root.findViewById(R.id.cardContainer);
         adapter = new RoutineCardAdapter(routines);
-        cardContainer.setLayoutManager(new GridLayoutManager(getContext(), requireActivity().getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT ? 1 : 2));
+
+        DisplayMetrics displayMetrics = root.getContext().getResources().getDisplayMetrics();
+        float dpWidth = displayMetrics.widthPixels / displayMetrics.density;
+        if(dpWidth >= 1024 || (dpWidth >= 600 && getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT)) {
+            cardContainer.setLayoutManager(new GridLayoutManager(getContext(),getActivity().getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT ? 2 : 3));
+
+        } else {
+            cardContainer.setLayoutManager(new GridLayoutManager(getContext(), requireActivity().getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT ? 1 : 2));
+        }
+
         cardContainer.setAdapter(adapter);
 
         initRoutines();

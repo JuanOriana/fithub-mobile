@@ -3,15 +3,18 @@ package com.example.fithub_mobile.ui.profile;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.res.Configuration;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.Navigation;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -63,7 +66,14 @@ public class ProfileFragment extends Fragment {
 
         cardContainer = root.findViewById(R.id.cardContainer);
         adapter = new RoutineCardAdapter(routines);
-        cardContainer.setLayoutManager(new LinearLayoutManager(getContext()));
+        DisplayMetrics displayMetrics = root.getContext().getResources().getDisplayMetrics();
+        float dpWidth = displayMetrics.widthPixels / displayMetrics.density;
+        if(dpWidth >= 1024 || (dpWidth >= 600 && getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT)) {
+            cardContainer.setLayoutManager(new GridLayoutManager(getContext(), 2));
+        } else {
+            cardContainer.setLayoutManager(new LinearLayoutManager(getContext()));
+        }
+
         cardContainer.setAdapter(adapter);
 
         getUserData();

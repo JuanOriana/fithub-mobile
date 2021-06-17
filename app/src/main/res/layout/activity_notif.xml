@@ -56,6 +56,7 @@
                     android:id="@+id/checkBox_mon"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:buttonTint="@color/fithub_green"
                     android:text="@string/monday"
                     android:textColor="@color/fithub_green" />
 
@@ -63,6 +64,7 @@
                     android:id="@+id/checkBox_wed"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:buttonTint="@color/fithub_green"
                     android:text="@string/wednesday"
                     android:textColor="@color/fithub_green" />
 
@@ -70,6 +72,7 @@
                     android:id="@+id/checkBox_fri"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:buttonTint="@color/fithub_green"
                     android:text="@string/friday"
                     android:textColor="@color/fithub_green" />
             </LinearLayout>
@@ -84,6 +87,7 @@
                     android:id="@+id/checkBox_tue"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:buttonTint="@color/fithub_green"
                     android:text="@string/tuesday"
                     android:textColor="@color/fithub_green" />
 
@@ -91,6 +95,7 @@
                     android:id="@+id/checkBox_thu"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:buttonTint="@color/fithub_green"
                     android:text="@string/thursday"
                     android:textColor="@color/fithub_green" />
 
@@ -98,6 +103,7 @@
                     android:id="@+id/checkBox_sat"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:buttonTint="@color/fithub_green"
                     android:text="@string/saturday"
                     android:textColor="@color/fithub_green" />
 
@@ -105,6 +111,7 @@
                     android:id="@+id/checkBox_sun"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:buttonTint="@color/fithub_green"
                     android:text="@string/sunday"
                     android:textColor="@color/fithub_green" />
             </LinearLayout>
@@ -114,6 +121,7 @@
             android:id="@+id/notif_tp"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:background="#F1FBF7"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/linearLayout2" />

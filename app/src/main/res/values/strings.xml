@@ -1,6 +1,6 @@
 <resources>
     <string name="app_name">Fithub</string>
-    <string name="title_home">Fithub</string>
+    <string name="title_home">Home</string>
     <string name="title_profile">Profile</string>
     <string name="emailInputHint">Email</string>
     <string name="passwordInputHint">Password</string>
@@ -58,6 +58,7 @@
     <string name="secs">Seconds</string>
     <string name="reps">Repetitions</string>
     <string name="accept">Accept</string>
+    <string name="rating">Rating</string>
     <string name="when_do_you_want_to_be_notified_for_your_routine">When do you want to be notified for your routine?</string>
     <string name="sort_spinner_placeholder">Choose the category</string>
     <string name="descending">Descending</string>
@@ -83,7 +84,7 @@
     <string name="verif_success">Account verified successfully!</string>
     <string name="verif_fail">There was a problem verifying your account</string>
     <string name="rated">You have rated this routine</string>
-    <string name="recommendation_title">Recommended Routine</string>
+    <string name="recommendation_title">A routine for you</string>
     <string name="set_up_notification">Set up notification</string>
     <string name="gen_qr">Generate QR</string>
     <string name="scan_qr">Scan your QR</string>
@@ -99,6 +100,7 @@
     <string name="error_params">Error in parameters</string>
     <string name="success_register">Register successful. Please confirm your email to proceed.</string>
     <string name="existing_account">This account exist already</string>
+    <string name="my_routines">My Routines</string>
     <string name="first_name_error">The first name is not valid</string>
     <string name="last_name_error">The last name is not valid</string>
     <string name="success_profile_editing">Profile edited successfully</string>

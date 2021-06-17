@@ -19,7 +19,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="32dp"
             android:layout_marginBottom="32dp"
-            android:text="@string/title_home"
+            android:text="@string/fithub"
             android:textColor="@color/fithub_green"
             android:textSize="70sp"
             android:textStyle="bold" />
