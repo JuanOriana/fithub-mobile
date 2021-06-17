@@ -42,7 +42,7 @@
         <activity android:name=".ExecutionActivity" />
         <activity
             android:name=".routine.RoutineActivity"
-            android:label="@string/title_activity_routine"
+            android:label=""
             android:parentActivityName=".MainActivity"
             android:theme="@style/Theme.Fithubmobile.NoActionBar">
             <intent-filter>

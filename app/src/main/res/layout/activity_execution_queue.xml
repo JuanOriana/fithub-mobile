@@ -146,20 +146,19 @@
 
         <ImageButton
             android:id="@+id/prev_queue"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
             android:backgroundTint="?attr/colorPrimary"
             android:minWidth="100dp"
             android:minHeight="80dp"
-            android:rotationY="180"
             android:scaleType="fitXY"
             android:tint="#FFFFFF"
-            app:srcCompat="@android:drawable/ic_media_next" />
+            app:srcCompat="@drawable/skip_prev" />
 
         <ToggleButton
             android:id="@+id/play_btn_queue"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
             android:background="@drawable/pause_check"
             android:backgroundTint="?attr/colorPrimary"
             android:backgroundTintMode="screen"
@@ -174,15 +173,15 @@
 
         <ImageButton
             android:id="@+id/next_queue"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
             android:backgroundTint="?attr/colorPrimary"
             android:backgroundTintMode="src_in"
             android:minWidth="100dp"
             android:minHeight="80dp"
             android:scaleType="fitXY"
             android:tint="#FFFFFF"
-            app:srcCompat="@android:drawable/ic_media_next" />
+            app:srcCompat="@drawable/skip_next" />
 
     </LinearLayout>
 
