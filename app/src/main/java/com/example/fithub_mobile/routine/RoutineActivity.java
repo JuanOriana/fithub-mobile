@@ -191,7 +191,7 @@ public class RoutineActivity extends AppCompatActivity {
                                             ex.getExercise(),ex.getOrder(),ex.getDuration(),ex.getRepetitions(),null
                                     );
                                     newEx.setCycle(ex.getCycle());
-                                    ex.setSet(i);
+                                    newEx.setSet(i);
                                     setExercises.add(newEx);
                                 }
                                 exerciseQueueRealState.getExercises().addAll(setExercises);
