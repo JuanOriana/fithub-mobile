@@ -44,7 +44,6 @@ public class EditProfileFragment extends Fragment {
         getUserData();
 
         Button saveBtn = root.findViewById(R.id.save_btn);
-
         saveBtn.setOnClickListener(this::saveChanges);
 
 
@@ -58,19 +57,18 @@ public class EditProfileFragment extends Fragment {
 
         boolean error = false;
 
-
         if (fn.trim().length() == 0){
             error = true;
-            fnView.setError("The first name is not valid");
+            fnView.setError(getString(R.string.first_name_error));
         }
 
         if (ln.trim().length() == 0){
             error = true;
-            lnView.setError("The last name is not valid");
+            lnView.setError(getString(R.string.last_name_error));
         }
 
         if (error){
-            Toast toast=Toast.makeText(getContext(),"Error in parameters",Toast.LENGTH_SHORT);
+            Toast toast=Toast.makeText(getContext(),getString(R.string.error_params),Toast.LENGTH_SHORT);
             toast.show();
             return;
         }
@@ -81,13 +79,13 @@ public class EditProfileFragment extends Fragment {
         app.getUserRepository().editCurrentUser(user).observe(getViewLifecycleOwner(), r -> {
             if (r.getStatus() == Status.SUCCESS) {
                 Navigation.findNavController(view).navigate(R.id.action_navigation_editprofile_to_navigation_profile);
-                Toast.makeText(getContext(),"Profile edited sucessfully",Toast.LENGTH_LONG).show();
+                Toast.makeText(getContext(),getString(R.string.success_profile_editing),Toast.LENGTH_LONG).show();
 
             } else {
                 Resource.defaultResourceHandler(r);
                 Navigation.findNavController(view).navigate(R.id.action_navigation_editprofile_to_navigation_profile);
                 if (r.getStatus() == Status.ERROR)
-                    Toast.makeText(getContext(),"Something went wrong editing your profile",Toast.LENGTH_LONG).show();
+                    Toast.makeText(getContext(),getString(R.string.failure_profile_editing),Toast.LENGTH_LONG).show();
             }
         });
 
@@ -107,7 +105,6 @@ public class EditProfileFragment extends Fragment {
 
                 ImageView userImg = root.findViewById(R.id.userImg);
                 Picasso.get().load(user.getAvatarUrl()).into(userImg);
-
             } else {
                 Resource.defaultResourceHandler(r);
             }

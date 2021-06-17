@@ -27,4 +27,5 @@
         <item>@string/advanced_difficulty</item>
         <item>@string/expert_difficulty</item>
     </string-array>
+    <string name="rating">Rating</string>
 </resources>

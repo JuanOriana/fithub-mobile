@@ -4,6 +4,7 @@ import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
 import android.os.Bundle;
+import android.speech.SpeechRecognizer;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -31,7 +32,7 @@ public class FilterDialogFragment extends DialogFragment
     static final int SORT_CRITERIA = 0;
     static final int ORDER_CRITERIA = 1;
     static final int FILTER_CRITERIA = 2;
-    static final int BASED_CRITERIA = 3;;
+    static final int BASED_CRITERIA = 3;
 
     @NotNull
     public Dialog onCreateDialog(Bundle savedInstanceState){
@@ -133,7 +134,6 @@ public class FilterDialogFragment extends DialogFragment
         negativeButton.setOnClickListener(v -> {
             filterDialog.dismiss();
         });
-
         return filterDialog;
     }
 }

@@ -13,7 +13,6 @@ android {
         targetSdkVersion 30
         versionCode 1
         versionName "1.0"
-
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
@@ -53,6 +52,12 @@ dependencies {
     implementation 'com.squareup.retrofit2:converter-gson:2.9.0'
     implementation "com.squareup.okhttp3:logging-interceptor:$ok_http_version"
     implementation 'com.google.code.gson:gson:2.8.7'
+    implementation project(':pocketsphinx-android-5prealpha-release')
+    implementation files('C:/Users/agus_/Downloads/pocketsphinx-android-5prealpha-release.aar')
+
 
 
 }
+ant.importBuild 'assets.xml'
+preBuild.dependsOn(list, checksum)
+clean.dependsOn(clean_assets)

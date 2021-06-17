@@ -1,2 +1,4 @@
 include ':app'
+include ':pocketsphinx-android-5prealpha-release'
 rootProject.name = "fithub-mobile"
+

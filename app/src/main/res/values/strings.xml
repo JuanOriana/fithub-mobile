@@ -99,8 +99,15 @@
     <string name="error_params">Error in parameters</string>
     <string name="success_register">Register successful. Please confirm your email to proceed.</string>
     <string name="existing_account">This account exist already</string>
-
-
+    <string name="first_name_error">The first name is not valid</string>
+    <string name="last_name_error">The last name is not valid</string>
+    <string name="success_profile_editing">Profile edited successfully</string>
+    <string name="failure_profile_editing">Something went wrong editing your profile</string>
+    <string name="kws_caption">kws_caption</string>
+    <string name="menu_caption">menu_caption</string>
+    <string name="digits_caption">digits_caption</string>
+    <string name="phone_caption">phone_caption</string>
+    <string name="forecast_caption">forecast_caption</string>
 
 
 </resources>
