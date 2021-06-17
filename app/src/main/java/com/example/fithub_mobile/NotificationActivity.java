@@ -95,7 +95,7 @@ public class NotificationActivity extends AppCompatActivity {
             }
 
             finish();
-            Toast.makeText(getApplicationContext(),"Reminder created succesfully",Toast.LENGTH_SHORT).show();
+            Toast.makeText(getApplicationContext(),getString(R.string.reminder_created),Toast.LENGTH_SHORT).show();
 
         });
 

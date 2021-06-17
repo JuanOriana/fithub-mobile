@@ -101,6 +101,7 @@
     <string name="success_register">Register successful. Please confirm your email to proceed.</string>
     <string name="existing_account">This account exist already</string>
     <string name="my_routines">My Routines</string>
+    <string name="reminder_created">Reminder created succesfully</string>
 
 
 
