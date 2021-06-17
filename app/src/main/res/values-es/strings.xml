@@ -96,6 +96,7 @@
     <string name="error_params">Errores en parametros</string>
     <string name="success_register">Registro exitoso. Confirma tu email para continuar.</string>
     <string name="existing_account">Esta cuenta ya existe</string>
+    <string name="my_routines">Mis Rutinas</string>
 
 
 </resources>
