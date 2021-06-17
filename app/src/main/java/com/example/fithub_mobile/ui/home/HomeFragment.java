@@ -1,22 +1,16 @@
 package com.example.fithub_mobile.ui.home;
 
 import android.annotation.SuppressLint;
-import android.content.Context;
-import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
-import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.TextureView;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.GridLayoutManager;
@@ -25,22 +19,15 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.fithub_mobile.App;
 import com.example.fithub_mobile.R;
 import com.example.fithub_mobile.backend.models.FullRoutine;
-import com.example.fithub_mobile.backend.models.PublicUser;
-import com.example.fithub_mobile.excercise.LastlyExecutedCard;
-import com.example.fithub_mobile.excercise.LastlyExecutedCardData;
-import com.example.fithub_mobile.excercise.LastlyExecutedCardDataManager;
+import com.example.fithub_mobile.ui.excercise.LastlyExecutedCard;
+import com.example.fithub_mobile.ui.excercise.LastlyExecutedCardData;
+import com.example.fithub_mobile.ui.excercise.LastlyExecutedCardDataManager;
 import com.example.fithub_mobile.repository.Resource;
 import com.example.fithub_mobile.repository.Status;
-import com.example.fithub_mobile.routine.RoutineCard;
-import com.example.fithub_mobile.routine.RoutineCardAdapter;
-import com.example.fithub_mobile.routine.RoutineCardData;
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
-import com.squareup.picasso.Picasso;
+import com.example.fithub_mobile.ui.routine.RoutineCard;
+import com.example.fithub_mobile.ui.routine.RoutineCardAdapter;
 
-import java.lang.reflect.Type;
 import java.util.ArrayList;
-import java.util.Objects;
 
 public class HomeFragment extends Fragment {
 

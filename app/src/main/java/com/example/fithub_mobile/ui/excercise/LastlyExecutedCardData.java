@@ -1,4 +1,4 @@
-package com.example.fithub_mobile.excercise;
+package com.example.fithub_mobile.ui.excercise;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;

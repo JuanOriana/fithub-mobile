@@ -31,17 +31,17 @@
                     android:scheme="http" />
             </intent-filter>
         </activity>
-        <activity android:name=".NotificationActivity"
+        <activity android:name=".ui.notification.NotificationActivity"
             android:label="@string/set_up_notification"/>
-        <activity android:name=".QrGenActivity"
+        <activity android:name=".ui.qr.QrGenActivity"
             android:label="@string/gen_qr"/>
         />
         <activity android:name=".QrScanner"
             android:label="@string/scan_qr"/>
-        <activity android:name=".ExecutionQueueActivity" />
-        <activity android:name=".ExecutionActivity" />
+        <activity android:name=".ui.execution.ExecutionQueueActivity" />
+        <activity android:name=".ui.execution.ExecutionActivity" />
         <activity
-            android:name=".routine.RoutineActivity"
+            android:name=".ui.routine.RoutineActivity"
             android:label=""
             android:parentActivityName=".MainActivity"
             android:theme="@style/Theme.Fithubmobile.NoActionBar">
@@ -88,12 +88,12 @@
         </activity>
 
         <receiver
-            android:name=".NotifyHandlerReceiver"
+            android:name=".ui.notification.NotifyHandlerReceiver"
             android:enabled="true" />
 
         <provider
             android:name="androidx.core.content.FileProvider"
-            android:authorities="com.example.fithub_mobile.QrGenActivity.provider"
+            android:authorities="com.example.fithub_mobile.ui.qr.QrGenActivity.provider"
             android:exported="false"
             android:grantUriPermissions="true">
             <meta-data

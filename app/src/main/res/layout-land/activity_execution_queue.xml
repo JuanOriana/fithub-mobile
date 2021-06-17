@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ExecutionQueueActivity">
+    tools:context=".ui.execution.ExecutionQueueActivity">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/current_exercise_card"

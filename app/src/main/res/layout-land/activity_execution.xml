@@ -5,7 +5,7 @@
     android:id="@+id/exercise_execution"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ExecutionActivity">
+    tools:context=".ui.execution.ExecutionActivity">
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar3"

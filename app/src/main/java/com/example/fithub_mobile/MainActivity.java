@@ -7,7 +7,7 @@ import android.util.Log;
 import android.view.View;
 
 import com.example.fithub_mobile.backend.models.Error;
-import com.example.fithub_mobile.excercise.LastlyExecutedCardDataManager;
+import com.example.fithub_mobile.ui.excercise.LastlyExecutedCardDataManager;
 import com.example.fithub_mobile.repository.Resource;
 import com.example.fithub_mobile.repository.Status;
 import com.example.fithub_mobile.ui.login.Login;

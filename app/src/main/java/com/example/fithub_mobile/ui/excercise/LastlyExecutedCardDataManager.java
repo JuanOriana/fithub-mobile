@@ -1,10 +1,8 @@
-package com.example.fithub_mobile.excercise;
+package com.example.fithub_mobile.ui.excercise;
 
 import android.content.Context;
 import android.content.SharedPreferences;
 
-import com.example.fithub_mobile.ExerciseQueueRealState;
-import com.example.fithub_mobile.backend.models.FullCycleExercise;
 import com.google.gson.Gson;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;

@@ -1,4 +1,4 @@
-package com.example.fithub_mobile.routine;
+package com.example.fithub_mobile.ui.routine;
 
 import android.content.Context;
 import android.content.Intent;
@@ -7,20 +7,20 @@ import android.net.Uri;
 import android.os.Bundle;
 
 import com.example.fithub_mobile.App;
-import com.example.fithub_mobile.CycleDisplay;
-import com.example.fithub_mobile.ExecutionActivity;
-import com.example.fithub_mobile.ExerciseQueueRealState;
+import com.example.fithub_mobile.ui.CycleDisplay;
+import com.example.fithub_mobile.ui.execution.ExecutionActivity;
+import com.example.fithub_mobile.ui.execution.ExerciseQueueRealState;
 import com.example.fithub_mobile.ui.login.Login;
 import com.example.fithub_mobile.MainActivity;
-import com.example.fithub_mobile.NotificationActivity;
-import com.example.fithub_mobile.QrGenActivity;
+import com.example.fithub_mobile.ui.notification.NotificationActivity;
+import com.example.fithub_mobile.ui.qr.QrGenActivity;
 import com.example.fithub_mobile.R;
 import com.example.fithub_mobile.backend.models.FullCycle;
 import com.example.fithub_mobile.backend.models.FullCycleExercise;
 import com.example.fithub_mobile.backend.models.FullRoutine;
 import com.example.fithub_mobile.backend.models.Review;
-import com.example.fithub_mobile.excercise.LastlyExecutedCardData;
-import com.example.fithub_mobile.excercise.LastlyExecutedCardDataManager;
+import com.example.fithub_mobile.ui.excercise.LastlyExecutedCardData;
+import com.example.fithub_mobile.ui.excercise.LastlyExecutedCardDataManager;
 import com.example.fithub_mobile.repository.Resource;
 import com.example.fithub_mobile.repository.Status;
 import com.google.android.material.appbar.CollapsingToolbarLayout;

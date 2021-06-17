@@ -30,10 +30,10 @@ import com.example.fithub_mobile.R;
 import com.example.fithub_mobile.backend.models.FullRoutine;
 import com.example.fithub_mobile.backend.models.FullUser;
 import com.example.fithub_mobile.backend.models.PublicUser;
-import com.example.fithub_mobile.excercise.LastlyExecutedCardDataManager;
+import com.example.fithub_mobile.ui.excercise.LastlyExecutedCardDataManager;
 import com.example.fithub_mobile.repository.Resource;
 import com.example.fithub_mobile.repository.Status;
-import com.example.fithub_mobile.routine.RoutineCardAdapter;
+import com.example.fithub_mobile.ui.routine.RoutineCardAdapter;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;

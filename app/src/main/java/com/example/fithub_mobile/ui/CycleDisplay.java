@@ -1,4 +1,4 @@
-package com.example.fithub_mobile;
+package com.example.fithub_mobile.ui;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
@@ -8,10 +8,11 @@ import android.widget.TextView;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.lifecycle.LifecycleOwner;
 
+import com.example.fithub_mobile.App;
+import com.example.fithub_mobile.R;
 import com.example.fithub_mobile.backend.models.FullCycle;
 import com.example.fithub_mobile.backend.models.FullCycleExercise;
-import com.example.fithub_mobile.excercise.ExerciseData;
-import com.example.fithub_mobile.excercise.ExerciseItem;
+import com.example.fithub_mobile.ui.excercise.ExerciseItem;
 import com.example.fithub_mobile.repository.Resource;
 import com.example.fithub_mobile.repository.Status;
 

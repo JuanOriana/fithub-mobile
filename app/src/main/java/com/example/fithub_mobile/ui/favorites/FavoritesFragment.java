@@ -12,21 +12,16 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.fithub_mobile.App;
 import com.example.fithub_mobile.R;
 import com.example.fithub_mobile.backend.models.FullRoutine;
-import com.example.fithub_mobile.backend.models.FullUser;
-import com.example.fithub_mobile.backend.models.PublicUser;
 import com.example.fithub_mobile.repository.Resource;
 import com.example.fithub_mobile.repository.Status;
-import com.example.fithub_mobile.routine.RoutineCardAdapter;
-import com.example.fithub_mobile.routine.RoutineCardData;
+import com.example.fithub_mobile.ui.routine.RoutineCardAdapter;
 
 import java.util.ArrayList;
-import java.util.Objects;
 
 public class FavoritesFragment extends Fragment {
 
