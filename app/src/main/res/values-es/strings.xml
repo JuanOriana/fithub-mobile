@@ -80,8 +80,8 @@
     <string name="verif_success">¡Cuenta verificada exitosamente!</string>
     <string name="verif_fail">Hubo un problema verificando tu cuenta</string>
     <string name="rated">Puntuaste esta rutina</string>
-    <string name="recommendation_title">Rutina Recomendada Para Ti</string>
-    <string name="set_up_notification">Set up notification</string>
+    <string name="recommendation_title">Rutina Recomendada</string>
+    <string name="set_up_notification">Ajuste De Notifiacion</string>
     <string name="gen_qr">Generar QR</string>
     <string name="scan_qr">Escanea tu QR</string>
     <string name="no_fav_routine_msg">¡Parece que aún no tenés rutinas favoritas!</string>
