@@ -84,7 +84,7 @@
     <string name="verif_success">Account verified successfully!</string>
     <string name="verif_fail">There was a problem verifying your account</string>
     <string name="rated">You have rated this routine</string>
-    <string name="recommendation_title">A routine for you</string>
+    <string name="recommendation_title">Recommended Routine For You</string>
     <string name="set_up_notification">Set up notification</string>
     <string name="gen_qr">Generate QR</string>
     <string name="scan_qr">Scan your QR</string>
