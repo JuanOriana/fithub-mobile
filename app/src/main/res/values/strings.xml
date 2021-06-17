@@ -85,7 +85,7 @@
     <string name="verif_fail">There was a problem verifying your account</string>
     <string name="rated">You have rated this routine</string>
     <string name="recommendation_title">Recommended Routine</string>
-    <string name="set_up_notification">Set up notification</string>
+    <string name="set_up_notification">Notification Setup</string>
     <string name="gen_qr">Generate QR</string>
     <string name="scan_qr">Scan your QR</string>
     <string name="profile_options">Profile options</string>
@@ -101,15 +101,10 @@
     <string name="success_register">Register successful. Please confirm your email to proceed.</string>
     <string name="existing_account">This account exist already</string>
     <string name="my_routines">My Routines</string>
+    <string name="reminder_created">Reminder created succesfully</string>
     <string name="first_name_error">The first name is not valid</string>
     <string name="last_name_error">The last name is not valid</string>
     <string name="success_profile_editing">Profile edited successfully</string>
     <string name="failure_profile_editing">Something went wrong editing your profile</string>
-    <string name="kws_caption">kws_caption</string>
-    <string name="menu_caption">menu_caption</string>
-    <string name="digits_caption">digits_caption</string>
-    <string name="phone_caption">phone_caption</string>
-    <string name="forecast_caption">forecast_caption</string>
-
 
 </resources>

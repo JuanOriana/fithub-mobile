@@ -1,7 +1,6 @@
-package com.example.fithub_mobile;
+package com.example.fithub_mobile.ui.execution;
 
 import com.example.fithub_mobile.backend.models.FullCycleExercise;
-import com.example.fithub_mobile.excercise.ExerciseData;
 
 import java.util.ArrayList;
 

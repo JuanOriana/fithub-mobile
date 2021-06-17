@@ -1,15 +1,11 @@
 package com.example.fithub_mobile.ui.search;
 
 import android.app.Activity;
-import android.content.Context;
 import android.content.res.Configuration;
 import android.os.Build;
 import android.os.Bundle;
 import android.content.Intent;
-import android.os.Parcelable;
-import android.text.TextUtils;
 import android.util.DisplayMetrics;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -17,43 +13,27 @@ import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
-import android.widget.Filter;
 import android.widget.SearchView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
-import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.LifecycleOwner;
-import androidx.lifecycle.MutableLiveData;
-import androidx.lifecycle.Observer;
-import androidx.lifecycle.SavedStateViewModelFactory;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.fithub_mobile.App;
 import com.example.fithub_mobile.QrScanner;
 import com.example.fithub_mobile.R;
 import com.example.fithub_mobile.backend.models.FullRoutine;
-import com.example.fithub_mobile.backend.models.PublicUser;
 import com.example.fithub_mobile.repository.Resource;
 import com.example.fithub_mobile.repository.Status;
-import com.example.fithub_mobile.routine.RoutineCard;
-import com.example.fithub_mobile.routine.RoutineCardAdapter;
-import com.example.fithub_mobile.routine.RoutineCardData;
+import com.example.fithub_mobile.ui.routine.RoutineCardAdapter;
 
 import org.jetbrains.annotations.NotNull;
-import org.w3c.dom.Text;
 
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Objects;
-import java.util.function.Predicate;
 
 public class SearchFragment extends Fragment implements FilterDialogListener {
 

@@ -5,7 +5,7 @@
     android:id="@+id/exercise_execution"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ExecutionActivity">
+    tools:context=".ui.execution.ExecutionActivity">
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar3"
@@ -97,20 +97,18 @@
 
         <ImageButton
             android:id="@+id/prev"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="83dp"
+            android:layout_height="80dp"
             android:backgroundTint="?attr/colorPrimary"
-            android:minWidth="100dp"
             android:minHeight="80dp"
-            android:rotationY="180"
             android:scaleType="fitXY"
             android:tint="#FFFFFF"
-            app:srcCompat="@android:drawable/ic_media_next" />
+            app:srcCompat="@drawable/skip_prev" />
 
         <ToggleButton
             android:id="@+id/play_btn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
             android:background="@drawable/pause_check"
             android:backgroundTint="?attr/colorPrimary"
             android:backgroundTintMode="screen"
@@ -125,16 +123,13 @@
 
         <ImageButton
             android:id="@+id/next"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="16dp"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
             android:backgroundTint="?attr/colorPrimary"
             android:backgroundTintMode="src_in"
-            android:minWidth="100dp"
-            android:minHeight="80dp"
             android:scaleType="fitXY"
             android:tint="#FFFFFF"
-            app:srcCompat="@android:drawable/ic_media_next" />
+            app:srcCompat="@drawable/skip_next" />
     </LinearLayout>
 
     <LinearLayout

@@ -1,4 +1,4 @@
-package com.example.fithub_mobile.excercise;
+package com.example.fithub_mobile.ui.excercise;
 
 import java.util.Objects;
 

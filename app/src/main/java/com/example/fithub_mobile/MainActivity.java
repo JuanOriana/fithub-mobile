@@ -4,22 +4,16 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.View;
-import android.widget.Toast;
 
 import com.example.fithub_mobile.backend.models.Error;
-import com.example.fithub_mobile.excercise.LastlyExecutedCardDataManager;
+import com.example.fithub_mobile.ui.excercise.LastlyExecutedCardDataManager;
 import com.example.fithub_mobile.repository.Resource;
 import com.example.fithub_mobile.repository.Status;
-import com.example.fithub_mobile.ui.profile.EditProfileFragment;
-import com.example.fithub_mobile.ui.profile.ProfileFragment;
+import com.example.fithub_mobile.ui.login.Login;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.SearchView;
-import androidx.fragment.app.FragmentTransaction;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
@@ -52,7 +46,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void goToLogin(){
-        Intent i = new Intent(this,Login.class);
+        Intent i = new Intent(this, Login.class);
         startActivity(i);
         finish();
     }

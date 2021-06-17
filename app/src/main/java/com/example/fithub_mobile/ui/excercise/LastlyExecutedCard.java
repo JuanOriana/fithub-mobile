@@ -1,6 +1,5 @@
-package com.example.fithub_mobile.excercise;
+package com.example.fithub_mobile.ui.excercise;
 
-import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;

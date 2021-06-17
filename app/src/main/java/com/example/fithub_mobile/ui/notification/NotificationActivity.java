@@ -1,11 +1,8 @@
-package com.example.fithub_mobile;
+package com.example.fithub_mobile.ui.notification;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.NotificationCompat;
-import androidx.core.app.NotificationManagerCompat;
-import androidx.navigation.Navigation;
 
 import android.app.AlarmManager;
 import android.app.NotificationChannel;
@@ -14,13 +11,14 @@ import android.app.PendingIntent;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
-import android.os.SystemClock;
 import android.util.Log;
 import android.view.MenuItem;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.TimePicker;
 import android.widget.Toast;
+
+import com.example.fithub_mobile.R;
 
 import java.util.Calendar;
 
@@ -95,7 +93,7 @@ public class NotificationActivity extends AppCompatActivity {
             }
 
             finish();
-            Toast.makeText(getApplicationContext(),"Reminder created succesfully",Toast.LENGTH_SHORT).show();
+            Toast.makeText(getApplicationContext(),getString(R.string.reminder_created),Toast.LENGTH_SHORT).show();
 
         });
 

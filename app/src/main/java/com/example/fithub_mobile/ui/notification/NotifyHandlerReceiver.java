@@ -1,4 +1,4 @@
-package com.example.fithub_mobile;
+package com.example.fithub_mobile.ui.notification;
 
 import android.app.NotificationManager;
 import android.app.PendingIntent;
@@ -8,10 +8,9 @@ import android.content.Intent;
 import android.net.Uri;
 
 import androidx.core.app.NotificationCompat;
-import androidx.core.app.NotificationManagerCompat;
 import androidx.core.app.TaskStackBuilder;
 
-import com.example.fithub_mobile.routine.RoutineActivity;
+import com.example.fithub_mobile.R;
 
 public class NotifyHandlerReceiver extends BroadcastReceiver {
 

@@ -1,29 +1,20 @@
-package com.example.fithub_mobile;
+package com.example.fithub_mobile.ui.execution;
 
 import android.annotation.SuppressLint;
-import android.content.Intent;
-import android.media.Image;
-import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Filter;
-import android.widget.Filterable;
-import android.widget.ImageButton;
 import android.widget.ImageView;
-import android.widget.RatingBar;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.fithub_mobile.R;
 import com.example.fithub_mobile.backend.models.FullCycleExercise;
-import com.example.fithub_mobile.excercise.ExerciseData;
-import com.google.android.material.button.MaterialButton;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
-import java.util.Collection;
 
 public class ExerciseAdapter extends RecyclerView.Adapter<ExerciseAdapter.ViewHolder> {
 

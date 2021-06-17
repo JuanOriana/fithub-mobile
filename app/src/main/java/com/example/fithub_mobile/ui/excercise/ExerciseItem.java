@@ -1,4 +1,4 @@
-package com.example.fithub_mobile.excercise;
+package com.example.fithub_mobile.ui.excercise;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
@@ -9,7 +9,6 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 
 import com.example.fithub_mobile.R;
 import com.example.fithub_mobile.backend.models.FullCycleExercise;
-import com.example.fithub_mobile.backend.models.FullExercise;
 
 @SuppressLint("ViewConstructor")
 public class ExerciseItem extends ConstraintLayout {

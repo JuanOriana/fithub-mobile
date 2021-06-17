@@ -1,4 +1,4 @@
-package com.example.fithub_mobile;
+package com.example.fithub_mobile.ui.qr;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
@@ -17,7 +17,6 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.text.format.DateFormat;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -26,12 +25,13 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.fithub_mobile.routine.RoutineActivity;
+import com.example.fithub_mobile.BuildConfig;
+import com.example.fithub_mobile.R;
+import com.example.fithub_mobile.ui.routine.RoutineActivity;
 
 import net.glxn.qrgen.android.QRCode;
 
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.Date;

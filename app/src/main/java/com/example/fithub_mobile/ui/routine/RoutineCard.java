@@ -1,11 +1,9 @@
-package com.example.fithub_mobile.routine;
+package com.example.fithub_mobile.ui.routine;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
-import android.media.Image;
 import android.net.Uri;
-import android.util.Log;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.RatingBar;
@@ -22,8 +20,6 @@ import com.example.fithub_mobile.repository.Status;
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.card.MaterialCardView;
 import com.squareup.picasso.Picasso;
-
-import org.w3c.dom.Text;
 
 @SuppressLint("ViewConstructor")
 public class RoutineCard extends MaterialCardView {
