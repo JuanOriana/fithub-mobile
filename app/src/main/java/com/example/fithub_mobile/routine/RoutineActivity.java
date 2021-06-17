@@ -3,42 +3,34 @@ package com.example.fithub_mobile.routine;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.content.res.Configuration;
+import android.net.Uri;
 import android.os.Bundle;
 
 import com.example.fithub_mobile.App;
-import com.example.fithub_mobile.CycleData;
 import com.example.fithub_mobile.CycleDisplay;
 import com.example.fithub_mobile.ExecutionActivity;
 import com.example.fithub_mobile.ExerciseQueueRealState;
+import com.example.fithub_mobile.Login;
 import com.example.fithub_mobile.MainActivity;
 import com.example.fithub_mobile.NotificationActivity;
 import com.example.fithub_mobile.QrGenActivity;
 import com.example.fithub_mobile.R;
 import com.example.fithub_mobile.backend.models.FullCycle;
 import com.example.fithub_mobile.backend.models.FullCycleExercise;
-import com.example.fithub_mobile.backend.models.FullExercise;
 import com.example.fithub_mobile.backend.models.FullRoutine;
 import com.example.fithub_mobile.backend.models.Review;
-import com.example.fithub_mobile.excercise.ExerciseData;
-import com.example.fithub_mobile.excercise.LastlyExecutedCard;
 import com.example.fithub_mobile.excercise.LastlyExecutedCardData;
 import com.example.fithub_mobile.excercise.LastlyExecutedCardDataManager;
 import com.example.fithub_mobile.repository.Resource;
 import com.example.fithub_mobile.repository.Status;
 import com.google.android.material.appbar.CollapsingToolbarLayout;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
-import com.squareup.picasso.Picasso;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.lifecycle.LifecycleOwner;
 
-import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageButton;
@@ -47,33 +39,40 @@ import android.widget.RatingBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import java.lang.reflect.Type;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 public class RoutineActivity extends AppCompatActivity {
 
     public static final String EXTRA_ID = "com.example.fithub_mobile.EXTRA_ID";
     static final private String ID_PARENT_EXTRA = "com.example.fithub_mobile.ID_PARENT";
     static final public String TITLE_QR_ID = "com.example.fithub_mobile.TITLE_QR_ID";
+    public static final String COMEBACK_URL = "com.example.fithub_mobile.COMEBACK_URL";
     private FullRoutine routine;
     private List<FullCycle> cycles;
     private int id;
     private Context context;
+    private SharedPreferences sp;
+    private Uri uri;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_routine);
-        context = this;
 
         Intent intent = getIntent();
         id = Integer.parseInt(intent.getData().getQueryParameter("id"));
+        uri = intent.getData();
+
+        sp = getSharedPreferences("login",MODE_PRIVATE);
+        if(!sp.getBoolean("logged",false)){
+            goToLogin();
+        }
+
+        context = this;
 
         Toolbar toolbar = findViewById(R.id.toolbar);
         CollapsingToolbarLayout toolBarLayout = findViewById(R.id.toolbar_layout);
@@ -234,5 +233,12 @@ public class RoutineActivity extends AppCompatActivity {
             onBackPressed();
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    public void goToLogin(){
+        Intent i = new Intent(this, Login.class);
+        i.putExtra(COMEBACK_URL,uri.toString());
+        startActivity(i);
+        finish();
     }
 }
