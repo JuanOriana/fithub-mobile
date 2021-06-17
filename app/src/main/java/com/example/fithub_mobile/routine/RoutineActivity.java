@@ -185,10 +185,11 @@ public class RoutineActivity extends AppCompatActivity {
                                 });
                             }
                             for (int i = 0; i < cycle.getRepetitions(); i ++) {
-                                for (FullCycleExercise ex : cycleExercises) {
+                                List<FullCycleExercise> setExercises = new ArrayList<>(cycleExercises);
+                                for (FullCycleExercise ex : setExercises) {
                                     ex.setSet(i);
                                 }
-                                exerciseQueueRealState.getExercises().addAll(cycleExercises);
+                                exerciseQueueRealState.getExercises().addAll(setExercises);
                             }
 
                             if (exerciseQueueRealState.getCycleCount() == cycles.size()){
