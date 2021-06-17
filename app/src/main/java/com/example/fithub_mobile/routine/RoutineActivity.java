@@ -175,14 +175,6 @@ public class RoutineActivity extends AppCompatActivity {
                             List<FullCycleExercise> cycleExercises = rEx.getData().getContent();
                             for (FullCycleExercise ex : cycleExercises) {
                                 ex.setCycle(cycle);
-                                app.getExerciseImageRepository().getExerciseImages(ex.getExercise().getId()).observe(this, rImg -> {
-                                    if (rImg.getStatus() == Status.SUCCESS) {
-                                        assert rImg.getData() != null;
-                                        ex.setImg(rImg.getData().getContent().get(0).getUrl());
-                                    } else {
-                                        Resource.defaultResourceHandler(rImg);
-                                    }
-                                });
                             }
                             for (int i = 0; i < cycle.getRepetitions(); i ++) {
                                 List<FullCycleExercise> setExercises = new ArrayList<>();
@@ -192,6 +184,14 @@ public class RoutineActivity extends AppCompatActivity {
                                     );
                                     newEx.setCycle(ex.getCycle());
                                     newEx.setSet(i);
+                                    app.getExerciseImageRepository().getExerciseImages(ex.getExercise().getId()).observe(this, rImg -> {
+                                        if (rImg.getStatus() == Status.SUCCESS) {
+                                            assert rImg.getData() != null;
+                                            newEx.setImg(rImg.getData().getContent().get(0).getUrl());
+                                        } else {
+                                            Resource.defaultResourceHandler(rImg);
+                                        }
+                                    });
                                     setExercises.add(newEx);
                                 }
                                 exerciseQueueRealState.getExercises().addAll(setExercises);
