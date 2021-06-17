@@ -10,6 +10,7 @@ import android.util.Log;
 import android.util.Patterns;
 import android.view.MotionEvent;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -78,15 +79,26 @@ public class Register extends AppCompatActivity {
             return;
         }
 
+
+        Button regButton = findViewById(R.id.register_btn);
+        regButton.setEnabled(false);
         RegisterCredentials credentials = new RegisterCredentials(email,pass,fn,ln,email,"https://png.pngitem.com/pimgs/s/421-4213053_default-avatar-icon-hd-png-download.png");
         App app = (App)getApplication();
         app.getUserRepository().register(credentials).observe(this, r -> {
             if (r.getStatus() == Status.SUCCESS) {
+                fnView.setText("");
+                lnView.setText("");
+                emailView.setText("");
+                passView.setText("");
+                passConfView.setText("");
                 Toast.makeText(getApplicationContext(),getText(R.string.success_register),Toast.LENGTH_LONG).show();
+                regButton.setEnabled(true);
             } else {
                 Resource.defaultResourceHandler(r);
-                if (r.getStatus() == Status.ERROR)
-                    Toast.makeText(getApplicationContext(),getText(R.string.existing_account),Toast.LENGTH_LONG).show();
+                if (r.getStatus() == Status.ERROR) {
+                    Toast.makeText(getApplicationContext(), getText(R.string.existing_account), Toast.LENGTH_LONG).show();
+                    regButton.setEnabled(true);
+                }
             }
         });
     }
