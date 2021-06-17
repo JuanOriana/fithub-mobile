@@ -5,6 +5,16 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginEnd="24dp"
+        android:background="@android:color/darker_gray"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
     <TextView
         android:id="@+id/exercise_name"
         android:layout_width="wrap_content"
@@ -22,46 +32,67 @@
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
         android:orientation="horizontal"
         android:paddingRight="30dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <TextView
-            android:id="@+id/secs_count"
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="3dp"
-            android:textColor="@color/fithub_green"
-            android:textSize="18sp"
-            android:textStyle="bold" />
+            android:orientation="vertical">
 
-        <TextView
-            android:id="@+id/item_secs_title"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="10dp"
-            android:text="@string/secs"
-            android:textColor="@color/fithub_green"
-            android:textSize="18sp" />
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginBottom="5dp"
+                android:orientation="horizontal">
 
-        <TextView
-            android:id="@+id/reps_count"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="3dp"
-            android:textColor="@color/fithub_green"
-            android:textSize="18sp"
-            android:textStyle="bold" />
+                <TextView
+                    android:id="@+id/secs_count"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="3dp"
+                    android:textColor="@color/fithub_green"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
 
-        <TextView
-            android:id="@+id/item_reps_title"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="10dp"
-            android:text="@string/reps"
-            android:textColor="@color/fithub_green"
-            android:textSize="18sp" />
+                <TextView
+                    android:id="@+id/item_secs_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="10dp"
+                    android:text="@string/secs"
+                    android:textColor="@color/fithub_green"
+                    android:textSize="18sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/reps_count"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="3dp"
+                    android:textColor="@color/fithub_green"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/item_reps_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="10dp"
+                    android:text="@string/reps"
+                    android:textColor="@color/fithub_green"
+                    android:textSize="18sp" />
+            </LinearLayout>
+        </LinearLayout>
+
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
