@@ -33,8 +33,8 @@ public class ExerciseItem extends ConstraintLayout {
         TextView secs = findViewById(R.id.secs_count);
         int val = exerciseData.getDuration();
         if(val <= 0) {
-            secs.setVisibility(View.INVISIBLE);
-            findViewById(R.id.item_secs_title).setVisibility(View.INVISIBLE);
+            secs.setVisibility(View.GONE);
+            findViewById(R.id.item_secs_title).setVisibility(View.GONE);
         } else {
             secs.setText(Integer.toString(val));
         }
@@ -42,8 +42,8 @@ public class ExerciseItem extends ConstraintLayout {
         TextView reps = findViewById(R.id.reps_count);
         val = exerciseData.getRepetitions();
         if(val <= 0) {
-            findViewById(R.id.item_reps_title).setVisibility(View.GONE);
-            reps.setVisibility(View.GONE);
+            findViewById(R.id.item_reps_title).setVisibility(View.INVISIBLE);
+            reps.setVisibility(View.INVISIBLE);
         } else {
             reps.setText(Integer.toString(val));
         }
