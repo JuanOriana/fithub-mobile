@@ -98,7 +98,7 @@
     <string name="existing_account">Esta cuenta ya existe</string>
     <string name="my_routines">Mis Rutinas</string>
     <string name="reminder_created">Recordatorio creado exitosamente</string>
-    <string name="no_routines_msg">Parece que aun no tenés rutinas</string>
+    <string name="no_routines_msg">¡Parece que aun no tenés rutinas!</string>
     <string name="first_name_error">El nombre no es válido</string>
     <string name="last_name_error">El apellido no es válido</string>
     <string name="success_profile_editing">Perfil editado exitosamente</string>

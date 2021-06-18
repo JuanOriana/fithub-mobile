@@ -8,6 +8,18 @@
     tools:context=".ui.profile.ProfileFragment" >
 
     <TextView
+        android:id="@+id/noRoutinesProfileLand"
+        android:layout_width="391dp"
+        android:layout_height="65dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="50dp"
+        android:gravity="center"
+        android:text="@string/no_routines_msg"
+        android:textSize="24sp"
+        app:layout_constraintStart_toEndOf="@+id/userContainer"
+        app:layout_constraintTop_toBottomOf="@+id/textView" />
+
+    <TextView
         android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

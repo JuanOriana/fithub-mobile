@@ -57,7 +57,8 @@ public class ProfileFragment extends Fragment {
                 new ViewModelProvider(this).get(ProfileViewModel.class);
 
         root = inflater.inflate(R.layout.fragment_profile, container, false);
-        noRoutinesMsg = root.findViewById(R.id.noRoutinesTextView);
+        noRoutinesMsg = getResources().getConfiguration().orientation ==  Configuration.ORIENTATION_PORTRAIT ?
+                root.findViewById(R.id.noRoutinesTextView): root.findViewById(R.id.noRoutinesProfileLand);
         noRoutinesMsg.setVisibility(View.GONE);
         sp = getContext().getSharedPreferences("login", 0);
 
