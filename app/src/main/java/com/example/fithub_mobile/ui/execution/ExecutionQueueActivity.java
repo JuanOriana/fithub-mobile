@@ -45,6 +45,10 @@ public class ExecutionQueueActivity extends AppCompatActivity {
 
         exerciseQueueRealState = ExerciseQueueRealState.getInstance();
 
+        if (cTimer != null){
+            cTimer.cancel();
+        }
+
 
         RecyclerView exerciseContainer = findViewById(R.id.exercise_container);
         exerciseContainer.setLayoutManager(new LinearLayoutManager(this));
@@ -194,6 +198,9 @@ public class ExecutionQueueActivity extends AppCompatActivity {
         // Handle item selection
         switch (item.getItemId()) {
             case R.id.changeExecView:
+                if (cTimer != null){
+                    cTimer.cancel();
+                }
                 Intent i = new Intent(this, ExecutionActivity.class);
                 startActivity(i);
                 finish();

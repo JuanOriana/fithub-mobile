@@ -44,6 +44,10 @@ public class ExecutionActivity extends AppCompatActivity {
 
         exerciseQueueRealState = ExerciseQueueRealState.getInstance();
 
+        if (cTimer != null){
+            cTimer.cancel();
+        }
+
         pgBar = findViewById(R.id.progressBar);
         pgBar.setProgress(0);
 
@@ -190,6 +194,9 @@ public class ExecutionActivity extends AppCompatActivity {
         // Handle item selection
         switch (item.getItemId()) {
             case R.id.changeExecView:
+                if (cTimer != null){
+                    cTimer.cancel();
+                }
                 Intent i = new Intent(this, ExecutionQueueActivity.class);
                 startActivity(i);
                 finish();
