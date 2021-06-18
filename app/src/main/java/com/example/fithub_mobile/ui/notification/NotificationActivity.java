@@ -86,7 +86,7 @@ public class NotificationActivity extends AppCompatActivity {
                             this,
                             42+i,
                             pending,
-                            PendingIntent.FLAG_CANCEL_CURRENT);
+                            PendingIntent.FLAG_UPDATE_CURRENT);
                     alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(),
                             AlarmManager.INTERVAL_DAY * 7, pendingNotifyIntent);
                 }
