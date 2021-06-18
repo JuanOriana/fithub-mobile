@@ -37,6 +37,7 @@ public class HomeFragment extends Fragment {
     private RoutineCardAdapter adapter;
     private ArrayList<FullRoutine> routines = new ArrayList<>();
     private LastlyExecutedCardDataManager lastlyExecManager;
+    private TextView noRoutineMsg;
     View root;
 
 
@@ -49,7 +50,8 @@ public class HomeFragment extends Fragment {
         root = inflater.inflate(R.layout.fragment_home, container, false);
 
         recentContainer = root.findViewById(R.id.recent_container);
-
+        noRoutineMsg = root.findViewById(R.id.noRoutinesTextViewHome);
+        noRoutineMsg.setVisibility(View.GONE);
         root.findViewById(R.id.recommendation_wrap).setVisibility(View.GONE);
 
         lastlyExecManager = LastlyExecutedCardDataManager.getInstance();
@@ -91,6 +93,7 @@ public class HomeFragment extends Fragment {
             if (r.getStatus() == Status.SUCCESS) {
                 assert r.getData() != null;
                 routines.addAll(r.getData().getContent());
+                noRoutineMsg.setVisibility(routines.size()>0 ? View.GONE : View.VISIBLE );
 
                 app.getFavouriteRepository().getFavourites().observe(getViewLifecycleOwner(), rfav -> {
                     if (rfav.getStatus() == Status.SUCCESS) {

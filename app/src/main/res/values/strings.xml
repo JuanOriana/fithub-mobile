@@ -106,5 +106,6 @@
     <string name="last_name_error">The last name is not valid</string>
     <string name="success_profile_editing">Profile edited successfully</string>
     <string name="failure_profile_editing">Something went wrong editing your profile</string>
+    <string name="no_routines_msg">Looks like you don\'t have any routines</string>
 
 </resources>

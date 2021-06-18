@@ -46,6 +46,7 @@ public class ProfileFragment extends Fragment {
     private ArrayList<FullRoutine> routines = new ArrayList<>();
     private View root;
     private FullUser user;
+    private TextView noRoutinesMsg;
     RoutineCardAdapter adapter;
     SharedPreferences sp;
 
@@ -56,7 +57,8 @@ public class ProfileFragment extends Fragment {
                 new ViewModelProvider(this).get(ProfileViewModel.class);
 
         root = inflater.inflate(R.layout.fragment_profile, container, false);
-
+        noRoutinesMsg = root.findViewById(R.id.noRoutinesTextView);
+        noRoutinesMsg.setVisibility(View.GONE);
         sp = getContext().getSharedPreferences("login", 0);
 
         cardContainer = root.findViewById(R.id.cardContainer);
@@ -120,6 +122,7 @@ public class ProfileFragment extends Fragment {
                                 routine.setFavourite(true);
                             }
                         }
+                        noRoutinesMsg.setVisibility(routines.size() > 0 ? View.GONE : View.VISIBLE);
                         adapter.notifyDataSetChanged();
 
                     } else {

@@ -6,6 +6,20 @@
     android:layout_height="match_parent"
     tools:context=".ui.search.SearchFragment">
 
+    <TextView
+        android:id="@+id/notFoundMessage"
+        android:layout_width="376dp"
+        android:layout_height="65dp"
+        android:layout_marginStart="4dp"
+        android:layout_marginTop="150dp"
+        android:layout_marginEnd="4dp"
+        android:gravity="center"
+        android:text="@string/NotFoundMessage"
+        android:textSize="24sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <ScrollView
         android:id="@+id/scrollView2"
         android:layout_width="0dp"
@@ -18,33 +32,20 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            >
+            android:orientation="vertical">
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/cardContainer"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="330dp"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginBottom="60dp"
                 android:divider="@drawable/divider"
                 android:gravity="center"
                 android:orientation="vertical"
-                android:showDividers="middle"/>
+                android:showDividers="middle" />
         </LinearLayout>
 
     </ScrollView>
-
-    <TextView
-        android:id="@+id/notFoundMessage"
-        android:layout_width="376dp"
-        android:layout_height="65dp"
-        android:layout_marginTop="200dp"
-        android:gravity="center"
-        android:text="@string/NotFoundMessage"
-        android:textSize="24sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
